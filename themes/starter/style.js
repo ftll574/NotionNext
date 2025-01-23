@@ -204,6 +204,44 @@ const Style = () => {
   height: auto;
   width: auto;
 }
+
+// 主題顏色
+body {
+  background-color: #f7f9fc;
+}
+
+// 按鈕懸停效果
+.bg-primary:hover {
+  box-shadow: 0 4px 15px rgba(0, 98, 155, 0.3);
+  transform: translateY(-2px);
+  transition: all 0.3s ease;
+}
+
+// 卡片陰影效果
+.card-shadow {
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.card-shadow:hover {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  transform: translateY(-5px);
+}
+
+// 自定義滾動條
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #00629B;
+  border-radius: 4px;
+}
   `}</style>
 }
 
