@@ -65,7 +65,13 @@ const BLOG = {
     'Hi，我是一个程序员, Hi，我是一个打工人,Hi，我是一个干饭人,欢迎来到我的博客🎉',
 
   // uuid重定向至 slug
-  UUID_REDIRECT: process.env.UUID_REDIRECT || false
+  UUID_REDIRECT: process.env.UUID_REDIRECT || false,
+
+  // 顶部右侧导航按钮
+  STARTER_NAV_BUTTON_ENABLE: true,
+
+  // 登入功能
+  ENABLE_LOGIN: process.env.NEXT_PUBLIC_ENABLE_LOGIN || false, // 是否開啟登入
 }
 
 module.exports = BLOG
