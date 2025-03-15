@@ -12,8 +12,22 @@ export const About = () => {
       {/* <!-- ====== About Section Start --> */}
       <section
         id='about'
-        className='bg-gray-1 pb-8 pt-20 dark:bg-dark-2 lg:pb-[70px] lg:pt-[120px]'>
-        <div className='container'>
+        className='pattern-bg pb-8 pt-20 dark:bg-dark-2 lg:pb-[70px] lg:pt-[120px] relative'>
+        
+        {/* 添加裝飾元素 */}
+        <div className="absolute right-0 top-0 h-40 w-40 opacity-20">
+          <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <path fill="#00629B" d="M46.5,-78.1C59.9,-71.7,70.3,-59.5,74.4,-45.6C78.5,-31.7,76.2,-16.2,71.4,-3.2C66.6,9.8,59.3,20.3,52.7,31.3C46.1,42.3,40.1,53.9,30.7,61.3C21.2,68.6,8.1,71.7,-3.9,68.3C-15.8,64.9,-26.5,54.9,-39.8,47.1C-53.1,39.2,-69,33.4,-74.4,22.4C-79.8,11.4,-74.7,-4.9,-68.2,-19.1C-61.8,-33.3,-54,-45.4,-43.3,-52.7C-32.7,-60,-16.3,-62.3,-0.3,-61.8C15.7,-61.4,31.3,-58.1,46.5,-52.1C61.7,-46.2,76.5,-37.5,46.5,-78.1Z" transform="translate(100 100)" />
+          </svg>
+        </div>
+        <div className="absolute left-0 bottom-0 h-40 w-40 opacity-20 rotate-180">
+          <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <path fill="#00629B" d="M46.5,-78.1C59.9,-71.7,70.3,-59.5,74.4,-45.6C78.5,-31.7,76.2,-16.2,71.4,-3.2C66.6,9.8,59.3,20.3,52.7,31.3C46.1,42.3,40.1,53.9,30.7,61.3C21.2,68.6,8.1,71.7,-3.9,68.3C-15.8,64.9,-26.5,54.9,-39.8,47.1C-53.1,39.2,-69,33.4,-74.4,22.4C-79.8,11.4,-74.7,-4.9,-68.2,-19.1C-61.8,-33.3,-54,-45.4,-43.3,-52.7C-32.7,-60,-16.3,-62.3,-0.3,-61.8C15.7,-61.4,31.3,-58.1,46.5,-52.1C61.7,-46.2,76.5,-37.5,46.5,-78.1Z" transform="translate(100 100)" />
+          </svg>
+        </div>
+        
+        {/* 內容容器 */}
+        <div className="container relative z-10">
           <div className='wow fadeInUp' data-wow-delay='.2s'>
             <div className='-mx-4 flex flex-wrap items-center'>
               {/* 左侧的文字说明板块 */}
@@ -38,143 +52,23 @@ export const About = () => {
 
               {/* 右侧的图片海报 */}
               <div className='w-full px-4 lg:w-1/2'>
-                <div className='-mx-2 flex flex-wrap sm:-mx-4 lg:-mx-2 xl:-mx-4'>
-                  <div className='w-full px-2 sm:w-1/2 sm:px-4 lg:px-2 xl:px-4'>
-                    <div className='mb-4 sm:mb-8 sm:h-[400px] md:h-[540px] lg:h-[400px] xl:h-[500px]'>
-                      <img
-                        src={siteConfig('STARTER_ABOUT_IMAGE_1')}
-                        alt='about image'
-                        className='h-full w-full object-cover object-center'
-                      />
-                    </div>
-                  </div>
-
-                  <div className='w-full px-2 sm:w-1/2 sm:px-4 lg:px-2 xl:px-4'>
-                    <div className='mb-4 sm:mb-8 sm:h-[220px] md:h-[346px] lg:mb-4 lg:h-[225px] xl:mb-8 xl:h-[310px]'>
-                      <img
-                        src={siteConfig('STARTER_ABOUT_IMAGE_2')}
-                        alt='about image'
-                        className='h-full w-full object-cover object-center'
-                      />
-                    </div>
-
-                    <div className='relative z-10 mb-4 flex items-center justify-center overflow-hidden bg-primary px-6 py-12 sm:mb-8 sm:h-[160px] sm:p-5 lg:mb-4 xl:mb-8'>
-                      <div>
-                        <span className='block text-5xl font-extrabold text-white'>
-                          {siteConfig('STARTER_ABOUT_TIPS_1')}
-                        </span>
-                        <span className='block text-base font-semibold text-white'>
-                          {siteConfig('STARTER_ABOUT_TIPS_2')}
-                        </span>
-                        <span className='block text-base font-medium text-white text-opacity-70'>
-                          {siteConfig('STARTER_ABOUT_TIPS_3')}
-                        </span>
-                      </div>
-                      <div>
-                        <span className='absolute left-0 top-0 -z-10'>
-                          <svg
-                            width='106'
-                            height='144'
-                            viewBox='0 0 106 144'
-                            fill='none'
-                            xmlns='http://www.w3.org/2000/svg'>
-                            <rect
-                              opacity='0.1'
-                              x='-67'
-                              y='47.127'
-                              width='113.378'
-                              height='131.304'
-                              transform='rotate(-42.8643 -67 47.127)'
-                              fill='url(#paint0_linear_1416_214)'
-                            />
-                            <defs>
-                              <linearGradient
-                                id='paint0_linear_1416_214'
-                                x1='-10.3111'
-                                y1='47.127'
-                                x2='-10.3111'
-                                y2='178.431'
-                                gradientUnits='userSpaceOnUse'>
-                                <stop stopColor='white' />
-                                <stop
-                                  offset='1'
-                                  stopColor='white'
-                                  stopOpacity='0'
-                                />
-                              </linearGradient>
-                            </defs>
-                          </svg>
-                        </span>
-                        <span className='absolute right-0 top-0 -z-10'>
-                          <svg
-                            width='130'
-                            height='97'
-                            viewBox='0 0 130 97'
-                            fill='none'
-                            xmlns='http://www.w3.org/2000/svg'>
-                            <rect
-                              opacity='0.1'
-                              x='0.86792'
-                              y='-6.67725'
-                              width='155.563'
-                              height='140.614'
-                              transform='rotate(-42.8643 0.86792 -6.67725)'
-                              fill='url(#paint0_linear_1416_215)'
-                            />
-                            <defs>
-                              <linearGradient
-                                id='paint0_linear_1416_215'
-                                x1='78.6495'
-                                y1='-6.67725'
-                                x2='78.6495'
-                                y2='133.937'
-                                gradientUnits='userSpaceOnUse'>
-                                <stop stopColor='white' />
-                                <stop
-                                  offset='1'
-                                  stopColor='white'
-                                  stopOpacity='0'
-                                />
-                              </linearGradient>
-                            </defs>
-                          </svg>
-                        </span>
-                        <span className='absolute bottom-0 right-0 -z-10'>
-                          <svg
-                            width='175'
-                            height='104'
-                            viewBox='0 0 175 104'
-                            fill='none'
-                            xmlns='http://www.w3.org/2000/svg'>
-                            <rect
-                              opacity='0.1'
-                              x='175.011'
-                              y='108.611'
-                              width='101.246'
-                              height='148.179'
-                              transform='rotate(137.136 175.011 108.611)'
-                              fill='url(#paint0_linear_1416_216)'
-                            />
-                            <defs>
-                              <linearGradient
-                                id='paint0_linear_1416_216'
-                                x1='225.634'
-                                y1='108.611'
-                                x2='225.634'
-                                y2='256.79'
-                                gradientUnits='userSpaceOnUse'>
-                                <stop stopColor='white' />
-                                <stop
-                                  offset='1'
-                                  stopColor='white'
-                                  stopOpacity='0'
-                                />
-                              </linearGradient>
-                            </defs>
-                          </svg>
-                        </span>
-                      </div>
-                    </div>
+                <div className='relative mx-auto'>
+                  <img
+                    src={siteConfig('STARTER_ABOUT_IMAGE_1')}
+                    alt="關於我們"
+                    className="rounded-tl-[80px] rounded-br-[80px] shadow-xl float-animation"
+                  />
+                  <img
+                    src={siteConfig('STARTER_ABOUT_IMAGE_2')}
+                    alt="關於我們"
+                    className="absolute -bottom-16 -right-16 z-10 rounded-tl-[80px] rounded-br-[80px] shadow-xl float-animation"
+                    style={{animationDelay: '1.5s'}}
+                  />
+                  
+                  {/* 統計數字卡片 */}
+                  <div className="absolute -left-10 top-1/2 transform -translate-y-1/2 bg-white dark:bg-dark-1 p-5 rounded-lg shadow-xl z-20 float-animation" style={{animationDelay: '0.8s'}}>
+                    <h3 className="text-4xl font-bold text-gradient">{siteConfig('STARTER_ABOUT_TIPS_1')}</h3>
+                    <p className="text-body-color">{siteConfig('STARTER_ABOUT_TIPS_2')}</p>
                   </div>
                 </div>
               </div>

@@ -73,7 +73,7 @@ export const Contact = () => {
                 {/* 联系方式右侧留言 */}
                 <div className='w-full px-4 lg:w-5/12 xl:w-4/12'>
                   <div
-                    className='wow fadeInUp rounded-lg bg-white px-8 py-10 shadow-testimonial dark:bg-dark-2 dark:shadow-none sm:px-10 sm:py-12 md:p-[60px] lg:p-10 lg:px-10 lg:py-12 2xl:p-[60px]'
+                    className='wow fadeInUp gradient-card p-8 transition-all duration-300 hover:shadow-xl'
                     data-wow-delay='.2s'>
                     {/* 自定义的留言表单 、 需要对接接口 */}
                     {/* <MessageForm/> */}

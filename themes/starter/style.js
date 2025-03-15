@@ -242,6 +242,102 @@ body {
   background-color: #00629B;
   border-radius: 4px;
 }
+
+// 表格文字置中
+.notion-table {
+  width: 100%;
+}
+
+.notion-table td, 
+.notion-table th {
+  text-align: center !important;
+  padding: 0.5rem;
+}
+
+.notion-collection-page {
+  width: 100%;
+}
+
+.notion-collection-page table td,
+.notion-collection-page table th {
+  text-align: center !important;
+}
+
+// 漸變效果和陰影
+.gradient-card {
+  background: linear-gradient(135deg, #ffffff 0%, #f3f4f6 100%);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.01);
+  transition: all 0.3s ease;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.gradient-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 25px 30px -10px rgba(0, 98, 155, 0.2);
+}
+
+// 特效按鈕
+.btn-effect {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s ease;
+}
+
+.btn-effect:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: all 0.4s ease;
+}
+
+.btn-effect:hover:before {
+  left: 100%;
+}
+
+// 背景圖案
+.pattern-bg {
+  background-color: #f7f9fc;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2300629B' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+// 高級文字效果
+.text-gradient {
+  background: linear-gradient(90deg, #00629B, #0096db);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+}
+
+// 圖片懸停效果
+.img-zoom {
+  transition: transform 0.5s ease;
+  overflow: hidden;
+}
+
+.img-zoom:hover img {
+  transform: scale(1.05);
+}
+
+.img-zoom img {
+  transition: transform 0.5s ease;
+}
+
+// 動畫效果
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+.float-animation {
+  animation: float 3s ease-in-out infinite;
+}
   `}</style>
 }
 
