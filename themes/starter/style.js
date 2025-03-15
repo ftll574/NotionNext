@@ -338,6 +338,51 @@ body {
 .float-animation {
   animation: float 3s ease-in-out infinite;
 }
+
+/* 表格文字置中 - 加強版 */
+.notion-collection-table,
+.notion-simple-table {
+  width: 100% !important;
+}
+
+/* 表格所有單元格置中 */
+.notion-collection-table td, 
+.notion-collection-table th,
+.notion-simple-table td,
+.notion-simple-table th {
+  text-align: center !important;
+  padding: 8px !important;
+  vertical-align: middle !important;
+}
+
+/* 數據庫表格 */
+.notion-collection-page table {
+  width: 100% !important;
+}
+
+.notion-collection-page table td,
+.notion-collection-page table th {
+  text-align: center !important;
+  padding: 8px !important;
+}
+
+/* 確保表格寬度適合 */
+.notion-table-wrapper {
+  width: 100% !important;
+  overflow-x: auto !important;
+}
+
+/* 使用更高優先級的選擇器 */
+table[class*="notion"] td,
+table[class*="notion"] th {
+  text-align: center !important;
+}
+
+/* 針對特定的表格視圖 */
+.notion-table-view td,
+.notion-table-view th {
+  text-align: center !important;
+}
   `}</style>
 }
 

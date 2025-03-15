@@ -84,6 +84,15 @@ module.exports = {
       }),
       animation: {
         'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+      },
+      fontSize: {
+        'base': '1.05rem',
+        'lg': '1.15rem',
+        'xl': '1.25rem',
+        '2xl': '1.5rem',
+        '3xl': '1.875rem',
+        '4xl': '2.25rem',
+        '5xl': '3rem',
       }
     }
   },
