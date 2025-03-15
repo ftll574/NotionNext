@@ -17,19 +17,19 @@ const CONFIG = {
   STARTER_HERO_BUTTON_1_URL: '/products',
   STARTER_HERO_BUTTON_2_TEXT: '聯繫我們',
   STARTER_HERO_BUTTON_2_URL: '#contact',
-  STARTER_HERO_BUTTON_2_ICON: '/images/starter/github.svg', // 英雄区按钮2的图标，不需要则留空
+  STARTER_HERO_BUTTON_2_ICON: '', // 英雄区按钮2的图标，不需要则留空
 
   // 英雄区配图，如需隐藏，改为空值即可 ''
-  STARTER_HERO_PREVIEW_IMAGE: '/images/hero-new.jpg', // 产品预览图 ，默认读取public目录下图片
-  STARTER_HERO_BANNER_IMAGE: 'images/starter/background/home.png', // hero区下方的全宽图
+  STARTER_HERO_PREVIEW_IMAGE: 'images/starter/background/home2.png', // 产品预览图 ，默认读取public目录下图片
+  STARTER_HERO_BANNER_IMAGE: '', // hero区下方的全宽图
 
   // 顶部右侧导航按钮
   STARTER_NAV_BUTTON_ENABLE: false, // 是否启用导航按钮
-  STARTER_NAV_BUTTON_1_TEXT: 'Sign In',
-  STARTER_NAV_BUTTON_1_URL: '/sign-in',
+  STARTER_NAV_BUTTON_1_TEXT: '',
+  STARTER_NAV_BUTTON_1_URL: '',
 
-  STARTER_NAV_BUTTON_2_TEXT: 'Sign Up', 
-  STARTER_NAV_BUTTON_2_URL: '/sign-up',
+  STARTER_NAV_BUTTON_2_TEXT: '', 
+  STARTER_NAV_BUTTON_2_URL: '',
 
   // 特性区块
   STARTER_FEATURE_ENABLE: true,
@@ -60,14 +60,14 @@ const CONFIG = {
   // 首页ABOUT区块
   STARTER_ABOUT_ENABLE: true, // ABOUT区块开关
   STARTER_ABOUT_TITLE: '30年專注塑膠原料行業',
-  STARTER_ABOUT_TEXT: '信為塑膠成立於1993年，專注於高品質塑膠原料的供應與服務。<br/><br/>憑藉多年的行業經驗和穩定的供應鏈管理，我們為電子、汽車、家電等行業提供可靠的原材料支持，成為眾多製造企業的長期合作夥伴。',
+  STARTER_ABOUT_TEXT: '鑫葳塑膠成立於1993年，專注於高品質塑膠原料的供應與服務。<br/><br/>憑藉多年的行業經驗和穩定的供應鏈管理，我們為電子、汽車、家電等行業提供可靠的原材料支持，成為眾多製造企業的長期合作夥伴。',
   STARTER_ABOUT_BUTTON_TEXT: '了解更多',
   STARTER_ABOUT_BUTTON_URL: '/about',
-  STARTER_ABOUT_IMAGE_1: '/images/about/factory.jpg',
-  STARTER_ABOUT_IMAGE_2: '/images/about/material.jpg',
+  STARTER_ABOUT_IMAGE_1: 'images/starter/meterial/meterial.jpg',
+  STARTER_ABOUT_IMAGE_2: 'images/starter/delivery/delivery.jpg',
   STARTER_ABOUT_TIPS_1: '1000+',
   STARTER_ABOUT_TIPS_2: '長期客戶',
-  STARTER_ABOUT_TIPS_3: '遍布全球',
+  STARTER_ABOUT_TIPS_3: '品質穩定',
 
   // 首页价格区块
   STARTER_PRICING_ENABLE: true, // 价格区块开关
@@ -118,7 +118,7 @@ const CONFIG = {
     {
       STARTER_TESTIMONIALS_ITEM_CONTENT: '通過與這家供應商的合作，我們顯著提高了產品質量，同時降低了材料不穩定導致的生產問題。他們的技術團隊非常專業，提供了很多有價值的建議。',
       STARTER_TESTIMONIALS_ITEM_AVATAR: '/images/testimonials/client1.jpg',
-      STARTER_TESTIMONIALS_ITEM_NICKNAME: '李總監',
+      STARTER_TESTIMONIALS_ITEM_NICKNAME: '李鎮宇',
       STARTER_TESTIMONIALS_ITEM_DESCRIPTION: '電子產品製造商',
       STARTER_TESTIMONIALS_ITEM_RATING: 5,
       STARTER_TESTIMONIALS_ITEM_URL: '#'
@@ -126,7 +126,7 @@ const CONFIG = {
     {
       STARTER_TESTIMONIALS_ITEM_CONTENT: '作為汽車零部件生產商，我們對原材料的要求非常嚴格。這家公司不僅能提供符合我們標準的高品質材料，還能根據我們的特殊需求進行調整。',
       STARTER_TESTIMONIALS_ITEM_AVATAR: '/images/testimonials/client2.jpg',
-      STARTER_TESTIMONIALS_ITEM_NICKNAME: '張經理',
+      STARTER_TESTIMONIALS_ITEM_NICKNAME: '李智宇',
       STARTER_TESTIMONIALS_ITEM_DESCRIPTION: '汽車零部件製造商',
       STARTER_TESTIMONIALS_ITEM_RATING: 5,
       STARTER_TESTIMONIALS_ITEM_URL: '#'
@@ -134,7 +134,7 @@ const CONFIG = {
     {
       STARTER_TESTIMONIALS_ITEM_CONTENT: '我們與該供應商合作已超過5年，他們始終保持穩定的供應和優質的服務。即使在原材料短缺的時期，他們也能確保我們的訂單優先得到滿足。',
       STARTER_TESTIMONIALS_ITEM_AVATAR: '/images/testimonials/client3.jpg',
-      STARTER_TESTIMONIALS_ITEM_NICKNAME: '王董事',
+      STARTER_TESTIMONIALS_ITEM_NICKNAME: '李綺',
       STARTER_TESTIMONIALS_ITEM_DESCRIPTION: '家用電器製造商',
       STARTER_TESTIMONIALS_ITEM_RATING: 5,
       STARTER_TESTIMONIALS_ITEM_URL: '#'
@@ -268,14 +268,14 @@ const CONFIG = {
       TITLE: '關於我們',
       LINK_GROUP: [
         { TITLE: '公司首頁', URL: '/#home' },
-        { TITLE: '公司', URL: 'https://docs.tangly1024.com/about' },
+        { TITLE: '關於鑫葳', URL: '/about' },
         {
-          TITLE: '幫助支持',
-          URL: 'https://docs.tangly1024.com/article/how-to-question'
+          TITLE: '公司成員',
+          URL: '/member'
         },
         {
-          TITLE: '合作申请',
-          URL: 'https://docs.tangly1024.com/article/my-service'
+          TITLE: '員工招募',
+          URL: 'https://www.104.com.tw/company/1a2x6blwrp?jobsource=google'
         }
       ]
     },
@@ -308,16 +308,36 @@ const CONFIG = {
       TITLE: '產品目錄',
       LINK_GROUP: [
         {
-          TITLE: '南亞塑膠 PVC',
-          URL: '/nanyapvc'
+          TITLE: '南亞系列',
+          URL: '/nan-yia'
         },
         {
-          TITLE: '台塑 PVC',
-          URL: '/taiwanpvc'
+          TITLE: '台化系列',
+          URL: '/formosa-chemical'
         },
         {
-          TITLE: '中国大陆使用Notion',
-          URL: 'https://docs.tangly1024.com/article/notion-faster'
+          TITLE: 'U-Pellet台灣優粒子TPR',
+          URL: '/u-pellet-tpr'
+        },
+        {
+          TITLE: '福聚系列',
+          URL: '/fu-ju'
+        },
+        {
+          TITLE: '永嘉系列',
+          URL: '/yongjia'
+        },
+        {
+          TITLE: '奇美系列',
+          URL: '/chi-mei'
+        },
+        {
+          TITLE: '台聚系列',
+          URL: '/formosa-polymer'
+        },
+        {
+          TITLE: '台塑系列',
+          URL: '/formosa-plastic'
         }
       ]
     }
