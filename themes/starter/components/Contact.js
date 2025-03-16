@@ -7,6 +7,11 @@ import { SVGPhone } from './svg/SVGPhone'
 /* eslint-disable react/no-unescaped-entities */
 export const Contact = () => {
   const url = siteConfig('STARTER_CONTACT_MSG_EXTERNAL_URL')
+  
+  // 地址的 Google Maps 連結
+  const addressText = siteConfig('STARTER_CONTACT_ADDRESS_TEXT')
+  const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(addressText)}`
+  
   return (
     <>
       {/* <!-- ====== Contact Start ====== --> */}
@@ -50,7 +55,7 @@ export const Contact = () => {
                 </div>
                 
                 <div className='mb-12 grid grid-cols-1 md:grid-cols-2 gap-8 lg:mb-0'>
-                  {/* 地址卡片 */}
+                  {/* 地址卡片 - 添加可點擊連結 */}
                   <div className='wow fadeInUp gradient-card p-8 transition-all duration-300 hover:shadow-xl flex' data-wow-delay='0.1s'>
                     <div className='mr-6 flex items-start text-primary'>
                       <SVGLocation />
@@ -60,8 +65,20 @@ export const Contact = () => {
                         {siteConfig('STARTER_CONTACT_ADDRESS_TITLE')}
                       </h5>
                       <p className='text-base text-body-color dark:text-dark-6'>
-                        {siteConfig('STARTER_CONTACT_ADDRESS_TEXT')}
+                        {addressText}
                       </p>
+                      <a 
+                        href={googleMapsUrl} 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="mt-3 inline-flex items-center text-primary hover:underline"
+                      >
+                        在 Google 地圖查看
+                        <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                        </svg>
+                      </a>
                     </div>
                   </div>
                   
@@ -77,6 +94,15 @@ export const Contact = () => {
                       <p className='text-base text-body-color dark:text-dark-6'>
                         {siteConfig('STARTER_CONTACT_PHONE_TEXT')}
                       </p>
+                      <a 
+                        href={`tel:${siteConfig('STARTER_CONTACT_PHONE_TEXT').replace(/[^0-9+]/g, '')}`} 
+                        className="mt-3 inline-flex items-center text-primary hover:underline"
+                      >
+                        立即撥打
+                        <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                        </svg>
+                      </a>
                     </div>
                   </div>
                   
@@ -92,8 +118,10 @@ export const Contact = () => {
                       <p className='text-base text-body-color dark:text-dark-6'>
                         {siteConfig('STARTER_CONTACT_EMAIL_TEXT')}
                       </p>
-                      <a href={`mailto:${siteConfig('STARTER_CONTACT_EMAIL_TEXT')}`} 
-                         className="mt-3 inline-flex items-center text-primary hover:underline">
+                      <a 
+                        href={`mailto:${siteConfig('STARTER_CONTACT_EMAIL_TEXT')}`} 
+                        className="mt-3 inline-flex items-center text-primary hover:underline"
+                      >
                         寄送郵件
                         <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
@@ -102,7 +130,7 @@ export const Contact = () => {
                     </div>
                   </div>
                   
-                  {/* 營業時間卡片 - 如果您需要添加此項 */}
+                  {/* 營業時間卡片 */}
                   <div className='wow fadeInUp gradient-card p-8 transition-all duration-300 hover:shadow-xl flex' data-wow-delay='0.4s'>
                     <div className='mr-6 flex items-start text-primary'>
                       <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
