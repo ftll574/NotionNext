@@ -68,7 +68,7 @@ const BLOG = {
   UUID_REDIRECT: process.env.UUID_REDIRECT || false,
 
   // 顶部右侧导航按钮
-  STARTER_NAV_BUTTON_ENABLE: true,
+  STARTER_NAV_BUTTON_ENABLE: false,
 
   // 登入功能
   ENABLE_LOGIN: process.env.NEXT_PUBLIC_ENABLE_LOGIN || false, // 是否開啟登入

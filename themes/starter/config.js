@@ -20,7 +20,7 @@ const CONFIG = {
   STARTER_HERO_BUTTON_2_ICON: '', // 英雄区按钮2的图标，不需要则留空
 
   // 英雄区配图，如需隐藏，改为空值即可 ''
-  STARTER_HERO_PREVIEW_IMAGE: 'images/starter/background/home2.png', // 产品预览图 ，默认读取public目录下图片
+  STARTER_HERO_PREVIEW_IMAGE: 'images/starter/background/home2.jpg', // 产品预览图 ，默认读取public目录下图片
   STARTER_HERO_BANNER_IMAGE: '', // hero区下方的全宽图
 
   // 顶部右侧导航按钮
@@ -49,13 +49,13 @@ const CONFIG = {
 
   STARTER_FEATURE_3_TITLE_1: '專業服務',
   STARTER_FEATURE_3_TEXT_1: '技術團隊提供專業諮詢，助您選擇最適合的材料',
-  STARTER_FEATURE_3_BUTTON_TEXT: '聯繫顧問',
-  STARTER_FEATURE_3_BUTTON_URL: '/consultant',
+  STARTER_FEATURE_3_BUTTON_TEXT: '聯繫我們',
+  STARTER_FEATURE_3_BUTTON_URL: '/contact',
 
   STARTER_FEATURE_4_TITLE_1: '快速交付',
   STARTER_FEATURE_4_TEXT_1: '完善的供應鏈管理，確保準時交付每一批訂單',
-  STARTER_FEATURE_4_BUTTON_TEXT: '配送服務',
-  STARTER_FEATURE_4_BUTTON_URL: '/delivery',
+  STARTER_FEATURE_4_BUTTON_TEXT: '聯絡我們',
+  STARTER_FEATURE_4_BUTTON_URL: '/contact',
 
   // 首页ABOUT区块
   STARTER_ABOUT_ENABLE: true, // ABOUT区块开关
@@ -173,7 +173,7 @@ const CONFIG = {
   STARTER_TEAM_ITEMS: [
     {
       STARTER_TEAM_ITEM_AVATAR: '/images/team/ceo.jpg',
-      STARTER_TEAM_ITEM_NICKNAME: '陳總經理',
+      STARTER_TEAM_ITEM_NICKNAME: '李憲明',
       STARTER_TEAM_ITEM_DESCRIPTION: '創始人兼首席執行官',
       STARTER_TEAM_ITEM_URL: '#'
     },
@@ -212,21 +212,21 @@ const CONFIG = {
 
   // 地址
   STARTER_CONTACT_ADDRESS_TITLE: '公司地址',
-  STARTER_CONTACT_ADDRESS_TEXT: '中國廣東省深圳市南山區高新科技園區88號',
+  STARTER_CONTACT_ADDRESS_TEXT: '244新北市林口區湖北里10鄰17之20號',
 
   // 電話
   STARTER_CONTACT_PHONE_TITLE: '聯繫電話',
-  STARTER_CONTACT_PHONE_TEXT: '+86 755-8888-7777',
+  STARTER_CONTACT_PHONE_TEXT: '(886)0938-321-132',
 
   // 郵箱
   STARTER_CONTACT_EMAIL_TITLE: '電子郵箱',
-  STARTER_CONTACT_EMAIL_TEXT: 'info@plasticmaterials.com',
+  STARTER_CONTACT_EMAIL_TEXT: 'tw.xinwei@gmail.com',
 
   // 外部留言表單鏈接 (可選)
   STARTER_CONTACT_MSG_EXTERNAL_URL: 'https://forms.your-form-provider.com/contact-form',
 
   // 合作伙伴的图标
-  STARTER_BRANDS_ENABLE: true, // 合作伙伴开关
+  STARTER_BRANDS_ENABLE: false, // 合作伙伴开关
   STARTER_BRANDS: [
     {
       IMAGE: '/images/starter/brands/graygrids.svg',
