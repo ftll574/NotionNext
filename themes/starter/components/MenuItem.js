@@ -11,11 +11,21 @@ export const MenuItem = ({ link }) => {
   const hasSubMenu = link?.subMenus?.length > 0
   const router = useRouter()
 
-  // 管理子菜单的展开状态
+  // 管理菜单的展开状态
   const [isSubMenuOpen, setIsSubMenuOpen] = useState(false)
+  const [childMenuOpenStates, setChildMenuOpenStates] = useState({})
 
   const toggleSubMenu = () => {
-    setIsSubMenuOpen(prev => !prev) // 切换子菜单状态
+    setIsSubMenuOpen(prev => !prev)
+  }
+
+  const toggleChildMenu = (subMenuIndex, e) => {
+    e.preventDefault()
+    e.stopPropagation()
+    setChildMenuOpenStates(prev => ({
+      ...prev,
+      [subMenuIndex]: !prev[subMenuIndex]
+    }))
   }
 
   return (
@@ -63,26 +73,73 @@ export const MenuItem = ({ link }) => {
             </svg>
           </button>
 
-          {/* 子菜单 */}
+          {/* 二级菜单 */}
           <div
             className={`submenu dark:border-gray-600 relative left-0 top-full w-[250px] rounded-sm bg-white p-4 transition-all duration-300 dark:bg-dark-2 lg:absolute lg:shadow-lg ${
               isSubMenuOpen
                 ? 'block opacity-100 visible'
                 : 'hidden opacity-0 invisible'
             }`}>
-            {link.subMenus.map((sLink, index) => (
-              <Link
-                key={index}
-                href={sLink.href}
-                target={link?.target}
-                className='block rounded px-4 py-[10px] text-sm text-body-color hover:text-primary dark:text-dark-6 dark:hover:text-primary'>
-                {/* 子菜单 SubMenuItem */}
-                <span className='text-md ml-2 whitespace-nowrap'>
-                  {link?.icon && <i className={sLink.icon + ' mr-2 my-auto'} />}{' '}
-                  {sLink.title}
-                </span>
-              </Link>
-            ))}
+            {link.subMenus.map((sLink, index) => {
+              // 檢查是否有三級菜單
+              const hasChildMenu = sLink.childMenus && sLink.childMenus.length > 0
+
+              return (
+                <div key={index} className="mb-2">
+                  {!hasChildMenu ? (
+                    // 普通二級菜單項
+                    <Link
+                      href={sLink.href}
+                      target={sLink.target || link?.target}
+                      className='block rounded px-4 py-[10px] text-sm text-body-color hover:text-primary dark:text-dark-6 dark:hover:text-primary'>
+                      <span className='text-md ml-2 whitespace-nowrap'>
+                        {sLink.icon && <i className={sLink.icon + ' mr-2 my-auto'} />}
+                        {sLink.title}
+                      </span>
+                    </Link>
+                  ) : (
+                    // 有三級菜單的二級菜單項
+                    <div className="relative">
+                      <button
+                        onClick={(e) => toggleChildMenu(index, e)}
+                        className='w-full text-left rounded px-4 py-[10px] text-sm text-body-color hover:text-primary dark:text-dark-6 dark:hover:text-primary flex justify-between items-center'>
+                        <span className='text-md ml-2 whitespace-nowrap'>
+                          {sLink.icon && <i className={sLink.icon + ' mr-2 my-auto'} />}
+                          {sLink.title}
+                        </span>
+                        <svg
+                          className={`w-4 h-4 transform transition-transform ${childMenuOpenStates[index] ? 'rotate-90' : ''}`}
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                          xmlns="http://www.w3.org/2000/svg">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                      </button>
+
+                      {/* 三級菜單 */}
+                      <div
+                        className={`pl-4 ml-2 mt-1 border-l border-gray-200 dark:border-gray-700 transition-all duration-300 ${
+                          childMenuOpenStates[index] ? 'block' : 'hidden'
+                        }`}>
+                        {sLink.childMenus.map((childLink, childIndex) => (
+                          <Link
+                            key={childIndex}
+                            href={childLink.href}
+                            target={childLink.target || sLink.target || link?.target}
+                            className='block rounded px-4 py-[8px] text-sm text-body-color hover:text-primary dark:text-dark-6 dark:hover:text-primary'>
+                            <span className='text-md whitespace-nowrap'>
+                              {childLink.icon && <i className={childLink.icon + ' mr-2 my-auto'} />}
+                              {childLink.title}
+                            </span>
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )
+            })}
           </div>
         </li>
       )}
