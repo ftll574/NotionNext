@@ -3,7 +3,7 @@ import SocialButton from '@/themes/fukasawa/components/SocialButton'
 import { Logo } from './Logo'
 import { SVGFooterCircleBG } from './svg/SVGFooterCircleBG'
 import Link from 'next/link'
-import AnalyticsBusuanzi from '@/components/AnalyticsBusuanzi'
+import React, { useEffect, useState } from 'react'
 
 /* eslint-disable @next/next/no-img-element */
 export const Footer = props => {
@@ -12,6 +12,12 @@ export const Footer = props => {
     ? props?.latestPosts.slice(0, footerPostCount)
     : []
   const STARTER_FOOTER_LINK_GROUP = siteConfig('STARTER_FOOTER_LINK_GROUP', [])
+  const [showStats, setShowStats] = useState(false)
+  
+  useEffect(() => {
+    setShowStats(true)
+  }, [])
+
   return (
     <>
       {/* <!-- ====== Footer Section Start --> */}
@@ -171,21 +177,23 @@ export const Footer = props => {
                 {siteConfig('STARTER_FOOTER_COPYRIGHT')}
               </p>
               
-              {/* 添加訪客統計 */}
-              <div className="flex items-center justify-center space-x-5">
-                <div className="flex items-center space-x-2 text-sm text-body-color dark:text-white">
-                  <i className="fas fa-eye"></i>
-                  <span className="busuanzi_container_site_pv">
-                    訪問量: <span className="busuanzi_value_site_pv"></span>
-                  </span>
+              {/* 只在客戶端渲染統計組件 */}
+              {showStats && (
+                <div className="flex items-center justify-center space-x-5">
+                  <div className="flex items-center space-x-2 text-sm text-body-color dark:text-white">
+                    <i className="fas fa-eye"></i>
+                    <span className="busuanzi_container_site_pv">
+                      總訪問量: <span className="busuanzi_value_site_pv"></span>
+                    </span>
+                  </div>
+                  <div className="flex items-center space-x-2 text-sm text-body-color dark:text-white">
+                    <i className="fas fa-users"></i>
+                    <span className="busuanzi_container_site_uv">
+                      訪客數: <span className="busuanzi_value_site_uv"></span>
+                    </span>
+                  </div>
                 </div>
-                <div className="flex items-center space-x-2 text-sm text-body-color dark:text-white">
-                  <i className="fas fa-users"></i>
-                  <span className="busuanzi_container_site_uv">
-                    訪客數: <span className="busuanzi_value_site_uv"></span>
-                  </span>
-                </div>
-              </div>
+              )}
             </div>
           </div>
         </div>
