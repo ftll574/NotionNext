@@ -3,6 +3,7 @@ import SocialButton from '@/themes/fukasawa/components/SocialButton'
 import { Logo } from './Logo'
 import { SVGFooterCircleBG } from './svg/SVGFooterCircleBG'
 import Link from 'next/link'
+import AnalyticsBusuanzi from '@/components/AnalyticsBusuanzi'
 
 /* eslint-disable @next/next/no-img-element */
 export const Footer = props => {
@@ -160,6 +161,33 @@ export const Footer = props => {
           <span className='absolute right-0 top-0 z-[-1]'>
             <SVGFooterCircleBG />
           </span>
+        </div>
+
+        {/* 版權區塊 */}
+        <div className="bg-primary/10 py-8">
+          <div className="container">
+            <div className="items-center justify-between text-center md:flex">
+              <p className="mb-6 text-base text-body-color dark:text-white md:mb-0">
+                {siteConfig('STARTER_FOOTER_COPYRIGHT')}
+              </p>
+              
+              {/* 添加訪客統計 */}
+              <div className="flex items-center justify-center space-x-5">
+                <div className="flex items-center space-x-2 text-sm text-body-color dark:text-white">
+                  <i className="fas fa-eye"></i>
+                  <span className="busuanzi_container_site_pv">
+                    訪問量: <span className="busuanzi_value_site_pv"></span>
+                  </span>
+                </div>
+                <div className="flex items-center space-x-2 text-sm text-body-color dark:text-white">
+                  <i className="fas fa-users"></i>
+                  <span className="busuanzi_container_site_uv">
+                    訪客數: <span className="busuanzi_value_site_uv"></span>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </footer>
       {/* <!-- ====== Footer Section End --> */}

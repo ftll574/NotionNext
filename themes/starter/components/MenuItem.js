@@ -75,7 +75,7 @@ export const MenuItem = ({ link }) => {
 
           {/* 二级菜单 */}
           <div
-            className={`submenu dark:border-gray-600 relative left-0 top-full w-[250px] rounded-sm bg-white p-4 transition-all duration-300 dark:bg-dark-2 lg:absolute lg:shadow-lg ${
+            className={`submenu dark:border-gray-600 absolute left-full top-0 w-[250px] rounded-sm bg-white p-4 transition-all duration-300 dark:bg-dark-2 lg:absolute lg:shadow-lg ${
               isSubMenuOpen
                 ? 'block opacity-100 visible'
                 : 'hidden opacity-0 invisible'
