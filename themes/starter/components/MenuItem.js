@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import { useState } from 'react'
 
 /**
- * 菜单链接
+ * 菜單鏈接
  * @param {*} param0
  * @returns
  */
@@ -11,7 +11,7 @@ export const MenuItem = ({ link }) => {
   const hasSubMenu = link?.subMenus?.length > 0
   const router = useRouter()
 
-  // 管理菜单的展开状态
+  // 管理菜單的展開狀態
   const [isSubMenuOpen, setIsSubMenuOpen] = useState(false)
   const [childMenuOpenStates, setChildMenuOpenStates] = useState({})
 
@@ -41,105 +41,91 @@ export const MenuItem = ({ link }) => {
                 ? 'lg:text-white lg:group-hover:text-white'
                 : ''
             } lg:group-hover:opacity-70`}>
-            {link?.icon && <i className={link.icon + ' mr-2 my-auto'} />}
+            {link?.icon && <span className='mr-2'>{link.icon}</span>}
             {link?.name}
           </Link>
         </li>
       )}
 
-      {/* 有子菜单的 MenuItem */}
+      {/* 帶子菜單的 MenuItem */}
       {hasSubMenu && (
         <li className='submenu-item group relative whitespace-nowrap'>
           <button
             onClick={toggleSubMenu}
-            className={`cursor-pointer relative px-8 flex items-center justify-between py-2 text-base font-medium text-dark group-hover:text-primary dark:text-white lg:ml-8 lg:mr-0 lg:inline-flex lg:py-6 lg:pl-0 lg:pr-4 ${
+            className={`ud-menu-scroll mx-8 flex items-center justify-between py-2 text-base font-medium text-dark group-hover:text-primary dark:text-white lg:mr-0 lg:inline-flex lg:px-0 lg:py-6 ${
               router.route === '/'
                 ? 'lg:text-white lg:group-hover:text-white'
                 : ''
-            } lg:group-hover:opacity-70 xl:ml-10`}>
-            <span>
-              {link?.icon && <i className={link.icon + ' mr-2 my-auto'} />}
-              {link?.name}
+            } lg:group-hover:opacity-70`}>
+            {link?.icon && <span className='mr-2'>{link.icon}</span>}
+            {link?.name}
+            <span className='pl-3'>
+              <svg width='15' height='14' viewBox='0 0 15 14'>
+                <path
+                  d='M7.81602 9.97495C7.68477 9.97495 7.57539 9.9312 7.46602 9.8437L2.43477 4.89995C2.23789 4.70308 2.23789 4.39683 2.43477 4.19995C2.63164 4.00308 2.93789 4.00308 3.13477 4.19995L7.81602 8.77183L12.4973 4.1562C12.6941 3.95933 13.0004 3.95933 13.1973 4.1562C13.3941 4.35308 13.3941 4.65933 13.1973 4.8562L8.16601 9.79995C8.05664 9.90933 7.94727 9.97495 7.81602 9.97495Z'
+                  fill='currentColor'
+                />
+              </svg>
             </span>
-
-            <svg
-              className='ml-2 fill-current'
-              width='16'
-              height='20'
-              viewBox='0 0 16 20'
-              fill='none'
-              xmlns='http://www.w3.org/2000/svg'>
-              <path d='M7.99999 14.9C7.84999 14.9 7.72499 14.85 7.59999 14.75L1.84999 9.10005C1.62499 8.87505 1.62499 8.52505 1.84999 8.30005C2.07499 8.07505 2.42499 8.07505 2.64999 8.30005L7.99999 13.525L13.35 8.25005C13.575 8.02505 13.925 8.02505 14.15 8.25005C14.375 8.47505 14.375 8.82505 14.15 9.05005L8.39999 14.7C8.27499 14.825 8.14999 14.9 7.99999 14.9Z' />
-            </svg>
           </button>
 
-          {/* 二级菜单 */}
+          {/* 下拉子菜單 */}
           <div
-            className={`submenu dark:border-gray-600 absolute left-full top-0 w-[250px] rounded-sm bg-white p-4 transition-all duration-300 dark:bg-dark-2 lg:absolute lg:shadow-lg ${
-              isSubMenuOpen
-                ? 'block opacity-100 visible'
-                : 'hidden opacity-0 invisible'
-            }`}>
-            {link.subMenus.map((sLink, index) => {
-              // 檢查是否有三級菜單
-              const hasChildMenu = sLink.childMenus && sLink.childMenus.length > 0
-
-              return (
-                <div key={index} className="mb-2">
-                  {!hasChildMenu ? (
-                    // 普通二級菜單項
+            className={`submenu ${
+              isSubMenuOpen ? 'block' : 'hidden'
+            } relative rounded-md bg-white transition-[top] duration-300 group-hover:opacity-100 dark:bg-dark-2 lg:invisible lg:absolute lg:top-[110%] lg:block lg:opacity-0 lg:shadow-lg lg:group-hover:visible lg:group-hover:top-full`}>
+            <ul className='py-2 lg:py-[14px]'>
+              {link?.subMenus?.map((subMenu, subMenuIndex) => (
+                <li key={subMenuIndex} className='relative'>
+                  {!subMenu?.subMenus?.length ? (
                     <Link
-                      href={sLink.href}
-                      target={sLink.target || link?.target}
-                      className='block rounded px-4 py-[10px] text-sm text-body-color hover:text-primary dark:text-dark-6 dark:hover:text-primary'>
-                      <span className='text-md ml-2 whitespace-nowrap'>
-                        {sLink.icon && <i className={sLink.icon + ' mr-2 my-auto'} />}
-                        {sLink.title}
-                      </span>
+                      href={subMenu?.href}
+                      target={subMenu?.target}
+                      className='flex px-8 py-2 text-sm text-body-color hover:text-primary dark:text-dark-6 dark:hover:text-white lg:px-3'>
+                      {subMenu?.icon && <span className='mr-2'>{subMenu.icon}</span>}
+                      {subMenu?.name}
                     </Link>
                   ) : (
-                    // 有三級菜單的二級菜單項
-                    <div className="relative">
+                    <div className='relative'>
                       <button
-                        onClick={(e) => toggleChildMenu(index, e)}
-                        className='w-full text-left rounded px-4 py-[10px] text-sm text-body-color hover:text-primary dark:text-dark-6 dark:hover:text-primary flex justify-between items-center'>
-                        <span className='text-md ml-2 whitespace-nowrap'>
-                          {sLink.icon && <i className={sLink.icon + ' mr-2 my-auto'} />}
-                          {sLink.title}
+                        onClick={(e) => toggleChildMenu(subMenuIndex, e)}
+                        className='flex w-full items-center justify-between px-8 py-2 text-sm text-body-color hover:text-primary dark:text-dark-6 dark:hover:text-white lg:px-3'>
+                        {subMenu?.icon && <span className='mr-2'>{subMenu.icon}</span>}
+                        {subMenu?.name}
+                        <span className='pl-3'>
+                          <svg width='15' height='14' viewBox='0 0 15 14' className='rotate-[-90deg]'>
+                            <path
+                              d='M7.81602 9.97495C7.68477 9.97495 7.57539 9.9312 7.46602 9.8437L2.43477 4.89995C2.23789 4.70308 2.23789 4.39683 2.43477 4.19995C2.63164 4.00308 2.93789 4.00308 3.13477 4.19995L7.81602 8.77183L12.4973 4.1562C12.6941 3.95933 13.0004 3.95933 13.1973 4.1562C13.3941 4.35308 13.3941 4.65933 13.1973 4.8562L8.16601 9.79995C8.05664 9.90933 7.94727 9.97495 7.81602 9.97495Z'
+                              fill='currentColor'
+                            />
+                          </svg>
                         </span>
-                        <svg
-                          className={`w-4 h-4 transform transition-transform ${childMenuOpenStates[index] ? 'rotate-90' : ''}`}
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                          xmlns="http://www.w3.org/2000/svg">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
-                        </svg>
                       </button>
 
-                      {/* 三級菜單 */}
+                      {/* 第三級菜單 - 向右側展開 */}
                       <div
-                        className={`pl-4 ml-2 mt-1 border-l border-gray-200 dark:border-gray-700 transition-all duration-300 ${
-                          childMenuOpenStates[index] ? 'block' : 'hidden'
-                        }`}>
-                        {sLink.childMenus.map((childLink, childIndex) => (
-                          <Link
-                            key={childIndex}
-                            href={childLink.href}
-                            target={childLink.target || sLink.target || link?.target}
-                            className='block rounded px-4 py-[8px] text-sm text-body-color hover:text-primary dark:text-dark-6 dark:hover:text-primary'>
-                            <span className='text-md whitespace-nowrap'>
-                              {childLink.icon && <i className={childLink.icon + ' mr-2 my-auto'} />}
-                              {childLink.title}
-                            </span>
-                          </Link>
-                        ))}
+                        className={`child-menu ${
+                          childMenuOpenStates[subMenuIndex] ? 'block' : 'hidden'
+                        } absolute right-[-100%] top-0 z-10 min-w-[200px] rounded-md bg-white py-2 shadow-lg dark:bg-dark-2`}>
+                        <ul className='py-1'>
+                          {subMenu?.subMenus?.map((childMenu, childMenuIndex) => (
+                            <li key={childMenuIndex}>
+                              <Link
+                                href={childMenu?.href}
+                                target={childMenu?.target}
+                                className='block px-4 py-1 text-sm text-body-color hover:bg-gray-50 hover:text-primary dark:text-dark-6 dark:hover:bg-dark-3 dark:hover:text-white'>
+                                {childMenu?.icon && <span className='mr-2'>{childMenu.icon}</span>}
+                                {childMenu?.name}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
                       </div>
                     </div>
                   )}
-                </div>
-              )
-            })}
+                </li>
+              ))}
+            </ul>
           </div>
         </li>
       )}
