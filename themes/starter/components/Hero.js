@@ -3,12 +3,65 @@ import LazyImage from '@/components/LazyImage'
 import { siteConfig } from '@/lib/config'
 import CONFIG from '../config'
 import Link from 'next/link'
+import { useEffect, useState } from 'react'
 
 /**
- * 英雄大图区块
+ * 英雄大圖區塊
  */
 export const Hero = props => {
   const config = props?.NOTION_CONFIG || CONFIG
+  
+  // 從配置中獲取輪播圖片數組，如果是字符串則轉換為數組
+  const getImagesArray = () => {
+    const imagesConfig = siteConfig('STARTER_HERO_PREVIEW_IMAGES', null, config) || 
+                        siteConfig('STARTER_HERO_PREVIEW_IMAGE', null, config)
+    
+    if (!imagesConfig) return []
+    
+    // 如果配置是字符串，檢查是否包含分隔符
+    if (typeof imagesConfig === 'string') {
+      // 如果包含逗號，則按逗號分割成數組
+      if (imagesConfig.includes(',')) {
+        return imagesConfig.split(',').map(url => url.trim())
+      }
+      // 否則將單個圖片作為數組的唯一元素
+      return [imagesConfig]
+    }
+    
+    // 如果已經是數組則直接返回
+    return Array.isArray(imagesConfig) ? imagesConfig : []
+  }
+  
+  const images = getImagesArray()
+  const [currentImageIndex, setCurrentImageIndex] = useState(0)
+  
+  // 自動輪播效果
+  useEffect(() => {
+    // 如果只有一張圖片或沒有圖片，不需要輪播
+    if (images.length <= 1) return
+    
+    const interval = setInterval(() => {
+      setCurrentImageIndex(prevIndex => 
+        prevIndex === images.length - 1 ? 0 : prevIndex + 1
+      )
+    }, 5000) // 每5秒切換一次圖片
+    
+    return () => clearInterval(interval)
+  }, [images.length])
+  
+  // 手動切換函數
+  const goToNextSlide = () => {
+    setCurrentImageIndex(prevIndex => 
+      prevIndex === images.length - 1 ? 0 : prevIndex + 1
+    )
+  }
+  
+  const goToPrevSlide = () => {
+    setCurrentImageIndex(prevIndex => 
+      prevIndex === 0 ? images.length - 1 : prevIndex - 1
+    )
+  }
+
   return (
     <>
       {/* <!-- ====== Hero Section Start --> */}
@@ -81,25 +134,59 @@ export const Hero = props => {
             </div>
 
             {/* 产品预览图片 */}
-            {siteConfig('STARTER_HERO_PREVIEW_IMAGE', null, config) && (
+            {images.length > 0 && (
               <div className='w-full px-4'>
                 <div
                   className='wow fadeInUp relative z-10 mx-auto max-w-[845px] transform transition-all duration-300 hover:-translate-y-2'
                   data-wow-delay='.25s'>
-                  <div className='mt-16'>
-                    <img
-                      src={siteConfig('STARTER_HERO_PREVIEW_IMAGE', null, config)}
-                      alt={siteConfig('TITLE', null, config)}
-                      title={siteConfig('TITLE', null, config)}
-                      className='mx-auto max-w-full rounded-xl shadow-2xl'
-                    />
-                  </div>
-                  {/* 背景裝飾 */}
-                  <div className='absolute -left-9 bottom-0 z-[-1] opacity-60 animate-pulse'>
-                    <img src='/images/starter/bg-hero-circle.svg' />
-                  </div>
-                  <div className='absolute -right-6 -top-6 z-[-1] opacity-60 animate-pulse' style={{animationDelay: '1s'}}>
-                    <img src='/images/starter/bg-hero-circle.svg' />
+                  <div className='mt-16 relative'>
+                    {/* 輪播圖片 */}
+                    <div className='relative overflow-hidden rounded-md'>
+                      {images.map((image, index) => (
+                        <img
+                          key={index}
+                          src={image}
+                          alt={siteConfig('TITLE', null, config)}
+                          title={siteConfig('TITLE', null, config)}
+                          className={`w-full transition-opacity duration-500 ${
+                            index === currentImageIndex ? 'opacity-100' : 'opacity-0 absolute top-0 left-0'
+                          }`}
+                        />
+                      ))}
+                      
+                      {/* 輪播導航按鈕 - 只在多張圖片時顯示 */}
+                      {images.length > 1 && (
+                        <>
+                          <button 
+                            onClick={goToPrevSlide}
+                            className='absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/50 dark:bg-dark-2/50 rounded-full p-2 text-primary hover:bg-white dark:hover:bg-dark-2 transition-all'
+                          >
+                            <i className='fas fa-chevron-left'></i>
+                          </button>
+                          <button 
+                            onClick={goToNextSlide}
+                            className='absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/50 dark:bg-dark-2/50 rounded-full p-2 text-primary hover:bg-white dark:hover:bg-dark-2 transition-all'
+                          >
+                            <i className='fas fa-chevron-right'></i>
+                          </button>
+                        </>
+                      )}
+                    </div>
+                    
+                    {/* 輪播指示器 - 只在多張圖片時顯示 */}
+                    {images.length > 1 && (
+                      <div className='flex justify-center mt-4'>
+                        {images.map((_, index) => (
+                          <button 
+                            key={index}
+                            onClick={() => setCurrentImageIndex(index)}
+                            className={`w-3 h-3 rounded-full mx-1 ${
+                              index === currentImageIndex ? 'bg-primary' : 'bg-gray-300 dark:bg-gray-600'
+                            }`}
+                          />
+                        ))}
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
