@@ -61,7 +61,7 @@ const CONFIG = {
   // 首页ABOUT区块
   STARTER_ABOUT_ENABLE: true, // ABOUT区块开关
   STARTER_ABOUT_TITLE: '鑫葳團隊服務業界30年，專注塑膠原料行業',
-  STARTER_ABOUT_TEXT: '鑫葳塑膠成立於1993年，專注於高品質塑膠原料的供應與服務。<br/><br/>憑藉多年的行業經驗和穩定的供應鏈管理，我們為電子、汽車、家電等行業提供可靠的原材料支持，成為眾多製造企業的長期合作夥伴。',
+  STARTER_ABOUT_TEXT: '鑫葳塑膠專注於高品質塑膠原料的供應與服務。<br/><br/>憑藉多年的行業經驗和穩定的供應鏈管理，我們為電子、汽車、家電等行業提供可靠的原材料支持，成為眾多製造企業的長期合作夥伴。',
   STARTER_ABOUT_BUTTON_TEXT: '了解更多',
   STARTER_ABOUT_BUTTON_URL: '/about',
   STARTER_ABOUT_IMAGE_1: 'images/starter/meterial/meterial.jpg',
@@ -216,9 +216,9 @@ const CONFIG = {
   STARTER_CONTACT_ADDRESS_TEXT: '244 新北市林口區湖北里10鄰17之20號',
 
   // 電話
-  STARTER_CONTACT_PHONE_TITLE: '聯繫電話',
-  STARTER_CONTACT_PHONE_TEXT: '(886) 0938-321-132',
-
+  STARTER_CONTACT_PHONE_TITLE: '聯繫電話與傳真',
+  STARTER_CONTACT_PHONE_TEXT: '☎ (886) 0938-321-132',
+  STARTER_CONTACT_FAX_TEXT: '📠 (02) 2602-6967',
   // 郵箱
   STARTER_CONTACT_EMAIL_TITLE: '電子郵箱',
   STARTER_CONTACT_EMAIL_TEXT: 'tw.xinwei@gmail.com',

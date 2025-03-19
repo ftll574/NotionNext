@@ -93,6 +93,8 @@ export const Contact = () => {
                       </h5>
                       <p className='text-base text-body-color dark:text-dark-6'>
                         {siteConfig('STARTER_CONTACT_PHONE_TEXT')}
+                        <br/>
+                        {siteConfig('STARTER_CONTACT_FAX_TEXT')}
                       </p>
                       <a 
                         href={`tel:${siteConfig('STARTER_CONTACT_PHONE_TEXT').replace(/[^0-9+]/g, '')}`} 
@@ -142,9 +144,8 @@ export const Contact = () => {
                         營業時間
                       </h5>
                       <p className='text-base text-body-color dark:text-dark-6'>
-                        週一至週五: 9:00 - 17:30<br/>
-                        週六: 9:00 - 13:00<br/>
-                        週日: 休息
+                        週一至週五: 8:00 - 17:00<br/>
+                        週六日: 休息
                       </p>
                     </div>
                   </div>
