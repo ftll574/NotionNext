@@ -132,68 +132,67 @@ export const Hero = props => {
                 </ul>
               </div>
             </div>
-
-            {/* 产品预览图片 */}
-            {images.length > 0 && (
-              <div className='w-full px-4'>
-                <div
-                  className='wow fadeInUp relative z-10 mx-auto max-w-[845px] transform transition-all duration-300 hover:-translate-y-2'
-                  data-wow-delay='.25s'>
-                  <div className='mt-16 relative'>
-                    {/* 輪播圖片 */}
-                    <div className='relative overflow-hidden rounded-md'>
-                      {images.map((image, index) => (
-                        <img
-                          key={index}
-                          src={image}
-                          alt={siteConfig('TITLE', null, config)}
-                          title={siteConfig('TITLE', null, config)}
-                          className={`w-full transition-opacity duration-500 ${
-                            index === currentImageIndex ? 'opacity-100' : 'opacity-0 absolute top-0 left-0'
-                          }`}
-                        />
-                      ))}
-                      
-                      {/* 輪播導航按鈕 - 只在多張圖片時顯示 */}
-                      {images.length > 1 && (
-                        <>
-                          <button 
-                            onClick={goToPrevSlide}
-                            className='absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/50 dark:bg-dark-2/50 rounded-full p-2 text-primary hover:bg-white dark:hover:bg-dark-2 transition-all'
-                          >
-                            <i className='fas fa-chevron-left'></i>
-                          </button>
-                          <button 
-                            onClick={goToNextSlide}
-                            className='absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/50 dark:bg-dark-2/50 rounded-full p-2 text-primary hover:bg-white dark:hover:bg-dark-2 transition-all'
-                          >
-                            <i className='fas fa-chevron-right'></i>
-                          </button>
-                        </>
-                      )}
-                    </div>
-                    
-                    {/* 輪播指示器 - 只在多張圖片時顯示 */}
-                    {images.length > 1 && (
-                      <div className='flex justify-center mt-4'>
-                        {images.map((_, index) => (
-                          <button 
-                            key={index}
-                            onClick={() => setCurrentImageIndex(index)}
-                            className={`w-3 h-3 rounded-full mx-1 ${
-                              index === currentImageIndex ? 'bg-primary' : 'bg-gray-300 dark:bg-gray-600'
-                            }`}
-                          />
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                </div>
-              </div>
-            )}
           </div>
         </div>
       </div>
+      {/* <!-- ====== Hero Section End --> */}
+      
+      {/* 全版輪播圖片 */}
+      {images.length > 0 && (
+        <div className="relative w-full overflow-hidden" style={{ height: '70vh' }}>
+          {/* 輪播圖片 */}
+          {images.map((image, index) => (
+            <div
+              key={index}
+              className={`absolute inset-0 transition-opacity duration-500 ${
+                index === currentImageIndex ? 'opacity-100' : 'opacity-0'
+              }`}
+            >
+              <img
+                src={image}
+                alt={siteConfig('TITLE', null, config)}
+                title={siteConfig('TITLE', null, config)}
+                className="w-full h-full object-cover"
+              />
+            </div>
+          ))}
+          
+          {/* 輪播導航按鈕 - 只在多張圖片時顯示 */}
+          {images.length > 1 && (
+            <>
+              <button 
+                onClick={goToPrevSlide}
+                className='absolute left-8 top-1/2 transform -translate-y-1/2 bg-white/50 dark:bg-dark-2/50 rounded-full p-3 text-primary hover:bg-white dark:hover:bg-dark-2 transition-all z-20'
+              >
+                <i className='fas fa-chevron-left text-xl'></i>
+              </button>
+              <button 
+                onClick={goToNextSlide}
+                className='absolute right-8 top-1/2 transform -translate-y-1/2 bg-white/50 dark:bg-dark-2/50 rounded-full p-3 text-primary hover:bg-white dark:hover:bg-dark-2 transition-all z-20'
+              >
+                <i className='fas fa-chevron-right text-xl'></i>
+              </button>
+            </>
+          )}
+          
+          {/* 輪播指示器 - 只在多張圖片時顯示 */}
+          {images.length > 1 && (
+            <div className='absolute bottom-8 left-1/2 transform -translate-x-1/2 flex justify-center z-20'>
+              {images.map((_, index) => (
+                <button 
+                  key={index}
+                  onClick={() => setCurrentImageIndex(index)}
+                  className={`w-4 h-4 rounded-full mx-2 ${
+                    index === currentImageIndex ? 'bg-primary' : 'bg-white/70'
+                  }`}
+                  aria-label={`前往第 ${index + 1} 張圖片`}
+                />
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+      
       {/* 横幅图片 */}
       {siteConfig('STARTER_HERO_BANNER_IMAGE', null, config) && (
         <div className='container'>
@@ -207,7 +206,6 @@ export const Hero = props => {
             )}></LazyImage>
         </div>
       )}
-      {/* <!-- ====== Hero Section End --> */}
     </>
   )
 }
