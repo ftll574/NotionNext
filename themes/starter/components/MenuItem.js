@@ -7,7 +7,7 @@ import { useState, useRef, useEffect } from 'react'
  * @param {*} param0
  * @returns
  */
-export const MenuItem = ({ link, onMenuOpen, isAnyMenuOpen }) => {
+export const MenuItem = ({ link, index, isOpen, onMenuOpen, isAnyMenuOpen }) => {
   const hasSubMenu = link?.subMenus?.length > 0
   const router = useRouter()
   const menuRef = useRef(null)
@@ -16,14 +16,17 @@ export const MenuItem = ({ link, onMenuOpen, isAnyMenuOpen }) => {
   const [isSubMenuOpen, setIsSubMenuOpen] = useState(false)
   const [childMenuOpenStates, setChildMenuOpenStates] = useState({})
 
+  // 計算動畫延遲時間，每個菜單項依序延遲出現
+  const animationDelay = `${index * 0.1}s`;
+
   // 切換子菜單狀態
   const toggleSubMenu = () => {
     const newState = !isSubMenuOpen
     setIsSubMenuOpen(newState)
     
     // 通知父組件有菜單被打開
-    if (newState) {
-      onMenuOpen && onMenuOpen()
+    if (newState && onMenuOpen) {
+      onMenuOpen()
     }
   }
 
@@ -56,10 +59,11 @@ export const MenuItem = ({ link, onMenuOpen, isAnyMenuOpen }) => {
 
   // 當其他菜單打開時，關閉此菜單
   useEffect(() => {
-    if (isAnyMenuOpen && !isSubMenuOpen) {
+    if (isAnyMenuOpen) {
+      setIsSubMenuOpen(false)
       setChildMenuOpenStates({})
     }
-  }, [isAnyMenuOpen, isSubMenuOpen])
+  }, [isAnyMenuOpen])
 
   // 路由變化時關閉所有菜單
   useEffect(() => {
@@ -71,10 +75,17 @@ export const MenuItem = ({ link, onMenuOpen, isAnyMenuOpen }) => {
     <>
       {/* 普通 MenuItem */}
       {!hasSubMenu && (
-        <li className='group relative whitespace-nowrap'>
+        <li 
+          className="group relative"
+          style={{
+            opacity: isOpen ? 1 : 0,
+            transform: isOpen ? 'translateY(0)' : 'translateY(-20px)',
+            transition: `opacity 0.5s ease-out ${animationDelay}, transform 0.5s ease-out ${animationDelay}`
+          }}
+        >
           <Link
-            href={link?.href}
-            target={link?.target}
+            href={link?.href || '#'}
+            target={link?.href && link.href.indexOf('http') === 0 ? '_blank' : '_self'}
             className={`ud-menu-scroll mx-8 flex py-2 text-base font-medium text-dark group-hover:text-primary dark:text-white lg:mr-0 lg:inline-flex lg:px-0 lg:py-6 ${
               router.route === '/'
                 ? 'lg:text-white lg:group-hover:text-white'
@@ -88,7 +99,15 @@ export const MenuItem = ({ link, onMenuOpen, isAnyMenuOpen }) => {
 
       {/* 帶子菜單的 MenuItem */}
       {hasSubMenu && (
-        <li className='submenu-item group relative whitespace-nowrap' ref={menuRef}>
+        <li 
+          ref={menuRef}
+          className="group relative"
+          style={{
+            opacity: isOpen ? 1 : 0,
+            transform: isOpen ? 'translateY(0)' : 'translateY(-20px)',
+            transition: `opacity 0.5s ease-out ${animationDelay}, transform 0.5s ease-out ${animationDelay}`
+          }}
+        >
           <button
             onClick={toggleSubMenu}
             className={`ud-menu-scroll mx-8 flex items-center justify-between py-2 text-base font-medium text-dark group-hover:text-primary dark:text-white lg:mr-0 lg:inline-flex lg:px-0 lg:py-6 ${
@@ -124,8 +143,8 @@ export const MenuItem = ({ link, onMenuOpen, isAnyMenuOpen }) => {
                   {!hasChildMenu ? (
                     // 普通二級菜單項
                     <Link
-                      href={sLink.href}
-                      target={sLink.target || link?.target}
+                      href={sLink.href || '#'}
+                      target={sLink.href && sLink.href.indexOf('http') === 0 ? '_blank' : '_self'}
                       className='block rounded px-4 py-[10px] text-sm text-body-color hover:text-primary dark:text-dark-6 dark:hover:text-primary'>
                       <span className='text-md ml-2 whitespace-nowrap'>
                         {sLink.icon && <i className={sLink.icon + ' mr-2 my-auto'} />}
@@ -160,8 +179,8 @@ export const MenuItem = ({ link, onMenuOpen, isAnyMenuOpen }) => {
                         {sLink.childMenus.map((childLink, childIndex) => (
                           <Link
                             key={childIndex}
-                            href={childLink.href}
-                            target={childLink.target || sLink.target || link?.target}
+                            href={childLink.href || '#'}
+                            target={childLink.href && childLink.href.indexOf('http') === 0 ? '_blank' : '_self'}
                             className='block rounded px-4 py-[8px] text-sm text-body-color hover:text-primary dark:text-dark-6 dark:hover:text-primary'>
                             <span className='text-md whitespace-nowrap'>
                               {childLink.icon && <i className={childLink.icon + ' mr-2 my-auto'} />}

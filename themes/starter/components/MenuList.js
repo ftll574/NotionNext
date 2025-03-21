@@ -11,7 +11,13 @@ import { MenuItem } from './MenuItem'
 export const MenuList = props => {
   const { customNav, customMenu } = props
   const { locale } = useGlobal()
-
+  const [navBar, setNavBar] = useState(false)
+  
+  // 添加菜單展開狀態
+  const [isOpen, setIsOpen] = useState(false)
+  // 修正：定義 lockScreen 狀態
+  const [lockScreen, setLockScreen] = useState(false)
+  
   const [showMenu, setShowMenu] = useState(false) // 控制菜單展開/收起狀態
   const [activeMenuIndex, setActiveMenuIndex] = useState(null) // 跟踪當前打開的菜單
   const navRef = useRef(null)
@@ -57,10 +63,6 @@ export const MenuList = props => {
     return null
   }
 
-  const toggleMenu = () => {
-    setShowMenu(!showMenu) // 切換菜單狀態
-  }
-
   // 處理菜單項被打開的回調
   const handleMenuOpen = (index) => {
     setActiveMenuIndex(index)
@@ -71,6 +73,7 @@ export const MenuList = props => {
     const handleClickOutside = (event) => {
       if (navRef.current && !navRef.current.contains(event.target)) {
         setShowMenu(false)
+        setLockScreen(false)
       }
     }
 
@@ -83,37 +86,74 @@ export const MenuList = props => {
   // 路由變化時關閉菜單
   useEffect(() => {
     setShowMenu(false)
+    setLockScreen(false)
     setActiveMenuIndex(null)
   }, [router.asPath])
 
+  // 滾動事件和動畫效果
+  useEffect(() => {
+    // 監聽滾動事件
+    const changeHeight = () => {
+      if (window.scrollY > 100) {
+        setNavBar(true)
+      } else {
+        setNavBar(false)
+      }
+    }
+    window.addEventListener('scroll', changeHeight)
+    
+    // 加載時顯示菜單動畫效果
+    setTimeout(() => {
+      setIsOpen(true)
+    }, 200)
+    
+    return () => {
+      window.removeEventListener('scroll', changeHeight)
+    }
+  }, [])
+
   return (
     <div ref={navRef}>
-      {/* 移動端菜單切換按鈕 */}
-      <button
-        id='navbarToggler'
-        onClick={toggleMenu}
-        className={`absolute right-4 top-1/2 block -translate-y-1/2 rounded-lg px-3 py-[6px] ring-primary focus:ring-2 lg:hidden ${
-          showMenu ? 'navbarTogglerActive' : ''
-        }`}>
-        <span className='relative my-[6px] block h-[2px] w-[30px] bg-white duration-200 transition-all'></span>
-        <span className='relative my-[6px] block h-[2px] w-[30px] bg-white duration-200 transition-all'></span>
-        <span className='relative my-[6px] block h-[2px] w-[30px] bg-white duration-200 transition-all'></span>
-      </button>
+      {/* 移動端選單按鈕 */}
+      <div className='relative flex justify-between lg:hidden'>
+        <div></div>
+        <div>
+          <button
+            onClick={() => setLockScreen(!lockScreen)}
+            className='block absolute right-0 top-1/2 translate-y-[-50%] rounded-lg px-3 py-[6px] ring-primary focus:ring-2'>
+            <span
+              className={`relative my-1.5 block h-0.5 w-[30px] bg-black transition-all duration-300 dark:bg-white ${
+                lockScreen ? ' top-[7px] rotate-45' : ' '
+              }`}
+            />
+            <span
+              className={`relative my-1.5 block h-0.5 w-[30px] bg-black transition-all duration-300 dark:bg-white ${
+                lockScreen ? 'opacity-0 ' : ' '
+              }`}
+            />
+            <span
+              className={`relative my-1.5 block h-0.5 w-[30px] bg-black transition-all duration-300 dark:bg-white ${
+                lockScreen ? ' top-[-8px] -rotate-45' : ' '
+              }`}
+            />
+          </button>
+        </div>
+      </div>
 
-      <nav
-        id='navbarCollapse'
-        className={`absolute right-4 top-full w-full max-w-[250px] rounded-lg bg-white py-5 shadow-lg dark:bg-dark-2 lg:static lg:block lg:w-full lg:max-w-full lg:bg-transparent lg:px-4 lg:py-0 lg:shadow-none dark:lg:bg-transparent xl:px-6 ${
-          showMenu ? '' : 'hidden'
-        }`}>
-        <ul className='blcok lg:flex 2xl:ml-20'>
-          {links?.map((link, index) => (
-            <MenuItem 
+      {/* 電腦版選單 */}
+      <nav className={`absolute right-0 z-10 w-[250px] lg:static lg:block lg:w-full lg:max-w-full ${lockScreen ? 'block ' : 'hidden'}`}>
+        <ul className='block lg:flex'>
+          {links && links?.map((link, index) => {
+            // 將菜單索引傳遞給MenuItem用於計算延遲
+            return <MenuItem 
               key={index} 
               link={link} 
+              index={index} 
+              isOpen={isOpen} 
               onMenuOpen={() => handleMenuOpen(index)} 
               isAnyMenuOpen={activeMenuIndex !== null && activeMenuIndex !== index}
             />
-          ))}
+          })}
         </ul>
       </nav>
     </div>
