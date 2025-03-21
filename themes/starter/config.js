@@ -38,24 +38,24 @@ const CONFIG = {
   STARTER_FEATURE_TEXT_1: '多元化的產品線滿足各種需求',
   STARTER_FEATURE_TEXT_2: '從通用塑料到特種工程塑料，我們提供全面的塑膠原料解決方案',
 
-  STARTER_FEATURE_1_TITLE_1: '穩定的品質',
-  STARTER_FEATURE_1_TEXT_1: '嚴格的品質控制系統確保每批產品的穩定性和可靠性',
-  STARTER_FEATURE_1_BUTTON_TEXT: '了解更多',
+  STARTER_FEATURE_1_TITLE_1: '嚴選品質保證',
+  STARTER_FEATURE_1_TEXT_1: '採用SGS認證標準檢測流程，嚴控每批原料物性穩定，提供可追溯品質報告，杜絕生產隱患',
+  STARTER_FEATURE_1_BUTTON_TEXT: '品質管理系統',
   STARTER_FEATURE_1_BUTTON_URL: '/quality',
 
-  STARTER_FEATURE_2_TITLE_1: '多樣化選擇',
-  STARTER_FEATURE_2_TEXT_1: '提供多種類型塑膠原料，滿足不同行業需求',
-  STARTER_FEATURE_2_BUTTON_TEXT: '查看產品',
+  STARTER_FEATURE_2_TITLE_1: '全系列產品供應',
+  STARTER_FEATURE_2_TEXT_1: '涵蓋PE、PP、PS、ABS等通用塑料及工程塑料，可依客戶需求調配特性，提供客製化配方',
+  STARTER_FEATURE_2_BUTTON_TEXT: '瀏覽產品系列',
   STARTER_FEATURE_2_BUTTON_URL: '/products',
 
-  STARTER_FEATURE_3_TITLE_1: '專業服務',
-  STARTER_FEATURE_3_TEXT_1: '技術團隊提供專業諮詢，助您選擇最適合的材料',
-  STARTER_FEATURE_3_BUTTON_TEXT: '聯繫我們',
+  STARTER_FEATURE_3_TITLE_1: '技術支援服務',
+  STARTER_FEATURE_3_TEXT_1: '專業工程師團隊提供材料選型建議、應用問題診斷，協助客戶解決加工製程難題',
+  STARTER_FEATURE_3_BUTTON_TEXT: '技術諮詢服務',
   STARTER_FEATURE_3_BUTTON_URL: '/contact',
 
-  STARTER_FEATURE_4_TITLE_1: '快速交付',
-  STARTER_FEATURE_4_TEXT_1: '完善的供應鏈管理，確保準時交付每一批訂單',
-  STARTER_FEATURE_4_BUTTON_TEXT: '聯絡我們',
+  STARTER_FEATURE_4_TITLE_1: '靈活庫存管理',
+  STARTER_FEATURE_4_TEXT_1: '建立完善供應鏈體系，常規料型現貨供應，特殊需求快速調度，縮短交期至7-10個工作日',
+  STARTER_FEATURE_4_BUTTON_TEXT: '了解配送服務',
   STARTER_FEATURE_4_BUTTON_URL: '/contact',
 
   // 首页ABOUT区块
