@@ -2,7 +2,7 @@ import BLOG from '@/blog.config'
 import { siteConfig } from '@/lib/config'
 import { useGlobal } from '@/lib/global'
 import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { MenuItem } from './MenuItem'
 
 /**
@@ -12,7 +12,9 @@ export const MenuList = props => {
   const { customNav, customMenu } = props
   const { locale } = useGlobal()
 
-  const [showMenu, setShowMenu] = useState(false) // 控制菜单展开/收起状态
+  const [showMenu, setShowMenu] = useState(false) // 控制菜單展開/收起狀態
+  const [activeMenuIndex, setActiveMenuIndex] = useState(null) // 跟踪當前打開的菜單
+  const navRef = useRef(null)
   const router = useRouter()
 
   let links = [
@@ -46,7 +48,7 @@ export const MenuList = props => {
     links = customNav.concat(links)
   }
 
-  // 如果 开启自定义菜单，则覆盖Page生成的菜单
+  // 如果開啟自定義菜單，則覆蓋Page生成的菜單
   if (siteConfig('CUSTOM_MENU', BLOG.CUSTOM_MENU)) {
     links = customMenu
   }
@@ -56,16 +58,37 @@ export const MenuList = props => {
   }
 
   const toggleMenu = () => {
-    setShowMenu(!showMenu) // 切换菜单状态
+    setShowMenu(!showMenu) // 切換菜單狀態
   }
 
+  // 處理菜單項被打開的回調
+  const handleMenuOpen = (index) => {
+    setActiveMenuIndex(index)
+  }
+
+  // 監聽點擊事件，關閉菜單
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (navRef.current && !navRef.current.contains(event.target)) {
+        setShowMenu(false)
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [])
+
+  // 路由變化時關閉菜單
   useEffect(() => {
     setShowMenu(false)
-  }, [router])
+    setActiveMenuIndex(null)
+  }, [router.asPath])
 
   return (
-    <div>
-      {/* 移动端菜单切换按钮 */}
+    <div ref={navRef}>
+      {/* 移動端菜單切換按鈕 */}
       <button
         id='navbarToggler'
         onClick={toggleMenu}
@@ -84,7 +107,12 @@ export const MenuList = props => {
         }`}>
         <ul className='blcok lg:flex 2xl:ml-20'>
           {links?.map((link, index) => (
-            <MenuItem key={index} link={link} />
+            <MenuItem 
+              key={index} 
+              link={link} 
+              onMenuOpen={() => handleMenuOpen(index)} 
+              isAnyMenuOpen={activeMenuIndex !== null && activeMenuIndex !== index}
+            />
           ))}
         </ul>
       </nav>

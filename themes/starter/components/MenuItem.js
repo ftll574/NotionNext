@@ -1,22 +1,30 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 
 /**
  * 菜單鏈接
  * @param {*} param0
  * @returns
  */
-export const MenuItem = ({ link }) => {
+export const MenuItem = ({ link, onMenuOpen, isAnyMenuOpen }) => {
   const hasSubMenu = link?.subMenus?.length > 0
   const router = useRouter()
+  const menuRef = useRef(null)
 
   // 管理菜單的展開狀態
   const [isSubMenuOpen, setIsSubMenuOpen] = useState(false)
   const [childMenuOpenStates, setChildMenuOpenStates] = useState({})
 
+  // 切換子菜單狀態
   const toggleSubMenu = () => {
-    setIsSubMenuOpen(prev => !prev)
+    const newState = !isSubMenuOpen
+    setIsSubMenuOpen(newState)
+    
+    // 通知父組件有菜單被打開
+    if (newState) {
+      onMenuOpen && onMenuOpen()
+    }
   }
 
   const toggleChildMenu = (subMenuIndex, e) => {
@@ -27,6 +35,37 @@ export const MenuItem = ({ link }) => {
       [subMenuIndex]: !prev[subMenuIndex]
     }))
   }
+
+  // 監聽點擊事件，關閉菜單
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setIsSubMenuOpen(false)
+        setChildMenuOpenStates({})
+      }
+    }
+
+    if (isSubMenuOpen) {
+      document.addEventListener('mousedown', handleClickOutside)
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [isSubMenuOpen])
+
+  // 當其他菜單打開時，關閉此菜單
+  useEffect(() => {
+    if (isAnyMenuOpen && !isSubMenuOpen) {
+      setChildMenuOpenStates({})
+    }
+  }, [isAnyMenuOpen, isSubMenuOpen])
+
+  // 路由變化時關閉所有菜單
+  useEffect(() => {
+    setIsSubMenuOpen(false)
+    setChildMenuOpenStates({})
+  }, [router.asPath])
 
   return (
     <>
@@ -49,7 +88,7 @@ export const MenuItem = ({ link }) => {
 
       {/* 帶子菜單的 MenuItem */}
       {hasSubMenu && (
-        <li className='submenu-item group relative whitespace-nowrap'>
+        <li className='submenu-item group relative whitespace-nowrap' ref={menuRef}>
           <button
             onClick={toggleSubMenu}
             className={`ud-menu-scroll mx-8 flex items-center justify-between py-2 text-base font-medium text-dark group-hover:text-primary dark:text-white lg:mr-0 lg:inline-flex lg:px-0 lg:py-6 ${
