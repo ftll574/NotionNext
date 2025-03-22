@@ -20,8 +20,8 @@ const CONFIG = {
   STARTER_HERO_BUTTON_2_ICON: '', // 英雄区按钮2的图标，不需要则留空
 
   // 英雄区配图，如需隐藏，改为空值即可 ''
-  STARTER_HERO_PREVIEW_IMAGE: 'images/starter/background/home.jpg', // 产品预览图 ，默认读取public目录下图片
-  STARTER_HERO_PREVIEW_IMAGES: 'images/starter/background/home.jpg,images/starter/background/home3.jpg,images/starter/background/home4.jpg', // 产品预览图 ，默认读取public目录下图片
+  STARTER_HERO_PREVIEW_IMAGE: 'images/starter/background/home.png', // 产品预览图 ，默认读取public目录下图片
+  STARTER_HERO_PREVIEW_IMAGES: 'images/starter/background/home.png,images/starter/background/home3.png,images/starter/background/home4.png', // 产品预览图 ，默认读取public目录下图片
   STARTER_HERO_BANNER_IMAGE: '', // hero区下方的全宽图
 
   // 顶部右侧导航按钮
@@ -87,28 +87,39 @@ const CONFIG = {
   STARTER_PRICING_1_BUTTON_TEXT: '立即詢價',
   STARTER_PRICING_1_BUTTON_URL: '/quote',
 
-  // 產品系列2
-  STARTER_PRICING_2_TITLE: '工程級塑料',
+  // 產品系列2 (彈性塑膠)
+  STARTER_PRICING_2_TITLE: '彈性塑膠',
   STARTER_PRICING_2_IMAGE: 'images/starter/background/home2.jpg',
-  STARTER_PRICING_2_PRICE: '客製配方',
+  STARTER_PRICING_2_PRICE: '經濟實惠',
   STARTER_PRICING_2_PRICE_CURRENCY: '',
   STARTER_PRICING_2_PRICE_PERIOD: '',
-  STARTER_PRICING_2_TAG: '高性能',
-  STARTER_PRICING_2_HEADER: '適用於高要求工業應用',
-  STARTER_PRICING_2_FEATURES: 'PA尼龍系列｜PA6/PA66/改性,PC聚碳酸酯｜透明/阻燃級,POM聚甲醛｜高剛性/耐磨,PBT聚對苯二甲酸丁二醇酯,專業技術支援與物性測試',
-  STARTER_PRICING_2_BUTTON_TEXT: '技術諮詢',
-  STARTER_PRICING_2_BUTTON_URL: '/quote',
+  STARTER_PRICING_2_HEADER: '適用於彈性塑膠，提供多種規格',
+  STARTER_PRICING_2_FEATURES: 'TPE系列｜TPU系列｜PVC系列｜代補',
+  STARTER_PRICING_2_BUTTON_TEXT: '了解更多',
+  STARTER_PRICING_2_BUTTON_URL: '/recycled-materials',
 
-  // 產品系列3 (替換為再生料系列，取代特種塑料)
-  STARTER_PRICING_3_TITLE: '彈性塑膠',
+  // 產品系列2
+  STARTER_PRICING_3_TITLE: '工程級塑料',
   STARTER_PRICING_3_IMAGE: 'images/starter/background/home2.jpg',
-  STARTER_PRICING_3_PRICE: '經濟實惠',
+  STARTER_PRICING_3_PRICE: '客製配方',
   STARTER_PRICING_3_PRICE_CURRENCY: '',
   STARTER_PRICING_3_PRICE_PERIOD: '',
-  STARTER_PRICING_3_HEADER: '適用於彈性塑膠，提供多種規格',
-  STARTER_PRICING_3_FEATURES: 'TPE系列｜TPU系列｜PVC系列｜代補',
-  STARTER_PRICING_3_BUTTON_TEXT: '了解更多',
-  STARTER_PRICING_3_BUTTON_URL: '/recycled-materials',
+  STARTER_PRICING_3_TAG: '高性能',
+  STARTER_PRICING_3_HEADER: '適用於高要求工業應用',
+  STARTER_PRICING_3_FEATURES: 'PA尼龍系列｜PA6/PA66/改性,PC聚碳酸酯｜透明/阻燃級,POM聚甲醛｜高剛性/耐磨,PBT聚對苯二甲酸丁二醇酯,專業技術支援與物性測試',
+  STARTER_PRICING_3_BUTTON_TEXT: '技術諮詢',
+  STARTER_PRICING_3_BUTTON_URL: '/quote',
+
+  // 產品系列3 (替換為再生料系列，取代特種塑料)
+  STARTER_PRICING_2_TITLE: '彈性塑膠',
+  STARTER_PRICING_2_IMAGE: 'images/starter/background/home2.jpg',
+  STARTER_PRICING_2_PRICE: '經濟實惠',
+  STARTER_PRICING_2_PRICE_CURRENCY: '',
+  STARTER_PRICING_2_PRICE_PERIOD: '',
+  STARTER_PRICING_2_HEADER: '適用於彈性塑膠，提供多種規格',
+  STARTER_PRICING_2_FEATURES: 'TPE系列｜TPU系列｜PVC系列｜代補',
+  STARTER_PRICING_2_BUTTON_TEXT: '了解更多',
+  STARTER_PRICING_2_BUTTON_URL: '/recycled-materials',
 
   // 首页用户测评区块
   STARTER_TESTIMONIALS_ENABLE: false, // 测评区块开关
@@ -153,7 +164,7 @@ const CONFIG = {
 
   // 問題1
   STARTER_FAQ_1_QUESTION: '你們提供哪些類型的塑膠原料？',
-  STARTER_FAQ_1_ANSWER: '我們提供各種類型的塑膠原料，包括通用塑料（PP、PE、PS等）、工程塑料（PA、PC、POM等）和特種塑料（PEEK、PPS等）。我們可以根據客戶的具體需求提供定制解決方案。',
+  STARTER_FAQ_1_ANSWER: '我們提供各種類型的塑膠原料，包括通用塑料（PP、PE、PS等）、工程塑料（PA、PC、POM等）。我們可以根據客戶的具體需求提供定制解決方案。',
 
   // 問題2
   STARTER_FAQ_2_QUESTION: '如何確保原料的品質？',
@@ -365,7 +376,7 @@ const CONFIG = {
   STARTER_CTA_TITLE_2: '立即聯繫我們',
   STARTER_CTA_DESCRIPTION: '我們的專業團隊隨時為您提供技術諮詢和產品建議',
   STARTER_CTA_BUTTON: true,
-  STARTER_CTA_BUTTON_URL: '/contact',
+  STARTER_CTA_BUTTON_URL: '#contact',
   STARTER_CTA_BUTTON_TEXT: '免費獲取諮詢',
 
   STARTER_POST_REDIRECT_ENABLE: true, // 默認開啟重定向

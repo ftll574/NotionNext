@@ -3,6 +3,8 @@ import { SVGDesign } from './svg/SVGDesign'
 import { SVGEssential } from './svg/SVGEssential'
 import { SVGGifts } from './svg/SVGGifts'
 import { SVGTemplate } from './svg/SVGTemplate'
+import { SVGQualityAssurance } from './svg/SVGQualityAssurance'
+import { SVGInventoryManagement } from './svg/SVGInventoryManagement'
 import Link from 'next/link'
 /**
  * 产品特性相关，将显示在首页中
@@ -91,7 +93,7 @@ export const Features = () => {
               <div className='wow fadeInUp group mb-12' data-wow-delay='.25s'>
                 <div className='relative z-10 mb-10 flex h-[70px] w-[70px] items-center justify-center rounded-[14px] bg-primary'>
                   <span className='absolute left-0 top-0 -z-[1] mb-8 flex h-[70px] w-[70px] rotate-[25deg] items-center justify-center rounded-[14px] bg-primary bg-opacity-20 duration-300 group-hover:rotate-45'></span>
-                  <SVGEssential />
+                  <SVGInventoryManagement/>
                 </div>
                 <h4 className='mb-3 text-xl font-bold text-dark dark:text-white'>
                   {siteConfig('STARTER_FEATURE_4_TITLE_1')}
@@ -102,7 +104,7 @@ export const Features = () => {
                 <Link
                   href={siteConfig('STARTER_FEATURE_4_BUTTON_URL', '')}
                   className='text-base font-medium text-dark hover:text-primary dark:text-white dark:hover:text-primary'>
-                  {siteConfig('STARTER_FEATURE_3_BUTTON_TEXT')}
+                  {siteConfig('STARTER_FEATURE_4_BUTTON_TEXT')}
                 </Link>
               </div>
             </div>

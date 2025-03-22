@@ -33,24 +33,17 @@ export const Pricing = () => {
             {/* 第一个付费计划 */}
             <div className='w-full px-4 md:w-1/2 lg:w-1/3'>
               <div className="wow fadeInUp relative overflow-hidden rounded-xl border-0 bg-white shadow-lg transition-all duration-500 hover:-translate-y-2 hover:shadow-xl dark:bg-dark-2" data-wow-delay="0.1s">
-                {/* 背景圖案裝飾 - 使用 config 參數 */}
-                <div className="absolute inset-0 z-0 opacity-5">
-                  <img 
-                    src={siteConfig('STARTER_PRICING_1_IMAGE', '/images/starter/patterns/pattern-granule.jpg')} 
-                    alt="背景紋理" 
-                    className="h-full w-full object-cover"
-                  />
-                </div>
-                
-                {/* 如果有標籤，顯示在角落 */}
-                {siteConfig('STARTER_PRICING_1_TAG') && (
-                  <div className="absolute -right-12 top-10 z-20 w-40 rotate-45 bg-primary py-1 text-center text-xs font-semibold text-white">
-                    {siteConfig('STARTER_PRICING_1_TAG')}
-                  </div>
-                )}
-                
-                {/* 卡片頂部 - 現代化設計 */}
+                {/* 背景圖案裝飾 - 使用 config 參數，修改為只在卡片區域內顯示 */}
                 <div className="relative z-10 overflow-hidden pb-10 pt-8">
+                  {/* 背景圖案 - 移至此處並限制在頂部區域 */}
+                  <div className="absolute inset-0 z-0">
+                    <img 
+                      src={siteConfig('STARTER_PRICING_1_IMAGE', '/images/starter/patterns/pattern-granule.jpg')} 
+                      alt="背景紋理" 
+                      className="h-full w-full object-cover opacity-10"
+                    />
+                  </div>
+                  
                   {/* 波浪分隔線 */}
                   <div className="absolute bottom-0 left-0 right-0">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" className="text-primary text-opacity-5">
@@ -58,7 +51,7 @@ export const Pricing = () => {
                     </svg>
                   </div>
                   
-                  <div className="px-8 text-center">
+                  <div className="relative z-10 px-8 text-center">
                     <h3 className="text-xl font-bold text-dark mb-4 dark:text-white">
                       {siteConfig('STARTER_PRICING_1_TITLE')}
                     </h3>
@@ -115,7 +108,7 @@ export const Pricing = () => {
                   <img 
                     src={siteConfig('STARTER_PRICING_2_IMAGE', '/images/starter/patterns/pattern-grid.jpg')} 
                     alt="背景紋理" 
-                    className="h-full w-full object-cover"
+                    className="h-full w-full object-cover opacity-10"
                   />
                 </div>
                 
@@ -182,7 +175,7 @@ export const Pricing = () => {
                   <img 
                     src={siteConfig('STARTER_PRICING_3_IMAGE', '/images/starter/patterns/pattern-recycle.jpg')} 
                     alt="背景紋理" 
-                    className="h-full w-full object-cover"
+                    className="h-full w-full object-cover opacity-10"
                   />
                 </div>
                 
