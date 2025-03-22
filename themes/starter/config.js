@@ -111,17 +111,6 @@ const CONFIG = {
   STARTER_PRICING_3_BUTTON_TEXT: '技術諮詢',
   STARTER_PRICING_3_BUTTON_URL: '/quote',
 
-  // 產品系列3 (替換為再生料系列，取代特種塑料)
-  STARTER_PRICING_2_TITLE: '彈性塑膠',
-  STARTER_PRICING_2_IMAGE: 'images/starter/background/home2.jpg',
-  STARTER_PRICING_2_PRICE: '經濟實惠',
-  STARTER_PRICING_2_PRICE_CURRENCY: '',
-  STARTER_PRICING_2_PRICE_PERIOD: '',
-  STARTER_PRICING_2_HEADER: '適用於彈性塑膠，提供多種規格',
-  STARTER_PRICING_2_FEATURES: 'TPE系列｜TPU系列｜PVC系列｜代補',
-  STARTER_PRICING_2_BUTTON_TEXT: '了解更多',
-  STARTER_PRICING_2_BUTTON_URL: '/recycled-materials',
-
   // 首页用户测评区块
   STARTER_TESTIMONIALS_ENABLE: false, // 测评区块开关
   STARTER_TESTIMONIALS_TITLE: '客戶評價',

@@ -40,7 +40,7 @@ export const Pricing = () => {
                     <img 
                       src={siteConfig('STARTER_PRICING_1_IMAGE', '/images/starter/patterns/pattern-granule.jpg')} 
                       alt="背景紋理" 
-                      className="h-full w-full object-cover opacity-10"
+                      className="h-full w-full object-cover opacity-5"
                     />
                   </div>
                   
@@ -110,7 +110,7 @@ export const Pricing = () => {
                     <img 
                       src={siteConfig('STARTER_PRICING_2_IMAGE', '/images/starter/patterns/pattern-grid.jpg')} 
                       alt="背景紋理" 
-                      className="h-full w-full object-cover opacity-10"
+                      className="h-full w-full object-cover opacity-5"
                     />
                   </div>
                   
@@ -187,7 +187,7 @@ export const Pricing = () => {
                     <img 
                       src={siteConfig('STARTER_PRICING_3_IMAGE', '/images/starter/patterns/pattern-recycle.jpg')} 
                       alt="背景紋理" 
-                      className="h-full w-full object-cover opacity-10"
+                      className="h-full w-full object-cover opacity-5"
                     />
                   </div>
                   
