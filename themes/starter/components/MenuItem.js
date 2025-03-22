@@ -74,123 +74,124 @@ export const MenuItem = ({ link, index, isOpen, onMenuOpen, isAnyMenuOpen, navBa
   return (
     <>
       {/* 普通 MenuItem */}
-      {!hasSubMenu && (
-        <li 
-          className="group relative"
-          style={{
-            opacity: isOpen ? 1 : 0,
-            transform: isOpen ? 'translateY(0)' : 'translateY(-20px)',
-            transition: `opacity 0.5s ease-out ${animationDelay}, transform 0.5s ease-out ${animationDelay}`
-          }}
-        >
+      {!hasSubMenu && link && (
+        <li className="relative group">
           <Link
-            href={link?.href || '#'}
-            target={link?.href && link.href.indexOf('http') === 0 ? '_blank' : '_self'}
-            className={`ud-menu-scroll mx-8 flex py-2 text-base font-medium ${
-              navBar ? 'text-primary' : router.route === '/' ? 'lg:text-white lg:group-hover:text-white' : 'text-dark dark:text-white'
-            } group-hover:text-primary lg:mr-0 lg:inline-flex lg:px-0 lg:py-6 lg:group-hover:opacity-70`}>
-            {link?.icon && <span className='mr-2'>{link.icon}</span>}
-            {link?.name}
+            href={link.href}
+            target={link.external ? '_blank' : '_self'} 
+            rel={link.external ? 'noopener noreferrer' : ''}
+            className={`flex py-2 text-base transition-all duration-500 lg:mr-0 lg:inline-flex lg:py-6 lg:px-4 
+              ${router.pathname === link.href ? 'text-primary dark:text-white' : ''}
+              ${navBar 
+                ? 'text-black dark:text-black'
+                : 'text-dark group-hover:text-primary dark:text-white'
+              }
+              ${isOpen ? 'scale-animation-start' : 'scale-animation-init'}`}
+            style={{ animationDelay: animationDelay }}
+          >
+            <span className="mr-2">{link?.icon && <i className={link.icon} />}</span>
+            {link.name}
           </Link>
         </li>
       )}
 
       {/* 帶子菜單的 MenuItem */}
       {hasSubMenu && (
-        <li 
-          ref={menuRef}
-          className="group relative"
-          style={{
-            opacity: isOpen ? 1 : 0,
-            transform: isOpen ? 'translateY(0)' : 'translateY(-20px)',
-            transition: `opacity 0.5s ease-out ${animationDelay}, transform 0.5s ease-out ${animationDelay}`
-          }}
-        >
+        <li className="relative group" ref={menuRef}>
           <button
             onClick={toggleSubMenu}
-            className={`ud-menu-scroll mx-8 flex items-center justify-between py-2 text-base font-medium ${
-              navBar ? 'text-primary' : router.route === '/' ? 'lg:text-white lg:group-hover:text-white' : 'text-dark dark:text-white'
-            } group-hover:text-primary lg:mr-0 lg:inline-flex lg:px-0 lg:py-6 lg:group-hover:opacity-70`}>
-            {link?.icon && <span className='mr-2'>{link.icon}</span>}
-            {link?.name}
-            <span className='pl-3'>
-              <svg width='15' height='14' viewBox='0 0 15 14'>
-                <path
-                  d='M7.81602 9.97495C7.68477 9.97495 7.57539 9.9312 7.46602 9.8437L2.43477 4.89995C2.23789 4.70308 2.23789 4.39683 2.43477 4.19995C2.63164 4.00308 2.93789 4.00308 3.13477 4.19995L7.81602 8.77183L12.4973 4.1562C12.6941 3.95933 13.0004 3.95933 13.1973 4.1562C13.3941 4.35308 13.3941 4.65933 13.1973 4.8562L8.16601 9.79995C8.05664 9.90933 7.94727 9.97495 7.81602 9.97495Z'
-                  fill='currentColor'
-                />
+            className={`flex w-full items-center justify-between py-2 text-base transition-all duration-500 lg:mr-0 lg:inline-flex lg:py-6 lg:px-4
+              ${router.pathname === link.href ? 'text-primary dark:text-white' : ''}
+              ${navBar 
+                ? 'text-black dark:text-black'
+                : 'text-dark group-hover:text-primary dark:text-white'
+              }
+              ${isOpen ? 'scale-animation-start' : 'scale-animation-init'}`}
+            style={{ animationDelay: animationDelay }}
+          >
+            <span className="mr-2 flex items-center">
+              {link?.icon && <i className={`${link.icon} mr-2`} />}
+              {link.name}
+            </span>
+            <span className="ml-1 transition-transform duration-200">
+              <svg width="10" height="6" viewBox="0 0 10 6" className={`fill-current ${isSubMenuOpen ? 'rotate-180' : ''}`}>
+                <path d="M0.292893 0.292893C0.683416 -0.097631 1.31658 -0.097631 1.7071 0.292893L4.99999 3.58579L8.29288 0.292893C8.6834 -0.097631 9.31657 -0.097631 9.70709 0.292893C10.0976 0.683417 10.0976 1.31658 9.70709 1.70711L5.7071 5.70711C5.31657 6.09763 4.68341 6.09763 4.29289 5.70711L0.292893 1.70711C-0.0976309 1.31658 -0.0976309 0.683417 0.292893 0.292893Z" />
               </svg>
             </span>
           </button>
 
           {/* 二级菜单 */}
-          <div
-            className={`submenu dark:border-gray-600 relative left-0 top-full w-[250px] rounded-sm bg-white p-4 transition-all duration-300 dark:bg-dark-2 lg:absolute lg:shadow-lg ${
-              isSubMenuOpen
-                ? 'block opacity-100 visible'
-                : 'hidden opacity-0 invisible'
-            }`}>
-            {link.subMenus.map((sLink, index) => {
-              // 檢查是否有三級菜單
-              const hasChildMenu = sLink.childMenus && sLink.childMenus.length > 0
+          {isSubMenuOpen && (
+            <div className="lg:absolute lg:left-0 lg:top-full lg:w-[220px] lg:rounded-md lg:bg-white lg:px-2 lg:py-3 lg:shadow-lg lg:dark:bg-dark">
+              <ul className="lg:mt-0">
+                {link.subMenus.map((subMenu, subMenuIndex) => {
+                  // 檢查是否有三級菜單
+                  const hasChildMenu = subMenu.childMenus && subMenu.childMenus.length > 0
 
-              return (
-                <div key={index} className="mb-2">
-                  {!hasChildMenu ? (
-                    // 普通二級菜單項
-                    <Link
-                      href={sLink.href || '#'}
-                      target={sLink.href && sLink.href.indexOf('http') === 0 ? '_blank' : '_self'}
-                      className='block rounded px-4 py-[10px] text-sm text-body-color hover:text-primary dark:text-dark-6 dark:hover:text-primary'>
-                      <span className='text-md ml-2 whitespace-nowrap'>
-                        {sLink.icon && <i className={sLink.icon + ' mr-2 my-auto'} />}
-                        {sLink.title}
-                      </span>
-                    </Link>
-                  ) : (
-                    // 有三級菜單的二級菜單項 - 改為右側顯示
-                    <div className="relative group/child">
-                      <button
-                        onClick={(e) => toggleChildMenu(index, e)}
-                        className='w-full text-left rounded px-4 py-[10px] text-sm text-body-color hover:text-primary dark:text-dark-6 dark:hover:text-primary flex justify-between items-center'>
-                        <span className='text-md ml-2 whitespace-nowrap'>
-                          {sLink.icon && <i className={sLink.icon + ' mr-2 my-auto'} />}
-                          {sLink.title}
-                        </span>
-                        <svg
-                          className="w-4 h-4 transform"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                          xmlns="http://www.w3.org/2000/svg">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
-                        </svg>
-                      </button>
-
-                      {/* 三級菜單 - 改為右側顯示 */}
-                      <div
-                        className={`absolute left-full top-0 w-[220px] bg-white dark:bg-dark-2 rounded-sm shadow-lg p-2 -ml-1 ${
-                          childMenuOpenStates[index] ? 'block' : 'hidden'
-                        } lg:hidden lg:group-hover/child:block`}>
-                        {sLink.childMenus.map((childLink, childIndex) => (
-                          <Link
-                            key={childIndex}
-                            href={childLink.href || '#'}
-                            target={childLink.href && childLink.href.indexOf('http') === 0 ? '_blank' : '_self'}
-                            className='block rounded px-4 py-[8px] text-sm text-body-color hover:text-primary dark:text-dark-6 dark:hover:text-primary'>
-                            <span className='text-md whitespace-nowrap'>
-                              {childLink.icon && <i className={childLink.icon + ' mr-2 my-auto'} />}
-                              {childLink.title}
+                  return (
+                    <li key={subMenuIndex} className="relative">
+                      {!hasChildMenu ? (
+                        <Link
+                          href={subMenu.href}
+                          target={subMenu.external ? '_blank' : '_self'}
+                          rel={subMenu.external ? 'noopener noreferrer' : ''}
+                          className={`block py-2 text-sm text-dark hover:text-primary dark:text-white lg:px-3
+                            ${router.pathname === subMenu.href ? 'text-primary dark:text-white' : ''}
+                            ${navBar && 'lg:text-black lg:dark:text-black'}`}>
+                          <span className='text-md ml-2 whitespace-nowrap'>
+                            {subMenu.icon && <i className={subMenu.icon + ' mr-2 my-auto'} />}
+                            {subMenu.title}
+                          </span>
+                        </Link>
+                      ) : (
+                        // 有三級菜單的二級菜單項 - 改為右側顯示
+                        <div className="relative group/child">
+                          <button
+                            onClick={(e) => toggleChildMenu(subMenuIndex, e)}
+                            className='w-full text-left rounded px-4 py-[10px] text-sm text-body-color hover:text-primary dark:text-dark-6 dark:hover:text-primary flex justify-between items-center'>
+                            <span className='text-md ml-2 whitespace-nowrap'>
+                              {subMenu.icon && <i className={subMenu.icon + ' mr-2 my-auto'} />}
+                              {subMenu.title}
                             </span>
-                          </Link>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                </div>
-              )
-            })}
-          </div>
+                            <svg
+                              className="w-4 h-4 transform"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                              xmlns="http://www.w3.org/2000/svg">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                          </button>
+
+                          {/* 三級菜單 - 改為右側顯示 */}
+                          <div
+                            className={`absolute left-full top-0 w-[220px] bg-white dark:bg-dark-2 rounded-sm shadow-lg p-2 -ml-1 ${
+                              childMenuOpenStates[subMenuIndex] ? 'block' : 'hidden'
+                            } lg:hidden lg:group-hover/child:block`}>
+                            {subMenu.childMenus.map((childLink, childIndex) => (
+                              <Link
+                                key={childIndex}
+                                href={childLink.href}
+                                target={childLink.external ? '_blank' : '_self'}
+                                rel={childLink.external ? 'noopener noreferrer' : ''}
+                                className={`block rounded px-4 py-[8px] text-sm text-body-color hover:text-primary dark:text-dark-6 dark:hover:text-primary
+                                  ${router.pathname === childLink.href ? 'text-primary dark:text-white' : ''}
+                                  ${navBar && 'lg:text-black lg:dark:text-black'}`}>
+                                <span className='text-md whitespace-nowrap'>
+                                  {childLink.icon && <i className={childLink.icon + ' mr-2 my-auto'} />}
+                                  {childLink.title}
+                                </span>
+                              </Link>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                    </li>
+                  )
+                })}
+              </ul>
+            </div>
+          )}
         </li>
       )}
     </>

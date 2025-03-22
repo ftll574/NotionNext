@@ -95,7 +95,7 @@ const CONFIG = {
   STARTER_PRICING_2_PRICE_PERIOD: '',
   STARTER_PRICING_2_TAG: '熱銷',
   STARTER_PRICING_2_HEADER: '適用於需要彈性與韌性的應用場景',
-  STARTER_PRICING_2_FEATURES: 'TPE熱塑性彈性體｜多種硬度選擇,TPU聚氨酯彈性體｜優異耐磨性,PVC軟質塑膠｜符合環保標準,矽膠類彈性材料｜耐高溫應用,熱塑性橡膠｜良好回彈性能,提供物性測試報告與加工建議',
+  STARTER_PRICING_2_FEATURES: 'TPE熱塑性彈性體｜多種硬度選擇,TPU聚氨酯彈性體｜優異耐磨性,PVC軟質塑膠｜符合環保標準,矽膠類彈性材料｜耐高溫應用,熱塑性橡膠｜良好回彈性能',
   STARTER_PRICING_2_BUTTON_TEXT: '了解更多',
   STARTER_PRICING_2_BUTTON_URL: '/flexible-materials',
 
