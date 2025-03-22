@@ -1,114 +1,53 @@
-import BLOG from '@/blog.config'
-import { siteConfig } from '@/lib/config'
-import { getGlobalData } from '@/lib/db/getSiteData'
-import { DynamicLayout } from '@/themes/theme'
-import { Component } from 'react'
+import React from 'react'
+import Head from 'next/head'
+import Link from 'next/link'
 
-// 錯誤邊界組件，防止整個頁面因錯誤而崩潰
-class ErrorBoundary extends Component {
-  constructor(props) {
-    super(props)
-    this.state = { hasError: false }
-  }
-
-  static getDerivedStateFromError(error) {
-    return { hasError: true }
-  }
-
-  componentDidCatch(error, errorInfo) {
-    console.error('產品頁面錯誤:', error, errorInfo)
-  }
-
-  render() {
-    if (this.state.hasError) {
-      return (
-        <div className="container mx-auto px-4 py-12 text-center">
-          <h2 className="text-2xl font-bold mb-4">發生了一些錯誤</h2>
-          <p className="mb-4">請稍後再試或聯繫網站管理員</p>
-        </div>
-      )
-    }
-
-    return this.props.children
-  }
-}
-
-/**
- * 產品目錄頁面
- * @param {*} props
- * @returns
- */
-const ProductsPage = props => {
-  // 示例產品數據
-  const sampleProducts = [
-    {
-      title: 'PET塑膠板材',
-      modelNumber: 'PET-001',
-      description: '高透明度、高強度的PET塑膠板材，適用於各種包裝和工業用途'
-    },
-    {
-      title: 'PP聚丙烯顆粒',
-      modelNumber: 'PP-102',
-      description: '高品質聚丙烯原料，適用於注塑成型和擠出加工'
-    },
-    {
-      title: 'ABS工程塑料',
-      modelNumber: 'ABS-203',
-      description: '耐衝擊性佳的工程塑料，適用於家電、汽車零件等領域'
-    }
-  ]
-
-  const theme = siteConfig('THEME', BLOG.THEME, props.NOTION_CONFIG)
-  
+// 極簡產品頁，不使用任何可能有問題的組件
+export default function ProductsPage() {
   return (
-    <DynamicLayout theme={theme} layoutName='LayoutBase' {...props}>
-      <ErrorBoundary>
-        <div className="container mx-auto px-4 py-12">
-          <h1 className="text-3xl font-bold mb-8 text-center">產品目錄</h1>
-          
-          {/* 直接在頁面內渲染產品列表，不使用獨立組件 */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {sampleProducts.map((product, index) => (
-              <div key={index} className="border rounded-lg overflow-hidden shadow-md">
-                <div className="p-6">
-                  <h3 className="text-xl font-bold mb-3">{product.title}</h3>
-                  <p className="text-gray-600 mb-4">{product.description}</p>
-                  <p className="text-sm text-gray-500">型號: {product.modelNumber}</p>
-                </div>
-              </div>
-            ))}
-          </div>
+    <div className="min-h-screen bg-white dark:bg-gray-900">
+      <Head>
+        <title>產品目錄</title>
+      </Head>
+      
+      {/* 簡單頁頭 */}
+      <header className="sticky top-0 z-50 bg-white dark:bg-gray-900 shadow-sm">
+        <div className="container mx-auto px-4 py-4 flex justify-between items-center">
+          <Link href="/" className="text-xl font-bold">
+            您的公司
+          </Link>
+          <nav>
+            <Link href="/" className="px-4 py-2 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">
+              首頁
+            </Link>
+          </nav>
         </div>
-      </ErrorBoundary>
-    </DynamicLayout>
+      </header>
+      
+      {/* 主要內容 */}
+      <main className="container mx-auto px-4 py-12">
+        <h1 className="text-3xl font-bold mb-8 text-center text-gray-800 dark:text-white">產品目錄</h1>
+        
+        {/* 簡單產品列表 */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {[1, 2, 3].map((item) => (
+            <div key={item} className="border rounded-lg overflow-hidden shadow-md bg-white dark:bg-gray-800">
+              <div className="p-6">
+                <h3 className="text-xl font-bold mb-3 text-gray-800 dark:text-white">產品 {item}</h3>
+                <p className="text-gray-600 dark:text-gray-300 mb-4">這是示例產品描述，用於測試頁面是否正常顯示。</p>
+                <p className="text-sm text-gray-500 dark:text-gray-400">型號: EXAMPLE-{item}00</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </main>
+      
+      {/* 簡單頁尾 */}
+      <footer className="bg-gray-100 dark:bg-gray-800 py-8 mt-12">
+        <div className="container mx-auto px-4 text-center text-gray-600 dark:text-gray-400">
+          <p>© {new Date().getFullYear()} 您的公司. 保留所有權利.</p>
+        </div>
+      </footer>
+    </div>
   )
-}
-
-export async function getStaticProps({ locale }) {
-  try {
-    const props = await getGlobalData({ from: 'products-page', locale })
-    
-    return {
-      props,
-      revalidate: process.env.EXPORT
-        ? undefined
-        : siteConfig(
-            'NEXT_REVALIDATE_SECOND',
-            BLOG.NEXT_REVALIDATE_SECOND,
-            props.NOTION_CONFIG
-          )
-    }
-  } catch (error) {
-    console.error('Error in getStaticProps:', error)
-    
-    // 即使出錯也返回一些基本屬性
-    return {
-      props: {
-        error: true,
-        message: '資料載入失敗'
-      }
-    }
-  }
-}
-
-export default ProductsPage 
+} 

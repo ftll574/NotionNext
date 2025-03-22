@@ -6,22 +6,24 @@ import { useEffect, useState, useRef } from 'react'
 import { MenuItem } from './MenuItem'
 
 /**
- * 响应式 折叠菜单
+ * 響應式 折疊菜單
  */
 export const MenuList = props => {
   const { customNav, customMenu } = props
   const { locale } = useGlobal()
-  const [navBar, setNavBar] = useState(false)
+  const router = useRouter()
+  
+  // 修改：根據當前路由判斷是否為首頁
+  const isHomePage = router.pathname === '/'
+  const [navBar, setNavBar] = useState(!isHomePage) // 如果不是首頁，初始為 true
   
   // 添加菜單展開狀態
   const [isOpen, setIsOpen] = useState(false)
-  // 修正：定義 lockScreen 狀態
   const [lockScreen, setLockScreen] = useState(false)
   
-  const [showMenu, setShowMenu] = useState(false) // 控制菜單展開/收起狀態
-  const [activeMenuIndex, setActiveMenuIndex] = useState(null) // 跟踪當前打開的菜單
+  const [showMenu, setShowMenu] = useState(false)
+  const [activeMenuIndex, setActiveMenuIndex] = useState(null)
   const navRef = useRef(null)
-  const router = useRouter()
 
   let links = [
     {
@@ -54,7 +56,6 @@ export const MenuList = props => {
     links = customNav.concat(links)
   }
 
-  // 如果開啟自定義菜單，則覆蓋Page生成的菜單
   if (siteConfig('CUSTOM_MENU', BLOG.CUSTOM_MENU)) {
     links = customMenu
   }
@@ -88,20 +89,25 @@ export const MenuList = props => {
     setShowMenu(false)
     setLockScreen(false)
     setActiveMenuIndex(null)
-  }, [router.asPath])
+    
+    // 修改：當路由變化時，根據是否為首頁設置navBar狀態
+    const isHomePage = router.pathname === '/'
+    setNavBar(!isHomePage || window.scrollY > 100)
+  }, [router.asPath, router.pathname])
 
   // 滾動事件和動畫效果
   useEffect(() => {
     // 監聽滾動事件
     const changeHeight = () => {
-      if (window.scrollY > 100) {
+      // 修改：如果是首頁，則根據滾動位置變更顏色；如果不是首頁，始終為 true (黑色)
+      if (!isHomePage || window.scrollY > 100) {
         setNavBar(true)
       } else {
         setNavBar(false)
       }
     }
     
-    // 初始設置，根據當前滾動位置設定導航欄狀態
+    // 初始設置，根據當前滾動位置和頁面設定導航欄狀態
     changeHeight()
     
     window.addEventListener('scroll', changeHeight)
@@ -114,7 +120,7 @@ export const MenuList = props => {
     return () => {
       window.removeEventListener('scroll', changeHeight)
     }
-  }, [])
+  }, [isHomePage])
 
   return (
     <div ref={navRef}>

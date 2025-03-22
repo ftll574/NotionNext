@@ -83,7 +83,7 @@ export const MenuItem = ({ link, index, isOpen, onMenuOpen, isAnyMenuOpen, navBa
             className={`flex py-2 text-base font-bold transition-all duration-500 lg:mr-0 lg:inline-flex lg:py-6 lg:px-4 
               ${router.pathname === link.href ? 'text-primary dark:text-white' : ''}
               ${navBar 
-                ? 'text-black dark:text-black'
+                ? 'text-black dark:text-white'
                 : 'text-white group-hover:text-primary dark:text-white'
               }
               ${isOpen ? 'scale-animation-start' : 'scale-animation-init'}`}
@@ -103,7 +103,7 @@ export const MenuItem = ({ link, index, isOpen, onMenuOpen, isAnyMenuOpen, navBa
             className={`flex w-full items-center justify-between py-2 text-base font-bold transition-all duration-500 lg:mr-0 lg:inline-flex lg:py-6 lg:px-4
               ${router.pathname === link.href ? 'text-primary dark:text-white' : ''}
               ${navBar 
-                ? 'text-black dark:text-black'
+                ? 'text-black dark:text-white'
                 : 'text-white group-hover:text-primary dark:text-white'
               }
               ${isOpen ? 'scale-animation-start' : 'scale-animation-init'}`}
