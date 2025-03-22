@@ -6,11 +6,50 @@ import { siteConfig } from '@/lib/config'
 // 注意：暫時不使用 DynamicLayout
 // import { DynamicLayout } from '@/themes/theme'
 import { getGlobalData } from '@/lib/db/getSiteData'
+import { ProductCatalog } from '@/themes/starter/components/ProductCatalog'
 
+/**
+ * 整合 ProductCatalog 的產品頁面
+ */
 const ProductsPage = props => {
-  // 獲取基本配置，但不用於關鍵渲染邏輯
+  // 安全獲取配置
   const config = props.NOTION_CONFIG || {}
   const title = siteConfig('TITLE', BLOG.TITLE, config)
+  
+  // 示例產品數據
+  const sampleProducts = [
+    {
+      title: 'PET塑膠板材',
+      modelNumber: 'PET-001',
+      description: '高透明度、高強度的PET塑膠板材，適用於各種包裝和工業用途',
+      slug: 'pet-sheet',
+      tags: ['pet', 'sheet']
+    },
+    {
+      title: 'PP聚丙烯顆粒',
+      modelNumber: 'PP-102',
+      description: '高品質聚丙烯原料，適用於注塑成型和擠出加工',
+      slug: 'pp-resin',
+      tags: ['pp', 'resin']
+    },
+    {
+      title: 'ABS工程塑料',
+      modelNumber: 'ABS-203',
+      description: '耐衝擊性佳的工程塑料，適用於家電、汽車零件等領域',
+      slug: 'abs-plastic',
+      tags: ['abs', 'engineering']
+    }
+  ]
+  
+  // 示例標籤數據
+  const sampleTags = [
+    { name: 'PET材料', value: 'pet' },
+    { name: '聚丙烯', value: 'pp' },
+    { name: 'ABS塑料', value: 'abs' },
+    { name: '板材', value: 'sheet' },
+    { name: '樹脂', value: 'resin' },
+    { name: '工程塑料', value: 'engineering' }
+  ]
   
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 flex flex-col">
@@ -29,26 +68,12 @@ const ProductsPage = props => {
         </div>
       </header>
       
-      {/* 主內容 */}
-      <main className="flex-grow container mx-auto px-6 py-12">
-        <h1 className="text-3xl font-bold mb-8 text-center text-gray-800 dark:text-white">
-          產品目錄
-        </h1>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {[1, 2, 3].map((item) => (
-            <div key={item} className="border dark:border-gray-700 rounded-lg overflow-hidden shadow">
-              <div className="p-6">
-                <h3 className="text-xl font-bold mb-3 text-gray-800 dark:text-white">測試產品 {item}</h3>
-                <p className="text-gray-600 dark:text-gray-300 mb-4">這是一個測試產品描述，用於診斷頁面問題。</p>
-                <p className="text-sm text-gray-500 dark:text-gray-400">型號: TEST-{item}00</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </main>
+      {/* 使用 ProductCatalog 組件 */}
+      <div className="flex-grow">
+        <ProductCatalog products={sampleProducts} tags={sampleTags} />
+      </div>
       
-      {/* 簡單頁尾 */}
+      {/* 簡單頁尾 - 不重複顯示公司名稱 */}
       <footer className="bg-gray-100 dark:bg-gray-800 py-6">
         <div className="container mx-auto px-6 text-center text-gray-600 dark:text-gray-400">
           <p>© {new Date().getFullYear()} {title}</p>
@@ -60,7 +85,6 @@ const ProductsPage = props => {
 
 export async function getStaticProps({ locale }) {
   try {
-    // 仍然獲取全局數據，但即使失敗也有後備方案
     const props = await getGlobalData({ from: 'products-page', locale })
     return {
       props: props || { NOTION_CONFIG: {} },
