@@ -80,11 +80,11 @@ export const MenuItem = ({ link, index, isOpen, onMenuOpen, isAnyMenuOpen, navBa
             href={link.href}
             target={link.external ? '_blank' : '_self'} 
             rel={link.external ? 'noopener noreferrer' : ''}
-            className={`flex py-2 text-base transition-all duration-500 lg:mr-0 lg:inline-flex lg:py-6 lg:px-4 
+            className={`flex py-2 text-base font-bold transition-all duration-500 lg:mr-0 lg:inline-flex lg:py-6 lg:px-4 
               ${router.pathname === link.href ? 'text-primary dark:text-white' : ''}
               ${navBar 
                 ? 'text-black dark:text-black'
-                : 'text-dark group-hover:text-primary dark:text-white'
+                : 'text-white group-hover:text-primary dark:text-white'
               }
               ${isOpen ? 'scale-animation-start' : 'scale-animation-init'}`}
             style={{ animationDelay: animationDelay }}
@@ -100,11 +100,11 @@ export const MenuItem = ({ link, index, isOpen, onMenuOpen, isAnyMenuOpen, navBa
         <li className="relative group" ref={menuRef}>
           <button
             onClick={toggleSubMenu}
-            className={`flex w-full items-center justify-between py-2 text-base transition-all duration-500 lg:mr-0 lg:inline-flex lg:py-6 lg:px-4
+            className={`flex w-full items-center justify-between py-2 text-base font-bold transition-all duration-500 lg:mr-0 lg:inline-flex lg:py-6 lg:px-4
               ${router.pathname === link.href ? 'text-primary dark:text-white' : ''}
               ${navBar 
                 ? 'text-black dark:text-black'
-                : 'text-dark group-hover:text-primary dark:text-white'
+                : 'text-white group-hover:text-primary dark:text-white'
               }
               ${isOpen ? 'scale-animation-start' : 'scale-animation-init'}`}
             style={{ animationDelay: animationDelay }}

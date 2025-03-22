@@ -100,6 +100,10 @@ export const MenuList = props => {
         setNavBar(false)
       }
     }
+    
+    // 初始設置，根據當前滾動位置設定導航欄狀態
+    changeHeight()
+    
     window.addEventListener('scroll', changeHeight)
     
     // 加載時顯示菜單動畫效果
