@@ -20,8 +20,8 @@ const CONFIG = {
   STARTER_HERO_BUTTON_2_ICON: '', // 英雄区按钮2的图标，不需要则留空
 
   // 英雄区配图，如需隐藏，改为空值即可 ''
-  STARTER_HERO_PREVIEW_IMAGE: 'images/starter/background/home2.jpg', // 产品预览图 ，默认读取public目录下图片
-  STARTER_HERO_PREVIEW_IMAGES: 'images/starter/background/home2.jpg,images/starter/background/home3.jpg,images/starter/background/home4.jpg', // 产品预览图 ，默认读取public目录下图片
+  STARTER_HERO_PREVIEW_IMAGE: 'images/starter/background/home.jpg', // 产品预览图 ，默认读取public目录下图片
+  STARTER_HERO_PREVIEW_IMAGES: 'images/starter/background/home.jpg,images/starter/background/home3.jpg,images/starter/background/home4.jpg', // 产品预览图 ，默认读取public目录下图片
   STARTER_HERO_BANNER_IMAGE: '', // hero区下方的全宽图
 
   // 顶部右侧导航按钮
@@ -51,12 +51,12 @@ const CONFIG = {
   STARTER_FEATURE_3_TITLE_1: '技術支援服務',
   STARTER_FEATURE_3_TEXT_1: '專業工程師團隊提供材料選型建議、應用問題診斷，協助客戶解決加工製程難題',
   STARTER_FEATURE_3_BUTTON_TEXT: '技術諮詢服務',
-  STARTER_FEATURE_3_BUTTON_URL: '/contact',
+  STARTER_FEATURE_3_BUTTON_URL: '#contact',
 
   STARTER_FEATURE_4_TITLE_1: '靈活庫存管理',
   STARTER_FEATURE_4_TEXT_1: '建立完善供應鏈體系，常規料型現貨供應，特殊需求快速調度，縮短交期至7-10個工作日',
   STARTER_FEATURE_4_BUTTON_TEXT: '了解配送服務',
-  STARTER_FEATURE_4_BUTTON_URL: '/contact',
+  STARTER_FEATURE_4_BUTTON_URL: '#contact',
 
   // 首页ABOUT区块
   STARTER_ABOUT_ENABLE: true, // ABOUT区块开关
@@ -72,40 +72,43 @@ const CONFIG = {
 
   // 首页价格区块
   STARTER_PRICING_ENABLE: true, // 价格区块开关
-  STARTER_PRICING_TITLE: '產品系列',
-  STARTER_PRICING_TEXT_1: '多樣化的塑膠原料選擇',
-  STARTER_PRICING_TEXT_2: '根據您的需求，我們提供不同等級和類型的塑膠原料',
+  STARTER_PRICING_TITLE: '塑膠原料系列',
+  STARTER_PRICING_TEXT_1: '專業級塑膠原料供應',
+  STARTER_PRICING_TEXT_2: '三十年經驗，提供優質塑膠原料，滿足各行業製造需求',
 
   // 產品系列1
   STARTER_PRICING_1_TITLE: '通用型塑膠',
-  STARTER_PRICING_1_PRICE: '電詢', 
+  STARTER_PRICING_1_IMAGE: 'images/starter/background/home2.jpg',
+  STARTER_PRICING_1_PRICE: '量大優惠', 
   STARTER_PRICING_1_PRICE_CURRENCY: '',
   STARTER_PRICING_1_PRICE_PERIOD: '',
-  STARTER_PRICING_1_HEADER: '適用於一般生產需求',
-  STARTER_PRICING_1_FEATURES: 'PP聚丙烯,PE聚乙烯,PS聚苯乙烯,定制顏色選項,標準品質保證',
-  STARTER_PRICING_1_BUTTON_TEXT: '獲取報價',
+  STARTER_PRICING_1_HEADER: '適用於一般消費品製造',
+  STARTER_PRICING_1_FEATURES: 'PP聚丙烯｜射出級/擠出級,PE聚乙烯｜高/低密度,PS聚苯乙烯｜GPPS/HIPS,ABS｜各色標準料/改性料,提供物性數據與加工建議',
+  STARTER_PRICING_1_BUTTON_TEXT: '立即詢價',
   STARTER_PRICING_1_BUTTON_URL: '/quote',
 
   // 產品系列2
-  STARTER_PRICING_2_TITLE: '工程塑料',
-  STARTER_PRICING_2_PRICE: '電詢',
+  STARTER_PRICING_2_TITLE: '工程級塑料',
+  STARTER_PRICING_2_IMAGE: 'images/starter/background/home2.jpg',
+  STARTER_PRICING_2_PRICE: '客製配方',
   STARTER_PRICING_2_PRICE_CURRENCY: '',
   STARTER_PRICING_2_PRICE_PERIOD: '',
-  STARTER_PRICING_2_TAG: '熱銷',
+  STARTER_PRICING_2_TAG: '高性能',
   STARTER_PRICING_2_HEADER: '適用於高要求工業應用',
-  STARTER_PRICING_2_FEATURES: 'PA尼龍系列,PC聚碳酸酯,POM聚甲醛,高性能保證,技術支持服務',
-  STARTER_PRICING_2_BUTTON_TEXT: '獲取報價',
+  STARTER_PRICING_2_FEATURES: 'PA尼龍系列｜PA6/PA66/改性,PC聚碳酸酯｜透明/阻燃級,POM聚甲醛｜高剛性/耐磨,PBT聚對苯二甲酸丁二醇酯,專業技術支援與物性測試',
+  STARTER_PRICING_2_BUTTON_TEXT: '技術諮詢',
   STARTER_PRICING_2_BUTTON_URL: '/quote',
 
-  // 產品系列3
-  STARTER_PRICING_3_TITLE: '特種塑料',
-  STARTER_PRICING_3_PRICE: '電詢',
+  // 產品系列3 (替換為再生料系列，取代特種塑料)
+  STARTER_PRICING_3_TITLE: '彈性塑膠',
+  STARTER_PRICING_3_IMAGE: 'images/starter/background/home2.jpg',
+  STARTER_PRICING_3_PRICE: '經濟實惠',
   STARTER_PRICING_3_PRICE_CURRENCY: '',
   STARTER_PRICING_3_PRICE_PERIOD: '',
-  STARTER_PRICING_3_HEADER: '適用於特殊環境和需求',
-  STARTER_PRICING_3_FEATURES: 'PEEK聚醚醚酮,PPS聚苯硫醚,液晶聚合物,高溫耐候性,定制解決方案',
-  STARTER_PRICING_3_BUTTON_TEXT: '專業咨詢',
-  STARTER_PRICING_3_BUTTON_URL: '/special-consultation',
+  STARTER_PRICING_3_HEADER: '適用於彈性塑膠，提供多種規格',
+  STARTER_PRICING_3_FEATURES: 'TPE系列｜TPU系列｜PVC系列｜代補',
+  STARTER_PRICING_3_BUTTON_TEXT: '了解更多',
+  STARTER_PRICING_3_BUTTON_URL: '/recycled-materials',
 
   // 首页用户测评区块
   STARTER_TESTIMONIALS_ENABLE: false, // 测评区块开关
@@ -217,8 +220,8 @@ const CONFIG = {
 
   // 電話
   STARTER_CONTACT_PHONE_TITLE: '聯繫電話與傳真',
-  STARTER_CONTACT_PHONE_TEXT: '☎ (886) 0938-321-132',
-  STARTER_CONTACT_FAX_TEXT: '📠 (02) 2602-6967',
+  STARTER_CONTACT_PHONE_TEXT: '電話：(02) 2602-6961~2',
+  STARTER_CONTACT_FAX_TEXT: '傳真：(02) 2602-6967',
   // 郵箱
   STARTER_CONTACT_EMAIL_TITLE: '電子郵箱',
   STARTER_CONTACT_EMAIL_TEXT: 'tw.xinwei@gmail.com',

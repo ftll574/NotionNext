@@ -145,7 +145,7 @@ export const Contact = () => {
                       </h5>
                       <p className='text-base text-body-color dark:text-dark-6'>
                         週一至週五: 8:00 - 17:00<br/>
-                        週六日: 休息
+                        週六、日: 休息
                       </p>
                     </div>
                   </div>

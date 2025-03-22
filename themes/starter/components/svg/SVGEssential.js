@@ -11,10 +11,10 @@ export const SVGEssential = () => {
       strokeLinecap="round" 
       strokeLinejoin="round" 
       className="text-white w-8 h-8">
-      <path d="M3 3h18v18H3z"></path>
-      <path d="M3 9h18"></path>
-      <path d="M9 21V9"></path>
-      <circle cx="15" cy="15" r="2"></circle>
+      <circle cx="12" cy="12" r="10"></circle>
+      <path d="M9 12l2 2 4-4"></path>
+      <path d="M7.5 7.5l9 9"></path>
+      <path d="M16.5 7.5l-9 9"></path>
     </svg>
   )
 }
