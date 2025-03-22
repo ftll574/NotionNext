@@ -10,7 +10,8 @@ export const Contact = () => {
   
   // 地址的 Google Maps 連結
   const addressText = siteConfig('STARTER_CONTACT_ADDRESS_TEXT')
-  const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(addressText)}`
+  const googleaddress = siteConfig('STARTER_CONTACT_GOOGLE_ADDRESS')
+  const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(googleaddress)}`
   
   return (
     <>

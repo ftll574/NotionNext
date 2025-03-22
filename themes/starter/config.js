@@ -21,7 +21,7 @@ const CONFIG = {
 
   // 英雄区配图，如需隐藏，改为空值即可 ''
   STARTER_HERO_PREVIEW_IMAGE: 'images/starter/background/home.png', // 产品预览图 ，默认读取public目录下图片
-  STARTER_HERO_PREVIEW_IMAGES: 'images/starter/background/home.png,images/starter/background/home3.png,images/starter/background/home4.png', // 产品预览图 ，默认读取public目录下图片
+  STARTER_HERO_PREVIEW_IMAGES: 'images/starter/background/home.png,images/starter/background/home3.jpg,images/starter/background/home4.jpg', // 产品预览图 ，默认读取public目录下图片
   STARTER_HERO_BANNER_IMAGE: '', // hero区下方的全宽图
 
   // 顶部右侧导航按钮
@@ -93,10 +93,11 @@ const CONFIG = {
   STARTER_PRICING_2_PRICE: '經濟實惠',
   STARTER_PRICING_2_PRICE_CURRENCY: '',
   STARTER_PRICING_2_PRICE_PERIOD: '',
-  STARTER_PRICING_2_HEADER: '適用於彈性塑膠，提供多種規格',
-  STARTER_PRICING_2_FEATURES: 'TPE系列｜TPU系列｜PVC系列｜代補',
+  STARTER_PRICING_2_TAG: '熱銷',
+  STARTER_PRICING_2_HEADER: '適用於需要彈性與韌性的應用場景',
+  STARTER_PRICING_2_FEATURES: 'TPE熱塑性彈性體｜多種硬度選擇,TPU聚氨酯彈性體｜優異耐磨性,PVC軟質塑膠｜符合環保標準,矽膠類彈性材料｜耐高溫應用,熱塑性橡膠｜良好回彈性能,提供物性測試報告與加工建議',
   STARTER_PRICING_2_BUTTON_TEXT: '了解更多',
-  STARTER_PRICING_2_BUTTON_URL: '/recycled-materials',
+  STARTER_PRICING_2_BUTTON_URL: '/flexible-materials',
 
   // 產品系列2
   STARTER_PRICING_3_TITLE: '工程級塑料',
@@ -227,6 +228,7 @@ const CONFIG = {
 
   // 地址
   STARTER_CONTACT_ADDRESS_TITLE: '公司地址',
+  STARTER_CONTACT_GOOGLE_ADDRESS: '鑫葳貿易股份有限公司',
   STARTER_CONTACT_ADDRESS_TEXT: '244 新北市林口區湖北里10鄰17之20號',
 
   // 電話
@@ -291,7 +293,7 @@ const CONFIG = {
       ]
     },
     {
-      TITLE: '塑膠原料特性',
+      TITLE: '泛用塑膠特性',
       LINK_GROUP: [
         {
           TITLE: 'PE 特性',

@@ -7,7 +7,7 @@ import { useState, useRef, useEffect } from 'react'
  * @param {*} param0
  * @returns
  */
-export const MenuItem = ({ link, index, isOpen, onMenuOpen, isAnyMenuOpen }) => {
+export const MenuItem = ({ link, index, isOpen, onMenuOpen, isAnyMenuOpen, navBar }) => {
   const hasSubMenu = link?.subMenus?.length > 0
   const router = useRouter()
   const menuRef = useRef(null)
@@ -86,11 +86,9 @@ export const MenuItem = ({ link, index, isOpen, onMenuOpen, isAnyMenuOpen }) => 
           <Link
             href={link?.href || '#'}
             target={link?.href && link.href.indexOf('http') === 0 ? '_blank' : '_self'}
-            className={`ud-menu-scroll mx-8 flex py-2 text-base font-medium text-dark group-hover:text-primary dark:text-white lg:mr-0 lg:inline-flex lg:px-0 lg:py-6 ${
-              router.route === '/'
-                ? 'lg:text-white lg:group-hover:text-white'
-                : ''
-            } lg:group-hover:opacity-70`}>
+            className={`ud-menu-scroll mx-8 flex py-2 text-base font-medium ${
+              navBar ? 'text-primary' : router.route === '/' ? 'lg:text-white lg:group-hover:text-white' : 'text-dark dark:text-white'
+            } group-hover:text-primary lg:mr-0 lg:inline-flex lg:px-0 lg:py-6 lg:group-hover:opacity-70`}>
             {link?.icon && <span className='mr-2'>{link.icon}</span>}
             {link?.name}
           </Link>
@@ -110,11 +108,9 @@ export const MenuItem = ({ link, index, isOpen, onMenuOpen, isAnyMenuOpen }) => 
         >
           <button
             onClick={toggleSubMenu}
-            className={`ud-menu-scroll mx-8 flex items-center justify-between py-2 text-base font-medium text-dark group-hover:text-primary dark:text-white lg:mr-0 lg:inline-flex lg:px-0 lg:py-6 ${
-              router.route === '/'
-                ? 'lg:text-white lg:group-hover:text-white'
-                : ''
-            } lg:group-hover:opacity-70`}>
+            className={`ud-menu-scroll mx-8 flex items-center justify-between py-2 text-base font-medium ${
+              navBar ? 'text-primary' : router.route === '/' ? 'lg:text-white lg:group-hover:text-white' : 'text-dark dark:text-white'
+            } group-hover:text-primary lg:mr-0 lg:inline-flex lg:px-0 lg:py-6 lg:group-hover:opacity-70`}>
             {link?.icon && <span className='mr-2'>{link.icon}</span>}
             {link?.name}
             <span className='pl-3'>
