@@ -7,7 +7,7 @@ import { SVGQualityAssurance } from './svg/SVGQualityAssurance'
 import { SVGInventoryManagement } from './svg/SVGInventoryManagement'
 import Link from 'next/link'
 /**
- * 产品特性相关，将显示在首页中
+ * 產品特性相關，將顯示在首頁中
  * @returns
  */
 export const Features = () => {
@@ -15,8 +15,8 @@ export const Features = () => {
     <>
       {/* <!-- ====== Features Section Start --> */}
       <section className='pb-8 pt-20 dark:bg-dark lg:pb-[70px] lg:pt-[120px]'>
-        <div className='container'>
-          <div className='-mx-4 flex flex-wrap'>
+        <div className='container mx-auto px-4 sm:px-6 lg:px-8'>
+          <div className='flex flex-wrap justify-center'>
             <div className='w-full px-4'>
               <div className='mx-auto mb-12 max-w-[485px] text-center lg:mb-[70px]'>
                 <span className='mb-2 block text-lg font-semibold text-primary'>
@@ -31,8 +31,8 @@ export const Features = () => {
               </div>
             </div>
           </div>
-          <div className='-mx-4 flex flex-wrap'>
-            <div className='w-full px-4 md:w-1/2 lg:w-1/4'>
+          <div className='flex flex-wrap justify-center -mx-4'>
+            <div className='w-full px-4 sm:w-1/2 md:w-1/2 lg:w-1/4'>
               <div className='wow fadeInUp group mb-12' data-wow-delay='.1s'>
                 <div className='relative z-10 mb-10 flex h-[70px] w-[70px] items-center justify-center rounded-[14px] bg-primary'>
                   <span className='absolute left-0 top-0 -z-[1] mb-8 flex h-[70px] w-[70px] rotate-[25deg] items-center justify-center rounded-[14px] bg-primary bg-opacity-20 duration-300 group-hover:rotate-45'></span>
@@ -51,7 +51,7 @@ export const Features = () => {
                 </Link>
               </div>
             </div>
-            <div className='w-full px-4 md:w-1/2 lg:w-1/4'>
+            <div className='w-full px-4 sm:w-1/2 md:w-1/2 lg:w-1/4'>
               <div className='wow fadeInUp group mb-12' data-wow-delay='.15s'>
                 <div className='relative z-10 mb-10 flex h-[70px] w-[70px] items-center justify-center rounded-[14px] bg-primary'>
                   <span className='absolute left-0 top-0 -z-[1] mb-8 flex h-[70px] w-[70px] rotate-[25deg] items-center justify-center rounded-[14px] bg-primary bg-opacity-20 duration-300 group-hover:rotate-45'></span>
@@ -70,7 +70,7 @@ export const Features = () => {
                 </Link>
               </div>
             </div>
-            <div className='w-full px-4 md:w-1/2 lg:w-1/4'>
+            <div className='w-full px-4 sm:w-1/2 md:w-1/2 lg:w-1/4'>
               <div className='wow fadeInUp group mb-12' data-wow-delay='.2s'>
                 <div className='relative z-10 mb-10 flex h-[70px] w-[70px] items-center justify-center rounded-[14px] bg-primary'>
                   <span className='absolute left-0 top-0 -z-[1] mb-8 flex h-[70px] w-[70px] rotate-[25deg] items-center justify-center rounded-[14px] bg-primary bg-opacity-20 duration-300 group-hover:rotate-45'></span>
@@ -89,7 +89,7 @@ export const Features = () => {
                 </Link>
               </div>
             </div>
-            <div className='w-full px-4 md:w-1/2 lg:w-1/4'>
+            <div className='w-full px-4 sm:w-1/2 md:w-1/2 lg:w-1/4'>
               <div className='wow fadeInUp group mb-12' data-wow-delay='.25s'>
                 <div className='relative z-10 mb-10 flex h-[70px] w-[70px] items-center justify-center rounded-[14px] bg-primary'>
                   <span className='absolute left-0 top-0 -z-[1] mb-8 flex h-[70px] w-[70px] rotate-[25deg] items-center justify-center rounded-[14px] bg-primary bg-opacity-20 duration-300 group-hover:rotate-45'></span>

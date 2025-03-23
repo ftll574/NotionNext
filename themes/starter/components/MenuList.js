@@ -21,9 +21,9 @@ export const MenuList = props => {
   const [isOpen, setIsOpen] = useState(false)
   const [lockScreen, setLockScreen] = useState(false)
   
-  const [showMenu, setShowMenu] = useState(false)
   const [activeMenuIndex, setActiveMenuIndex] = useState(null)
   const navRef = useRef(null)
+  const [isMobile, setIsMobile] = useState(false)
 
   let links = [
     {
@@ -64,6 +64,22 @@ export const MenuList = props => {
     return null
   }
 
+  // 檢測是否為移動設備
+  useEffect(() => {
+    const checkIfMobile = () => {
+      setIsMobile(window.innerWidth < 1024) // lg 斷點是 1024px
+    }
+    
+    checkIfMobile() // 初始檢查
+    
+    // 監聽窗口大小變化
+    window.addEventListener('resize', checkIfMobile)
+    
+    return () => {
+      window.removeEventListener('resize', checkIfMobile)
+    }
+  }, [])
+
   // 處理菜單項被打開的回調
   const handleMenuOpen = (index) => {
     setActiveMenuIndex(index)
@@ -73,8 +89,8 @@ export const MenuList = props => {
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (navRef.current && !navRef.current.contains(event.target)) {
-        setShowMenu(false)
         setLockScreen(false)
+        setActiveMenuIndex(null)
       }
     }
 
@@ -86,7 +102,6 @@ export const MenuList = props => {
 
   // 路由變化時關閉菜單
   useEffect(() => {
-    setShowMenu(false)
     setLockScreen(false)
     setActiveMenuIndex(null)
     
@@ -123,7 +138,7 @@ export const MenuList = props => {
   }, [isHomePage])
 
   return (
-    <div ref={navRef}>
+    <div ref={navRef} className="menu-container">
       {/* 移動端選單按鈕 */}
       <div className='relative flex justify-between lg:hidden'>
         <div></div>
@@ -150,23 +165,104 @@ export const MenuList = props => {
         </div>
       </div>
 
-      {/* 電腦版選單 */}
-      <nav className={`absolute right-0 z-10 w-[250px] lg:static lg:block lg:w-full lg:max-w-full ${lockScreen ? 'block ' : 'hidden'}`}>
-        <ul className='block lg:flex'>
+      {/* 手機版選單 - 優化樣式 */}
+      {isMobile && lockScreen && (
+        <nav className="fixed left-0 top-[70px] z-50 h-[calc(100vh-70px)] w-full bg-dark/95 py-4 backdrop-blur-lg overflow-y-auto">
+          <ul className="block px-6 py-2">
+            {links && links?.map((link, index) => {
+              return <MenuItem 
+                key={`mobile-${index}`} 
+                link={link} 
+                index={index} 
+                isOpen={true} 
+                onMenuOpen={() => handleMenuOpen(index)} 
+                isAnyMenuOpen={activeMenuIndex !== null && activeMenuIndex !== index}
+                navBar={true}
+                isMobile={true}
+              />
+            })}
+          </ul>
+        </nav>
+      )}
+
+      {/* 電腦版選單 - 永遠可見 */}
+      <nav className="hidden lg:block lg:w-full lg:max-w-full desktop-menu">
+        <ul className="flex">
           {links && links?.map((link, index) => {
-            // 將菜單索引和navBar狀態傳遞給MenuItem
             return <MenuItem 
-              key={index} 
+              key={`desktop-${index}`} 
               link={link} 
               index={index} 
               isOpen={isOpen} 
               onMenuOpen={() => handleMenuOpen(index)} 
               isAnyMenuOpen={activeMenuIndex !== null && activeMenuIndex !== index}
               navBar={navBar}
+              isMobile={false}
             />
           })}
         </ul>
       </nav>
+
+      {/* 添加全局樣式 */}
+      <style jsx global>{`
+        /* 移動菜單整體樣式 */
+        .menu-container nav {
+          transition: all 0.3s ease;
+        }
+        
+        /* 統一子菜單樣式 */
+        .desktop-menu .group ul li a,
+        .desktop-menu .group ul li button {
+          padding: 8px 16px;
+          display: block;
+          width: 100%;
+          text-align: left;
+          color: #333;
+          border-radius: 4px;
+          transition: all 0.3s ease;
+        }
+        
+        /* 深色模式 */
+        .dark .desktop-menu .group ul li a,
+        .dark .desktop-menu .group ul li button {
+          color: #fff;
+        }
+        
+        /* 統一所有子菜單懸停和活動狀態 */
+        .desktop-menu .group ul li a:hover,
+        .desktop-menu .group ul li button:hover,
+        .desktop-menu .group ul li a.active {
+          background-color: rgba(59, 130, 246, 0.1);
+          color: #3b82f6;
+        }
+        
+        /* 子菜單容器統一樣式 */
+        .desktop-menu .group > div > div {
+          background-color: white;
+          border-radius: 8px;
+          box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+          overflow: hidden;
+          width: 220px;
+          padding: 8px;
+        }
+        
+        /* 深色模式子菜單容器 */
+        .dark .desktop-menu .group > div > div {
+          background-color: #1f2937;
+        }
+        
+        /* 三級菜單容器樣式 */
+        .desktop-menu .group ul li div > div {
+          background-color: white;
+          border-radius: 8px;
+          box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        
+        /* 深色模式三級菜單容器 */
+        .dark .desktop-menu .group ul li div > div {
+          background-color: #1f2937;
+        }
+      `}</style>
     </div>
   )
 }
