@@ -202,6 +202,23 @@ const CONFIG = {
     }
   ],
 
+  // 文章歸檔頁面
+  STARTER_ARCHIVE_ENABLE: true, // 是否啟用歸檔頁面
+  STARTER_ARCHIVE_TITLE: '塑料最新報價', // 歸檔頁面標題
+  STARTER_ARCHIVE_DESCRIPTION: '瀏覽我們的塑料原料最新報價及行業資訊', // 歸檔頁面描述
+  STARTER_ARCHIVE_POSTS_PER_PAGE: 12, // 每頁顯示的文章數量
+  STARTER_ARCHIVE_GRID_COLUMNS: 3, // 網格佈局列數 (手機端1列，平板2列，電腦根據此設置)
+  STARTER_ARCHIVE_SHOW_CATEGORY_FILTER: true, // 是否顯示類別過濾器
+  STARTER_ARCHIVE_DEFAULT_CATEGORY: 'all', // 預設選中的類別，'all'表示顯示全部
+
+  // 文章卡片樣式
+  STARTER_ARCHIVE_CARD_STYLE: 'modern', // 卡片樣式: 'modern', 'simple', 'compact'
+  STARTER_ARCHIVE_SHOW_COVER: true, // 是否顯示文章封面圖
+  STARTER_ARCHIVE_SHOW_SUMMARY: true, // 是否顯示文章摘要
+  STARTER_ARCHIVE_SHOW_DATE: true, // 是否顯示文章日期
+  STARTER_ARCHIVE_SHOW_CATEGORY_BADGE: true, // 是否顯示類別標籤
+  STARTER_ARCHIVE_ANIMATION: true, // 是否啟用滾動動畫效果
+
   // 部落格文章區塊
   STARTER_BLOG_ENABLE: true, // 首頁部落格區塊開關
   STARTER_BLOG_TITLE: '行業資訊',

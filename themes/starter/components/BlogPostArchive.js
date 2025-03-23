@@ -1,234 +1,105 @@
+/* eslint-disable @next/next/no-img-element */
 import Link from 'next/link'
-import { useState, useEffect } from 'react'
-import { format } from 'date-fns'
-import { zhTW } from 'date-fns/locale'
+import { siteConfig } from '@/lib/config'
 
 /**
- * 博客歸檔列表 - 2025版本優化，支持類別篩選
- * @param posts 所有文章
- * @param archiveTitle 歸檔標題
- * @returns {JSX.Element}
- * @constructor
+ * 博文存檔列表顯示 - 簡化版本
+ * @param {*} param0
+ * @returns
  */
-const BlogPostArchive = ({ posts = [], archiveTitle }) => {
-  const [groupedPosts, setGroupedPosts] = useState({})
-  const [activeYear, setActiveYear] = useState(null)
-  const [view, setView] = useState('list') // 'list' 或 'grid'
-  const [activeCategory, setActiveCategory] = useState('全部') // 默認選中全部
-  const [categories, setCategories] = useState(['全部'])
-  const [filteredPosts, setFilteredPosts] = useState([])
-  
-  // 收集所有類別並設置初始值
-  useEffect(() => {
-    if (!posts || posts.length === 0) return
-    
-    // 收集所有可用的類別
-    const uniqueCategories = ['全部']
-    posts.forEach(post => {
-      const category = post.category || '未分類'
-      if (!uniqueCategories.includes(category)) {
-        uniqueCategories.push(category)
-      }
-    })
-    
-    setCategories(uniqueCategories)
-    setActiveCategory('全部')
-    
-    // 設置最初的過濾文章為所有文章
-    setFilteredPosts(posts)
-  }, [posts])
-  
-  // 根據選中的類別進行文章過濾
-  useEffect(() => {
-    if (!posts || posts.length === 0) return
-    
-    let filtered = posts
-    if (activeCategory !== '全部') {
-      filtered = posts.filter(post => (post.category || '未分類') === activeCategory)
-    }
-    
-    setFilteredPosts(filtered)
-  }, [activeCategory, posts])
-  
-  // 對過濾後的文章按年份和月份進行分組
-  useEffect(() => {
-    if (!filteredPosts || filteredPosts.length === 0) return
-    
-    const grouped = {}
-    filteredPosts.forEach(post => {
-      const date = new Date(post.publishDate || post.date)
-      const year = date.getFullYear()
-      const month = date.getMonth()
-      
-      if (!grouped[year]) {
-        grouped[year] = {}
-      }
-      
-      if (!grouped[year][month]) {
-        grouped[year][month] = []
-      }
-      
-      grouped[year][month].push(post)
-    })
-    
-    setGroupedPosts(grouped)
-    
-    // 更新活動年份
-    const years = Object.keys(grouped).sort().reverse()
-    setActiveYear(years.length > 0 ? years[0] : null)
-  }, [filteredPosts])
-  
-  if (!posts || posts.length === 0) {
-    return <></>
-  }
-  
-  // 獲取所有年份並排序
-  const years = Object.keys(groupedPosts).sort().reverse()
-  
-  // 月份名稱
-  const monthNames = Array.from({ length: 12 }, (_, i) => 
-    format(new Date(2021, i, 1), 'MMMM', { locale: zhTW })
-  )
-  
-  // 處理類別切換
-  const handleCategoryChange = (category) => {
-    setActiveCategory(category)
-  }
+export const BlogPostArchive = ({ 
+  posts, 
+  archiveTitle, 
+  categories = [], 
+  selectedCategory = 'all', 
+  onCategoryChange = () => {} 
+}) => {
+  // 確保有文章數據
+  const postData = posts || []
   
   return (
-    <div className="container mx-auto px-4 py-16">
-      {archiveTitle && (
-        <h1 className="text-3xl font-bold text-center mb-12 dark:text-white">
-          {archiveTitle}
-        </h1>
-      )}
+    <div className='w-full'>
+      {/* 區塊標題文字 */}
+      <div className='mb-10 text-center'>
+        <h2 className='mb-4 text-3xl font-bold text-dark dark:text-white sm:text-4xl md:text-[40px]'>
+          {archiveTitle || siteConfig('STARTER_ARCHIVE_TITLE', '所有文章')}
+        </h2>
+        <p className='text-base text-body-color dark:text-dark-6'>
+          {siteConfig('STARTER_ARCHIVE_DESCRIPTION', '瀏覽我們所有的文章和最新消息')}
+        </p>
+      </div>
       
-      {/* 類別選擇標籤 */}
-      <div className="mb-8 overflow-x-auto">
-        <div className="flex space-x-3 py-2">
-          {categories.map(category => (
+      {/* 類別篩選 */}
+      {categories.length > 1 && (
+        <div className='mb-10 flex flex-wrap justify-center gap-3'>
+          {categories.map((category) => (
             <button
               key={category}
-              onClick={() => handleCategoryChange(category)}
-              className={`px-4 py-2 rounded-md whitespace-nowrap transition-all ${
-                activeCategory === category 
-                  ? 'bg-primary text-white font-medium' 
-                  : 'bg-gray-100 dark:bg-dark-2 dark:text-white hover:bg-gray-200 dark:hover:bg-dark-3'
-              }`}
+              onClick={() => onCategoryChange(category)}
+              className={`px-4 py-2 rounded-md text-sm font-medium transition-colors duration-200 
+                ${selectedCategory === category 
+                  ? 'bg-primary text-white'
+                  : 'bg-gray-100 text-gray-800 hover:bg-gray-200 dark:bg-dark-2 dark:text-gray-300 dark:hover:bg-gray-700'
+                }`}
             >
-              {category}
+              {category === 'all' ? '全部' : category}
             </button>
           ))}
-        </div>
-      </div>
-      
-      {/* 切換視圖按鈕 */}
-      <div className="flex justify-end mb-8">
-        <div className="flex bg-gray-100 dark:bg-dark-2 rounded-lg p-1">
-          <button 
-            onClick={() => setView('list')}
-            className={`px-4 py-2 rounded-md ${view === 'list' 
-              ? 'bg-primary text-white' 
-              : 'dark:text-white'}`}
-          >
-            <i className="fas fa-list mr-2"></i>列表
-          </button>
-          <button 
-            onClick={() => setView('grid')}
-            className={`px-4 py-2 rounded-md ${view === 'grid' 
-              ? 'bg-primary text-white' 
-              : 'dark:text-white'}`}
-          >
-            <i className="fas fa-th-large mr-2"></i>網格
-          </button>
-        </div>
-      </div>
-      
-      {/* 年份選擇標籤 */}
-      {years.length > 0 && (
-        <div className="mb-10 overflow-x-auto">
-          <div className="flex space-x-3 py-2">
-            {years.map(year => (
-              <button
-                key={year}
-                onClick={() => setActiveYear(year)}
-                className={`px-4 py-2 rounded-md whitespace-nowrap transition-all ${
-                  activeYear === year 
-                    ? 'bg-primary text-white font-medium' 
-                    : 'bg-gray-100 dark:bg-dark-2 dark:text-white hover:bg-gray-200 dark:hover:bg-dark-3'
-                }`}
-              >
-                {year}
-              </button>
-            ))}
-          </div>
         </div>
       )}
       
       {/* 文章列表 */}
-      {activeYear && years.length > 0 ? (
-        <div className="wow fadeInUp" data-wow-delay="0.2s">
-          {Object.keys(groupedPosts[activeYear])
-            .sort((a, b) => b - a) // 按月份降序排序
-            .map(month => (
-              <div key={month} className="mb-12">
-                <h3 className="text-xl font-bold mb-6 pb-2 border-b border-gray-200 dark:border-gray-700 dark:text-white">
-                  {monthNames[month]}
-                </h3>
-                
-                {view === 'list' ? (
-                  <ul className="space-y-4">
-                    {groupedPosts[activeYear][month].map((post, index) => (
-                      <li key={index} className="group">
-                        <div className="flex items-start transition-all p-4 rounded-lg hover:bg-gray-50 dark:hover:bg-dark-2">
-                          <div className="text-gray-400 dark:text-gray-500 mr-4 text-sm whitespace-nowrap">
-                            {format(new Date(post.publishDate || post.date), 'MM-dd')}
-                          </div>
-                          <Link href={`${post.slug}`} className="flex-1">
-                            <div className="font-medium text-lg group-hover:text-primary dark:text-white">
-                              {post.title}
-                            </div>
-                            {post.summary && (
-                              <p className="text-gray-500 dark:text-gray-400 text-sm mt-1 line-clamp-2">
-                                {post.summary}
-                              </p>
-                            )}
-                          </Link>
-                        </div>
-                      </li>
-                    ))}
-                  </ul>
-                ) : (
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {groupedPosts[activeYear][month].map((post, index) => (
-                      <Link href={`${post.slug}`} key={index}>
-                        <div className="group h-full bg-white dark:bg-dark-2 rounded-lg shadow-md hover:shadow-lg p-5 transition-all">
-                          <div className="text-gray-400 dark:text-gray-500 text-sm mb-2">
-                            {format(new Date(post.publishDate || post.date), 'MM-dd')}
-                          </div>
-                          <h4 className="font-medium text-lg mb-3 group-hover:text-primary dark:text-white">
-                            {post.title}
-                          </h4>
-                          {post.summary && (
-                            <p className="text-gray-500 dark:text-gray-400 text-sm line-clamp-3">
-                              {post.summary}
-                            </p>
-                          )}
-                        </div>
+      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
+        {postData?.length > 0 ? (
+          postData.map((item, index) => {
+            return (
+              <div key={index} className='mb-6'>
+                <div
+                  className='wow fadeInUp group rounded-lg bg-white p-4 pb-8 shadow-lg dark:bg-dark-2 h-full'
+                  data-wow-delay='.1s'>
+                  <Link href={`${item.slug}`} className='block overflow-hidden rounded'>
+                    {item.pageCoverThumbnail && (
+                      <img
+                        src={item.pageCoverThumbnail}
+                        alt={item.title}
+                        className='w-full h-48 object-cover transition group-hover:rotate-6 group-hover:scale-110'
+                      />
+                    )}
+                  </Link>
+                  <div className='mt-5'>
+                    <span className='mb-2 inline-block rounded bg-primary py-1 px-4 text-center text-xs font-semibold leading-loose text-white'>
+                      {item.publishDate && new Date(item.publishDate).toLocaleDateString()}
+                    </span>
+                    {item.category && (
+                      <span className='mx-2 inline-block rounded bg-gray-200 dark:bg-gray-700 py-1 px-3 text-center text-xs font-medium leading-loose'>
+                        {item.category}
+                      </span>
+                    )}
+                    <h3>
+                      <Link
+                        href={`${item.slug}`}
+                        className='mb-4 block text-xl font-bold text-dark hover:text-primary dark:text-white dark:hover:text-primary sm:text-2xl'>
+                        {item.title}
                       </Link>
-                    ))}
+                    </h3>
+                    <p className='text-base text-body-color dark:text-dark-6'>
+                      {item.summary}
+                    </p>
                   </div>
-                )}
+                </div>
               </div>
-            ))}
-        </div>
-      ) : (
-        <div className="text-center py-12 text-gray-500 dark:text-gray-400">
-          當前類別下沒有文章
-        </div>
-      )}
+            )
+          })
+        ) : (
+          <div className="text-center py-20 col-span-full">
+            <p className="text-lg text-body-color dark:text-dark-6">
+              {siteConfig('STARTER_ARCHIVE_NO_POSTS', '目前沒有文章')}
+            </p>
+          </div>
+        )}
+      </div>
     </div>
   )
 }
 
-export default BlogPostArchive 
+export default BlogPostArchive

@@ -7,7 +7,7 @@ import NotionPage from '@/components/NotionPage'
 import { siteConfig } from '@/lib/config'
 import { isBrowser } from '@/lib/utils'
 import { useRouter } from 'next/router'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { About } from './components/About'
 import { BackToTopButton } from './components/BackToTopButton'
 import { Blog } from './components/Blog'
@@ -246,21 +246,33 @@ const LayoutSearch = props => {
  * @returns
  */
 const LayoutArchive = props => {
-  const { archivePosts, archiveGroupByCategory } = props
+  const { archivePosts } = props
   const { locale } = useGlobal()
+  const [selectedCategory, setSelectedCategory] = useState('all')
+  
+  // 合併所有文章到一個數組
+  const allPosts = Object.values(archivePosts).flat()
+  
+  // 獲取所有可用類別
+  const categories = [...new Set(allPosts.map(post => post.category || '未分類'))];
+  
+  // 根據選中的類別過濾文章
+  const filteredPosts = selectedCategory === 'all' 
+    ? allPosts 
+    : allPosts.filter(post => post.category === selectedCategory);
   
   return (
-    <div className='p-4 rounded-xl border dark:border-gray-600 max-w-6xl w-full bg-white dark:bg-[#1e1e1e]'>
-      <div className='px-3'>
-        {Object.keys(archivePosts).map(archiveTitle => (
-          <BlogPostArchive
-            key={archiveTitle}
-            posts={archivePosts[archiveTitle]}
-            archiveTitle={archiveTitle}
-          />
-        ))}
+    <section className='bg-white dark:bg-dark py-16 lg:py-20'>
+      <div className='container mx-auto px-4'>
+        <BlogPostArchive
+          posts={filteredPosts}
+          archiveTitle={siteConfig('STARTER_ARCHIVE_TITLE', '所有文章')}
+          categories={['all', ...categories]}
+          selectedCategory={selectedCategory}
+          onCategoryChange={setSelectedCategory}
+        />
       </div>
-    </div>
+    </section>
   )
 }
 
