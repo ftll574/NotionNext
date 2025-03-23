@@ -2,37 +2,37 @@
  * 另一个落地页主题
  */
 const CONFIG = {
-  // 默认只展示Logo文字，如果设置了logo图片，会在文字左侧显示图标
-  STARTER_LOGO: '/images/starter/logo/logo-04.svg', // 普通logo图片 示例：/images/starter/logo/logo.svg
-  STARTER_LOGO_WHITE: '/images/starter/logo/logo-04.svg', // 透明底浅色logo 示例： /images/starter/logo/logo-white.svg
+  // 預設只展示Logo文字，如果設置了logo圖片，會在文字左側顯示圖標
+  STARTER_LOGO: '/images/starter/logo/logo-04.svg', // 普通logo圖片 示例：/images/starter/logo/logo.svg
+  STARTER_LOGO_WHITE: '/images/starter/logo/logo-04.svg', // 透明底淺色logo 示例： /images/starter/logo/logo-white.svg
 
-  // MENU ， 菜单部分不在此处配置，请在Notion数据库中添加MENU
+  // MENU ， 選單部分不在此處配置，請在Notion資料庫中添加MENU
 
-  // 英雄区块导航
-  STARTER_HERO_ENABLE: true, // 开启英雄区
+  // 英雄區塊導航
+  STARTER_HERO_ENABLE: true, // 開啟英雄區
   STARTER_HERO_TITLE_1: '專業塑膠原料供應商',
   STARTER_HERO_TITLE_2: '30年產業經驗，值得信賴的合作夥伴',
-  // 英雄区两个按钮，如果TEXT留空则隐藏按钮
+  // 英雄區兩個按鈕，如果TEXT留空則隱藏按鈕
   STARTER_HERO_BUTTON_1_TEXT: '產品目錄',
   STARTER_HERO_BUTTON_1_URL: '/products',
   STARTER_HERO_BUTTON_2_TEXT: '聯繫我們',
   STARTER_HERO_BUTTON_2_URL: '#contact',
-  STARTER_HERO_BUTTON_2_ICON: '', // 英雄区按钮2的图标，不需要则留空
+  STARTER_HERO_BUTTON_2_ICON: '', // 英雄區按鈕2的圖標，不需要則留空
 
-  // 英雄区配图，如需隐藏，改为空值即可 ''
-  STARTER_HERO_PREVIEW_IMAGE: 'images/starter/background/home.png', // 产品预览图 ，默认读取public目录下图片
-  STARTER_HERO_PREVIEW_IMAGES: 'images/starter/background/home.png,images/starter/background/home3.jpg,images/starter/background/home4.jpg', // 产品预览图 ，默认读取public目录下图片
-  STARTER_HERO_BANNER_IMAGE: '', // hero区下方的全宽图
+  // 英雄區配圖，如需隱藏，改為空值即可 ''
+  STARTER_HERO_PREVIEW_IMAGE: 'images/starter/background/home.png', // 產品預覽圖 ，預設讀取public目錄下圖片
+  STARTER_HERO_PREVIEW_IMAGES: 'images/starter/background/home.png,images/starter/background/home3.jpg,images/starter/background/home4.jpg', // 產品預覽圖 ，預設讀取public目錄下圖片
+  STARTER_HERO_BANNER_IMAGE: '', // hero區下方的全寬圖
 
-  // 顶部右侧导航按钮
-  STARTER_NAV_BUTTON_ENABLE: false, // 是否启用导航按钮
+  // 頂部右側導航按鈕
+  STARTER_NAV_BUTTON_ENABLE: false, // 是否啟用導航按鈕
   STARTER_NAV_BUTTON_1_TEXT: '',
   STARTER_NAV_BUTTON_1_URL: '',
 
   STARTER_NAV_BUTTON_2_TEXT: '', 
   STARTER_NAV_BUTTON_2_URL: '',
 
-  // 特性区块
+  // 特性區塊
   STARTER_FEATURE_ENABLE: true,
   STARTER_FEATURE_TITLE: '高品質塑膠原料',
   STARTER_FEATURE_TEXT_1: '多元化的產品線滿足各種需求',
@@ -58,8 +58,8 @@ const CONFIG = {
   STARTER_FEATURE_4_BUTTON_TEXT: '了解配送服務',
   STARTER_FEATURE_4_BUTTON_URL: '#contact',
 
-  // 首页ABOUT区块
-  STARTER_ABOUT_ENABLE: true, // ABOUT区块开关
+  // 首頁ABOUT區塊
+  STARTER_ABOUT_ENABLE: true, // ABOUT區塊開關
   STARTER_ABOUT_TITLE: '鑫葳團隊服務業界30年，專注塑膠原料行業',
   STARTER_ABOUT_TEXT: '鑫葳塑膠專注於高品質塑膠原料的供應與服務。<br/><br/>憑藉多年的行業經驗和穩定的供應鏈管理，我們為電子、汽車、家電等行業提供可靠的原材料支持，成為眾多製造企業的長期合作夥伴。',
   STARTER_ABOUT_BUTTON_TEXT: '了解更多',
@@ -70,8 +70,8 @@ const CONFIG = {
   STARTER_ABOUT_TIPS_2: '長期客戶',
   STARTER_ABOUT_TIPS_3: '品質穩定',
 
-  // 首页价格区块
-  STARTER_PRICING_ENABLE: true, // 价格区块开关
+  // 首頁價格區塊
+  STARTER_PRICING_ENABLE: true, // 價格區塊開關
   STARTER_PRICING_TITLE: '塑膠原料系列',
   STARTER_PRICING_TEXT_1: '專業級塑膠原料供應',
   STARTER_PRICING_TEXT_2: '三十年經驗，提供優質塑膠原料，滿足各行業製造需求',
@@ -99,7 +99,7 @@ const CONFIG = {
   STARTER_PRICING_2_BUTTON_TEXT: '了解更多',
   STARTER_PRICING_2_BUTTON_URL: '/flexible-materials',
 
-  // 產品系列2
+  // 產品系列3
   STARTER_PRICING_3_TITLE: '工程級塑料',
   STARTER_PRICING_3_IMAGE: 'images/starter/background/home2.jpg',
   STARTER_PRICING_3_PRICE: '客製配方',
@@ -111,14 +111,14 @@ const CONFIG = {
   STARTER_PRICING_3_BUTTON_TEXT: '技術諮詢',
   STARTER_PRICING_3_BUTTON_URL: '/quote',
 
-  // 首页用户测评区块
-  STARTER_TESTIMONIALS_ENABLE: false, // 测评区块开关
+  // 首頁用戶評價區塊
+  STARTER_TESTIMONIALS_ENABLE: false, // 評價區塊開關
   STARTER_TESTIMONIALS_TITLE: '客戶評價',
   STARTER_TESTIMONIALS_TEXT_1: '客戶對我們的評價',
   STARTER_TESTIMONIALS_TEXT_2: '來自各行業客戶的真實反饋',
-  STARTER_TESTIMONIALS_STAR_ICON: '/images/starter/testimonials/icon-star.svg', // 评分图标
+  STARTER_TESTIMONIALS_STAR_ICON: '/images/starter/testimonials/icon-star.svg', // 評分圖標
 
-  // 这里不支持CONFIG和环境变量，需要一一修改此处代码。
+  // 這裡不支援CONFIG和環境變數，需要一一修改此處程式碼。
   STARTER_TESTIMONIALS_ITEMS: [
     {
       STARTER_TESTIMONIALS_ITEM_CONTENT: '通過與這家供應商的合作，我們顯著提高了產品質量，同時降低了材料不穩定導致的生產問題。他們的技術團隊非常專業，提供了很多有價值的建議。',
@@ -146,8 +146,8 @@ const CONFIG = {
     }
   ],
 
-  //   FAQ 常见问题模块
-  STARTER_FAQ_ENABLE: true, // 常见问题模块开关
+  // FAQ 常見問題模組
+  STARTER_FAQ_ENABLE: true, // 常見問題模組開關
   STARTER_FAQ_TITLE: '常見問題',
   STARTER_FAQ_TEXT_1: '您可能想了解的問題',
   STARTER_FAQ_TEXT_2: '關於我們產品和服務的常見問題解答',
@@ -166,15 +166,15 @@ const CONFIG = {
 
   // 問題4
   STARTER_FAQ_4_QUESTION: '你們是否提供樣品測試？',
-  STARTER_FAQ_4_ANSWER: '是的，我們提供樣品測試服務。客戶可以在下大訂單前申請樣品進行測試，確保材料符合生產需求。部分特殊材料可能會收取樣品費用，具體請咨詢我們的銷售團隊。',
+  STARTER_FAQ_4_ANSWER: '是的，我們提供樣品測試服務。客戶可以在下大訂單前申請樣品進行測試，確保材料符合生產需求。部分特殊材料可能會收取樣品費用，具體請諮詢我們的銷售團隊。',
 
-  // 团队成员区块
-  STARTER_TEAM_ENABLE: false, // 团队成员区块开关
+  // 團隊成員區塊
+  STARTER_TEAM_ENABLE: false, // 團隊成員區塊開關
   STARTER_TEAM_TITLE: '專業團隊',
   STARTER_TEAM_TEXT_1: '我們的核心團隊',
   STARTER_TEAM_TEXT_2: '專業的團隊為您提供優質的產品和服務',
 
-  // 这里不支持CONFIG和环境变量，需要一一修改此处代码。
+  // 這裡不支援CONFIG和環境變數，需要一一修改此處程式碼。
   STARTER_TEAM_ITEMS: [
     {
       STARTER_TEAM_ITEM_AVATAR: '/images/team/ceo.jpg',
@@ -202,15 +202,15 @@ const CONFIG = {
     }
   ],
 
-  // 博客文章区块
-  STARTER_BLOG_ENABLE: true, // 首页博文区块开关
+  // 部落格文章區塊
+  STARTER_BLOG_ENABLE: true, // 首頁部落格區塊開關
   STARTER_BLOG_TITLE: '行業資訊',
-  STARTER_BLOG_COUNT: 3, // 首页博文区块默认展示前3篇文章
+  STARTER_BLOG_COUNT: 3, // 首頁部落格區塊預設展示前3篇文章
   STARTER_BLOG_TEXT_1: '最新塑膠行業動態',
   STARTER_BLOG_TEXT_2: '了解塑膠原料市場趨勢和應用案例',
 
-  // 联系模块
-  STARTER_CONTACT_ENABLE: true, // 联系模块开关
+  // 聯絡模組
+  STARTER_CONTACT_ENABLE: true, // 聯絡模組開關
   STARTER_CONTACT_TITLE: '聯繫我們',
   STARTER_CONTACT_TEXT_1: '隨時為您服務',
   STARTER_CONTACT_TEXT_2: '如有任何問題或合作意向，請隨時聯繫我們',
@@ -228,11 +228,11 @@ const CONFIG = {
   STARTER_CONTACT_EMAIL_TITLE: '電子郵箱',
   STARTER_CONTACT_EMAIL_TEXT: 'tw.xinwei@gmail.com',
 
-  // 外部留言表單鏈接 (可選)
+  // 外部留言表單連結 (可選)
   STARTER_CONTACT_MSG_EXTERNAL_URL: 'https://noteforms.com/forms/wtefer',
 
-  // 合作伙伴的图标
-  STARTER_BRANDS_ENABLE: false, // 合作伙伴开关
+  // 合作夥伴的圖標
+  STARTER_BRANDS_ENABLE: false, // 合作夥伴開關
   STARTER_BRANDS: [
     {
       IMAGE: '/images/starter/brands/graygrids.svg',
@@ -268,7 +268,7 @@ const CONFIG = {
 
   STARTER_FOOTER_SLOGAN: '專業塑膠原料供應商，為您的生產提供優質材料與全方位服務。',
 
-  // 页脚三列菜单组
+  // 頁尾三列選單組
   STARTER_FOOTER_LINK_GROUP: [
     {
       TITLE: '關於我們',
@@ -356,12 +356,12 @@ const CONFIG = {
   STARTER_FOOTER_PRIVACY_TERMS_OF_SERVICE_TEXT: '服務協議',
   STARTER_FOOTER_PRIVACY_TERMS_OF_SERVICE_URL: '/terms-of-use',
 
-  // 404页面的提示语
+  // 404頁面的提示語
   STARTER_404_TITLE: '我們似乎找不到您要找的頁面。',
   STARTER_404_TEXT: '抱歉！您要查找的頁面不存在。可能已經移動或刪除。',
   STARTER_404_BACK: '回到主頁',
 
-  // 页面底部的行动呼吁模块
+  // 頁面底部的行動呼籲模組
   STARTER_CTA_ENABLE: true,
   STARTER_CTA_TITLE: '需要專業的塑膠原料解決方案？',
   STARTER_CTA_TITLE_2: '立即聯繫我們',
@@ -370,7 +370,7 @@ const CONFIG = {
   STARTER_CTA_BUTTON_URL: '#contact',
   STARTER_CTA_BUTTON_TEXT: '免費獲取諮詢',
 
-  STARTER_POST_REDIRECT_ENABLE: true, // 默認開啟重定向
+  STARTER_POST_REDIRECT_ENABLE: true, // 預設開啟重定向
   STARTER_POST_REDIRECT_URL: 'https://xin-wei.com/', // 重定向域名
   STARTER_NEWSLETTER: process.env.NEXT_PUBLIC_THEME_STARTER_NEWSLETTER || false, // 是否開啟郵件訂閱 請先配置mailchimp功能 https://docs.tangly1024.com/article/notion-next-mailchimp
 

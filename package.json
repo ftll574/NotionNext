@@ -44,7 +44,8 @@
     "react-hotkeys-hook": "^4.5.0",
     "react-notion-x": "6.16.0",
     "react-share": "^4.4.1",
-    "react-tweet-embed": "~2.0.0"
+    "react-tweet-embed": "~2.0.0",
+    "date-fns": "^2.30.0"
   },
   "devDependencies": {
     "@types/react": "18.3.10",
@@ -66,7 +67,8 @@
     "prettier": "^3.3.2",
     "tailwindcss": "^3.3.2",
     "typescript": "5.6.2",
-    "webpack-bundle-analyzer": "^4.5.0"
+    "webpack-bundle-analyzer": "^4.5.0",
+    "date-fns": "^2.30.0"
   },
   "resolutions": {
     "axios": ">=0.21.1"
