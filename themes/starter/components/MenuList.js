@@ -4,6 +4,7 @@ import { useGlobal } from '@/lib/global'
 import { useRouter } from 'next/router'
 import { useEffect, useState, useRef } from 'react'
 import { MenuItem } from './MenuItem'
+import CONFIG from '../config'
 
 /**
  * 響應式 折疊菜單
@@ -30,7 +31,7 @@ export const MenuList = props => {
       icon: 'fas fa-archive',
       name: locale.NAV.ARCHIVE,
       href: '/archive',
-      show: siteConfig('HEO_MENU_ARCHIVE')
+      show: siteConfig('STARTER_MENU_ARCHIVE', null, CONFIG)
     },
     {
       icon: 'fas fa-search',

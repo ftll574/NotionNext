@@ -372,6 +372,8 @@ const CONFIG = {
 
   STARTER_POST_REDIRECT_ENABLE: true, // 默認開啟重定向
   STARTER_POST_REDIRECT_URL: 'https://xin-wei.com/', // 重定向域名
-  STARTER_NEWSLETTER: process.env.NEXT_PUBLIC_THEME_STARTER_NEWSLETTER || false // 是否開啟郵件訂閱 請先配置mailchimp功能 https://docs.tangly1024.com/article/notion-next-mailchimp
+  STARTER_NEWSLETTER: process.env.NEXT_PUBLIC_THEME_STARTER_NEWSLETTER || false, // 是否開啟郵件訂閱 請先配置mailchimp功能 https://docs.tangly1024.com/article/notion-next-mailchimp
+
+  STARTER_MENU_ARCHIVE: true,
 }
 export default CONFIG

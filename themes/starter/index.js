@@ -40,6 +40,7 @@ import SearchInput from './components/SearchInput'
 import { SignInForm } from './components/SignInForm'
 import { SignUpForm } from './components/SignUpForm'
 import { SVG404 } from './components/svg/SVG404'
+import BlogPostArchive from './components/BlogPostArchive'
 
 /**
  * 布局框架
@@ -244,12 +245,24 @@ const LayoutSearch = props => {
  * @param {*} props
  * @returns
  */
-const LayoutArchive = props => (
-  <>
-    {/* 博文列表 */}
-    <Blog {...props} />
-  </>
-)
+const LayoutArchive = props => {
+  const { archivePosts, archiveGroupByCategory } = props
+  const { locale } = useGlobal()
+  
+  return (
+    <div className='p-4 rounded-xl border dark:border-gray-600 max-w-6xl w-full bg-white dark:bg-[#1e1e1e]'>
+      <div className='px-3'>
+        {Object.keys(archivePosts).map(archiveTitle => (
+          <BlogPostArchive
+            key={archiveTitle}
+            posts={archivePosts[archiveTitle]}
+            archiveTitle={archiveTitle}
+          />
+        ))}
+      </div>
+    </div>
+  )
+}
 
 /**
  * 404页面
