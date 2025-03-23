@@ -117,87 +117,45 @@ const ProductsPage = ({ products = [], categories = [], parentCategories = {}, s
                 parentCategories[c.value] === category.value
               );
               
+              // 獲取所有子分類下的產品
+              const childCategoryProducts = childCategories.flatMap(childCat => 
+                products.filter(product => product.category === childCat.value)
+              );
+              
+              // 所有產品（主分類直接產品 + 子分類產品）
+              const allCategoryProducts = [...mainCategoryProducts, ...childCategoryProducts];
+              
               return (
                 <div key={catIndex} className="mb-16" id={category.value}>
                   <h2 className="text-2xl font-bold mb-8 pb-4 border-b border-gray-200 dark:border-gray-700">
                     {category.name}
                   </h2>
                   
-                  {/* 主分類下的產品 */}
-                  {mainCategoryProducts.length > 0 && (
-                    <div className="flex flex-row flex-wrap gap-6 mb-12">
-                      {mainCategoryProducts.map((product, index) => (
-                        <div key={index} className="bg-white dark:bg-dark-2 rounded-lg shadow-lg overflow-hidden p-6 w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] xl:w-[calc(25%-18px)]">
-                          <h3 className="text-xl font-semibold mb-3">{product.title}</h3>
-                          
-                          {/* 標籤列表 */}
-                          {product.tags && product.tags.length > 0 && (
-                            <div className="flex flex-wrap gap-2 mb-4">
-                              {product.tags.map((tag, tagIndex) => (
-                                <span key={tagIndex} className={`px-3 py-1 rounded-full text-sm ${getTagColor(tag)}`}>
-                                  {tag}
-                                </span>
-                              ))}
-                            </div>
-                          )}
-                          
-                          <p className="text-gray-500 dark:text-gray-400 mb-4">型號: {product.modelNumber}</p>
-                          <p className="text-gray-700 dark:text-gray-300 mb-6 line-clamp-3">{product.description}</p>
-                          
-                          <a 
-                            href={`/${product.slug}`} 
-                            className="inline-block px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
-                          >
-                            查看詳情
-                          </a>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                  
-                  {/* 子分類下的產品 */}
-                  {childCategories.map((childCat, childIndex) => {
-                    const childProducts = products.filter(product => 
-                      product.category === childCat.value
-                    );
-                    
-                    return childProducts.length > 0 ? (
-                      <div key={childIndex} className="mb-12">
-                        <h3 className="text-xl font-semibold mb-6 pl-4 border-l-4 border-primary">
-                          {childCat.name}
-                        </h3>
+                  {/* 所有產品在同一橫條顯示 */}
+                  <div className="flex flex-row flex-wrap gap-6 mb-12">
+                    {allCategoryProducts.map((product, index) => (
+                      <a 
+                        key={index} 
+                        href={`/${product.slug}`}
+                        className="bg-white dark:bg-dark-2 rounded-lg shadow-lg overflow-hidden p-6 w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] xl:w-[calc(25%-18px)] block hover:shadow-xl transition-all cursor-pointer"
+                      >
+                        <h3 className="text-xl font-semibold mb-3 text-gray-800 dark:text-white">{product.title}</h3>
                         
-                        <div className="flex flex-row flex-wrap gap-6">
-                          {childProducts.map((product, index) => (
-                            <div key={index} className="bg-white dark:bg-dark-2 rounded-lg shadow-lg overflow-hidden p-6 w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] xl:w-[calc(25%-18px)]">
-                              <h3 className="text-xl font-semibold mb-3">{product.title}</h3>
-                              
-                              {/* 標籤列表 */}
-                              {product.tags && product.tags.length > 0 && (
-                                <div className="flex flex-wrap gap-2 mb-4">
-                                  {product.tags.map((tag, tagIndex) => (
-                                    <span key={tagIndex} className={`px-3 py-1 rounded-full text-sm ${getTagColor(tag)}`}>
-                                      {tag}
-                                    </span>
-                                  ))}
-                                </div>
-                              )}
-                              
-                              <p className="text-gray-500 dark:text-gray-400 mb-4">型號: {product.modelNumber}</p>
-                              <p className="text-gray-700 dark:text-gray-300 mb-6 line-clamp-3">{product.description}</p>
-                              
-                              <a 
-                                href={`/${product.slug}`} 
-                                className="inline-block px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
-                              >
-                                查看詳情
-                              </a>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    ) : null;
-                  })}
+                        {/* 標籤列表 */}
+                        {product.tags && product.tags.length > 0 && (
+                          <div className="flex flex-wrap gap-2 mb-4">
+                            {product.tags.map((tag, tagIndex) => (
+                              <span key={tagIndex} className={`px-3 py-1 rounded-full text-sm ${getTagColor(tag)}`}>
+                                {tag}
+                              </span>
+                            ))}
+                          </div>
+                        )}
+                        
+                        <p className="text-gray-700 dark:text-gray-300 line-clamp-3">{product.summary || product.description}</p>
+                      </a>
+                    ))}
+                  </div>
                 </div>
               );
             })}
@@ -244,9 +202,8 @@ export async function getStaticProps({ locale }) {
         return props.allPages?.find(page => page.slug === pageSlug)
       }
       
-      // 根據 Notion 表格結構處理 SubMenu 和 ChildMenu
+      // 處理 SubMenu
       if (productMenu.subMenus && productMenu.subMenus.length > 0) {
-        // 首先收集所有 SubMenu
         productMenu.subMenus.forEach(subMenu => {
           const subMenuName = subMenu.title || subMenu.name
           const subMenuSlug = subMenu.id || subMenu.slug
@@ -267,6 +224,7 @@ export async function getStaticProps({ locale }) {
                 slug: subMenu.slug.startsWith('/') ? subMenu.slug.substring(1) : subMenu.slug,
                 category: subMenuSlug,
                 description: subMenu.description || '',
+                summary: pageData?.summary || pageData?.description || subMenu.description || '',
                 modelNumber: pageData?.id?.substr(-12) || subMenu.id?.substr(-12),
                 tags: pageData?.tags || []
               }
@@ -274,7 +232,7 @@ export async function getStaticProps({ locale }) {
               products.push(product)
             }
             
-            // 處理 ChildMenu - 根據 Notion 表格，這些應該歸屬於父 SubMenu
+            // 處理 ChildMenu
             if (subMenu.childMenus && subMenu.childMenus.length > 0) {
               subMenu.childMenus.forEach(childMenu => {
                 const childMenuName = childMenu.title || childMenu.name
@@ -298,8 +256,9 @@ export async function getStaticProps({ locale }) {
                       id: childMenu.id,
                       title: childMenuName,
                       slug: childMenu.slug.startsWith('/') ? childMenu.slug.substring(1) : childMenu.slug,
-                      category: childMenuSlug, // 使用 ChildMenu 自己的類別
+                      category: childMenuSlug,
                       description: childMenu.description || '',
+                      summary: pageData?.summary || pageData?.description || childMenu.description || '',
                       modelNumber: pageData?.id?.substr(-12) || childMenu.id?.substr(-12),
                       tags: pageData?.tags || []
                     }
