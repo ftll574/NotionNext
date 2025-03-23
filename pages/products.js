@@ -125,9 +125,9 @@ const ProductsPage = ({ products = [], categories = [], parentCategories = {}, s
                   
                   {/* 主分類下的產品 */}
                   {mainCategoryProducts.length > 0 && (
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+                    <div className="flex flex-row flex-wrap gap-6 mb-12">
                       {mainCategoryProducts.map((product, index) => (
-                        <div key={index} className="bg-white dark:bg-dark-2 rounded-lg shadow-lg overflow-hidden p-6">
+                        <div key={index} className="bg-white dark:bg-dark-2 rounded-lg shadow-lg overflow-hidden p-6 w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] xl:w-[calc(25%-18px)]">
                           <h3 className="text-xl font-semibold mb-3">{product.title}</h3>
                           
                           {/* 標籤列表 */}
@@ -141,16 +141,12 @@ const ProductsPage = ({ products = [], categories = [], parentCategories = {}, s
                             </div>
                           )}
                           
-                          {/* 型號 */}
-                          {product.modelNumber && (
-                            <p className="text-gray-600 dark:text-gray-400 mb-4">
-                              型號: {product.modelNumber}
-                            </p>
-                          )}
+                          <p className="text-gray-500 dark:text-gray-400 mb-4">型號: {product.modelNumber}</p>
+                          <p className="text-gray-700 dark:text-gray-300 mb-6 line-clamp-3">{product.description}</p>
                           
                           <a 
-                            href={`/${product.slug}`}
-                            className="inline-block py-2 px-4 bg-primary text-white rounded hover:bg-primary-dark transition-colors"
+                            href={`/${product.slug}`} 
+                            className="inline-block px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
                           >
                             查看詳情
                           </a>
@@ -171,9 +167,9 @@ const ProductsPage = ({ products = [], categories = [], parentCategories = {}, s
                           {childCat.name}
                         </h3>
                         
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div className="flex flex-row flex-wrap gap-6">
                           {childProducts.map((product, index) => (
-                            <div key={index} className="bg-white dark:bg-dark-2 rounded-lg shadow-lg overflow-hidden p-6">
+                            <div key={index} className="bg-white dark:bg-dark-2 rounded-lg shadow-lg overflow-hidden p-6 w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] xl:w-[calc(25%-18px)]">
                               <h3 className="text-xl font-semibold mb-3">{product.title}</h3>
                               
                               {/* 標籤列表 */}
@@ -187,16 +183,12 @@ const ProductsPage = ({ products = [], categories = [], parentCategories = {}, s
                                 </div>
                               )}
                               
-                              {/* 型號 */}
-                              {product.modelNumber && (
-                                <p className="text-gray-600 dark:text-gray-400 mb-4">
-                                  型號: {product.modelNumber}
-                                </p>
-                              )}
+                              <p className="text-gray-500 dark:text-gray-400 mb-4">型號: {product.modelNumber}</p>
+                              <p className="text-gray-700 dark:text-gray-300 mb-6 line-clamp-3">{product.description}</p>
                               
                               <a 
-                                href={`/${product.slug}`}
-                                className="inline-block py-2 px-4 bg-primary text-white rounded hover:bg-primary-dark transition-colors"
+                                href={`/${product.slug}`} 
+                                className="inline-block px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
                               >
                                 查看詳情
                               </a>
