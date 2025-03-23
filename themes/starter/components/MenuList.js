@@ -210,16 +210,20 @@ export const MenuList = props => {
           transition: all 0.3s ease;
         }
         
-        /* 統一子菜單樣式 */
+        /* 基本選單項樣式 */
         .desktop-menu .group ul li a,
         .desktop-menu .group ul li button {
           padding: 8px 16px;
-          display: block;
-          width: 100%;
-          text-align: left;
           color: #333;
           border-radius: 4px;
           transition: all 0.3s ease;
+          display: flex !important;
+          flex-direction: row !important;
+          align-items: center !important;
+          justify-content: space-between !important;
+          width: 100% !important;
+          text-align: left;
+          white-space: nowrap !important;
         }
         
         /* 深色模式 */
@@ -228,7 +232,7 @@ export const MenuList = props => {
           color: #fff;
         }
         
-        /* 統一所有子菜單懸停和活動狀態 */
+        /* 懸停和活動狀態 */
         .desktop-menu .group ul li a:hover,
         .desktop-menu .group ul li button:hover,
         .desktop-menu .group ul li a.active {
@@ -236,31 +240,49 @@ export const MenuList = props => {
           color: #3b82f6;
         }
         
-        /* 子菜單容器統一樣式 */
-        .desktop-menu .group > div > div {
-          background-color: white;
-          border-radius: 8px;
-          box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-          overflow: hidden;
-          width: 220px;
-          padding: 8px;
-        }
-        
-        /* 深色模式子菜單容器 */
-        .dark .desktop-menu .group > div > div {
-          background-color: #1f2937;
-        }
-        
-        /* 三級菜單容器樣式 */
+        /* 子菜單容器 */
+        .desktop-menu .group > div > div,
         .desktop-menu .group ul li div > div {
           background-color: white;
           border-radius: 8px;
           box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+          overflow: hidden;
+          min-width: 220px;
+          padding: 8px;
         }
         
-        /* 深色模式三級菜單容器 */
+        /* 深色模式子菜單容器 */
+        .dark .desktop-menu .group > div > div,
         .dark .desktop-menu .group ul li div > div {
           background-color: #1f2937;
+        }
+        
+        /* 箭頭和文字容器關鍵修復 */
+        .desktop-menu .group ul li a > *:first-child {
+          flex: 1 1 auto !important;
+          overflow: hidden !important;
+          text-overflow: ellipsis !important;
+          margin-right: 8px !important;
+        }
+        
+        .desktop-menu .group ul li a > *:last-child {
+          flex: 0 0 auto !important;
+          width: auto !important;
+          display: inline-flex !important;
+          align-items: center !important;
+        }
+        
+        /* 防止任何子元素破壞布局 */
+        .desktop-menu .group ul li a * {
+          margin: 0 !important;
+          vertical-align: middle !important;
+        }
+        
+        /* 確保所有子菜單列表不顯示列表符號 */
+        .desktop-menu .group ul {
+          list-style: none !important;
+          padding: 0 !important;
+          margin: 0 !important;
         }
       `}</style>
     </div>

@@ -152,13 +152,16 @@ export const MenuItem = ({ link, index, isOpen, onMenuOpen, isAnyMenuOpen, navBa
                           href={subMenu.href}
                           target={subMenu.external ? '_blank' : '_self'}
                           rel={subMenu.external ? 'noopener noreferrer' : ''}
-                          className={`flex items-center py-1.5 text-sm hover:text-primary
+                          className={`w-full flex items-center justify-between py-1.5 text-sm hover:text-primary
                             ${isMobile ? 'text-white/90' : 'text-dark dark:text-white lg:px-3'}
                             ${router.pathname === subMenu.href ? 'text-primary' : ''}`}>
-                          <span className='flex items-center'>
+                          <span className='inline-flex items-center'>
                             {subMenu.icon && <i className={`${subMenu.icon} mr-2 w-5 text-center ${isMobile ? 'text-white/90' : ''}`} />}
                             {subMenu.title}
                           </span>
+                          {subMenu.childMenus && subMenu.childMenus.length > 0 && (
+                            <span className="ml-1 inline-block">{'>'}</span>
+                          )}
                         </Link>
                       ) : (
                         // 有三級菜單的二級菜單項
