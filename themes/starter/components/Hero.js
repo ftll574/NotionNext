@@ -4,6 +4,7 @@ import { siteConfig } from '@/lib/config'
 import CONFIG from '../config'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
+import ScrollButton from './ScrollButton'
 
 /**
  * 英雄大圖區塊
@@ -162,6 +163,11 @@ export const Hero = props => {
             )}></LazyImage>
         </div>
       )}
+
+      {/* 添加滾動按鈕 */}
+      <div className="mt-12">
+        <ScrollButton targetId="about-section" />
+      </div>
     </>
   )
 }

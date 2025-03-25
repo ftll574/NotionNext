@@ -21,7 +21,7 @@ const CONFIG = {
 
   // 英雄區配圖，如需隱藏，改為空值即可 ''
   STARTER_HERO_PREVIEW_IMAGE: 'images/starter/background/home.png', // 產品預覽圖 ，預設讀取public目錄下圖片
-  STARTER_HERO_PREVIEW_IMAGES: 'images/starter/background/home.png,images/starter/background/home3.jpg,images/starter/background/home4.jpg', // 產品預覽圖 ，預設讀取public目錄下圖片
+  STARTER_HERO_PREVIEW_IMAGES: 'images/starter/background/home.png', // 產品預覽圖 ，預設讀取public目錄下圖片
   STARTER_HERO_BANNER_IMAGE: '', // hero區下方的全寬圖
 
   // 頂部右側導航按鈕
@@ -44,7 +44,7 @@ const CONFIG = {
   STARTER_FEATURE_1_BUTTON_URL: '/quality',
 
   STARTER_FEATURE_2_TITLE_1: '全系列產品供應',
-  STARTER_FEATURE_2_TEXT_1: '涵蓋PE、PP、PS、ABS等通用塑料及工程塑料，可依客戶需求調配特性，提供客製化配方',
+  STARTER_FEATURE_2_TEXT_1: '涵蓋TPE、PVC塑料等通用塑料、彈性塑膠、工程塑料，可依客戶需求調配特性，提供客製化配方',
   STARTER_FEATURE_2_BUTTON_TEXT: '瀏覽產品系列',
   STARTER_FEATURE_2_BUTTON_URL: '/products',
 
@@ -95,7 +95,7 @@ const CONFIG = {
   STARTER_PRICING_2_PRICE_PERIOD: '',
   STARTER_PRICING_2_TAG: '熱銷',
   STARTER_PRICING_2_HEADER: '適用於需要彈性與韌性的應用場景',
-  STARTER_PRICING_2_FEATURES: 'TPE熱塑性彈性體｜多種硬度選擇,TPU聚氨酯彈性體｜優異耐磨性,PVC軟質塑膠｜符合環保標準,矽膠類彈性材料｜耐高溫應用,熱塑性橡膠｜良好回彈性能',
+  STARTER_PRICING_2_FEATURES: 'TPE熱塑性彈性體｜多種硬度選擇,TPU聚氨酯彈性體｜優異耐磨性,PVC軟質塑膠｜符合環保標準,TPE彈材料｜奈化學良好,提供物性數據與加工建議',
   STARTER_PRICING_2_BUTTON_TEXT: '了解更多',
   STARTER_PRICING_2_BUTTON_URL: '/flexible-materials',
 
@@ -162,7 +162,7 @@ const CONFIG = {
 
   // 問題3
   STARTER_FAQ_3_QUESTION: '訂單交付時間是多久？',
-  STARTER_FAQ_3_ANSWER: '常規產品通常在確認訂單後7-15個工作日內交付，視訂單量和運輸方式而定。針對長期合作客戶，我們提供庫存預留服務，可以實現更快的交付時間。',
+  STARTER_FAQ_3_ANSWER: '常備塑料產品通常在確認訂單後1-3個工作日內交付，視訂單量和運輸方式而定。針對長期合作客戶，我們提供庫存預留服務，可以實現更快的交付時間。',
 
   // 問題4
   STARTER_FAQ_4_QUESTION: '你們是否提供樣品測試？',

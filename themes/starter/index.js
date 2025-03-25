@@ -41,6 +41,7 @@ import { SignInForm } from './components/SignInForm'
 import { SignUpForm } from './components/SignUpForm'
 import { SVG404 } from './components/svg/SVG404'
 import BlogPostArchive from './components/BlogPostArchive'
+import ScrollButton from './components/ScrollButton'
 
 /**
  * 布局框架

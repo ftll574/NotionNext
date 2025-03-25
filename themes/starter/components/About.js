@@ -2,6 +2,7 @@
 /* eslint-disable react/no-unescaped-entities */
 import { siteConfig } from '@/lib/config'
 import Link from 'next/link'
+import ScrollButton from './ScrollButton'
 
 /**
  * 首页的关于模块
@@ -74,6 +75,11 @@ export const About = () => {
               </div>
             </div>
           </div>
+        </div>
+
+        {/* 在組件底部添加滾動按鈕 */}
+        <div className="flex justify-center mt-8">
+          <ScrollButton targetId="services-section" />
         </div>
       </section>
       {/* <!-- ====== About Section End --> */}
