@@ -25,10 +25,10 @@ export const ProductCatalog = ({ products = [], tags = [] }) => {
   return (
     <>
       {/* <!-- ====== 產品目錄區塊 開始 --> */}
-      <section className="bg-white dark:bg-dark py-20">
+      <section className="bg-white dark:bg-dark py-20 pt-32">
         <div className="container mx-auto">
           <div className="text-center mb-16">
-            <h1 className="text-3xl font-bold text-dark dark:text-white mb-6 sm:text-4xl md:text-[40px]">
+            <h1 className="text-3xl font-bold leading-tight text-dark dark:text-white mb-6 sm:text-4xl md:text-[40px] md:leading-[1.2]">
               {siteConfig('PRODUCT_CATALOG_TITLE', '產品目錄')}
             </h1>
             <p className="text-base text-body-color dark:text-dark-6 max-w-[600px] mx-auto">

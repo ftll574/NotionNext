@@ -21,9 +21,6 @@ import { Hero } from './components/Hero'
 import { Pricing } from './components/Pricing'
 import { Team } from './components/Team'
 import { Testimonials } from './components/Testimonials'
-import CONFIG from './config'
-import { Style } from './style'
-// import { MadeWithButton } from './components/MadeWithButton'
 import Comment from '@/components/Comment'
 import replaceSearchResult from '@/components/Mark'
 import ShareBar from '@/components/ShareBar'
@@ -42,6 +39,14 @@ import { SignUpForm } from './components/SignUpForm'
 import { SVG404 } from './components/svg/SVG404'
 import BlogPostArchive from './components/BlogPostArchive'
 import ScrollButton from './components/ScrollButton'
+import CONFIG from './config'
+import { Style } from './style'
+import BLOG from '@/blog.config'
+import Head from 'next/head'
+import React, { createContext, useContext } from 'react'
+// import { MadeWithButton } from './components/MadeWithButton'
+
+const LayerContext = createContext()
 
 /**
  * 布局框架
@@ -91,41 +96,85 @@ const LayoutIndex = props => {
   const count = siteConfig('STARTER_BLOG_COUNT', 3, CONFIG)
   const { locale } = useGlobal()
   const posts = props?.allNavPages ? props.allNavPages.slice(0, count) : []
+  const { asPath, pathname } = useRouter()
+  
+  // 當前頁面的 URL 路徑
+  const canonicalURL = `${BLOG.LINK}${asPath}`
+  
+  // 取得當前頁面的標題 - 用於 SEO
+  const pageTitle = props?.title || (props?.siteInfo ? `${props.siteInfo?.title}` : BLOG.TITLE)
+  
+  // 取得當前頁面的描述 - 用於 SEO
+  let pageDescription = ''
+  if (pathname === '/') {
+    pageDescription = BLOG.DESCRIPTION || `${BLOG.AUTHOR} - ${BLOG.BIO}`
+  } else if (props?.post && props.post.summary) {
+    pageDescription = props.post.summary
+  } else if (pathname === '/products') {
+    pageDescription = '鑫葳貿易股份有限公司提供全系列塑膠原料，包括PP聚丙烯、PE聚乙烯、PS聚苯乙烯等通用塑料和高性能工程塑料。優質供應商、穩定品質、專業技術支援。'
+  } else if (pathname === '/about') {
+    pageDescription = '鑫葳貿易股份有限公司專注塑膠原料行業30年，提供全系列塑膠原料和專業技術支援，是值得信賴的長期合作夥伴。'
+  } else {
+    pageDescription = BLOG.DESCRIPTION || `${BLOG.AUTHOR} - ${BLOG.BIO}`
+  }
+  
   return (
     <>
+      <Head>
+        <title>{pageTitle}</title>
+        <meta name="description" content={pageDescription} />
+        <meta name="keywords" content={BLOG.KEYWORDS} />
+        <meta property="og:title" content={pageTitle} />
+        <meta property="og:description" content={pageDescription} />
+        <meta property="og:url" content={canonicalURL} />
+        {props?.post?.pageCoverThumbnail && (
+          <meta property="og:image" content={props.post.pageCoverThumbnail} />
+        )}
+        <link rel="canonical" href={canonicalURL} />
+      </Head>
+      
       {/* 英雄区 */}
       {siteConfig('STARTER_HERO_ENABLE', true, CONFIG) && <Hero {...props} />}
-      {/* 合作伙伴 */}
-      {siteConfig('STARTER_BRANDS_ENABLE', true, CONFIG) && <Brand />}
+      
       {/* 关于 */}
       {siteConfig('STARTER_ABOUT_ENABLE', true, CONFIG) && <About />}
+      
       {/* 产品特性 */}
       {siteConfig('STARTER_FEATURE_ENABLE', true, CONFIG) && <Features />}
+      
       {/* 价格 */}
       {siteConfig('STARTER_PRICING_ENABLE', true, CONFIG) && <Pricing />}
-      {/* 评价展示 */}
-      {siteConfig('STARTER_TESTIMONIALS_ENABLE', true, CONFIG) && (
-        <Testimonials />
-      )}
-      {/* 常见问题 */}
-      {siteConfig('STARTER_FAQ_ENABLE', true, CONFIG) && <FAQ />}
-      {/* 团队介绍 */}
-      {siteConfig('STARTER_TEAM_ENABLE', true, CONFIG) && <Team />}
+      
       {/* 博文列表 */}
       {siteConfig('STARTER_BLOG_ENABLE', true, CONFIG) && (
         <>
           <Blog posts={posts} />
           <div className='container mx-auto flex justify-end mb-4'>
-            <Link className='text-lg underline' href={'/archive'}>
+            <Link className='text-lg text-dark hover:text-primary dark:text-white dark:hover:text-primary flex items-center' href={'/archive'}>
               <span>{locale.COMMON.MORE}</span>
               <i className='ml-2 fas fa-arrow-right' />
             </Link>
           </div>
         </>
       )}
+
+      {/* 评价展示 */}
+      {siteConfig('STARTER_TESTIMONIALS_ENABLE', true, CONFIG) && (
+        <Testimonials />
+      )}
+      
+      {/* 常见问题 */}
+      {siteConfig('STARTER_FAQ_ENABLE', true, CONFIG) && <FAQ />}
+      
+      {/* 团队介绍 */}
+      {siteConfig('STARTER_TEAM_ENABLE', true, CONFIG) && <Team />}
+      
       {/* 联系方式 */}
       {siteConfig('STARTER_CONTACT_ENABLE', true, CONFIG) && <Contact />}
 
+      {/* 合作伙伴 */}
+      {siteConfig('STARTER_BRANDS_ENABLE', true, CONFIG) && <Brand />}
+      
       {/* 行动呼吁 */}
       {siteConfig('STARTER_CTA_ENABLE', true, CONFIG) && <CTA />}
     </>
@@ -562,3 +611,6 @@ export {
   LayoutTagIndex,
   CONFIG as THEME_CONFIG
 }
+
+export default LayoutIndex
+export const useLayerContext = () => useContext(LayerContext)

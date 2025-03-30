@@ -5,53 +5,42 @@ import Link from 'next/link'
 import ScrollButton from './ScrollButton'
 
 /**
- * 首页的关于模块
+ * 首頁的關於模組
  */
 export const About = () => {
   return (
     <>
       {/* <!-- ====== About Section Start --> */}
       <section
-        id='about'
-        className='pattern-bg pb-8 pt-20 dark:bg-dark-2 lg:pb-[70px] lg:pt-[120px] relative'>
-        
-        {/* 添加裝飾元素 */}
-        <div className="absolute right-0 top-0 h-40 w-40 opacity-20">
-          <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-            <path fill="#00629B" d="M46.5,-78.1C59.9,-71.7,70.3,-59.5,74.4,-45.6C78.5,-31.7,76.2,-16.2,71.4,-3.2C66.6,9.8,59.3,20.3,52.7,31.3C46.1,42.3,40.1,53.9,30.7,61.3C21.2,68.6,8.1,71.7,-3.9,68.3C-15.8,64.9,-26.5,54.9,-39.8,47.1C-53.1,39.2,-69,33.4,-74.4,22.4C-79.8,11.4,-74.7,-4.9,-68.2,-19.1C-61.8,-33.3,-54,-45.4,-43.3,-52.7C-32.7,-60,-16.3,-62.3,-0.3,-61.8C15.7,-61.4,31.3,-58.1,46.5,-52.1C61.7,-46.2,76.5,-37.5,46.5,-78.1Z" transform="translate(100 100)" />
-          </svg>
-        </div>
-        <div className="absolute left-0 bottom-0 h-40 w-40 opacity-20 rotate-180">
-          <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-            <path fill="#00629B" d="M46.5,-78.1C59.9,-71.7,70.3,-59.5,74.4,-45.6C78.5,-31.7,76.2,-16.2,71.4,-3.2C66.6,9.8,59.3,20.3,52.7,31.3C46.1,42.3,40.1,53.9,30.7,61.3C21.2,68.6,8.1,71.7,-3.9,68.3C-15.8,64.9,-26.5,54.9,-39.8,47.1C-53.1,39.2,-69,33.4,-74.4,22.4C-79.8,11.4,-74.7,-4.9,-68.2,-19.1C-61.8,-33.3,-54,-45.4,-43.3,-52.7C-32.7,-60,-16.3,-62.3,-0.3,-61.8C15.7,-61.4,31.3,-58.1,46.5,-52.1C61.7,-46.2,76.5,-37.5,46.5,-78.1Z" transform="translate(100 100)" />
-          </svg>
-        </div>
-        
-        {/* 內容容器 */}
-        <div className="container relative z-10">
+        id='about-section'
+        className='bg-gray-1 pb-8 pt-20 dark:bg-dark lg:pb-[70px] lg:pt-[120px] relative'>
+        <div className='container mx-auto px-4'>
           <div className='wow fadeInUp' data-wow-delay='.2s'>
             <div className='-mx-4 flex flex-wrap items-center'>
-              {/* 左侧的文字说明板块 */}
+              {/* 左側的文字說明板塊 */}
               <div className='w-full px-4 lg:w-1/2'>
                 <div className='mb-12 max-w-[540px] lg:mb-0'>
-                  <h2 className='mb-5 text-3xl font-bold leading-tight text-dark dark:text-white sm:text-[40px] sm:leading-[1.2]'>
-                    {siteConfig('STARTER_ABOUT_TITLE')}
-                  </h2>
+                  <span className='mb-2 block text-lg font-semibold text-primary'>
+                    {siteConfig('STARTER_ABOUT_TITLE', '鑫葳團隊服務業界30年，專注塑膠原料行業')}
+                  </span>
+                  <h3 className='mb-4 text-3xl font-bold leading-tight text-dark dark:text-white sm:text-4xl sm:leading-[1.2] lg:text-[40px]'>
+                    {siteConfig('STARTER_ABOUT_TEXT_1', '鑫葳團隊服務業界30年，專注塑膠原料行業')}
+                  </h3>
                   <p
-                    className='mb-10 text-base leading-relaxed text-body-color dark:text-dark-6'
                     dangerouslySetInnerHTML={{
-                      __html: siteConfig('STARTER_ABOUT_TEXT')
-                    }}></p>
+                      __html: siteConfig('STARTER_ABOUT_TEXT', '鑫葳塑膠專注於高品質塑膠原料的供應與服務。<br/><br/>憑藉多年的行業經驗和穩定的供應鏈管理，我們為電子、汽車、家電等行業提供可靠的原材料支持，成為眾多製造企業的長期合作夥伴。')
+                    }}
+                    className='mb-10 text-base leading-relaxed text-body-color dark:text-dark-6'></p>
 
                   <Link
-                    href={siteConfig('STARTER_ABOUT_BUTTON_URL', '')}
+                    href={siteConfig('STARTER_ABOUT_BUTTON_URL', '/about')}
                     className='inline-flex items-center justify-center rounded-md border border-primary bg-primary px-7 py-3 text-center text-base font-medium text-white hover:border-blue-dark hover:bg-blue-dark'>
-                    {siteConfig('STARTER_ABOUT_BUTTON_TEXT')}
+                    {siteConfig('STARTER_ABOUT_BUTTON_TEXT', '了解更多')}
                   </Link>
                 </div>
               </div>
-
-              {/* 右侧的图片海报 */}
+              
+              {/* 右側的圖片區域 */}
               <div className='w-full px-4 lg:w-1/2'>
                 <div className='relative mx-auto'>
                   <img
@@ -62,24 +51,24 @@ export const About = () => {
                   <img
                     src={siteConfig('STARTER_ABOUT_IMAGE_2')}
                     alt="關於我們"
-                    className="absolute -bottom-16 -right-16 z-10 rounded-tl-[80px] rounded-br-[80px] shadow-xl float-animation"
+                    className="absolute -bottom-16 -right-16 z-5 rounded-tl-[80px] rounded-br-[80px] shadow-xl float-animation"
                     style={{animationDelay: '1.5s'}}
                   />
                   
                   {/* 統計數字卡片 */}
-                  <div className="absolute -left-10 top-1/2 transform -translate-y-1/2 bg-white dark:bg-dark-1 p-5 rounded-lg shadow-xl z-20 float-animation" style={{animationDelay: '0.8s'}}>
-                    <h3 className="text-4xl font-bold text-gradient">{siteConfig('STARTER_ABOUT_TIPS_1')}</h3>
-                    <p className="text-body-color">{siteConfig('STARTER_ABOUT_TIPS_2')}</p>
+                  <div className="absolute -left-10 top-1/2 transform -translate-y-1/2 bg-white dark:bg-dark-1 p-5 rounded-lg shadow-xl z-10 float-animation" style={{animationDelay: '0.8s'}}>
+                    <h3 className="text-4xl font-bold text-gradient">{siteConfig('STARTER_ABOUT_TIPS_1', '1000+')}</h3>
+                    <p className="text-body-color">{siteConfig('STARTER_ABOUT_TIPS_2', '長期客戶')}</p>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-
-        {/* 在組件底部添加滾動按鈕 */}
-        <div className="flex justify-center mt-8">
-          <ScrollButton targetId="services-section" />
+        
+        {/* 滾動按鈕 - 絕對定位在底部中間 */}
+        <div className="absolute -bottom-16 md:-bottom-16 left-0 right-0 w-full flex justify-center pb-2">
+          <ScrollButton targetId="features-section" color="primary" />
         </div>
       </section>
       {/* <!-- ====== About Section End --> */}

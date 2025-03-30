@@ -1,7 +1,7 @@
 /**
  * 站点统计插件
  */
-module.exports = {
+const CONFIG = {
   ANALYTICS_VERCEL: process.env.NEXT_PUBLIC_ANALYTICS_VERCEL || true, // vercel自带的统计 https://vercel.com/docs/concepts/analytics/quickstart https://github.com/tangly1024/NotionNext/issues/897
   ANALYTICS_BUSUANZI_ENABLE:
     process.env.NEXT_PUBLIC_ANALYTICS_BUSUANZI_ENABLE || true, // 展示网站阅读量、访问数 see http://busuanzi.ibruce.info/
@@ -31,7 +31,35 @@ module.exports = {
     process.env.NEXT_PUBLIC_SEO_BAIDU_SITE_VERIFICATION || '', // Remove the value or replace it with your own google site verification code
 
   // 微软 Clarity 站点分析
-  CLARITY_ID: process.env.NEXT_PUBLIC_CLARITY_ID || null // 只需要复制Clarity脚本中的ID部分，ID是一个十位的英文数字组合
+  CLARITY_ID: process.env.NEXT_PUBLIC_CLARITY_ID || null, // 只需要复制Clarity脚本中的ID部分，ID是一个十位的英文数字组合
 
-  // <---- 站点统计
+  // GA4 - GOOGLE ANALYTICS 4, 測量ID 以 G- 開頭
+  ANALYTICS_TRACKING_ID: process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID || '',
+
+  // Matomo 統計分析以及谷歌跟蹤代碼
+  MATOMO_URL: process.env.NEXT_PUBLIC_MATOMO_URL || '',
+
+  // Umami Analytics
+  UMAMI_ENABLED: process.env.NEXT_PUBLIC_UMAMI_ENABLED || false,
+  UMAMI_ID: process.env.NEXT_PUBLIC_UMAMI_ID || '',
+  UMAMI_URL: process.env.NEXT_PUBLIC_UMAMI_URL || 'https://analytics.umami.is',
+  
+  // Google Search Console 站點驗證
+  GOOGLE_SITE_VERIFICATION: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || '',
+  
+  // Baidu Search Console 站點驗證
+  BAIDU_SITE_VERIFICATION: process.env.NEXT_PUBLIC_BAIDU_SITE_VERIFICATION || '',
+  
+  // 百度統計
+  BAIDU_ANALYTICS_ENABLED: process.env.NEXT_PUBLIC_BAIDU_ANALYTICS_ENABLED || false,
+  BAIDU_ANALYTICS_ID: process.env.NEXT_PUBLIC_BAIDU_ANALYTICS_ID || '',
+  
+  // Microsoft Clarity 分析
+  CLARITY_ANALYTICS_ENABLED: process.env.NEXT_PUBLIC_CLARITY_ANALYTICS_ENABLED || false,
+  CLARITY_ANALYTICS_ID: process.env.NEXT_PUBLIC_CLARITY_ANALYTICS_ID || '',
+  
+  // 數據收集隱私模式，合規GDPR，若開啟會詢問用戶是否同意數據收集
+  ANALYTICS_PRIVACY_MODE: process.env.NEXT_PUBLIC_ANALYTICS_PRIVACY_MODE || false
 }
+
+module.exports = CONFIG

@@ -147,6 +147,11 @@ export const Hero = props => {
               ))}
             </div>
           )}
+          
+          {/* 添加滾動按鈕 */}
+          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10">
+            <ScrollButton targetId="about-section" fixed={false} absolute={true} color="white" />
+          </div>
         </div>
       )}
       
@@ -163,11 +168,6 @@ export const Hero = props => {
             )}></LazyImage>
         </div>
       )}
-
-      {/* 添加滾動按鈕 */}
-      <div className="mt-12">
-        <ScrollButton targetId="about-section" />
-      </div>
     </>
   )
 }

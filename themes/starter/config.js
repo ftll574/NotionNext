@@ -16,7 +16,7 @@ const CONFIG = {
   STARTER_HERO_BUTTON_1_TEXT: '產品目錄',
   STARTER_HERO_BUTTON_1_URL: '/products',
   STARTER_HERO_BUTTON_2_TEXT: '聯繫我們',
-  STARTER_HERO_BUTTON_2_URL: '#contact',
+  STARTER_HERO_BUTTON_2_URL: '#contact-section',
   STARTER_HERO_BUTTON_2_ICON: '', // 英雄區按鈕2的圖標，不需要則留空
 
   // 英雄區配圖，如需隱藏，改為空值即可 ''
@@ -41,7 +41,7 @@ const CONFIG = {
   STARTER_FEATURE_1_TITLE_1: '嚴選品質保證',
   STARTER_FEATURE_1_TEXT_1: '採用SGS認證標準檢測流程，嚴控每批原料物性穩定，提供可追溯品質報告，杜絕生產隱患',
   STARTER_FEATURE_1_BUTTON_TEXT: '品質管理系統',
-  STARTER_FEATURE_1_BUTTON_URL: '/quality',
+  STARTER_FEATURE_1_BUTTON_URL: '/products',
 
   STARTER_FEATURE_2_TITLE_1: '全系列產品供應',
   STARTER_FEATURE_2_TEXT_1: '涵蓋TPE、PVC塑料等通用塑料、彈性塑膠、工程塑料，可依客戶需求調配特性，提供客製化配方',
@@ -51,12 +51,12 @@ const CONFIG = {
   STARTER_FEATURE_3_TITLE_1: '技術支援服務',
   STARTER_FEATURE_3_TEXT_1: '專業工程師團隊提供材料選型建議、應用問題診斷，協助客戶解決加工製程難題',
   STARTER_FEATURE_3_BUTTON_TEXT: '技術諮詢服務',
-  STARTER_FEATURE_3_BUTTON_URL: '#contact',
+  STARTER_FEATURE_3_BUTTON_URL: '#contact-section',
 
   STARTER_FEATURE_4_TITLE_1: '靈活庫存管理',
   STARTER_FEATURE_4_TEXT_1: '建立完善供應鏈體系，常規料型現貨供應，特殊需求快速調度，縮短交期至7-10個工作日',
   STARTER_FEATURE_4_BUTTON_TEXT: '了解配送服務',
-  STARTER_FEATURE_4_BUTTON_URL: '#contact',
+  STARTER_FEATURE_4_BUTTON_URL: '#contact-section',
 
   // 首頁ABOUT區塊
   STARTER_ABOUT_ENABLE: true, // ABOUT區塊開關
@@ -85,7 +85,7 @@ const CONFIG = {
   STARTER_PRICING_1_HEADER: '適用於一般消費品製造',
   STARTER_PRICING_1_FEATURES: 'PP聚丙烯｜射出級/擠出級,PE聚乙烯｜高/低密度,PS聚苯乙烯｜GPPS/HIPS,ABS｜各色標準料/改性料,提供物性數據與加工建議',
   STARTER_PRICING_1_BUTTON_TEXT: '立即詢價',
-  STARTER_PRICING_1_BUTTON_URL: '/quote',
+  STARTER_PRICING_1_BUTTON_URL: '#contact-section',
 
   // 產品系列2 (彈性塑膠)
   STARTER_PRICING_2_TITLE: '彈性塑膠',
@@ -97,7 +97,7 @@ const CONFIG = {
   STARTER_PRICING_2_HEADER: '適用於需要彈性與韌性的應用場景',
   STARTER_PRICING_2_FEATURES: 'TPE熱塑性彈性體｜多種硬度選擇,TPU聚氨酯彈性體｜優異耐磨性,PVC軟質塑膠｜符合環保標準,TPE彈材料｜奈化學良好,提供物性數據與加工建議',
   STARTER_PRICING_2_BUTTON_TEXT: '了解更多',
-  STARTER_PRICING_2_BUTTON_URL: '/flexible-materials',
+  STARTER_PRICING_2_BUTTON_URL: '#contact-section',
 
   // 產品系列3
   STARTER_PRICING_3_TITLE: '工程級塑料',
@@ -109,7 +109,7 @@ const CONFIG = {
   STARTER_PRICING_3_HEADER: '適用於高要求工業應用',
   STARTER_PRICING_3_FEATURES: 'PA尼龍系列｜PA6/PA66/改性,PC聚碳酸酯｜透明/阻燃級,POM聚甲醛｜高剛性/耐磨,PBT聚對苯二甲酸丁二醇酯,專業技術支援與物性測試',
   STARTER_PRICING_3_BUTTON_TEXT: '技術諮詢',
-  STARTER_PRICING_3_BUTTON_URL: '/quote',
+  STARTER_PRICING_3_BUTTON_URL: '#contact-section',
 
   // 首頁用戶評價區塊
   STARTER_TESTIMONIALS_ENABLE: false, // 評價區塊開關
@@ -327,36 +327,48 @@ const CONFIG = {
       TITLE: '產品目錄',
       LINK_GROUP: [
         {
+          TITLE: '所有產品',
+          URL: '/products'
+        },
+        {
+          TITLE: 'U-Pellet台灣優粒子TPE',
+          URL: '/products#u-pellet-tpe'
+        },
+        {
           TITLE: '南亞系列',
-          URL: '/nan-yia'
+          URL: '/products#nan-yia'
         },
         {
           TITLE: '台化系列',
-          URL: '/formosa-chemical'
+          URL: '/products#formosa-chemical'
         },
         {
-          TITLE: 'U-Pellet台灣優粒子TPR',
-          URL: '/u-pellet-tpr'
+          TITLE: '台化PP',
+          URL: '/products#formosa-chemical-pp'
         },
         {
-          TITLE: '福聚系列',
-          URL: '/fu-ju'
+          TITLE: '李長榮PP',
+          URL: '/products#lcy-pp'
         },
         {
-          TITLE: '永嘉系列',
-          URL: '/yongjia'
+          TITLE: '台塑PP',
+          URL: '/products#formosa-plastic-pp'
         },
         {
           TITLE: '奇美系列',
-          URL: '/chi-mei'
+          URL: '/products#chi-mei'
         },
         {
           TITLE: '台聚系列',
-          URL: '/formosa-polymer'
+          URL: '/products#formosa-polymer'
         },
         {
           TITLE: '台塑系列',
-          URL: '/formosa-plastic'
+          URL: '/products#formosa-plastic'
+        },
+        {
+          TITLE: '其他',
+          URL: '/products#other'
         }
       ]
     }
@@ -364,14 +376,14 @@ const CONFIG = {
 
   STARTER_FOOTER_BLOG_LATEST_TITLE: '最新文章',
 
-  STARTER_FOOTER_PRIVACY_POLICY_TEXT: '隱私政策',
-  STARTER_FOOTER_PRIVACY_POLICY_URL: '/privacy-policy',
+  STARTER_FOOTER_PRIVACY_POLICY_TEXT: '法律聲明',
+  STARTER_FOOTER_PRIVACY_POLICY_URL: '/legacy-notice',
 
-  STARTER_FOOTER_PRIVACY_LEGAL_NOTICE_TEXT: '法律聲明',
-  STARTER_FOOTER_PRIVACY_LEGAL_NOTICE_URL: '/legacy-notice',
+  STARTER_FOOTER_PRIVACY_LEGAL_NOTICE_TEXT: '',
+  STARTER_FOOTER_PRIVACY_LEGAL_NOTICE_URL: '',
 
-  STARTER_FOOTER_PRIVACY_TERMS_OF_SERVICE_TEXT: '服務協議',
-  STARTER_FOOTER_PRIVACY_TERMS_OF_SERVICE_URL: '/terms-of-use',
+  STARTER_FOOTER_PRIVACY_TERMS_OF_SERVICE_TEXT: '',
+  STARTER_FOOTER_PRIVACY_TERMS_OF_SERVICE_URL: '',
 
   // 404頁面的提示語
   STARTER_404_TITLE: '我們似乎找不到您要找的頁面。',
