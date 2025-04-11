@@ -90,19 +90,19 @@ const CONFIG = {
   // 產品系列2 (彈性塑膠)
   STARTER_PRICING_2_TITLE: '彈性塑膠',
   STARTER_PRICING_2_IMAGE: 'images/starter/background/home2.jpg',
-  STARTER_PRICING_2_PRICE: '經濟實惠',
+  STARTER_PRICING_2_PRICE: '客製配方',
   STARTER_PRICING_2_PRICE_CURRENCY: '',
   STARTER_PRICING_2_PRICE_PERIOD: '',
   STARTER_PRICING_2_TAG: '熱銷',
   STARTER_PRICING_2_HEADER: '適用於需要彈性與韌性的應用場景',
-  STARTER_PRICING_2_FEATURES: 'TPE熱塑性彈性體｜多種硬度選擇,TPU聚氨酯彈性體｜優異耐磨性,PVC軟質塑膠｜符合環保標準,TPE彈材料｜奈化學良好,提供物性數據與加工建議',
+  STARTER_PRICING_2_FEATURES: 'TPV熱塑性彈性體｜多種硬度選擇,TPU聚氨酯彈性體｜優異耐磨性,PVC軟質塑膠｜符合環保標準,TPE彈材料｜耐化學良好,提供物性數據與加工建議',
   STARTER_PRICING_2_BUTTON_TEXT: '了解更多',
   STARTER_PRICING_2_BUTTON_URL: '#contact-section',
 
   // 產品系列3
   STARTER_PRICING_3_TITLE: '工程級塑料',
   STARTER_PRICING_3_IMAGE: 'images/starter/background/home2.jpg',
-  STARTER_PRICING_3_PRICE: '客製配方',
+  STARTER_PRICING_3_PRICE: '經濟實惠',
   STARTER_PRICING_3_PRICE_CURRENCY: '',
   STARTER_PRICING_3_PRICE_PERIOD: '',
   STARTER_PRICING_3_TAG: '高性能',

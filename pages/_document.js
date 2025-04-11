@@ -12,7 +12,12 @@ class MyDocument extends Document {
     return (
       <Html lang={BLOG.LANG}>
         <Head>
-          {/* 预加载字体 */}
+          {/* DNS 預解析和資源預連接 */}
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+          <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossOrigin="anonymous" />
+          
+          {/* 預加載字體 */}
           {BLOG.FONT_AWESOME && (
             <>
               <link
@@ -31,12 +36,11 @@ class MyDocument extends Document {
           )}
           
           {/* 基本SEO標籤 */}
-          <meta name="robots" content="index, follow" />
-          <meta name="googlebot" content="index, follow" />
+          <meta name="robots" content="index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large" />
+          <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
           <meta charSet="UTF-8" />
-          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-          <meta name="description" content={BLOG.DESCRIPTION || `${BLOG.AUTHOR} - ${BLOG.BIO}`} />
-          <meta name="keywords" content={BLOG.KEYWORDS} />
+          <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0" />
+          <meta name="format-detection" content="telephone=no" />
           <meta name="author" content={BLOG.AUTHOR} />
           
           {/* Google Search Console 驗證 */}
@@ -55,6 +59,14 @@ class MyDocument extends Document {
             />
           )}
           
+          {/* Bing Webmaster 驗證 */}
+          {BLOG.BING_SITE_VERIFICATION && (
+            <meta 
+              name="msvalidate.01" 
+              content={BLOG.BING_SITE_VERIFICATION} 
+            />
+          )}
+          
           {/* 站點地圖連結 */}
           <link 
             rel="sitemap" 
@@ -63,37 +75,27 @@ class MyDocument extends Document {
             href="/sitemap.xml" 
           />
           
-          {/* Open Graph / Facebook */}
-          <meta property="og:type" content="website" />
-          <meta property="og:site_name" content={BLOG.AUTHOR} />
-          
-          {/* Twitter */}
-          <meta property="twitter:card" content="summary_large_image" />
-          <meta property="twitter:creator" content={BLOG.AUTHOR} />
+          {/* 多語言支持 */}
+          {BLOG.ENABLE_HREFLANG && Object.entries(BLOG.ALTERNATE_LANG_URLS || {}).map(([lang, url]) => (
+            <link 
+              key={lang}
+              rel="alternate" 
+              hrefLang={lang} 
+              href={url} 
+            />
+          ))}
+          {BLOG.ENABLE_HREFLANG && (
+            <link rel="alternate" hrefLang="x-default" href={BLOG.LINK} />
+          )}
           
           {/* 網站圖標 */}
           <link rel="icon" href={BLOG.BLOG_FAVICON} />
-          <link rel="apple-touch-icon" href={BLOG.BLOG_FAVICON} />
-          
-          {/* 結構化數據 - 組織 */}
-          <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{
-              __html: JSON.stringify({
-                '@context': 'https://schema.org',
-                '@type': 'Organization',
-                name: BLOG.AUTHOR,
-                url: BLOG.LINK,
-                logo: BLOG.BLOG_FAVICON,
-                sameAs: [
-                  BLOG.CONTACT_TWITTER && `https://twitter.com/${BLOG.CONTACT_TWITTER}`,
-                  BLOG.CONTACT_FACEBOOK && `https://www.facebook.com/${BLOG.CONTACT_FACEBOOK}`,
-                  BLOG.CONTACT_INSTAGRAM && `https://www.instagram.com/${BLOG.CONTACT_INSTAGRAM}`,
-                  BLOG.CONTACT_LINKEDIN && `https://www.linkedin.com/in/${BLOG.CONTACT_LINKEDIN}`
-                ].filter(Boolean)
-              })
-            }}
-          />
+          <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+          <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+          <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+          <link rel="manifest" href="/site.webmanifest" />
+          <meta name="theme-color" content="#ffffff" />
+          <meta name="msapplication-TileColor" content="#ffffff" />
         </Head>
 
         <body>

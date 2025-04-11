@@ -3,7 +3,7 @@ import SocialButton from '@/themes/fukasawa/components/SocialButton'
 import { Logo } from './Logo'
 import { SVGFooterCircleBG } from './svg/SVGFooterCircleBG'
 import Link from 'next/link'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 
 /* eslint-disable @next/next/no-img-element */
 export const Footer = props => {
@@ -12,11 +12,9 @@ export const Footer = props => {
     ? props?.latestPosts.slice(0, footerPostCount)
     : []
   const STARTER_FOOTER_LINK_GROUP = siteConfig('STARTER_FOOTER_LINK_GROUP', [])
-  const [showStats, setShowStats] = useState(false)
   
-  useEffect(() => {
-    setShowStats(true)
-  }, [])
+  // 移除useEffect和useState，直接使用客戶端渲染判斷
+  const isBrowser = typeof window !== 'undefined'
 
   return (
     <>
@@ -192,8 +190,8 @@ export const Footer = props => {
                 {siteConfig('STARTER_FOOTER_COPYRIGHT')}
               </p>
               
-              {/* 只在客戶端渲染統計組件 */}
-              {showStats && (
+              {/* 只在客戶端顯示統計組件 */}
+              {isBrowser && (
                 <div className="flex items-center justify-center space-x-5">
                   <div className="flex items-center space-x-2 text-sm text-body-color dark:text-white">
                     <i className="fas fa-eye"></i>

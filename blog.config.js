@@ -10,15 +10,15 @@ const BLOG = {
   SINCE: process.env.NEXT_PUBLIC_SINCE || 2025, // e.g if leave this empty, current year will be used.
 
   PSEUDO_STATIC: process.env.NEXT_PUBLIC_PSEUDO_STATIC || false, // 伪静态路径，开启后所有文章URL都以 .html 结尾。
-  NEXT_REVALIDATE_SECOND: process.env.NEXT_PUBLIC_REVALIDATE_SECOND || 5, // 更新缓存间隔 单位(秒)；即每个页面有5秒的纯静态期、此期间无论多少次访问都不会抓取notion数据；调大该值有助于节省Vercel资源、同时提升访问速率，但也会使文章更新有延迟。
+  NEXT_REVALIDATE_SECOND: process.env.NEXT_PUBLIC_REVALIDATE_SECOND || 60, // 更新缓存间隔 单位(秒)；即每个页面有5秒的纯静态期、此期间无论多少次访问都不会抓取notion数据；调大该值有助于节省Vercel资源、同时提升访问速率，但也会使文章更新有延迟。
   APPEARANCE: process.env.NEXT_PUBLIC_APPEARANCE || 'auto', // ['light', 'dark', 'auto'], // light 日间模式 ， dark夜间模式， auto根据时间和主题自动夜间模式
   APPEARANCE_DARK_TIME: process.env.NEXT_PUBLIC_APPEARANCE_DARK_TIME || [18, 6], // 夜间模式起至时间，false时关闭根据时间自动切换夜间模式
 
   AUTHOR: process.env.NEXT_PUBLIC_AUTHOR || '鑫葳貿易有限公司', // 您的昵称 例如 tangly1024
   BIO: process.env.NEXT_PUBLIC_BIO || '鑫葳貿易有限公司', // 作者简介
   LINK: process.env.NEXT_PUBLIC_LINK || 'https://xin-wei.com', // 网站地址
-  DESCRIPTION: process.env.NEXT_PUBLIC_DESCRIPTION || '專業塑膠原料供應商，30年產業經驗，值得信賴的合作夥伴。從通用塑料到特種工程塑料，我們提供全面的塑膠原料解決方案。', // 網站描述
-  KEYWORDS: process.env.NEXT_PUBLIC_KEYWORD || '鑫葳貿易有限公司,鑫葳,塑膠原料,塑料,PP聚丙烯,PE聚乙烯,PS聚苯乙烯,ABS,TPE熱塑性彈性體,塑膠供應商,原料批發,台灣塑膠,工程塑料', // 网站关键词 英文逗号隔开
+  DESCRIPTION: process.env.NEXT_PUBLIC_DESCRIPTION || '鑫葳貿易有限公司 - 專業塑膠原料供應商，30年產業經驗，提供PP聚丙烯、PE聚乙烯、PS聚苯乙烯等全系列塑膠原料，電子、汽車、家電等行業優質供應商。', // 網站描述
+  KEYWORDS: process.env.NEXT_PUBLIC_KEYWORD || '鑫葳貿易,塑膠原料,PP聚丙烯,PE聚乙烯,PS聚苯乙烯,ABS,塑膠供應商,工程塑料,塑膠粒,台灣塑膠原料', // 网站关键词 英文逗号隔开
   BLOG_FAVICON: process.env.NEXT_PUBLIC_FAVICON || '/favicon.ico', // blog favicon 配置, 默认使用 /public/favicon.ico，支持在线图片，如 https://img.imesong.com/favicon.png
   BEI_AN: process.env.NEXT_PUBLIC_BEI_AN || '', // 备案号 闽ICP备XXXXXX
   BEI_AN_LINK: process.env.NEXT_PUBLIC_BEI_AN_LINK || '', // 备案查询链接，如果用了萌备等备案请在这里填写
@@ -47,8 +47,8 @@ const BLOG = {
   ...require('./conf/dev.config'), // 开发、调试时需要关注的配置
 
   // 自定义外部脚本，外部样式
-  CUSTOM_EXTERNAL_JS: [''], // e.g. ['http://xx.com/script.js','http://xx.com/script.js']
-  CUSTOM_EXTERNAL_CSS: [''], // e.g. ['http://xx.com/style.css','http://xx.com/style.css']
+  CUSTOM_EXTERNAL_JS: [''], // e.g. ['https://xx.com/script.js','https://xx.com/script.js']
+  CUSTOM_EXTERNAL_CSS: [''], // e.g. ['https://xx.com/style.css','https://xx.com/style.css']
 
   // 自定义菜单
   CUSTOM_MENU: process.env.NEXT_PUBLIC_CUSTOM_MENU || true, // 支持Menu类型的菜单，替代了3.12版本前的Page类型
@@ -72,7 +72,7 @@ const BLOG = {
   STARTER_NAV_BUTTON_ENABLE: true,
 
   // 登入功能
-  ENABLE_LOGIN: process.env.NEXT_PUBLIC_ENABLE_LOGIN || false, // 是否開啟登入
+  ENABLE_LOGIN: false, // 禁用登入功能
 
   // 主题切换
   THEME_SWITCH: process.env.NEXT_PUBLIC_THEME_SWITCH || false,
@@ -83,9 +83,22 @@ const BLOG = {
   // SEO 相關設定
   CANONICAL_URL_PREFIX: process.env.NEXT_PUBLIC_CANONICAL_URL_PREFIX || 'https://xin-wei.com', // 規範化URL前綴
   ENABLE_CANONICAL: process.env.NEXT_PUBLIC_ENABLE_CANONICAL || true, // 是否啟用規範化URL
-  SITEMAP_EXCLUDE: process.env.NEXT_PUBLIC_SITEMAP_EXCLUDE || [], // 排除在站點地圖之外的頁面，例如 ['/private', '/secret']
-  ENABLE_HREFLANG: process.env.NEXT_PUBLIC_ENABLE_HREFLANG || false, // 是否啟用多語言標籤
-  ALTERNATE_LANG_URLS: process.env.NEXT_PUBLIC_ALTERNATE_LANG_URLS || { 'en-US': 'https://en.xin-wei.com', 'zh-CN': 'https://cn.xin-wei.com' }, // 多語言站點對應URL
+  SITEMAP_EXCLUDE: process.env.NEXT_PUBLIC_SITEMAP_EXCLUDE || [
+    '/search', 
+    '/search/*', 
+    '/sign-in', 
+    '/sign-in/*', 
+    '/sign-up', 
+    '/sign-up/*', 
+    '/dashboard',
+    '/dashboard/*',
+    '/zh/*',
+    '/auth/*'
+  ], // 排除在站點地圖之外的頁面
+  ENABLE_HREFLANG: false, // 禁用多語言標籤
+  
+  // 搜索功能
+  ENABLE_SEARCH: false, // 禁用搜索功能
   
   // 站點驗證碼
   GOOGLE_SITE_VERIFICATION: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || '', // Google Search Console 站點驗證碼

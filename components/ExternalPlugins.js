@@ -10,6 +10,7 @@ import { initGoogleAdsense } from './GoogleAdsense'
 import Head from 'next/head'
 import ExternalScript from './ExternalScript'
 import WebWhiz from './Webwhiz'
+import Script from 'next/script'
 
 /**
  * 各种插件脚本
@@ -272,8 +273,9 @@ const ExternalPlugin = props => {
       {COMMENT_DAO_VOICE_ID && (
         <>
           {/* DaoVoice 反馈 */}
-          <script
-            async
+          <Script
+            id="daovoice-init"
+            strategy="lazyOnload"
             dangerouslySetInnerHTML={{
               __html: `
                 (function(i, s, o, g, r, a, m) {
@@ -292,12 +294,13 @@ const ExternalPlugin = props => {
                   } else {
                     s.head.appendChild(a);
                   }
-                })(window, document, "script", ('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/daf1a94b.js", "daovoice")
+                })(window, document, "script", "https://widget.daovoice.io/widget/daf1a94b.js", "daovoice")
                 `
             }}
           />
-          <script
-            async
+          <Script
+            id="daovoice-config"
+            strategy="lazyOnload"
             dangerouslySetInnerHTML={{
               __html: `
              daovoice('init', {

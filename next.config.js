@@ -64,18 +64,32 @@ const nextConfig = {
   output: process.env.EXPORT ? 'export' : process.env.NEXT_BUILD_STANDALONE === 'true' ? 'standalone' : undefined,
   staticPageGenerationTimeout: 120,
   images: {
-    // 图片压缩
+    // 圖片壓縮和優化
     formats: ['image/avif', 'image/webp'],
-    // 允许next/image加载的图片 域名
-    domains: [
-      'gravatar.com',
-      'www.notion.so',
-      'avatars.githubusercontent.com',
-      'images.unsplash.com',
-      'source.unsplash.com',
-      'p1.qhimg.com',
-      'webmention.io',
-      'ko-fi.com'
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+    minimumCacheTTL: 60,
+    dangerouslyAllowSVG: true,
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+    
+    // 允許 next/image 加載的圖片域名
+    remotePatterns: [
+      { protocol: 'https', hostname: 'gravatar.com', pathname: '/**' },
+      { protocol: 'https', hostname: 'www.notion.so', pathname: '/**' },
+      { protocol: 'https', hostname: 'notion.so', pathname: '/**' },
+      { protocol: 'https', hostname: 'images.unsplash.com', pathname: '/**' },
+      { protocol: 'https', hostname: 'source.unsplash.com', pathname: '/**' },
+      { protocol: 'https', hostname: 'avatars.githubusercontent.com', pathname: '/**' },
+      { protocol: 'https', hostname: 'p1.qhimg.com', pathname: '/**' },
+      { protocol: 'https', hostname: 'webmention.io', pathname: '/**' },
+      { protocol: 'https', hostname: 'ko-fi.com', pathname: '/**' },
+      { protocol: 'https', hostname: 'cdn.jsdelivr.net', pathname: '/**' },
+      { protocol: 'https', hostname: 'cdnjs.cloudflare.com', pathname: '/**' },
+      { protocol: 'https', hostname: 'fonts.googleapis.com', pathname: '/**' },
+      { protocol: 'https', hostname: 'fonts.gstatic.com', pathname: '/**' },
+      { protocol: 'https', hostname: 'res.cloudinary.com', pathname: '/**' },
+      { protocol: 'https', hostname: 'imgur.com', pathname: '/**' },
+      { protocol: 'https', hostname: 'i.imgur.com', pathname: '/**' }
     ]
   },
 
@@ -111,7 +125,7 @@ const nextConfig = {
             source: '/:path*{/}?',
             headers: [
               { key: 'Access-Control-Allow-Credentials', value: 'true' },
-              { key: 'Access-Control-Allow-Origin', value: '*' },
+              { key: 'Access-Control-Allow-Origin', value: 'https://xin-wei.com' },
               {
                 key: 'Access-Control-Allow-Methods',
                 value: 'GET,OPTIONS,PATCH,DELETE,POST,PUT'
@@ -120,6 +134,89 @@ const nextConfig = {
                 key: 'Access-Control-Allow-Headers',
                 value:
                   'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
+              },
+              {
+                key: 'Content-Security-Policy',
+                value: "default-src 'self'; base-uri 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://cdnjs.snrat.com https://widget.daovoice.io https://busuanzi.ibruce.info https://*.vercel.com https://*.vercel.app http://localhost:* https://*.vercel.live; script-src-elem 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://widget.daovoice.io https://busuanzi.ibruce.info https://*.vercel.com https://*.vercel.app http://busuanzi.ibruce.info http://localhost:* https://*.vercel.live; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com data: https://*.jsdelivr.net https://cdnjs.cloudflare.com; connect-src 'self' https: wss: http://localhost:*; frame-src 'self' https://*.noteforms.com https://api.noteforms.com https://noteforms.com https://*.vercel.live; object-src 'none'; manifest-src 'self';"
+              },
+              {
+                key: 'X-Content-Type-Options',
+                value: 'nosniff'
+              },
+              {
+                key: 'Referrer-Policy',
+                value: 'strict-origin-when-cross-origin'
+              },
+              {
+                key: 'X-Frame-Options',
+                value: 'DENY'
+              }
+            ]
+          },
+          {
+            source: '/static/:path*',
+            headers: [
+              {
+                key: 'Cache-Control',
+                value: 'public, max-age=31536000, immutable'
+              }
+            ]
+          },
+          {
+            source: '/(.*).ico',
+            headers: [
+              {
+                key: 'Cache-Control',
+                value: 'public, max-age=31536000, immutable'
+              }
+            ]
+          },
+          {
+            source: '/(.*).png',
+            headers: [
+              {
+                key: 'Cache-Control',
+                value: 'public, max-age=31536000, immutable'
+              }
+            ]
+          },
+          {
+            source: '/(.*).jpg',
+            headers: [
+              {
+                key: 'Cache-Control',
+                value: 'public, max-age=31536000, immutable'
+              }
+            ]
+          },
+          {
+            source: '/(.*).webp',
+            headers: [
+              {
+                key: 'Cache-Control',
+                value: 'public, max-age=31536000, immutable'
+              }
+            ]
+          },
+          {
+            source: '/(.*).css',
+            headers: [
+              {
+                key: 'Cache-Control',
+                value: 'public, max-age=31536000, immutable'
+              }
+            ]
+          },
+          {
+            source: '/(.*).js',
+            headers: [
+              {
+                key: 'Cache-Control',
+                value: 'public, max-age=31536000, immutable'
+              },
+              {
+                key: 'Content-Type',
+                value: 'application/javascript; charset=utf-8'
               }
             ]
           }

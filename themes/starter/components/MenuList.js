@@ -141,29 +141,26 @@ export const MenuList = props => {
   return (
     <div ref={navRef} className="menu-container">
       {/* 移動端選單按鈕 */}
-      <div className='relative flex justify-between lg:hidden'>
-        <div></div>
-        <div>
-          <button
-            onClick={() => setLockScreen(!lockScreen)}
-            className='block absolute right-0 top-1/2 translate-y-[-50%] rounded-lg px-3 py-[6px] ring-primary focus:ring-2'>
-            <span
-              className={`relative my-1.5 block h-0.5 w-[30px] ${isHomePage && !navBar ? 'bg-white' : 'bg-black dark:bg-white'} transition-all duration-300 ${
-                lockScreen ? ' top-[7px] rotate-45' : ' '
-              }`}
-            />
-            <span
-              className={`relative my-1.5 block h-0.5 w-[30px] ${isHomePage && !navBar ? 'bg-white' : 'bg-black dark:bg-white'} transition-all duration-300 ${
-                lockScreen ? 'opacity-0 ' : ' '
-              }`}
-            />
-            <span
-              className={`relative my-1.5 block h-0.5 w-[30px] ${isHomePage && !navBar ? 'bg-white' : 'bg-black dark:bg-white'} transition-all duration-300 ${
-                lockScreen ? ' top-[-8px] -rotate-45' : ' '
-              }`}
-            />
-          </button>
-        </div>
+      <div className='lg:hidden'>
+        <button
+          onClick={() => setLockScreen(!lockScreen)}
+          className='rounded-lg px-3 py-[6px] ring-primary focus:ring-2'>
+          <span
+            className={`relative my-1.5 block h-0.5 w-[30px] ${isHomePage && !navBar ? 'bg-white' : 'bg-black dark:bg-white'} transition-all duration-300 ${
+              lockScreen ? ' top-[7px] rotate-45' : ' '
+            }`}
+          />
+          <span
+            className={`relative my-1.5 block h-0.5 w-[30px] ${isHomePage && !navBar ? 'bg-white' : 'bg-black dark:bg-white'} transition-all duration-300 ${
+              lockScreen ? 'opacity-0 ' : ' '
+            }`}
+          />
+          <span
+            className={`relative my-1.5 block h-0.5 w-[30px] ${isHomePage && !navBar ? 'bg-white' : 'bg-black dark:bg-white'} transition-all duration-300 ${
+              lockScreen ? ' top-[-8px] -rotate-45' : ' '
+            }`}
+          />
+        </button>
       </div>
 
       {/* 手機版選單 - 優化樣式 */}
@@ -248,42 +245,32 @@ export const MenuList = props => {
           border-radius: 8px;
           box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
           overflow: hidden;
-          min-width: 220px;
-          padding: 8px;
         }
         
-        /* 深色模式子菜單容器 */
+        /* 深色模式下子菜單容器 */
         .dark .desktop-menu .group > div > div,
         .dark .desktop-menu .group ul li div > div {
           background-color: #1f2937;
         }
         
-        /* 箭頭和文字容器關鍵修復 */
-        .desktop-menu .group ul li a > *:first-child {
-          flex: 1 1 auto !important;
-          overflow: hidden !important;
-          text-overflow: ellipsis !important;
-          margin-right: 8px !important;
-        }
-        
-        .desktop-menu .group ul li a > *:last-child {
-          flex: 0 0 auto !important;
-          width: auto !important;
-          display: inline-flex !important;
-          align-items: center !important;
-        }
-        
-        /* 防止任何子元素破壞布局 */
-        .desktop-menu .group ul li a * {
-          margin: 0 !important;
-          vertical-align: middle !important;
-        }
-        
-        /* 確保所有子菜單列表不顯示列表符號 */
-        .desktop-menu .group ul {
-          list-style: none !important;
-          padding: 0 !important;
-          margin: 0 !important;
+        /* 移動端菜單樣式 */
+        @media (max-width: 1023px) {
+          nav ul li div > div {
+            background-color: transparent !important;
+            box-shadow: none !important;
+          }
+          
+          nav ul li a, 
+          nav ul li button {
+            color: white !important;
+            padding: 12px 0 !important;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+          }
+          
+          nav ul li a:hover, 
+          nav ul li button:hover {
+            background-color: rgba(255, 255, 255, 0.1) !important;
+          }
         }
       `}</style>
     </div>

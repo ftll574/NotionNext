@@ -19,6 +19,7 @@ import ExternalPlugins from '@/components/ExternalPlugins'
 import SEO from '@/components/SEO'
 import { zhCN } from '@clerk/localizations'
 import dynamic from 'next/dynamic'
+import Script from 'next/script'
 // import { ClerkProvider } from '@clerk/nextjs'
 const ClerkProvider = dynamic(() =>
   import('@clerk/nextjs').then(m => m.ClerkProvider)
@@ -59,21 +60,13 @@ const MyApp = ({ Component, pageProps }) => {
         <Component {...pageProps} />
       </GLayout>
       <ExternalPlugins {...pageProps} />
+      <Script 
+        src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" 
+        strategy="lazyOnload" 
+        id="busuanzi-script" 
+      />
     </GlobalContextProvider>
   )
-
-  // 只在客戶端載入不蒜子腳本
-  useEffect(() => {
-    // 動態導入腳本
-    const script = document.createElement('script')
-    script.src = '//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js'
-    script.async = true
-    document.body.appendChild(script)
-    
-    return () => {
-      document.body.removeChild(script)
-    }
-  }, [])
 
   return (
     <>
