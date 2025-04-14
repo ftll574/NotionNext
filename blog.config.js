@@ -11,7 +11,7 @@ const BLOG = {
 
   PSEUDO_STATIC: process.env.NEXT_PUBLIC_PSEUDO_STATIC || false, // 伪静态路径，开启后所有文章URL都以 .html 结尾。
   NEXT_REVALIDATE_SECOND: process.env.NEXT_PUBLIC_REVALIDATE_SECOND || 60, // 更新缓存间隔 单位(秒)；即每个页面有5秒的纯静态期、此期间无论多少次访问都不会抓取notion数据；调大该值有助于节省Vercel资源、同时提升访问速率，但也会使文章更新有延迟。
-  APPEARANCE: process.env.NEXT_PUBLIC_APPEARANCE || 'auto', // ['light', 'dark', 'auto'], // light 日间模式 ， dark夜间模式， auto根据时间和主题自动夜间模式
+  APPEARANCE: process.env.NEXT_PUBLIC_APPEARANCE || 'light', // ['light', 'dark', 'auto'], // light 日间模式 ， dark夜间模式， auto根据时间和主题自动夜间模式
   APPEARANCE_DARK_TIME: process.env.NEXT_PUBLIC_APPEARANCE_DARK_TIME || [18, 6], // 夜间模式起至时间，false时关闭根据时间自动切换夜间模式
 
   AUTHOR: process.env.NEXT_PUBLIC_AUTHOR || '鑫葳貿易有限公司', // 您的昵称 例如 tangly1024
@@ -100,10 +100,11 @@ const BLOG = {
   // 搜索功能
   ENABLE_SEARCH: false, // 禁用搜索功能
   
-  // 站點驗證碼
-  GOOGLE_SITE_VERIFICATION: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || '', // Google Search Console 站點驗證碼
-  BAIDU_SITE_VERIFICATION: process.env.NEXT_PUBLIC_BAIDU_SITE_VERIFICATION || '', // 百度搜索資源平台站點驗證碼
-  BING_SITE_VERIFICATION: process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION || '' // Bing Webmaster 站點驗證碼
+  // 站點驗證碼 - 設定 Google Search Console 驗證碼
+  GOOGLE_SITE_VERIFICATION: '8MrZMy7Z8AL166kWXQe_F0wsN9IrGZGox9ILz7CoDjY',
+  BAIDU_SITE_VERIFICATION: '', // 百度搜尋管理員驗證碼
+  BING_SITE_VERIFICATION: '', // 必應網站管理員驗證碼
+  COMMENT_WEBMENTION: process.env.NEXT_PUBLIC_WEBMENTION_ENABLE
 }
 
 module.exports = BLOG

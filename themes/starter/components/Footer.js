@@ -29,7 +29,7 @@ export const Footer = props => {
                 <a className='-mx-4 mb-6 inline-block max-w-[160px]'>
                   <Logo white={true} />
                 </a>
-                <p className='mb-8 max-w-[270px] text-base text-gray-7'>
+                <p className='mb-8 max-w-[270px] text-base text-gray-300'>
                   {siteConfig('STARTER_FOOTER_SLOGAN')}
                 </p>
                 <div className='-mx-3 flex items-center'>
@@ -61,7 +61,7 @@ export const Footer = props => {
                               // 產品目錄帶錨點的連結 - 使用原生a標籤
                               <a
                                 href={l.URL}
-                                className='inline-block text-base text-gray-7 hover:text-primary transition-colors duration-300 hover:translate-x-1 transform'
+                                className='inline-block text-base text-gray-300 hover:text-primary transition-colors duration-300 hover:translate-x-1 transform'
                               >
                                 {l.TITLE}
                               </a>
@@ -69,7 +69,7 @@ export const Footer = props => {
                               // 普通連結
                               <Link
                                 href={l.URL}
-                                className='inline-block text-base text-gray-7 hover:text-primary transition-colors duration-300 hover:translate-x-1 transform'
+                                className='inline-block text-base text-gray-300 hover:text-primary transition-colors duration-300 hover:translate-x-1 transform'
                               >
                                 {l.TITLE}
                               </Link>
@@ -105,7 +105,7 @@ export const Footer = props => {
                             />
                           </div>
                         )}
-                        <span className='line-clamp-2 max-w-[180px] text-base text-gray-7 group-hover:text-white'>
+                        <span className='line-clamp-2 max-w-[180px] text-base text-gray-300 group-hover:text-white'>
                           {item.title}
                         </span>
                       </Link>
@@ -128,21 +128,21 @@ export const Footer = props => {
                     {siteConfig('STARTER_FOOTER_PRIVACY_POLICY_TEXT') && (
                       <Link
                         href={siteConfig('STARTER_FOOTER_PRIVACY_POLICY_URL', '')}
-                        className='px-3 text-base text-gray-7 hover:text-white hover:underline'>
+                        className='px-3 text-base text-gray-300 hover:text-white hover:underline'>
                         {siteConfig('STARTER_FOOTER_PRIVACY_POLICY_TEXT')}
                       </Link>
                     )}
                     {siteConfig('STARTER_FOOTER_PRIVACY_LEGAL_NOTICE_TEXT') && (
                       <Link
                         href={siteConfig('STARTER_FOOTER_PRIVACY_LEGAL_NOTICE_URL', '')}
-                        className='px-3 text-base text-gray-7 hover:text-white hover:underline'>
+                        className='px-3 text-base text-gray-300 hover:text-white hover:underline'>
                         {siteConfig('STARTER_FOOTER_PRIVACY_LEGAL_NOTICE_TEXT')}
                       </Link>
                     )}
                     {siteConfig('STARTER_FOOTER_PRIVACY_TERMS_OF_SERVICE_TEXT') && (
                       <Link
                         href={siteConfig('STARTER_FOOTER_PRIVACY_TERMS_OF_SERVICE_URL', '')}
-                        className='px-3 text-base text-gray-7 hover:text-white hover:underline'>
+                        className='px-3 text-base text-gray-300 hover:text-white hover:underline'>
                         {siteConfig('STARTER_FOOTER_PRIVACY_TERMS_OF_SERVICE_TEXT')}
                       </Link>
                     )}
@@ -151,13 +151,13 @@ export const Footer = props => {
               </div>
               <div className='w-full px-4 md:w-1/3 lg:w-1/2'>
                 <div className='my-1 flex justify-center md:justify-end'>
-                  <p className='text-base text-gray-7'>
+                  <p className='text-base text-gray-300'>
                     Designed and Developed by
                     <a
                       href='https://github.com/tangly1024/NotionNext'
                       rel='nofollow noopner noreferrer'
                       target='_blank'
-                      className='px-1 text-gray-1 hover:underline'>
+                      className='px-1 text-gray-100 hover:underline'>
                       NotionNext {siteConfig('VERSION')}
                     </a>
                   </p>
@@ -186,20 +186,20 @@ export const Footer = props => {
         <div className="bg-primary/10 py-8">
           <div className="container">
             <div className="items-center justify-between text-center md:flex">
-              <p className="mb-6 text-base text-body-color dark:text-white md:mb-0">
+              <p className="mb-6 text-base text-gray-300 md:mb-0">
                 {siteConfig('STARTER_FOOTER_COPYRIGHT')}
               </p>
               
               {/* 只在客戶端顯示統計組件 */}
               {isBrowser && (
                 <div className="flex items-center justify-center space-x-5">
-                  <div className="flex items-center space-x-2 text-sm text-body-color dark:text-white">
+                  <div className="flex items-center space-x-2 text-sm text-gray-300">
                     <i className="fas fa-eye"></i>
                     <span className="busuanzi_container_site_pv">
                       總訪問量: <span className="busuanzi_value_site_pv"></span>
                     </span>
                   </div>
-                  <div className="flex items-center space-x-2 text-sm text-body-color dark:text-white">
+                  <div className="flex items-center space-x-2 text-sm text-gray-300">
                     <i className="fas fa-users"></i>
                     <span className="busuanzi_container_site_uv">
                       訪客數: <span className="busuanzi_value_site_uv"></span>

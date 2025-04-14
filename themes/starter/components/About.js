@@ -82,28 +82,28 @@ export const About = () => {
               {/* 右側的圖片區域 */}
               <div className='w-full px-4 lg:w-1/2'>
                 <div className='relative mx-auto'>
-                  <div className="relative">
+                  <div className="relative z-[1]">
                     <img
                       src={siteConfig('STARTER_ABOUT_IMAGE_1')}
                       alt="關於我們"
-                      className="rounded-tl-[80px] rounded-br-[80px] shadow-xl hover-scale-img max-w-full h-auto"
+                      className="rounded-tl-[60px] rounded-br-[60px] shadow-xl hover-scale-img max-w-full h-auto dark:shadow-blue-900/30"
                     />
-                    <div className="absolute inset-0 rounded-tl-[80px] rounded-br-[80px] shadow-inner bg-gradient-to-tr from-primary/10 to-transparent"></div>
+                    <div className="absolute inset-0 rounded-tl-[60px] rounded-br-[60px] shadow-inner bg-gradient-to-tr from-primary/10 to-transparent dark:from-primary/20"></div>
                   </div>
                   
-                  <div className="relative">
+                  <div className="relative z-[2]">
                     <img
                       src={siteConfig('STARTER_ABOUT_IMAGE_2')}
                       alt="關於我們"
-                      className="absolute -bottom-16 -right-16 z-5 rounded-tl-[80px] rounded-br-[80px] shadow-xl hover-scale-img max-w-[65%] h-auto"
+                      className="absolute -bottom-12 -right-10 rounded-tl-[60px] rounded-br-[60px] shadow-2xl hover-scale-img max-w-[85%] h-auto border-4 border-white dark:border-blue-900/30 dark:shadow-blue-800/40"
                     />
-                    <div className="absolute -bottom-16 -right-16 z-6 inset-0 rounded-tl-[80px] rounded-br-[80px] shadow-inner bg-gradient-to-bl from-secondary/10 to-transparent"></div>
+                    <div className="absolute -bottom-12 -right-10 inset-0 rounded-tl-[60px] rounded-br-[60px] shadow-inner bg-gradient-to-bl from-secondary/10 to-transparent dark:from-secondary/20"></div>
                   </div>
                   
                   {/* 統計數字卡片 */}
-                  <div className="absolute -left-10 top-1/2 transform -translate-y-1/2 glassmorphism p-6 rounded-lg shadow-xl z-10 transition-all duration-500 hover:shadow-2xl hover:scale-105">
+                  <div className="absolute -left-10 top-1/2 transform -translate-y-1/2 glassmorphism p-6 rounded-lg shadow-xl z-[3] transition-all duration-500 hover:shadow-2xl hover:scale-105 dark:border dark:border-gray-700">
                     <h3 className="text-4xl font-bold bg-gradient-to-r from-primary to-blue-dark bg-clip-text text-transparent">{siteConfig('STARTER_ABOUT_TIPS_1', '1000+')}</h3>
-                    <p className="text-body-color mt-1">{siteConfig('STARTER_ABOUT_TIPS_2', '長期客戶')}</p>
+                    <p className="text-body-color mt-1 dark:text-gray-300">{siteConfig('STARTER_ABOUT_TIPS_2', '長期客戶')}</p>
                   </div>
                 </div>
               </div>

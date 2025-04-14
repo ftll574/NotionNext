@@ -210,10 +210,15 @@ const SEO = props => {
     const localBusinessSchema = {
       '@context': 'https://schema.org',
       '@type': 'LocalBusiness',
+      '@id': `${CANONICAL_URL_PREFIX}#localbusiness`,
       'name': AUTHOR,
+      'url': CANONICAL_URL_PREFIX,
+      'logo': STARTER_LOGO || image,
       'image': STARTER_LOGO || image,
       'url': CANONICAL_URL_PREFIX,
+      'email': 'tw.xinwei@gmail.com',
       'telephone': '+886-2-2602-6961',
+      'description': '鑫葳貿易有限公司 - 專業塑膠原料供應商，30年產業經驗，提供PP聚丙烯、PE聚乙烯、PS聚苯乙烯等全系列塑膠原料，電子、汽車、家電等行業優質供應商。',
       'address': {
         '@type': 'PostalAddress',
         'streetAddress': '湖北里10鄰17之20號',
@@ -230,12 +235,35 @@ const SEO = props => {
       'openingHoursSpecification': [
         {
           '@type': 'OpeningHoursSpecification',
-          'dayOfWeek': ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+          'dayOfWeek': [
+            'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'
+          ],
           'opens': '09:00',
           'closes': '18:00'
         }
       ],
-      'priceRange': '$$'
+      'priceRange': '$$', 
+      'hasOfferCatalog': {
+        '@type': 'OfferCatalog',
+        'name': '塑膠原料產品目錄',
+        'itemListElement': [
+          {
+            '@type': 'OfferCatalog',
+            'name': 'PP聚丙烯',
+            'description': '各種規格的聚丙烯原料，包括射出級、擠出級等'
+          },
+          {
+            '@type': 'OfferCatalog',
+            'name': 'PE聚乙烯',
+            'description': '高密度、低密度和線性低密度聚乙烯原料'
+          },
+          {
+            '@type': 'OfferCatalog',
+            'name': 'PS聚苯乙烯',
+            'description': '通用級和高衝擊級聚苯乙烯原料'
+          }
+        ]
+      }
     }
     
     return JSON.stringify(localBusinessSchema)
@@ -243,35 +271,30 @@ const SEO = props => {
   
   // 產生麵包屑結構化數據
   const generateBreadcrumbSchema = () => {
-    // 分析當前路徑以生成麵包屑
     const path = router.asPath
-    const breadcrumbItems = [
-      {
-        '@type': 'ListItem',
-        'position': 1,
-        'name': '首頁',
-        'item': CANONICAL_URL_PREFIX
-      }
-    ]
+    const isRootPage = path === '/'
     
-    // 根據不同路徑產生合適的麵包屑
-    if (meta?.type === 'Post' && meta.category) {
-      // 如果是文章且有分類
+    if (isRootPage) return null
+    
+    const breadcrumbItems = []
+    
+    // 添加首頁
+    breadcrumbItems.push({
+      '@type': 'ListItem',
+      'position': 1,
+      'name': '首頁',
+      'item': CANONICAL_URL_PREFIX
+    })
+    
+    // 根據當前路徑生成麵包屑
+    if (path.startsWith('/products')) {
       breadcrumbItems.push({
         '@type': 'ListItem',
         'position': 2,
-        'name': meta.category,
-        'item': `${CANONICAL_URL_PREFIX}/category/${encodeURIComponent(meta.category)}`
-      })
-      
-      breadcrumbItems.push({
-        '@type': 'ListItem',
-        'position': 3,
-        'name': meta.title,
-        'item': canonicalUrl
+        'name': '產品資訊',
+        'item': `${CANONICAL_URL_PREFIX}/products`
       })
     } else if (path.startsWith('/category/')) {
-      // 分類頁面
       breadcrumbItems.push({
         '@type': 'ListItem',
         'position': 2,
@@ -279,62 +302,40 @@ const SEO = props => {
         'item': `${CANONICAL_URL_PREFIX}/category`
       })
       
-      if (meta?.category) {
+      const categoryMatch = path.match(/\/category\/([^/]+)/)
+      if (categoryMatch) {
         breadcrumbItems.push({
           '@type': 'ListItem',
           'position': 3,
-          'name': meta.category,
-          'item': canonicalUrl
+          'name': decodeURIComponent(categoryMatch[1]),
+          'item': `${CANONICAL_URL_PREFIX}/category/${categoryMatch[1]}`
         })
       }
-    } else if (path.startsWith('/tag/')) {
-      // 標籤頁面
+    } else if (meta?.type === 'Post') {
       breadcrumbItems.push({
         '@type': 'ListItem',
         'position': 2,
-        'name': '標籤',
-        'item': `${CANONICAL_URL_PREFIX}/tag`
+        'name': '文章',
+        'item': `${CANONICAL_URL_PREFIX}/archive`
       })
       
-      if (router.query.tag) {
+      if (meta.title) {
         breadcrumbItems.push({
           '@type': 'ListItem',
           'position': 3,
-          'name': router.query.tag,
+          'name': meta.title,
           'item': canonicalUrl
         })
       }
-    } else if (path === '/archive') {
-      // 存檔頁面
-      breadcrumbItems.push({
-        '@type': 'ListItem',
-        'position': 2,
-        'name': '存檔',
-        'item': canonicalUrl
-      })
-    } else if (path === '/search' || path.startsWith('/search/')) {
-      // 搜尋頁面
-      breadcrumbItems.push({
-        '@type': 'ListItem',
-        'position': 2,
-        'name': '搜尋',
-        'item': canonicalUrl
-      })
-    } else if (path === '/products') {
-      // 產品頁面
-      breadcrumbItems.push({
-        '@type': 'ListItem',
-        'position': 2,
-        'name': '產品資訊',
-        'item': canonicalUrl
-      })
     }
     
-    return JSON.stringify({
+    const breadcrumbSchema = {
       '@context': 'https://schema.org',
       '@type': 'BreadcrumbList',
       'itemListElement': breadcrumbItems
-    })
+    }
+    
+    return JSON.stringify(breadcrumbSchema)
   }
   
   // 網站 SEO 核心標記

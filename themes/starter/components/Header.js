@@ -6,7 +6,6 @@ import throttle from 'lodash.throttle'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useCallback, useEffect, useState, useRef } from 'react'
-import { DarkModeButton } from './DarkModeButton'
 import { Logo } from './Logo'
 import { MenuList } from './MenuList'
 
@@ -97,11 +96,10 @@ export const Header = props => {
               <Logo {...props} className="transition-all duration-300" />
             </div>
 
-            {/* 手機版：菜單和深色模式按鈕在一起 */}
+            {/* 手機版：只顯示選單按鈕 */}
             <div className="flex items-center space-x-2">
-              {/* 僅在手機版顯示菜單和模式切換按鈕 */}
+              {/* 僅顯示選單按鈕，移除深色模式按鈕 */}
               <MenuList {...props} />
-              <DarkModeButton />
             </div>
 
             {/* 僅在桌面版顯示的導航按鈕 */}

@@ -16,6 +16,8 @@ class MyDocument extends Document {
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
           <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossOrigin="anonymous" />
+          <link rel="preconnect" href="https://www.googletagmanager.com" crossOrigin="anonymous" />
+          <link rel="preconnect" href="https://www.google-analytics.com" crossOrigin="anonymous" />
           
           {/* 預加載字體 */}
           {BLOG.FONT_AWESOME && (
@@ -42,6 +44,18 @@ class MyDocument extends Document {
           <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0" />
           <meta name="format-detection" content="telephone=no" />
           <meta name="author" content={BLOG.AUTHOR} />
+          
+          {/* Google 搜尋優化提示 */}
+          <meta name="google" content="notranslate" />
+          <meta name="google" content="nositelinkssearchbox" />
+          <meta name="googlebot-news" content="index,follow" />
+          <meta name="googlebot" content="index,follow,max-video-preview:-1,max-image-preview:large,max-snippet:-1" />
+          
+          {/* 移動端適配提示 */}
+          <meta name="HandheldFriendly" content="True" />
+          <meta name="MobileOptimized" content="320" />
+          <meta name="apple-mobile-web-app-capable" content="yes" />
+          <meta name="apple-mobile-web-app-status-bar-style" content="black" />
           
           {/* Google Search Console 驗證 */}
           {BLOG.GOOGLE_SITE_VERIFICATION && (
@@ -75,7 +89,7 @@ class MyDocument extends Document {
             href="/sitemap.xml" 
           />
           
-          {/* 多語言支持 */}
+          {/* 提供所有替代語言版本的資訊 */}
           {BLOG.ENABLE_HREFLANG && Object.entries(BLOG.ALTERNATE_LANG_URLS || {}).map(([lang, url]) => (
             <link 
               key={lang}
