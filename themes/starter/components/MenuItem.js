@@ -136,7 +136,7 @@ export const MenuItem = ({ link, index, isOpen, onMenuOpen, isAnyMenuOpen, navBa
           {isSubMenuOpen && (
             <div className={`
               ${isMobile
-                ? 'mt-2 pl-6 space-y-1'
+                ? 'mt-2 pl-4 space-y-1'
                 : 'lg:absolute lg:left-0 lg:top-full lg:w-[220px] lg:rounded-md lg:bg-white lg:px-2 lg:py-3 lg:shadow-lg lg:dark:bg-dark'
               }
             `}>
@@ -193,7 +193,7 @@ export const MenuItem = ({ link, index, isOpen, onMenuOpen, isAnyMenuOpen, navBa
                           <div
                             className={`
                               ${isMobile
-                                ? `mt-1 pl-6 space-y-1 ${childMenuOpenStates[subMenuIndex] ? 'block' : 'hidden'}`
+                                ? `mt-1 pl-4 space-y-1 ${childMenuOpenStates[subMenuIndex] ? 'block' : 'hidden'}`
                                 : `absolute left-full top-0 w-[220px] bg-white dark:bg-dark-2 rounded-sm shadow-lg p-2 -ml-1 z-50
                                    ${childMenuOpenStates[subMenuIndex] ? 'block' : 'hidden'} 
                                    lg:hidden lg:group-hover/child:block`

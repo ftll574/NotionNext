@@ -162,8 +162,8 @@ export const MenuList = props => {
 
       {/* 手機版選單 - 優化樣式 */}
       {isMobile && lockScreen && (
-        <nav className="fixed left-0 top-[70px] z-50 h-[calc(100vh-70px)] w-full bg-dark/95 py-4 backdrop-blur-lg overflow-y-auto">
-          <ul className="block px-6 py-2">
+        <nav className="fixed left-0 top-[70px] z-[99] h-[calc(100vh-70px)] w-full bg-dark py-4 overflow-y-auto">
+          <ul className="block px-4 py-2">
             {links && links?.map((link, index) => {
               return <MenuItem
                 key={`mobile-${index}`}
