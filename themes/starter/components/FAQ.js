@@ -2,6 +2,7 @@ import { siteConfig } from '@/lib/config'
 import { useEffect } from 'react'
 import { SVGCircleBG } from './svg/SVGCircleBG'
 import { SVGQuestion } from './svg/SVGQuestion'
+import ScrollButton from './ScrollButton'
 
 export const FAQ = () => {
   useEffect(() => {
@@ -17,7 +18,7 @@ export const FAQ = () => {
   return (
     <>
       {/* <!-- ====== FAQ Section Start --> */}
-      <section className='relative overflow-hidden bg-white pb-8 pt-20 dark:bg-dark lg:pb-[50px] lg:pt-[120px]'>
+      <section id="faq-section" className='relative overflow-hidden bg-white pb-8 pt-20 dark:bg-dark lg:pb-[50px] lg:pt-[120px]'>
         <div className='container mx-auto'>
           <div className='-mx-4 flex flex-wrap'>
             <div className='w-full px-4'>
@@ -102,6 +103,9 @@ export const FAQ = () => {
               </div>
             </div>
           </div>
+          
+          {/* 滾動按鈕 */}
+          <ScrollButton targetId="team-section" color="primary" />
         </div>
 
         {/* 背景图案 */}

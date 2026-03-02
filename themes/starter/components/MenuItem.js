@@ -7,7 +7,7 @@ import { useState, useRef, useEffect } from 'react'
  * @param {*} param0
  * @returns
  */
-export const MenuItem = ({ link, index, isOpen, onMenuOpen, isAnyMenuOpen, navBar }) => {
+export const MenuItem = ({ link, index, isOpen, onMenuOpen, isAnyMenuOpen, navBar, isMobile }) => {
   const hasSubMenu = link?.subMenus?.length > 0
   const router = useRouter()
   const menuRef = useRef(null)
@@ -71,25 +71,38 @@ export const MenuItem = ({ link, index, isOpen, onMenuOpen, isAnyMenuOpen, navBa
     setChildMenuOpenStates({})
   }, [router.asPath])
 
+  // 決定文本顏色
+  const getTextColorClass = () => {
+    if (isMobile) {
+      // 手機模式下，統一使用白色
+      return 'text-white'
+    } else if (navBar) {
+      // 非首頁或滾動後的導航欄
+      return 'text-black dark:text-white'
+    } else {
+      // 首頁頂部的透明導航欄
+      return 'text-white group-hover:text-primary dark:text-white'
+    }
+  }
+
   return (
     <>
       {/* 普通 MenuItem */}
       {!hasSubMenu && link && (
-        <li className="relative group">
+        <li className={`relative group ${isMobile ? 'py-2 border-b border-gray-700/50' : ''}`}>
           <Link
             href={link.href}
             target={link.external ? '_blank' : '_self'} 
             rel={link.external ? 'noopener noreferrer' : ''}
-            className={`flex py-2 text-base font-bold transition-all duration-500 lg:mr-0 lg:inline-flex lg:py-6 lg:px-4 
-              ${router.pathname === link.href ? 'text-primary dark:text-white' : ''}
-              ${navBar 
-                ? 'text-black dark:text-white'
-                : 'text-white group-hover:text-primary dark:text-white'
-              }
+            className={`flex items-center py-2 text-base font-medium transition-all duration-300 
+              ${router.pathname === link.href ? 'text-primary' : ''}
+              ${getTextColorClass()}
               ${isOpen ? 'scale-animation-start' : 'scale-animation-init'}`}
             style={{ animationDelay: animationDelay }}
           >
-            <span className="mr-2">{link?.icon && <i className={link.icon} />}</span>
+            <span className="mr-3 flex items-center justify-center w-6">
+              {link?.icon && <i className={`${link.icon} text-lg ${isMobile ? 'text-white' : ''}`} />}
+            </span>
             {link.name}
           </Link>
         </li>
@@ -97,88 +110,101 @@ export const MenuItem = ({ link, index, isOpen, onMenuOpen, isAnyMenuOpen, navBa
 
       {/* 帶子菜單的 MenuItem */}
       {hasSubMenu && (
-        <li className="relative group" ref={menuRef}>
+        <li className={`relative group ${isMobile ? 'py-2 border-b border-gray-700/50' : ''}`} ref={menuRef}>
           <button
             onClick={toggleSubMenu}
-            className={`flex w-full items-center justify-between py-2 text-base font-bold transition-all duration-500 lg:mr-0 lg:inline-flex lg:py-6 lg:px-4
-              ${router.pathname === link.href ? 'text-primary dark:text-white' : ''}
-              ${navBar 
-                ? 'text-black dark:text-white'
-                : 'text-white group-hover:text-primary dark:text-white'
-              }
+            className={`flex w-full items-center justify-between py-2 text-base font-medium transition-all duration-300
+              ${router.pathname === link.href ? 'text-primary' : ''}
+              ${getTextColorClass()}
               ${isOpen ? 'scale-animation-start' : 'scale-animation-init'}`}
             style={{ animationDelay: animationDelay }}
           >
-            <span className="mr-2 flex items-center">
-              {link?.icon && <i className={`${link.icon} mr-2`} />}
+            <span className="flex items-center">
+              <span className="mr-3 flex items-center justify-center w-6">
+                {link?.icon && <i className={`${link.icon} text-lg ${isMobile ? 'text-white' : ''}`} />}
+              </span>
               {link.name}
             </span>
             <span className="ml-1 transition-transform duration-200">
-              <svg width="10" height="6" viewBox="0 0 10 6" className={`fill-current ${isSubMenuOpen ? 'rotate-180' : ''}`}>
-                <path d="M0.292893 0.292893C0.683416 -0.097631 1.31658 -0.097631 1.7071 0.292893L4.99999 3.58579L8.29288 0.292893C8.6834 -0.097631 9.31657 -0.097631 9.70709 0.292893C10.0976 0.683417 10.0976 1.31658 9.70709 1.70711L5.7071 5.70711C5.31657 6.09763 4.68341 6.09763 4.29289 5.70711L0.292893 1.70711C-0.0976309 1.31658 -0.0976309 0.683417 0.292893 0.292893Z" />
+              <svg width="16" height="16" viewBox="0 0 24 24" className={`fill-none stroke-current ${isMobile ? 'text-white' : ''} ${isSubMenuOpen ? 'rotate-180' : ''}`}>
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
               </svg>
             </span>
           </button>
 
-          {/* 二级菜单 */}
+          {/* 二级菜单 - 優化手機版佈局 */}
           {isSubMenuOpen && (
-            <div className="lg:absolute lg:left-0 lg:top-full lg:w-[220px] lg:rounded-md lg:bg-white lg:px-2 lg:py-3 lg:shadow-lg lg:dark:bg-dark">
+            <div className={`
+              ${isMobile 
+                ? 'mt-2 pl-6 space-y-1' 
+                : 'lg:absolute lg:left-0 lg:top-full lg:w-[220px] lg:rounded-md lg:bg-white lg:px-2 lg:py-3 lg:shadow-lg lg:dark:bg-dark'
+              }
+            `}>
               <ul className="lg:mt-0">
                 {link.subMenus.map((subMenu, subMenuIndex) => {
                   // 檢查是否有三級菜單
                   const hasChildMenu = subMenu.childMenus && subMenu.childMenus.length > 0
 
                   return (
-                    <li key={subMenuIndex} className="relative">
+                    <li key={subMenuIndex} className={`relative ${isMobile ? 'py-1.5' : ''}`}>
                       {!hasChildMenu ? (
                         <Link
                           href={subMenu.href}
                           target={subMenu.external ? '_blank' : '_self'}
                           rel={subMenu.external ? 'noopener noreferrer' : ''}
-                          className={`block py-2 text-sm text-dark hover:text-primary dark:text-white lg:px-3
-                            ${router.pathname === subMenu.href ? 'text-primary dark:text-white' : ''}
-                            ${navBar && 'lg:text-black lg:dark:text-black'}`}>
-                          <span className='text-md ml-2 whitespace-nowrap'>
-                            {subMenu.icon && <i className={subMenu.icon + ' mr-2 my-auto'} />}
+                          className={`w-full flex items-center justify-between py-1.5 text-sm hover:text-primary
+                            ${isMobile ? 'text-white/90' : 'text-dark dark:text-white lg:px-3'}
+                            ${router.pathname === subMenu.href ? 'text-primary' : ''}`}>
+                          <span className='inline-flex items-center'>
+                            {subMenu.icon && <i className={`${subMenu.icon} mr-2 w-5 text-center ${isMobile ? 'text-white/90' : ''}`} />}
                             {subMenu.title}
                           </span>
+                          {subMenu.childMenus && subMenu.childMenus.length > 0 && (
+                            <span className="ml-1 inline-block">{'>'}</span>
+                          )}
                         </Link>
                       ) : (
-                        // 有三級菜單的二級菜單項 - 改為右側顯示
-                        <div className="relative group/child">
+                        // 有三級菜單的二級菜單項
+                        <div className={`relative ${isMobile ? 'group/mobile' : 'group/child'}`}>
                           <button
                             onClick={(e) => toggleChildMenu(subMenuIndex, e)}
-                            className='w-full text-left rounded px-4 py-[10px] text-sm text-body-color hover:text-primary dark:text-dark-6 dark:hover:text-primary flex justify-between items-center'>
-                            <span className='text-md ml-2 whitespace-nowrap'>
-                              {subMenu.icon && <i className={subMenu.icon + ' mr-2 my-auto'} />}
+                            className={`w-full text-left py-1.5 text-sm hover:text-primary flex justify-between items-center
+                              ${isMobile ? 'text-white/90' : 'text-dark px-3 dark:text-white'}`}>
+                            <span className='flex items-center'>
+                              {subMenu.icon && <i className={`${subMenu.icon} mr-2 w-5 text-center ${isMobile ? 'text-white/90' : ''}`} />}
                               {subMenu.title}
                             </span>
                             <svg
-                              className="w-4 h-4 transform"
+                              className={`w-4 h-4 transform ${isMobile ? 'text-white/90' : ''}`}
                               fill="none"
                               stroke="currentColor"
                               viewBox="0 0 24 24"
                               xmlns="http://www.w3.org/2000/svg">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={isMobile ? (childMenuOpenStates[subMenuIndex] ? "M19 9l-7 7-7-7" : "M9 5l7 7-7 7") : "M9 5l7 7-7 7"}></path>
                             </svg>
                           </button>
 
-                          {/* 三級菜單 - 改為右側顯示 */}
+                          {/* 三級菜單 - 優化手機版顯示 */}
                           <div
-                            className={`absolute left-full top-0 w-[220px] bg-white dark:bg-dark-2 rounded-sm shadow-lg p-2 -ml-1 ${
-                              childMenuOpenStates[subMenuIndex] ? 'block' : 'hidden'
-                            } lg:hidden lg:group-hover/child:block`}>
+                            className={`
+                              ${isMobile 
+                                ? `mt-1 pl-6 space-y-1 ${childMenuOpenStates[subMenuIndex] ? 'block' : 'hidden'}` 
+                                : `absolute left-full top-0 w-[220px] bg-white dark:bg-dark-2 rounded-sm shadow-lg p-2 -ml-1 
+                                   ${childMenuOpenStates[subMenuIndex] ? 'block' : 'hidden'} 
+                                   lg:hidden lg:group-hover/child:block`
+                              }
+                            `}>
                             {subMenu.childMenus.map((childLink, childIndex) => (
                               <Link
                                 key={childIndex}
                                 href={childLink.href}
                                 target={childLink.external ? '_blank' : '_self'}
                                 rel={childLink.external ? 'noopener noreferrer' : ''}
-                                className={`block rounded px-4 py-[8px] text-sm text-body-color hover:text-primary dark:text-dark-6 dark:hover:text-primary
-                                  ${router.pathname === childLink.href ? 'text-primary dark:text-white' : ''}
-                                  ${navBar && 'lg:text-black lg:dark:text-black'}`}>
-                                <span className='text-md whitespace-nowrap'>
-                                  {childLink.icon && <i className={childLink.icon + ' mr-2 my-auto'} />}
+                                className={`flex items-center py-1.5 text-sm hover:text-primary
+                                  ${isMobile ? 'text-white/80' : 'px-3 text-body-color dark:text-dark-6'}
+                                  ${router.pathname === childLink.href ? 'text-primary' : ''}`}>
+                                <span className='flex items-center'>
+                                  {childLink.icon && <i className={`${childLink.icon} mr-2 w-5 text-center ${isMobile ? 'text-white/80' : ''}`} />}
                                   {childLink.title}
                                 </span>
                               </Link>

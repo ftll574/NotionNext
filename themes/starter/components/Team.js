@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { siteConfig } from '@/lib/config'
 import { SVGAvatarBG } from './svg/SVGAvatarBG'
+import ScrollButton from './ScrollButton'
 
 export const Team = () => {
   const STARTER_TEAM_ITEMS = siteConfig('STARTER_TEAM_ITEMS', [])
@@ -8,7 +9,7 @@ export const Team = () => {
     <>
       {/* <!-- ====== Team Section Start --> */}
       <section
-        id='team'
+        id='team-section'
         className='overflow-hidden bg-gray-1 pb-12 pt-20 dark:bg-dark-2 lg:pb-[90px] lg:pt-[120px]'>
         <div className='container mx-auto'>
           <div className='-mx-4 flex flex-wrap'>
@@ -66,6 +67,9 @@ export const Team = () => {
               )
             })}
           </div>
+          
+          {/* 滾動按鈕 */}
+          <ScrollButton targetId="contact-section" color="primary" />
         </div>
       </section>
       {/* <!-- ====== Team Section End --> */}

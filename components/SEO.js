@@ -20,6 +20,7 @@ const SEO = props => {
   const router = useRouter()
   const meta = getSEOMeta(props, router, useGlobal()?.locale)
   const webFontUrl = siteConfig('FONT_URL')
+  const STARTER_LOGO = siteConfig('STARTER_LOGO')
 
   useEffect(() => {
     // 使用WebFontLoader字体加载
@@ -128,9 +129,13 @@ const SEO = props => {
           content={SEO_BAIDU_SITE_VERIFICATION}
         />
       )}
+<<<<<<< HEAD
 
       {/* 基础SEO元数据 */}
       <meta name='keywords' content={keywords} />
+=======
+      <meta name='keywords' content={`${keywords},塑膠原料,TPE,PVC,工程塑料,塑膠材料,原物料,射出級,擠出級,南亞,台化,福聚,永嘉,奇美,台聚,台塑`} />
+>>>>>>> be8c14e1 (Fix mobile display bug)
       <meta name='description' content={description} />
       <meta name='author' content={AUTHOR} />
       <meta name='generator' content='NotionNext' />
@@ -142,8 +147,9 @@ const SEO = props => {
       {/* Open Graph 元数据 */}
       <meta property='og:locale' content={lang} />
       <meta property='og:title' content={title} />
-      <meta property='og:description' content={description} />
+      <meta property='og:description' content={`專業塑膠原料供應商 - ${description}`} />
       <meta property='og:url' content={url} />
+<<<<<<< HEAD
       <meta property='og:image' content={image} />
       <meta property='og:image:width' content='1200' />
       <meta property='og:image:height' content='630' />
@@ -152,13 +158,51 @@ const SEO = props => {
       <meta property='og:type' content={type} />
 
       {/* Twitter Card 元数据 */}
+=======
+      <meta property='og:image' content={STARTER_LOGO || image} />
+      <meta property='og:site_name' content={title} />
+      <meta property='og:type' content={type} />
+      <script type="application/ld+json">
+        {`
+          {
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": "${AUTHOR}",
+            "url": "${url}",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "${STARTER_LOGO || image}",
+              "width": "280",
+              "height": "44"
+            },
+            "description": "鑫威貿易專注於高品質塑膠原料的供應與服務，為電子、汽車、家電等行業提供可靠的原材料支持",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "新北市",
+              "addressRegion": "林口區",
+              "postalCode": "244",
+              "streetAddress": "湖北里10鄰17之20號"
+            },
+            "contactPoint": {
+              "@type": "ContactPoint",
+              "telephone": "(02) 2602-6961",
+              "contactType": "customer service"
+            }
+          }
+        `}
+      </script>
+>>>>>>> be8c14e1 (Fix mobile display bug)
       <meta name='twitter:card' content='summary_large_image' />
       <meta name='twitter:site' content={siteConfig('TWITTER_SITE', '@NotionNext')} />
       <meta name='twitter:creator' content={siteConfig('TWITTER_CREATOR', '@NotionNext')} />
       <meta name='twitter:title' content={title} />
+<<<<<<< HEAD
       <meta name='twitter:description' content={description} />
       <meta name='twitter:image' content={image} />
       <meta name='twitter:image:alt' content={title} />
+=======
+      <meta name='twitter:image' content={STARTER_LOGO || image} />
+>>>>>>> be8c14e1 (Fix mobile display bug)
 
       <link rel='icon' href={BLOG_FAVICON} />
 
@@ -293,7 +337,7 @@ const getSEOMeta = (props, router, locale) => {
   switch (router.route) {
     case '/':
       return {
-        title: `${siteInfo?.title} | ${siteInfo?.description}`,
+        title: `${siteInfo?.title} | 專業塑膠原料供應商 - 南亞、台化、福聚、永嘉、奇美、台聚、台塑系列代理`,
         description: `${siteInfo?.description}`,
         image: `${siteInfo?.pageCover}`,
         slug: '',

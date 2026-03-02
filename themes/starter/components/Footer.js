@@ -52,15 +52,30 @@ export const Footer = props => {
                     <h4 className='mb-9 text-lg font-semibold text-white'>
                       {item.TITLE}
                     </h4>
-                    <ul>
+                    <ul className="space-y-2">
                       {item?.LINK_GROUP?.map((l, i) => {
+                        // 檢查是否為產品目錄頁面帶有錨點的連結
+                        const isProductAnchorLink = l.URL.startsWith('/products#')
+                        
                         return (
                           <li key={i}>
-                            <Link
-                              href={l.URL}
-                              className='mb-3 inline-block text-base text-gray-7 hover:text-primary'>
-                              {l.TITLE}
-                            </Link>
+                            {isProductAnchorLink ? (
+                              // 產品目錄帶錨點的連結 - 使用原生a標籤
+                              <a
+                                href={l.URL}
+                                className='inline-block text-base text-gray-7 hover:text-primary transition-colors duration-300 hover:translate-x-1 transform'
+                              >
+                                {l.TITLE}
+                              </a>
+                            ) : (
+                              // 普通連結
+                              <Link
+                                href={l.URL}
+                                className='inline-block text-base text-gray-7 hover:text-primary transition-colors duration-300 hover:translate-x-1 transform'
+                              >
+                                {l.TITLE}
+                              </Link>
+                            )}
                           </li>
                         )
                       })}
@@ -112,27 +127,27 @@ export const Footer = props => {
               <div className='w-full px-4 md:w-2/3 lg:w-1/2'>
                 <div className='my-1'>
                   <div className='-mx-3 flex items-center justify-center md:justify-start'>
-                    <Link
-                      href={siteConfig('STARTER_FOOTER_PRIVACY_POLICY_URL', '')}
-                      className='px-3 text-base text-gray-7 hover:text-white hover:underline'>
-                      {siteConfig('STARTER_FOOTER_PRIVACY_POLICY_TEXT')}
-                    </Link>
-                    <Link
-                      href={siteConfig(
-                        'STARTER_FOOTER_PRIVACY_LEGAL_NOTICE_URL', ''
-                      )}
-                      className='px-3 text-base text-gray-7 hover:text-white hover:underline'>
-                      {siteConfig('STARTER_FOOTER_PRIVACY_LEGAL_NOTICE_TEXT')}
-                    </Link>
-                    <Link
-                      href={siteConfig(
-                        'STARTER_FOOTER_PRIVACY_TERMS_OF_SERVICE_URL', ''
-                      )}
-                      className='px-3 text-base text-gray-7 hover:text-white hover:underline'>
-                      {siteConfig(
-                        'STARTER_FOOTER_PRIVACY_TERMS_OF_SERVICE_TEXT', ''
-                      )}
-                    </Link>
+                    {siteConfig('STARTER_FOOTER_PRIVACY_POLICY_TEXT') && (
+                      <Link
+                        href={siteConfig('STARTER_FOOTER_PRIVACY_POLICY_URL', '')}
+                        className='px-3 text-base text-gray-7 hover:text-white hover:underline'>
+                        {siteConfig('STARTER_FOOTER_PRIVACY_POLICY_TEXT')}
+                      </Link>
+                    )}
+                    {siteConfig('STARTER_FOOTER_PRIVACY_LEGAL_NOTICE_TEXT') && (
+                      <Link
+                        href={siteConfig('STARTER_FOOTER_PRIVACY_LEGAL_NOTICE_URL', '')}
+                        className='px-3 text-base text-gray-7 hover:text-white hover:underline'>
+                        {siteConfig('STARTER_FOOTER_PRIVACY_LEGAL_NOTICE_TEXT')}
+                      </Link>
+                    )}
+                    {siteConfig('STARTER_FOOTER_PRIVACY_TERMS_OF_SERVICE_TEXT') && (
+                      <Link
+                        href={siteConfig('STARTER_FOOTER_PRIVACY_TERMS_OF_SERVICE_URL', '')}
+                        className='px-3 text-base text-gray-7 hover:text-white hover:underline'>
+                        {siteConfig('STARTER_FOOTER_PRIVACY_TERMS_OF_SERVICE_TEXT')}
+                      </Link>
+                    )}
                   </div>
                 </div>
               </div>

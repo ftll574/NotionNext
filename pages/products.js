@@ -1,14 +1,84 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import Head from 'next/head'
 import BLOG from '@/blog.config'
 import { siteConfig } from '@/lib/config'
 import { getGlobalData } from '@/lib/db/getSiteData'
+import { useRouter } from 'next/router'
 
 /**
  * 產品目錄頁面 - 修正分類結構
  */
 const ProductsPage = ({ products = [], categories = [], parentCategories = {}, siteInfo, NOTION_CONFIG }) => {
+  const router = useRouter()
   const title = siteConfig('TITLE', BLOG.TITLE, NOTION_CONFIG)
+  const categoryRefs = useRef({})
+  
+  // 初始化滾動處理
+  useEffect(() => {
+    // 檢查網址中是否有錨點
+    if (typeof window !== 'undefined') {
+      const scrollToAnchor = () => {
+        const hash = window.location.hash
+        if (hash) {
+          const id = hash.replace('#', '')
+          console.log('嘗試定位到錨點:', id)
+          
+          // 先嘗試通過ID直接查找元素
+          let element = document.getElementById(id)
+          
+          // 如果找不到，嘗試查找包含相關品牌PP的元素
+          if (!element && id.includes('pp')) {
+            // 查找所有帶有id的元素
+            const allElements = document.querySelectorAll('[id]')
+            const ppElements = Array.from(allElements).filter(el => 
+              el.id.includes('pp') || el.textContent.toLowerCase().includes(id.replace('-pp', ''))
+            )
+            
+            if (ppElements.length > 0) {
+              element = ppElements[0]
+              console.log('找到相關PP元素:', element.id)
+            }
+          }
+          
+          if (element) {
+            // 計算滾動位置，減去導航欄高度
+            const navHeight = 100  // 估計導航欄高度
+            const offsetTop = element.getBoundingClientRect().top + window.pageYOffset - navHeight
+            
+            // 執行滾動
+            window.scrollTo({
+              top: offsetTop,
+              behavior: 'smooth'
+            })
+            
+            // 高亮顯示目標元素
+            element.classList.add('bg-blue-50', 'dark:bg-blue-900/20')
+            setTimeout(() => {
+              element.classList.remove('bg-blue-50', 'dark:bg-blue-900/20')
+            }, 2000)
+            
+            return true
+          } else {
+            console.log('未找到對應的錨點元素:', id)
+          }
+        }
+        return false
+      }
+      
+      // 頁面載入完成後滾動，延遲以確保頁面完全加載
+      setTimeout(scrollToAnchor, 800)
+      
+      // 監聽哈希變化
+      const handleHashChange = () => {
+        setTimeout(scrollToAnchor, 300)
+      }
+      
+      window.addEventListener('hashchange', handleHashChange)
+      return () => {
+        window.removeEventListener('hashchange', handleHashChange)
+      }
+    }
+  }, [])
   
   // 根據標籤內容生成顏色
   const getTagColor = (tag) => {
@@ -74,6 +144,17 @@ const ProductsPage = ({ products = [], categories = [], parentCategories = {}, s
   // 獲取主分類，不包括子分類
   const mainCategories = categories.filter(cat => !parentCategories[cat.value]);
   
+  // 調試輸出所有分類的ID和名稱
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      console.log('===產品目錄分類===');
+      mainCategories.forEach(cat => {
+        console.log(`${cat.name}: ${cat.value} (錨點ID: ${cat.anchorId || '未設置'})`);
+      });
+      console.log('================');
+    }
+  }, [mainCategories]);
+  
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 flex flex-col">
       <Head>
@@ -82,9 +163,9 @@ const ProductsPage = ({ products = [], categories = [], parentCategories = {}, s
       
       <div className="flex-grow mt-16">
         {products && products.length > 0 ? (
-          <div className="container mx-auto px-4 py-12">
+          <div className="container mx-auto px-4 py-12 pt-8 md:pt-16">
             <div className="text-center mb-16">
-              <h1 className="text-3xl font-bold text-dark dark:text-white mb-6 sm:text-4xl md:text-[40px]">
+              <h1 className="text-3xl font-bold leading-tight text-dark dark:text-white mb-6 sm:text-4xl md:text-[40px] md:leading-[1.2]">
                 產品目錄
               </h1>
               <p className="text-base text-body-color dark:text-dark-6 max-w-[600px] mx-auto mb-8">
@@ -96,7 +177,7 @@ const ProductsPage = ({ products = [], categories = [], parentCategories = {}, s
                 {mainCategories.map((category, index) => (
                   <a 
                     key={index}
-                    href={`#${category.value}`}
+                    href={`#${category.anchorId || category.value}`}
                     className="px-4 py-2 bg-primary text-white rounded-full hover:bg-primary-dark transition-colors"
                   >
                     {category.name}
@@ -126,10 +207,15 @@ const ProductsPage = ({ products = [], categories = [], parentCategories = {}, s
               const allCategoryProducts = [...mainCategoryProducts, ...childCategoryProducts];
               
               return (
-                <div key={catIndex} className="mb-16" id={category.value}>
-                  <h2 className="text-2xl font-bold mb-8 pb-4 border-b border-gray-200 dark:border-gray-700">
-                    {category.name}
-                  </h2>
+                <div key={catIndex} className="mb-16">
+                  <div className="flex items-center group scroll-mt-32" id={category.anchorId || category.value}>
+                    <h2 className="text-2xl font-bold mb-8 pb-4 border-b border-gray-200 dark:border-gray-700 w-full text-dark dark:text-white">
+                      {category.name}
+                      <a href={`#${category.anchorId || category.value}`} className="ml-2 text-primary opacity-0 group-hover:opacity-100 transition-opacity" aria-label="Section anchor">
+                        #
+                      </a>
+                    </h2>
+                  </div>
                   
                   {/* 所有產品在同一橫條顯示 */}
                   <div className="flex flex-row flex-wrap gap-6 mb-12">
@@ -167,12 +253,6 @@ const ProductsPage = ({ products = [], categories = [], parentCategories = {}, s
           </div>
         )}
       </div>
-      
-      <footer className="bg-gray-100 dark:bg-gray-800 py-6">
-        <div className="container mx-auto px-6 text-center text-gray-600 dark:text-gray-400">
-          <p>© {new Date().getFullYear()} {title}</p>
-        </div>
-      </footer>
     </div>
   )
 }
@@ -208,10 +288,33 @@ export async function getStaticProps({ locale }) {
           const subMenuName = subMenu.title || subMenu.name
           const subMenuSlug = subMenu.id || subMenu.slug
           
+          // 建立產品分類ID映射表 - 用於錨點
+          const categoryIdMap = {
+            '南亞系列': 'nan-yia',
+            '台化系列': 'formosa-chemical',
+            '台化PP': 'formosa-chemical-pp',
+            '台塑PP': 'formosa-plastic-pp',
+            '李長榮PP': 'lcy-pp',
+            'U-Pellet台灣優粒子TPR': 'u-pellet-tpr',
+            'U-Pellet TPR': 'u-pellet-tpr',
+            'U-Pellet台灣優粒子TPE': 'u-pellet-tpe',
+            '福聚系列': 'fu-ju',
+            '永嘉系列': 'yongjia',
+            '奇美系列': 'chi-mei',
+            '台聚系列': 'formosa-polymer',
+            '台塑系列': 'formosa-plastic',
+            '其他': 'other',
+          };
+          
+          // 使用映射表中的ID或生成一個ID
+          const anchorId = categoryIdMap[subMenuName] || 
+                          subMenuName.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '');
+          
           if (subMenuName && subMenuSlug) {
             categoryMap.set(subMenuSlug, {
               name: subMenuName,
-              value: subMenuSlug
+              value: subMenuSlug,
+              anchorId: anchorId // 使用映射表中的ID
             })
             
             // 處理指向頁面的 SubMenu
@@ -239,10 +342,33 @@ export async function getStaticProps({ locale }) {
                 const childMenuSlug = childMenu.id || childMenu.slug
                 
                 if (childMenuName && childMenuSlug) {
+                  // 使用相同的映射表處理子分類
+                  const categoryIdMap = {
+                    '南亞系列': 'nan-yia',
+                    '台化系列': 'formosa-chemical',
+                    '台化PP': 'formosa-chemical-pp',
+                    '台塑PP': 'formosa-plastic-pp',
+                    '李長榮PP': 'lcy-pp',
+                    'U-Pellet台灣優粒子TPR': 'u-pellet-tpr',
+                    'U-Pellet TPR': 'u-pellet-tpr',
+                    'U-Pellet台灣優粒子TPE': 'u-pellet-tpe',
+                    '福聚系列': 'fu-ju',
+                    '永嘉系列': 'yongjia',
+                    '奇美系列': 'chi-mei',
+                    '台聚系列': 'formosa-polymer',
+                    '台塑系列': 'formosa-plastic',
+                    '其他': 'other',
+                  };
+                  
+                  // 使用映射表中的ID或生成一個ID
+                  const childAnchorId = categoryIdMap[childMenuName] || 
+                                    childMenuName.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '');
+                  
                   // 添加為類別
                   categoryMap.set(childMenuSlug, {
                     name: childMenuName,
-                    value: childMenuSlug
+                    value: childMenuSlug,
+                    anchorId: childAnchorId
                   })
                   
                   // 設置父子關係

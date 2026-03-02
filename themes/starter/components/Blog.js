@@ -1,6 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
 import { siteConfig } from '@/lib/config'
+<<<<<<< HEAD
 import SmartLink from '@/components/SmartLink'
+=======
+import Link from 'next/link'
+import ScrollButton from './ScrollButton'
+>>>>>>> be8c14e1 (Fix mobile display bug)
 
 /**
  * 博文列表
@@ -11,7 +16,7 @@ export const Blog = ({ posts }) => {
   return (
     <>
       {/* <!-- ====== Blog Section Start --> */}
-      <section className='bg-white pb-10 pt-20 dark:bg-dark lg:pb-20 lg:pt-[120px]'>
+      <section id="blog-section" className='bg-white pb-10 pt-20 dark:bg-dark lg:pb-20 lg:pt-[120px]'>
         <div className='container mx-auto'>
           {/* 区块标题文字 */}
           <div className='-mx-4 flex flex-wrap justify-center'>
@@ -70,6 +75,9 @@ export const Blog = ({ posts }) => {
               )
             })}
           </div>
+          
+          {/* 滾動按鈕 */}
+          <ScrollButton targetId="testimonials-section" color="primary" />
         </div>
       </section>
       {/* <!-- ====== Blog Section End --> */}

@@ -287,6 +287,7 @@ img {
   overflow: hidden;
 }
 
+<<<<<<< HEAD
 
 .lazy-image-placeholder{
   background: 
@@ -298,3 +299,11 @@ img {
   @keyframes l1 {
   0% {background-position: right}
 }
+=======
+.container {
+  width: 100%;
+  max-width: 1200px; /* 或更大的值，取決於你的設計需求 */
+  margin: 0 auto;
+  padding: 0 15px;
+}
+>>>>>>> be8c14e1 (Fix mobile display bug)

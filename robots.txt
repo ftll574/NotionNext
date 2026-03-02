@@ -1,0 +1,55 @@
+User-agent: *
+Disallow: /api/
+Disallow: /_next/
+Disallow: /api/*
+Disallow: /admin/
+Disallow: /admin/*
+Disallow: /feed
+Disallow: /atom
+Disallow: /rss
+Disallow: /rss.xml
+Disallow: /feed.xml
+
+User-agent: Googlebot
+Disallow: /api/
+Disallow: /_next/
+Disallow: /admin/
+
+User-agent: Bingbot
+Disallow: /api/
+Disallow: /_next/
+Disallow: /admin/
+
+User-agent: Baiduspider
+Disallow: /api/
+Disallow: /_next/
+Disallow: /admin/
+
+User-agent: YandexBot
+Disallow: /api/
+Disallow: /_next/
+Disallow: /admin/
+
+User-agent: SogouSpider
+Disallow: /api/
+Disallow: /_next/
+Disallow: /admin/
+
+User-agent: Applebot
+Disallow: /api/
+Disallow: /_next/
+Disallow: /admin/
+
+User-agent: facebookexternalhit
+Disallow: /api/
+Disallow: /_next/
+Disallow: /admin/
+
+User-agent: Twitterbot
+Disallow: /api/
+Disallow: /_next/
+Disallow: /admin/
+
+Sitemap: xin-wei.com/sitemap.xml
+Crawl-delay: 10
+

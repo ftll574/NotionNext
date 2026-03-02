@@ -2,7 +2,6 @@ const { THEME } = require('./blog.config')
 const fs = require('fs')
 const path = require('path')
 const BLOG = require('./blog.config')
-const { extractLangPrefix } = require('./lib/utils/pageId')
 
 // 打包时是否分析代码
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
@@ -11,6 +10,7 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 
 // 扫描项目 /themes下的目录名
 const themes = scanSubdirectories(path.resolve(__dirname, 'themes'))
+<<<<<<< HEAD
 // 检测用户开启的多语言
 const locales = (function () {
   // 根据BLOG_NOTION_PAGE_ID 检查支持多少种语言数据.
@@ -31,6 +31,8 @@ const locales = (function () {
   }
   return langs
 })()
+=======
+>>>>>>> be8c14e1 (Fix mobile display bug)
 
 // 编译前执行
 // eslint-disable-next-line no-unused-vars
@@ -69,8 +71,6 @@ function scanSubdirectories(directory) {
     if (stats.isDirectory()) {
       subdirectories.push(file)
     }
-
-    // subdirectories.push(file)
   })
 
   return subdirectories
@@ -90,6 +90,7 @@ const nextConfig = {
       ? 'standalone'
       : undefined,
   staticPageGenerationTimeout: 120,
+<<<<<<< HEAD
 
   // 性能优化配置
   compress: true,
@@ -114,6 +115,8 @@ const nextConfig = {
         // 支持的所有多语言,按需填写即可
         locales: locales
       },
+=======
+>>>>>>> be8c14e1 (Fix mobile display bug)
   images: {
     // 图片压缩和格式优化
     formats: ['image/avif', 'image/webp'],
@@ -155,6 +158,7 @@ const nextConfig = {
   // 重写url
   rewrites: process.env.EXPORT
     ? undefined
+<<<<<<< HEAD
     : () => {
         // 处理多语言重定向
         const langsRewrites = []
@@ -191,8 +195,10 @@ const nextConfig = {
           )
         }
 
+=======
+    : async () => {
+>>>>>>> be8c14e1 (Fix mobile display bug)
         return [
-          ...langsRewrites,
           // 伪静态重写
           {
             source: '/:path*.html',

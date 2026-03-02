@@ -4,6 +4,7 @@ import { siteConfig } from '@/lib/config'
 import CONFIG from '../config'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
+import ScrollButton from './ScrollButton'
 
 /**
  * 英雄大圖區塊
@@ -146,6 +147,11 @@ export const Hero = props => {
               ))}
             </div>
           )}
+          
+          {/* 添加滾動按鈕 */}
+          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10">
+            <ScrollButton targetId="about-section" fixed={false} absolute={true} color="white" />
+          </div>
         </div>
       )}
       

@@ -1,5 +1,6 @@
 import { siteConfig } from '@/lib/config'
 import Link from 'next/link'
+import ScrollButton from './ScrollButton'
 
 /**
  * 价格板块
@@ -10,7 +11,7 @@ export const Pricing = () => {
     <>
       {/* <!-- ====== Pricing Section Start --> */}
       <section
-        id='pricing'
+        id='pricing-section'
         className='relative overflow-hidden bg-white pb-12 pt-20 dark:bg-dark lg:pb-[90px] lg:pt-[120px]'>
         <div className='container mx-auto'>
           <div className='-mx-4 flex flex-wrap'>
@@ -253,6 +254,11 @@ export const Pricing = () => {
                 </div>
               </div>
             </div>
+          </div>
+          
+          {/* 滾動按鈕 */}
+          <div className="mt-16 md:mt-20">
+            <ScrollButton targetId="blog-section" color="primary" />
           </div>
         </div>
       </section>

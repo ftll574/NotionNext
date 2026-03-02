@@ -11,9 +11,9 @@
     "url": "https://github.com/tangly1024/NotionNext.git"
   },
   "author": {
-    "name": "tangly",
-    "email": "mail@tangly1024.com",
-    "url": "http://tangly1024.com"
+    "name": "鑫葳貿易有限公司",
+    "email": "mail@xin-wei.com",
+    "url": "http://xin-wei.com"
   },
   "scripts": {
     "dev": "next dev",
@@ -67,10 +67,18 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-facebook": "^8.1.4",
+<<<<<<< HEAD
     "react-hotkeys-hook": "^4.6.2",
     "react-notion-x": "7.7.1",
     "react-share": "^5.2.2",
     "react-tweet-embed": "~2.0.0"
+=======
+    "react-hotkeys-hook": "^4.5.0",
+    "react-notion-x": "6.16.0",
+    "react-share": "^4.4.1",
+    "react-tweet-embed": "~2.0.0",
+    "date-fns": "^2.30.0"
+>>>>>>> be8c14e1 (Fix mobile display bug)
   },
   "devDependencies": {
     "@types/node": "22.15.3",

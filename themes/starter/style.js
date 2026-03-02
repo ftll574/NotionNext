@@ -383,6 +383,41 @@ table[class*="notion"] th {
 .notion-table-view th {
   text-align: center !important;
 }
+
+/* 添加滾動按鈕的樣式 */
+.scroll-button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.scroll-button {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #e30000;
+  color: white;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.scroll-button:hover {
+  background-color: #c00000;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+.scroll-button svg {
+  width: 24px;
+  height: 24px;
+}
   `}</style>
 }
 

@@ -3,6 +3,7 @@ import CONFIG from '../config'
 import { SVGEmail } from './svg/SVGEmail'
 import { SVGLocation } from './svg/SVGLocation'
 import { SVGPhone } from './svg/SVGPhone'
+import ScrollButton from './ScrollButton'
 
 /* eslint-disable react/no-unescaped-entities */
 export const Contact = () => {
@@ -16,9 +17,9 @@ export const Contact = () => {
   return (
     <>
       {/* <!-- ====== Contact Start ====== --> */}
-      <section id='contact' className='relative py-20 md:py-[120px]'>
+      <section id='contact-section' className='relative py-20 dark:bg-dark md:py-[120px]'>
         <div className='absolute left-0 top-0 -z-[1] h-full w-full dark:bg-dark'></div>
-        <div className='absolute left-0 top-0 -z-[1] h-1/2 w-full bg-[#E9F9FF] dark:bg-dark-700 lg:h-[45%] xl:h-1/2'></div>
+        <div className='absolute left-0 top-0 -z-[1] h-1/2 w-full bg-[#E9F9FF] dark:bg-dark lg:h-[45%] xl:h-1/2'></div>
         
         {/* 背景裝飾元素 */}
         <div className="absolute right-0 top-0 -z-[1] opacity-30">
@@ -62,7 +63,7 @@ export const Contact = () => {
                       <SVGLocation />
                     </div>
                     <div>
-                      <h5 className='mb-4 text-xl font-bold text-dark dark:text-white'>
+                      <h5 className='mb-4 text-xl font-bold text-dark dark:text-dark-5'>
                         {siteConfig('STARTER_CONTACT_ADDRESS_TITLE')}
                       </h5>
                       <p className='text-base text-body-color dark:text-dark-6'>
@@ -89,7 +90,7 @@ export const Contact = () => {
                       <SVGPhone />
                     </div>
                     <div>
-                      <h5 className='mb-4 text-xl font-bold text-dark dark:text-white'>
+                      <h5 className='mb-4 text-xl font-bold text-dark dark:text-dark-5'>
                         {siteConfig('STARTER_CONTACT_PHONE_TITLE')}
                       </h5>
                       <p className='text-base text-body-color dark:text-dark-6'>
@@ -98,7 +99,7 @@ export const Contact = () => {
                         {siteConfig('STARTER_CONTACT_FAX_TEXT')}
                       </p>
                       <a 
-                        href={`tel:${siteConfig('STARTER_CONTACT_PHONE_TEXT').replace(/[^0-9+]/g, '')}`} 
+                        href={`tel:${siteConfig('STARTER_CONTACT_PHONE_TEXT') ? siteConfig('STARTER_CONTACT_PHONE_TEXT').replace(/^電話：|電話:/g, '').replace(/[^0-9+]/g, '') : ''}`} 
                         className="mt-3 inline-flex items-center text-primary hover:underline"
                       >
                         立即撥打
@@ -115,7 +116,7 @@ export const Contact = () => {
                       <SVGEmail />
                     </div>
                     <div>
-                      <h5 className='mb-4 text-xl font-bold text-dark dark:text-white'>
+                      <h5 className='mb-4 text-xl font-bold text-dark dark:text-dark-5'>
                         {siteConfig('STARTER_CONTACT_EMAIL_TITLE')}
                       </h5>
                       <p className='text-base text-body-color dark:text-dark-6'>
@@ -141,7 +142,7 @@ export const Contact = () => {
                       </svg>
                     </div>
                     <div>
-                      <h5 className='mb-4 text-xl font-bold text-dark dark:text-white'>
+                      <h5 className='mb-4 text-xl font-bold text-dark dark:text-dark-5'>
                         營業時間
                       </h5>
                       <p className='text-base text-body-color dark:text-dark-6'>
@@ -162,7 +163,7 @@ export const Contact = () => {
                     className='wow fadeInUp gradient-card rounded-lg shadow-xl overflow-hidden'
                     data-wow-delay='.2s'>
                     <div className="bg-primary p-6 text-white">
-                      <h3 className="text-2xl font-bold">聯絡表單</h3>
+                      <h3 className="text-2xl font-bold text-white">聯絡表單</h3>
                       <p className="mt-2">填寫以下表單，我們將盡快回覆您</p>
                     </div>
                     {/* 嵌入外部表單 */}
