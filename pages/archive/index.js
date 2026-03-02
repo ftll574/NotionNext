@@ -44,18 +44,24 @@ export async function getStaticProps({ locale }) {
     return b?.publishDate - a?.publishDate
   })
 
+  // 按類別分組，而不是按日期
   const archivePosts = {}
 
   postsSortByDate.forEach(post => {
-    const date = formatDateFmt(post.publishDate, 'yyyy-MM')
-    if (archivePosts[date]) {
-      archivePosts[date].push(post)
+    // 獲取文章的類別
+    const category = post.category || '未分類'
+    
+    // 如果該類別已存在於 archivePosts 中，將文章添加到該類別數組
+    if (archivePosts[category]) {
+      archivePosts[category].push(post)
     } else {
-      archivePosts[date] = [post]
+      // 否則，為該類別創建一個新數組
+      archivePosts[category] = [post]
     }
   })
 
   props.archivePosts = archivePosts
+  props.archiveGroupByCategory = true // 添加新的配置項，標記是按類別分組的
   delete props.allPages
 
   return {
