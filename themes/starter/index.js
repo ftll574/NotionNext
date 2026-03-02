@@ -38,7 +38,7 @@ import { SignInForm } from './components/SignInForm'
 import { SignUpForm } from './components/SignUpForm'
 import { SVG404 } from './components/svg/SVG404'
 import BlogPostArchive from './components/BlogPostArchive'
-import ScrollButton from './components/ScrollButton'
+import SchemaOrg from './components/SchemaOrg'
 import CONFIG from './config'
 import Style from './style'
 import BLOG from '@/blog.config'
@@ -82,6 +82,7 @@ const LayoutBase = props => {
       id='theme-starter'
       className={`${siteConfig('FONT_STYLE')} min-h-screen flex flex-col dark:bg-[#212b36] scroll-smooth`}>
       <Style />
+      <SchemaOrg />
 
       {/* 页头 */}
       {isLiteMode ? <></> : <Header {...props} />}

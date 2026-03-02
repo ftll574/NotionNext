@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { siteConfig } from '@/lib/config'
 import SmartLink from '@/components/SmartLink'
-import ScrollButton from './ScrollButton'
+
 
 /**
  * 博文列表
@@ -72,8 +72,6 @@ export const Blog = ({ posts }) => {
             })}
           </div>
 
-          {/* 滾動按鈕 */}
-          <ScrollButton targetId="testimonials-section" color="primary" />
         </div>
       </section>
       {/* <!-- ====== Blog Section End --> */}

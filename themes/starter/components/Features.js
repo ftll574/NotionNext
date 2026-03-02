@@ -6,7 +6,7 @@ import { SVGTemplate } from './svg/SVGTemplate'
 import { SVGQualityAssurance } from './svg/SVGQualityAssurance'
 import { SVGInventoryManagement } from './svg/SVGInventoryManagement'
 import Link from 'next/link'
-import FixedScrollButton from './FixedScrollButton'
+
 import { useEffect, useRef, useState } from 'react'
 
 /**
@@ -16,7 +16,7 @@ import { useEffect, useRef, useState } from 'react'
 export const Features = () => {
   const [isVisible, setIsVisible] = useState(false)
   const sectionRef = useRef(null)
-  
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -27,18 +27,18 @@ export const Features = () => {
       },
       { threshold: 0.1 }
     )
-    
+
     if (sectionRef.current) {
       observer.observe(sectionRef.current)
     }
-    
+
     return () => {
       if (sectionRef.current) {
         observer.unobserve(sectionRef.current)
       }
     }
   }, [])
-  
+
   // 特性卡片數據
   const featureCards = [
     {
@@ -66,7 +66,7 @@ export const Features = () => {
       delay: 300
     },
     {
-      icon: <SVGInventoryManagement/>,
+      icon: <SVGInventoryManagement />,
       title: siteConfig('STARTER_FEATURE_4_TITLE_1'),
       description: siteConfig('STARTER_FEATURE_4_TEXT_1'),
       link: siteConfig('STARTER_FEATURE_4_BUTTON_URL', ''),
@@ -78,9 +78,9 @@ export const Features = () => {
   return (
     <>
       {/* <!-- ====== Features Section Start --> */}
-      <section 
+      <section
         ref={sectionRef}
-        id="features-section" 
+        id="features-section"
         className='pb-16 pt-24 dark:bg-dark lg:pb-24 lg:pt-32 relative overflow-hidden'
       >
         {/* 背景效果元素 */}
@@ -88,7 +88,7 @@ export const Features = () => {
           <div className="absolute top-20 -right-40 w-80 h-80 bg-primary-100 rounded-full opacity-20 dark:opacity-5"></div>
           <div className="absolute -bottom-40 -left-20 w-80 h-80 bg-secondary-100 rounded-full opacity-20 dark:opacity-5"></div>
         </div>
-        
+
         <div className='container mx-auto px-4 sm:px-6 lg:px-8 relative z-10'>
           <div className={`flex flex-wrap justify-center transition-all duration-1000 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
             <div className='w-full px-4'>
@@ -105,13 +105,13 @@ export const Features = () => {
               </div>
             </div>
           </div>
-          
+
           <div className='flex flex-wrap justify-center -mx-4'>
             {featureCards.map((card, index) => (
-              <div 
-                key={index} 
+              <div
+                key={index}
                 className='w-full px-4 sm:w-1/2 md:w-1/2 lg:w-1/4'
-                style={{ 
+                style={{
                   transitionDelay: `${card.delay}ms`,
                   opacity: isVisible ? 1 : 0,
                   transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
@@ -147,11 +147,7 @@ export const Features = () => {
               </div>
             ))}
           </div>
-          
-          {/* 滾動按鈕 */}
-          <div className="mt-4 mb-8 text-center relative z-20">
-            <FixedScrollButton targetId="pricing-section" color="primary" pulseEffect={true} />
-          </div>
+
         </div>
       </section>
       {/* <!-- ====== Features Section End --> */}

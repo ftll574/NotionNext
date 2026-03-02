@@ -6,7 +6,7 @@ import { loadExternalResource } from '@/lib/utils'
 import { useEffect } from 'react'
 import { SVGLeftArrow } from './svg/SVGLeftArrow'
 import { SVGRightArrow } from './svg/SVGRightArrow'
-import ScrollButton from './ScrollButton'
+
 
 /**
  * 一些外部js
@@ -143,9 +143,7 @@ export const Testimonials = () => {
               </div>
             </div>
           </div>
-          
-          {/* 滾動按鈕 */}
-          <ScrollButton targetId="faq-section" color="primary" />
+
         </div>
       </section>
       {/* <!-- ====== Testimonial Section End --> */}

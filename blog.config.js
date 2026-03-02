@@ -80,27 +80,33 @@ const BLOG = {
 
   // 右键菜单
   CUSTOM_RIGHT_CLICK_CONTEXT_MENU: process.env.NEXT_PUBLIC_CUSTOM_RIGHT_CLICK_CONTEXT_MENU || false,
-  
+
   // SEO 相關設定
   CANONICAL_URL_PREFIX: process.env.NEXT_PUBLIC_CANONICAL_URL_PREFIX || 'https://xin-wei.com', // 規範化URL前綴
   ENABLE_CANONICAL: process.env.NEXT_PUBLIC_ENABLE_CANONICAL || true, // 是否啟用規範化URL
   SITEMAP_EXCLUDE: process.env.NEXT_PUBLIC_SITEMAP_EXCLUDE || [
-    '/search', 
-    '/search/*', 
-    '/sign-in', 
-    '/sign-in/*', 
-    '/sign-up', 
-    '/sign-up/*', 
+    '/search',
+    '/search/*',
+    '/sign-in',
+    '/sign-in/*',
+    '/sign-up',
+    '/sign-up/*',
     '/dashboard',
     '/dashboard/*',
     '/zh/*',
-    '/auth/*'
+    '/auth/*',
+    '/500',
+    '/test-scroll',
+    '/%23',
+    '/category',
+    '/tag',
+    '/links'
   ], // 排除在站點地圖之外的頁面
   ENABLE_HREFLANG: false, // 禁用多語言標籤
-  
+
   // 搜索功能
   ENABLE_SEARCH: false, // 禁用搜索功能
-  
+
   // 站點驗證碼 - 設定 Google Search Console 驗證碼
   GOOGLE_SITE_VERIFICATION: '8MrZMy7Z8AL166kWXQe_F0wsN9IrGZGox9ILz7CoDjY',
   BAIDU_SITE_VERIFICATION: '', // 百度搜尋管理員驗證碼
