@@ -57,49 +57,49 @@ const LayerContext = createContext()
  * @returns
  */
 const LayoutBase = props => {
-    const { children } = props
-    // 极简模式，会隐藏掉页头页脚等组件，便于嵌入网页等功能 
-    const { isLiteMode } = useGlobal()
-    const router = useRouter()
+  const { children } = props
+  // 极简模式，会隐藏掉页头页脚等组件，便于嵌入网页等功能 
+  const { isLiteMode } = useGlobal()
+  const router = useRouter()
 
-    // 加载wow动画
-    useEffect(() => {
-        loadWowJS()
-    }, [])
+  // 加载wow动画
+  useEffect(() => {
+    loadWowJS()
+  }, [])
 
-    // 特殊简化布局，如果识别到路由中有 ?lite=true，则给网页添加一些自定义的css样式，例如背景改成黑色
-    useEffect(() => {
-        const isLiteMode = router.query.lite === 'true'
-        console.log(router.query.lite, isLiteMode)
-        if (isLiteMode) {
-            document.body.style.backgroundColor = 'black'
-            document.body.style.color = 'white'
-        }
-    }, [])
+  // 特殊简化布局，如果识别到路由中有 ?lite=true，则给网页添加一些自定义的css样式，例如背景改成黑色
+  useEffect(() => {
+    const isLiteMode = router.query.lite === 'true'
+    console.log(router.query.lite, isLiteMode)
+    if (isLiteMode) {
+      document.body.style.backgroundColor = 'black'
+      document.body.style.color = 'white'
+    }
+  }, [])
 
-    return (
-        <div
-            id='theme-starter'
-            className={`${siteConfig('FONT_STYLE')} min-h-screen flex flex-col dark:bg-[#212b36] scroll-smooth`}>
-            <Style />
+  return (
+    <div
+      id='theme-starter'
+      className={`${siteConfig('FONT_STYLE')} min-h-screen flex flex-col dark:bg-[#212b36] scroll-smooth`}>
+      <Style />
 
-            {/* 页头 */}
-            {isLiteMode ? <></> : <Header {...props} />}
+      {/* 页头 */}
+      {isLiteMode ? <></> : <Header {...props} />}
 
-            <div id='main-wrapper' className='grow'>
-                {children}
-            </div>
+      <div id='main-wrapper' className='grow'>
+        {children}
+      </div>
 
-            {/* 页脚 */}
-            
-            {isLiteMode ? <></> : <Footer {...props} />}
+      {/* 页脚 */}
 
-            {/* 悬浮按钮 */}
-            {isLiteMode ? <></> : <BackToTopButton />}
+      {isLiteMode ? <></> : <Footer {...props} />}
 
-            {/* <MadeWithButton/> */}
-        </div>
-    )
+      {/* 悬浮按钮 */}
+      {isLiteMode ? <></> : <BackToTopButton />}
+
+      {/* <MadeWithButton/> */}
+    </div>
+  )
 }
 
 /**
@@ -112,20 +112,20 @@ const LayoutIndex = props => {
   const { locale } = useGlobal()
   const posts = props?.allNavPages ? props.allNavPages.slice(0, count) : []
   const { asPath, pathname } = useRouter()
-  
+
   // 當前頁面的 URL 路徑
   const canonicalURL = `${BLOG.LINK}${asPath}`
-  
+
   // 取得當前頁面的標題 - 用於 SEO (首頁標題由 BLOG.TITLE 設定)
   const pageTitle = BLOG.TITLE
-  
+
   // 取得當前頁面的描述 - 用於 SEO (首頁描述由 BLOG.DESCRIPTION 設定)
   let pageDescription = BLOG.DESCRIPTION
   // 移除針對 /products 和 /about 的特定描述邏輯，這些將由 LayoutPostList 處理
   // if (props?.post && props.post.summary) { // 這段邏輯可能適用於首頁嵌入的最新文章，可以保留或根據實際情況調整
   //   pageDescription = props.post.summary
   // }
-  
+
   return (
     <>
       <Head>
@@ -140,29 +140,25 @@ const LayoutIndex = props => {
         )}
         <link rel="canonical" href={canonicalURL} />
       </Head>
-      
+
       {/* 英雄区 */}
       {siteConfig('STARTER_HERO_ENABLE', true, CONFIG) && <Hero {...props} />}
-      
+
       {/* 关于 */}
       {siteConfig('STARTER_ABOUT_ENABLE', true, CONFIG) && <About />}
-      
+
       {/* 产品特性 */}
       {siteConfig('STARTER_FEATURE_ENABLE', true, CONFIG) && <Features />}
-      
+
       {/* 价格 */}
       {siteConfig('STARTER_PRICING_ENABLE', true, CONFIG) && <Pricing />}
-      
+
       {/* 博文列表 */}
       {siteConfig('STARTER_BLOG_ENABLE', true, CONFIG) && (
         <>
           <Blog posts={posts} />
           <div className='container mx-auto flex justify-end mb-4'>
-<<<<<<< HEAD
             <SmartLink className='text-lg underline' href={'/archive'}>
-=======
-            <Link className='text-lg text-dark hover:text-primary dark:text-white dark:hover:text-primary flex items-center' href={'/archive'}>
->>>>>>> be8c14e1 (Fix mobile display bug)
               <span>{locale.COMMON.MORE}</span>
               <i className='ml-2 fas fa-arrow-right' />
             </SmartLink>
@@ -174,19 +170,19 @@ const LayoutIndex = props => {
       {siteConfig('STARTER_TESTIMONIALS_ENABLE', true, CONFIG) && (
         <Testimonials />
       )}
-      
+
       {/* 常见问题 */}
       {siteConfig('STARTER_FAQ_ENABLE', true, CONFIG) && <FAQ />}
-      
+
       {/* 团队介绍 */}
       {siteConfig('STARTER_TEAM_ENABLE', true, CONFIG) && <Team />}
-      
+
       {/* 联系方式 */}
       {siteConfig('STARTER_CONTACT_ENABLE', true, CONFIG) && <Contact />}
 
       {/* 合作伙伴 */}
       {siteConfig('STARTER_BRANDS_ENABLE', true, CONFIG) && <Brand />}
-      
+
       {/* 行动呼吁 */}
       {siteConfig('STARTER_CTA_ENABLE', true, CONFIG) && <CTA />}
     </>
@@ -354,18 +350,18 @@ const LayoutArchive = props => {
   const { archivePosts } = props
   const { locale } = useGlobal()
   const [selectedCategory, setSelectedCategory] = useState('all')
-  
+
   // 合併所有文章到一個數組
   const allPosts = Object.values(archivePosts).flat()
-  
+
   // 獲取所有可用類別
   const categories = [...new Set(allPosts.map(post => post.category || '未分類'))];
-  
+
   // 根據選中的類別過濾文章
-  const filteredPosts = selectedCategory === 'all' 
-    ? allPosts 
+  const filteredPosts = selectedCategory === 'all'
+    ? allPosts
     : allPosts.filter(post => post.category === selectedCategory);
-  
+
   return (
     <section className='bg-white dark:bg-dark py-16 lg:py-20'>
       <div className='container mx-auto px-4'>
@@ -397,7 +393,7 @@ const Layout404 = props => {
       <Head>
         <title>{pageTitle}</title>
         <meta name="description" content={pageDescription} />
-        {/* 404 頁面通常不需要被索引，可以考慮加上 noindex，但如果希望用戶能搜到404提示則不用加 */} 
+        {/* 404 頁面通常不需要被索引，可以考慮加上 noindex，但如果希望用戶能搜到404提示則不用加 */}
         {/* <meta name="robots" content="noindex" /> */}
         <meta property="og:title" content={pageTitle} />
         <meta property="og:description" content={pageDescription} />

@@ -32,12 +32,9 @@ const CONFIG = {
 
   // 微软 Clarity 站点分析
   CLARITY_ID: process.env.NEXT_PUBLIC_CLARITY_ID || null, // 只需要复制Clarity脚本中的ID部分，ID是一个十位的英文数字组合
-<<<<<<< HEAD
 
   UMAMI_HOST: process.env.NEXT_PUBLIC_UMAMI_HOST || 'https://cloud.umami.is/script.js', // umami的服务地址
   UMAMI_ID: process.env.NEXT_PUBLIC_UMAMI_ID || '', // umami的id
-=======
->>>>>>> be8c14e1 (Fix mobile display bug)
 
   // GA4 - GOOGLE ANALYTICS 4, 測量ID 以 G- 開頭
   ANALYTICS_TRACKING_ID: process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID || '',
@@ -47,7 +44,6 @@ const CONFIG = {
 
   // Umami Analytics
   UMAMI_ENABLED: process.env.NEXT_PUBLIC_UMAMI_ENABLED || false,
-  UMAMI_ID: process.env.NEXT_PUBLIC_UMAMI_ID || '',
   UMAMI_URL: process.env.NEXT_PUBLIC_UMAMI_URL || 'https://analytics.umami.is',
   
   // Google Search Console 站點驗證
