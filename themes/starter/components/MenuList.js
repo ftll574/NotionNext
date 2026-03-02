@@ -144,7 +144,7 @@ export const MenuList = props => {
       <nav className={`absolute right-0 z-10 w-[250px] lg:static lg:block lg:w-full lg:max-w-full ${lockScreen ? 'block ' : 'hidden'}`}>
         <ul className='block lg:flex'>
           {links && links?.map((link, index) => {
-            // 將菜單索引傳遞給MenuItem用於計算延遲
+            // 將菜單索引和navBar狀態傳遞給MenuItem
             return <MenuItem 
               key={index} 
               link={link} 
@@ -152,6 +152,7 @@ export const MenuList = props => {
               isOpen={isOpen} 
               onMenuOpen={() => handleMenuOpen(index)} 
               isAnyMenuOpen={activeMenuIndex !== null && activeMenuIndex !== index}
+              navBar={navBar}
             />
           })}
         </ul>

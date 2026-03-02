@@ -86,13 +86,16 @@ module.exports = {
         'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
       },
       fontSize: {
-        'base': '1.05rem',
-        'lg': '1.15rem',
-        'xl': '1.25rem',
+        'xs': '0.875rem',
+        'sm': '1rem',
+        'base': '1.125rem',
+        'lg': '1.25rem',
+        'xl': '1.375rem',
         '2xl': '1.5rem',
         '3xl': '1.875rem',
         '4xl': '2.25rem',
         '5xl': '3rem',
+        '6xl': '3.75rem',
       }
     }
   },

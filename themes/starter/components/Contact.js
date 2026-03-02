@@ -10,7 +10,8 @@ export const Contact = () => {
   
   // 地址的 Google Maps 連結
   const addressText = siteConfig('STARTER_CONTACT_ADDRESS_TEXT')
-  const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(addressText)}`
+  const googleaddress = siteConfig('STARTER_CONTACT_GOOGLE_ADDRESS')
+  const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(googleaddress)}`
   
   return (
     <>
@@ -145,7 +146,7 @@ export const Contact = () => {
                       </h5>
                       <p className='text-base text-body-color dark:text-dark-6'>
                         週一至週五: 8:00 - 17:00<br/>
-                        週六日: 休息
+                        週六、日: 休息
                       </p>
                     </div>
                   </div>
