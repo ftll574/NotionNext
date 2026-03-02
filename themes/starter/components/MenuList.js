@@ -174,6 +174,7 @@ export const MenuList = props => {
                 isAnyMenuOpen={activeMenuIndex !== null && activeMenuIndex !== index}
                 navBar={true}
                 isMobile={true}
+                totalLinks={links.length}
               />
             })}
           </ul>
@@ -193,6 +194,7 @@ export const MenuList = props => {
               isAnyMenuOpen={activeMenuIndex !== null && activeMenuIndex !== index}
               navBar={navBar}
               isMobile={false}
+              totalLinks={links.length}
             />
           })}
         </ul>

@@ -7,7 +7,7 @@ import { useState, useRef, useEffect } from 'react'
  * @param {*} param0
  * @returns
  */
-export const MenuItem = ({ link, index, isOpen, onMenuOpen, isAnyMenuOpen, navBar, isMobile }) => {
+export const MenuItem = ({ link, index, isOpen, onMenuOpen, isAnyMenuOpen, navBar, isMobile, totalLinks }) => {
   const hasSubMenu = link?.subMenus?.length > 0
   const router = useRouter()
   const menuRef = useRef(null)
@@ -15,6 +15,9 @@ export const MenuItem = ({ link, index, isOpen, onMenuOpen, isAnyMenuOpen, navBa
   // 管理菜單的展開狀態
   const [isSubMenuOpen, setIsSubMenuOpen] = useState(false)
   const [childMenuOpenStates, setChildMenuOpenStates] = useState({})
+
+  // 判斷是否為靠右側的菜單項，若是，則第三層子選單向左展開避免超出螢幕
+  const isRightSide = totalLinks ? index >= Math.ceil(totalLinks / 2) : false;
 
   // 計算動畫延遲時間，每個菜單項依序延遲出現
   const animationDelay = `${index * 0.1}s`;
@@ -194,7 +197,7 @@ export const MenuItem = ({ link, index, isOpen, onMenuOpen, isAnyMenuOpen, navBa
                             className={`
                               ${isMobile
                                 ? `mt-1 pl-4 space-y-1 ${childMenuOpenStates[subMenuIndex] ? 'block' : 'hidden'}`
-                                : `absolute left-full top-0 w-[220px] bg-white dark:bg-dark-2 rounded-sm shadow-lg p-2 -ml-1 z-50
+                                : `absolute ${isRightSide ? 'right-full -mr-1' : 'left-full -ml-1'} top-0 w-[220px] bg-white dark:bg-dark-2 rounded-sm shadow-lg p-2 z-50
                                    ${childMenuOpenStates[subMenuIndex] ? 'block' : 'hidden'} 
                                    lg:hidden lg:group-hover/child:block`
                               }
