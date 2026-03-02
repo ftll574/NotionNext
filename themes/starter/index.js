@@ -40,7 +40,7 @@ import { SVG404 } from './components/svg/SVG404'
 import BlogPostArchive from './components/BlogPostArchive'
 import ScrollButton from './components/ScrollButton'
 import CONFIG from './config'
-import { Style } from './style'
+import Style from './style'
 import BLOG from '@/blog.config'
 import Head from 'next/head'
 import React, { createContext, useContext } from 'react'
@@ -116,22 +116,15 @@ const LayoutIndex = props => {
   // 當前頁面的 URL 路徑
   const canonicalURL = `${BLOG.LINK}${asPath}`
   
-  // 取得當前頁面的標題 - 用於 SEO
-  const pageTitle = props?.title || (props?.siteInfo ? `${props.siteInfo?.title}` : BLOG.TITLE)
+  // 取得當前頁面的標題 - 用於 SEO (首頁標題由 BLOG.TITLE 設定)
+  const pageTitle = BLOG.TITLE
   
-  // 取得當前頁面的描述 - 用於 SEO
-  let pageDescription = ''
-  if (pathname === '/') {
-    pageDescription = BLOG.DESCRIPTION || `${BLOG.AUTHOR} - ${BLOG.BIO}`
-  } else if (props?.post && props.post.summary) {
-    pageDescription = props.post.summary
-  } else if (pathname === '/products') {
-    pageDescription = '鑫葳貿易股份有限公司提供全系列塑膠原料，包括PP聚丙烯、PE聚乙烯、PS聚苯乙烯等通用塑料和高性能工程塑料。優質供應商、穩定品質、專業技術支援。'
-  } else if (pathname === '/about') {
-    pageDescription = '鑫葳貿易股份有限公司專注塑膠原料行業30年，提供全系列塑膠原料和專業技術支援，是值得信賴的長期合作夥伴。'
-  } else {
-    pageDescription = BLOG.DESCRIPTION || `${BLOG.AUTHOR} - ${BLOG.BIO}`
-  }
+  // 取得當前頁面的描述 - 用於 SEO (首頁描述由 BLOG.DESCRIPTION 設定)
+  let pageDescription = BLOG.DESCRIPTION
+  // 移除針對 /products 和 /about 的特定描述邏輯，這些將由 LayoutPostList 處理
+  // if (props?.post && props.post.summary) { // 這段邏輯可能適用於首頁嵌入的最新文章，可以保留或根據實際情況調整
+  //   pageDescription = props.post.summary
+  // }
   
   return (
     <>
@@ -207,9 +200,25 @@ const LayoutIndex = props => {
  */
 const LayoutSlug = props => {
   const { post, lock, validPassword } = props
+  const router = useRouter()
+  const { locale } = useGlobal()
+
+  // canonical URL
+  const canonicalURL = BLOG.LINK + router.asPath
+
+  // Meta Title: 文章標題 - 作者/網站名
+  const metaTitle = post?.title ? `${post.title} - ${BLOG.AUTHOR}` : BLOG.TITLE
+
+  // Meta Description: 文章摘要，如果沒有摘要則使用網站通用描述
+  const metaDescription = post?.summary || BLOG.DESCRIPTION
+
+  // Meta Keywords: 文章標籤（如果存在）或網站通用關鍵字
+  const metaKeywords = post?.tags ? post.tags.join(',') : BLOG.KEYWORDS
+
+  // 檢查是否需要 noindex (假設 post 物件中直接有 noIndex 布林屬性)
+  const shouldNoIndex = post?.noIndex === true;
 
   // 如果 是 /article/[slug] 的文章路径则視情況进行重定向到另一个域名
-  const router = useRouter()
   if (
     !post &&
     siteConfig('STARTER_POST_REDIRECT_ENABLE') &&
@@ -229,6 +238,19 @@ const LayoutSlug = props => {
 
   return (
     <>
+      <Head>
+        <title>{metaTitle}</title>
+        <meta name="description" content={metaDescription} />
+        <meta name="keywords" content={metaKeywords} />
+        {shouldNoIndex && <meta name="robots" content="noindex" />}
+        <meta property="og:title" content={metaTitle} />
+        <meta property="og:description" content={metaDescription} />
+        <meta property="og:url" content={canonicalURL} />
+        {post?.pageCoverThumbnail && (
+          <meta property="og:image" content={post.pageCoverThumbnail} />
+        )}
+        <link rel="canonical" href={canonicalURL} />
+      </Head>
       <Banner title={post?.title} description={post?.summary} />
       <div className='container grow'>
         <div className='flex flex-wrap justify-center -mx-4'>
@@ -286,6 +308,11 @@ const LayoutSearch = props => {
   const { keyword } = props
   const router = useRouter()
   const currentSearch = keyword || router?.query?.s
+  const { locale } = useGlobal()
+
+  const pageTitle = currentSearch ? `「${currentSearch}」的搜尋結果 - ${BLOG.AUTHOR}` : `網站搜尋 - ${BLOG.AUTHOR}`
+  const pageDescription = currentSearch ? `查看鑫葳貿易有限公司關於「${currentSearch}」的所有搜尋結果。` : `在鑫葳貿易有限公司網站內搜尋您感興趣的內容。`
+  const canonicalURL = BLOG.LINK + router.asPath
 
   useEffect(() => {
     if (isBrowser) {
@@ -301,6 +328,15 @@ const LayoutSearch = props => {
   }, [])
   return (
     <>
+      <Head>
+        <title>{pageTitle}</title>
+        <meta name="description" content={pageDescription} />
+        <meta name="keywords" content={currentSearch ? `${currentSearch}, ${BLOG.KEYWORDS}` : BLOG.KEYWORDS} />
+        <meta property="og:title" content={pageTitle} />
+        <meta property="og:description" content={pageDescription} />
+        <meta property="og:url" content={canonicalURL} />
+        <link rel="canonical" href={canonicalURL} />
+      </Head>
       <section className='max-w-7xl mx-auto bg-white pb-10 pt-20 dark:bg-dark lg:pb-20 lg:pt-[120px]'>
         <SearchInput {...props} />
         {currentSearch && <Blog {...props} />}
@@ -351,8 +387,23 @@ const LayoutArchive = props => {
  * @returns
  */
 const Layout404 = props => {
+  const router = useRouter()
+  const canonicalURL = BLOG.LINK + router.asPath
+  const pageTitle = `頁面未找到 (404) - ${BLOG.AUTHOR}`;
+  const pageDescription = `抱歉，您所尋找的頁面不存在。請檢查網址或返回首頁。`;
+
   return (
     <>
+      <Head>
+        <title>{pageTitle}</title>
+        <meta name="description" content={pageDescription} />
+        {/* 404 頁面通常不需要被索引，可以考慮加上 noindex，但如果希望用戶能搜到404提示則不用加 */} 
+        {/* <meta name="robots" content="noindex" /> */}
+        <meta property="og:title" content={pageTitle} />
+        <meta property="og:description" content={pageDescription} />
+        <meta property="og:url" content={canonicalURL} />
+        <link rel="canonical" href={canonicalURL} />
+      </Head>
       {/* <!-- ====== 404 Section Start --> */}
       <section className='bg-white py-20 dark:bg-dark-2 lg:py-[110px]'>
         <div className='container mx-auto'>
@@ -397,10 +448,47 @@ const Layout404 = props => {
  */
 const LayoutPostList = props => {
   const { posts, category, tag } = props
+  const router = useRouter()
+  const { locale } = useGlobal()
   const slotTitle = category || tag
+
+  let pageTitle = BLOG.TITLE
+  let pageDescription = BLOG.DESCRIPTION
+  const canonicalURL = BLOG.LINK + router.asPath
+
+  // 根據路徑設定特定的 title 和 description
+  if (router.pathname === '/products') {
+    pageTitle = `所有產品 - ${BLOG.AUTHOR}`;
+    pageDescription = `探索鑫葳貿易有限公司提供的各類高品質塑膠原料，包括PP、PE、PS、ABS等，滿足您的各種工業應用需求。`;
+  } else if (router.pathname === '/about') {
+    pageTitle = `關於我們 - ${BLOG.AUTHOR}`;
+    pageDescription = `了解鑫葳貿易有限公司的歷史、使命與價值觀。我們是您值得信賴的塑膠原料合作夥伴，擁有超過30年的產業經驗。`;
+  } else if (router.pathname === '/contact') {
+    pageTitle = `聯絡我們 - ${BLOG.AUTHOR}`;
+    pageDescription = `聯絡鑫葳貿易有限公司，獲取專業的塑膠原料解決方案、產品報價或技術支援。我們期待與您合作。`;
+  } else if (category) {
+    pageTitle = `${category} - 分類文章 - ${BLOG.AUTHOR}`;
+    pageDescription = `瀏覽鑫葳貿易在「${category}」分類下的所有文章與資訊。`;
+  } else if (tag) {
+    pageTitle = `${tag} - 標籤文章 - ${BLOG.AUTHOR}`;
+    pageDescription = `查找鑫葳貿易所有標記為「${tag}」的相關文章與內容。`;
+  } else if (router.pathname === '/archive') {
+    // Archive 頁面可能有自己的 LayoutArchive 元件，但如果由 LayoutPostList 處理，則使用此設定
+    pageTitle = `文章存檔 - ${BLOG.AUTHOR}`;
+    pageDescription = `瀏覽鑫葳貿易有限公司所有文章，獲取塑膠產業最新資訊與技術分享。`;
+  }
 
   return (
     <>
+      <Head>
+        <title>{pageTitle}</title>
+        <meta name="description" content={pageDescription} />
+        <meta name="keywords" content={BLOG.KEYWORDS} />
+        <meta property="og:title" content={pageTitle} />
+        <meta property="og:description" content={pageDescription} />
+        <meta property="og:url" content={canonicalURL} />
+        <link rel="canonical" href={canonicalURL} />
+      </Head>
       {/* <!-- ====== Blog Section Start --> */}
       <section className='bg-white pb-10 pt-20 dark:bg-dark lg:pb-20 lg:pt-[120px]'>
         <div className='container mx-auto'>

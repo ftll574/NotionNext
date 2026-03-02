@@ -52,48 +52,17 @@ export default function ScrollButton({
     const targetElement = document.getElementById(targetId)
     
     if (targetElement) {
-      // 如果找到目標元素，滾動到該元素
-      targetElement.scrollIntoView({ behavior: 'smooth' })
+      // 使用更簡單的方法滾動到元素
+      window.scrollTo({
+        top: targetElement.offsetTop,
+        behavior: 'smooth'
+      })
     } else {
-      // 目標ID不存在時，嘗試尋找下一個可見的區塊
-      console.warn(`目標ID "${targetId}" 不存在，嘗試滾動到下一個區塊`)
-      
-      // 獲取所有主要區塊（通常有特定ID的section標籤）
-      const sections = document.querySelectorAll('section[id]')
-      const sectionIds = Array.from(sections).map(section => section.id)
-      
-      if (sectionIds.length > 0) {
-        // 找到當前視窗中可見的區塊
-        const currentPosition = window.scrollY + window.innerHeight / 2
-        let currentSectionIndex = -1
-        
-        sections.forEach((section, index) => {
-          const sectionTop = section.offsetTop
-          const sectionBottom = sectionTop + section.offsetHeight
-          
-          if (currentPosition >= sectionTop && currentPosition < sectionBottom) {
-            currentSectionIndex = index
-          }
-        })
-        
-        // 如果找到當前區塊，滾動到下一個區塊
-        if (currentSectionIndex !== -1 && currentSectionIndex < sectionIds.length - 1) {
-          const nextSection = sections[currentSectionIndex + 1]
-          nextSection.scrollIntoView({ behavior: 'smooth' })
-        } else {
-          // 如果找不到當前區塊或已經是最後一個區塊，滾動到頁面高度的下一個位置
-          window.scrollTo({
-            top: currentPosition + window.innerHeight,
-            behavior: 'smooth'
-          })
-        }
-      } else {
-        // 如果沒有找到任何區塊，則簡單地向下滾動一個視窗高度
-        window.scrollTo({
-          top: window.scrollY + window.innerHeight,
-          behavior: 'smooth'
-        })
-      }
+      // 如果找不到目標元素，簡單地向下滾動一個視窗高度
+      window.scrollTo({
+        top: window.scrollY + window.innerHeight,
+        behavior: 'smooth'
+      })
     }
   }
 

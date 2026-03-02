@@ -3282,9 +3282,9 @@ neo-async@^2.6.2:
   resolved "https://registry.npmjs.org/neo-async/-/neo-async-2.6.2.tgz"
   integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
 
-next-sitemap@^1.6.203:
+next-sitemap@^1.9.12:
   version "1.9.12"
-  resolved "https://registry.npmmirror.com/next-sitemap/-/next-sitemap-1.9.12.tgz"
+  resolved "https://registry.npmjs.org/next-sitemap/-/next-sitemap-1.9.12.tgz"
   integrity sha512-kHXf4ZNAGLJyK16HbjzE5X9JlKwXtxW+9J4dh3oT7LSbU/+3bN+VqWjNw/776Otbanf7EJsvl51oQ78qQW5XBQ==
   dependencies:
     "@corex/deepmerge" "^2.6.148"
