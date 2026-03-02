@@ -13,15 +13,15 @@ export const MenuList = props => {
   const { customNav, customMenu } = props
   const { locale } = useGlobal()
   const router = useRouter()
-  
+
   // 修改：根據當前路由判斷是否為首頁
   const isHomePage = router.pathname === '/'
   const [navBar, setNavBar] = useState(!isHomePage) // 如果不是首頁，初始為 true
-  
+
   // 添加菜單展開狀態
   const [isOpen, setIsOpen] = useState(false)
   const [lockScreen, setLockScreen] = useState(false)
-  
+
   const [activeMenuIndex, setActiveMenuIndex] = useState(null)
   const navRef = useRef(null)
   const [isMobile, setIsMobile] = useState(false)
@@ -70,12 +70,12 @@ export const MenuList = props => {
     const checkIfMobile = () => {
       setIsMobile(window.innerWidth < 1024) // lg 斷點是 1024px
     }
-    
+
     checkIfMobile() // 初始檢查
-    
+
     // 監聽窗口大小變化
     window.addEventListener('resize', checkIfMobile)
-    
+
     return () => {
       window.removeEventListener('resize', checkIfMobile)
     }
@@ -105,7 +105,7 @@ export const MenuList = props => {
   useEffect(() => {
     setLockScreen(false)
     setActiveMenuIndex(null)
-    
+
     // 修改：當路由變化時，根據是否為首頁設置navBar狀態
     const isHomePage = router.pathname === '/'
     setNavBar(!isHomePage || window.scrollY > 100)
@@ -122,17 +122,17 @@ export const MenuList = props => {
         setNavBar(false)
       }
     }
-    
+
     // 初始設置，根據當前滾動位置和頁面設定導航欄狀態
     changeHeight()
-    
+
     window.addEventListener('scroll', changeHeight)
-    
+
     // 加載時顯示菜單動畫效果
     setTimeout(() => {
       setIsOpen(true)
     }, 200)
-    
+
     return () => {
       window.removeEventListener('scroll', changeHeight)
     }
@@ -146,19 +146,16 @@ export const MenuList = props => {
           onClick={() => setLockScreen(!lockScreen)}
           className='rounded-lg px-3 py-[6px] ring-primary focus:ring-2'>
           <span
-            className={`relative my-1.5 block h-0.5 w-[30px] ${isHomePage && !navBar ? 'bg-white' : 'bg-black dark:bg-white'} transition-all duration-300 ${
-              lockScreen ? ' top-[7px] rotate-45' : ' '
-            }`}
+            className={`relative my-1.5 block h-0.5 w-[30px] ${isHomePage && !navBar ? 'bg-white' : 'bg-black dark:bg-white'} transition-all duration-300 ${lockScreen ? ' top-[7px] rotate-45' : ' '
+              }`}
           />
           <span
-            className={`relative my-1.5 block h-0.5 w-[30px] ${isHomePage && !navBar ? 'bg-white' : 'bg-black dark:bg-white'} transition-all duration-300 ${
-              lockScreen ? 'opacity-0 ' : ' '
-            }`}
+            className={`relative my-1.5 block h-0.5 w-[30px] ${isHomePage && !navBar ? 'bg-white' : 'bg-black dark:bg-white'} transition-all duration-300 ${lockScreen ? 'opacity-0 ' : ' '
+              }`}
           />
           <span
-            className={`relative my-1.5 block h-0.5 w-[30px] ${isHomePage && !navBar ? 'bg-white' : 'bg-black dark:bg-white'} transition-all duration-300 ${
-              lockScreen ? ' top-[-8px] -rotate-45' : ' '
-            }`}
+            className={`relative my-1.5 block h-0.5 w-[30px] ${isHomePage && !navBar ? 'bg-white' : 'bg-black dark:bg-white'} transition-all duration-300 ${lockScreen ? ' top-[-8px] -rotate-45' : ' '
+              }`}
           />
         </button>
       </div>
@@ -168,12 +165,12 @@ export const MenuList = props => {
         <nav className="fixed left-0 top-[70px] z-50 h-[calc(100vh-70px)] w-full bg-dark/95 py-4 backdrop-blur-lg overflow-y-auto">
           <ul className="block px-6 py-2">
             {links && links?.map((link, index) => {
-              return <MenuItem 
-                key={`mobile-${index}`} 
-                link={link} 
-                index={index} 
-                isOpen={true} 
-                onMenuOpen={() => handleMenuOpen(index)} 
+              return <MenuItem
+                key={`mobile-${index}`}
+                link={link}
+                index={index}
+                isOpen={true}
+                onMenuOpen={() => handleMenuOpen(index)}
                 isAnyMenuOpen={activeMenuIndex !== null && activeMenuIndex !== index}
                 navBar={true}
                 isMobile={true}
@@ -187,12 +184,12 @@ export const MenuList = props => {
       <nav className="hidden lg:block lg:w-full lg:max-w-full desktop-menu">
         <ul className="flex">
           {links && links?.map((link, index) => {
-            return <MenuItem 
-              key={`desktop-${index}`} 
-              link={link} 
-              index={index} 
-              isOpen={isOpen} 
-              onMenuOpen={() => handleMenuOpen(index)} 
+            return <MenuItem
+              key={`desktop-${index}`}
+              link={link}
+              index={index}
+              isOpen={isOpen}
+              onMenuOpen={() => handleMenuOpen(index)}
               isAnyMenuOpen={activeMenuIndex !== null && activeMenuIndex !== index}
               navBar={navBar}
               isMobile={false}
@@ -244,7 +241,6 @@ export const MenuList = props => {
           background-color: white;
           border-radius: 8px;
           box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-          overflow: hidden;
         }
         
         /* 深色模式下子菜單容器 */

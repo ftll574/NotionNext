@@ -23,7 +23,7 @@ export const MenuItem = ({ link, index, isOpen, onMenuOpen, isAnyMenuOpen, navBa
   const toggleSubMenu = () => {
     const newState = !isSubMenuOpen
     setIsSubMenuOpen(newState)
-    
+
     // 通知父組件有菜單被打開
     if (newState && onMenuOpen) {
       onMenuOpen()
@@ -92,7 +92,7 @@ export const MenuItem = ({ link, index, isOpen, onMenuOpen, isAnyMenuOpen, navBa
         <li className={`relative group ${isMobile ? 'py-2 border-b border-gray-700/50' : ''}`}>
           <Link
             href={link.href}
-            target={link.external ? '_blank' : '_self'} 
+            target={link.external ? '_blank' : '_self'}
             rel={link.external ? 'noopener noreferrer' : ''}
             className={`flex items-center py-2 text-base font-medium transition-all duration-300 
               ${router.pathname === link.href ? 'text-primary' : ''}
@@ -135,8 +135,8 @@ export const MenuItem = ({ link, index, isOpen, onMenuOpen, isAnyMenuOpen, navBa
           {/* 二级菜单 - 優化手機版佈局 */}
           {isSubMenuOpen && (
             <div className={`
-              ${isMobile 
-                ? 'mt-2 pl-6 space-y-1' 
+              ${isMobile
+                ? 'mt-2 pl-6 space-y-1'
                 : 'lg:absolute lg:left-0 lg:top-full lg:w-[220px] lg:rounded-md lg:bg-white lg:px-2 lg:py-3 lg:shadow-lg lg:dark:bg-dark'
               }
             `}>
@@ -145,6 +145,11 @@ export const MenuItem = ({ link, index, isOpen, onMenuOpen, isAnyMenuOpen, navBa
                   // 檢查是否有三級菜單
                   const hasChildMenu = subMenu.childMenus && subMenu.childMenus.length > 0
 
+                  // 判斷是否為第一項或最後一項，加上對應的圓角
+                  const isFirstItem = subMenuIndex === 0;
+                  const isLastItem = subMenuIndex === link.subMenus.length - 1;
+                  const roundedClass = isMobile ? '' : `${isFirstItem ? 'rounded-t-md' : ''} ${isLastItem ? 'rounded-b-md' : ''}`;
+
                   return (
                     <li key={subMenuIndex} className={`relative ${isMobile ? 'py-1.5' : ''}`}>
                       {!hasChildMenu ? (
@@ -152,7 +157,7 @@ export const MenuItem = ({ link, index, isOpen, onMenuOpen, isAnyMenuOpen, navBa
                           href={subMenu.href}
                           target={subMenu.external ? '_blank' : '_self'}
                           rel={subMenu.external ? 'noopener noreferrer' : ''}
-                          className={`w-full flex items-center justify-between py-1.5 text-sm hover:text-primary
+                          className={`w-full flex items-center justify-between py-1.5 text-sm hover:text-primary ${roundedClass}
                             ${isMobile ? 'text-white/90' : 'text-dark dark:text-white lg:px-3'}
                             ${router.pathname === subMenu.href ? 'text-primary' : ''}`}>
                           <span className='inline-flex items-center'>
@@ -168,7 +173,7 @@ export const MenuItem = ({ link, index, isOpen, onMenuOpen, isAnyMenuOpen, navBa
                         <div className={`relative ${isMobile ? 'group/mobile' : 'group/child'}`}>
                           <button
                             onClick={(e) => toggleChildMenu(subMenuIndex, e)}
-                            className={`w-full text-left py-1.5 text-sm hover:text-primary flex justify-between items-center
+                            className={`w-full text-left py-1.5 text-sm hover:text-primary flex justify-between items-center ${roundedClass}
                               ${isMobile ? 'text-white/90' : 'text-dark px-3 dark:text-white'}`}>
                             <span className='flex items-center'>
                               {subMenu.icon && <i className={`${subMenu.icon} mr-2 w-5 text-center ${isMobile ? 'text-white/90' : ''}`} />}
@@ -187,9 +192,9 @@ export const MenuItem = ({ link, index, isOpen, onMenuOpen, isAnyMenuOpen, navBa
                           {/* 三級菜單 - 優化手機版顯示 */}
                           <div
                             className={`
-                              ${isMobile 
-                                ? `mt-1 pl-6 space-y-1 ${childMenuOpenStates[subMenuIndex] ? 'block' : 'hidden'}` 
-                                : `absolute left-full top-0 w-[220px] bg-white dark:bg-dark-2 rounded-sm shadow-lg p-2 -ml-1 
+                              ${isMobile
+                                ? `mt-1 pl-6 space-y-1 ${childMenuOpenStates[subMenuIndex] ? 'block' : 'hidden'}`
+                                : `absolute left-full top-0 w-[220px] bg-white dark:bg-dark-2 rounded-sm shadow-lg p-2 -ml-1 z-50
                                    ${childMenuOpenStates[subMenuIndex] ? 'block' : 'hidden'} 
                                    lg:hidden lg:group-hover/child:block`
                               }
