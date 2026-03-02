@@ -13,7 +13,7 @@ const CONFIG = {
   STARTER_HERO_TITLE_1: '專業塑膠原料供應商',
   STARTER_HERO_TITLE_2: '30年行業經驗，值得信賴的合作夥伴',
   // 英雄区两个按钮，如果TEXT留空则隐藏按钮
-  STARTER_HERO_BUTTON_1_TEXT: '了解產品',
+  STARTER_HERO_BUTTON_1_TEXT: '產品目錄',
   STARTER_HERO_BUTTON_1_URL: '/products',
   STARTER_HERO_BUTTON_2_TEXT: '聯繫我們',
   STARTER_HERO_BUTTON_2_URL: '#contact',
@@ -21,6 +21,7 @@ const CONFIG = {
 
   // 英雄区配图，如需隐藏，改为空值即可 ''
   STARTER_HERO_PREVIEW_IMAGE: 'images/starter/background/home2.jpg', // 产品预览图 ，默认读取public目录下图片
+  STARTER_HERO_PREVIEW_IMAGES: 'images/starter/background/home2.jpg,images/starter/background/home3.jpg,images/starter/background/home4.jpg', // 产品预览图 ，默认读取public目录下图片
   STARTER_HERO_BANNER_IMAGE: '', // hero区下方的全宽图
 
   // 顶部右侧导航按钮
@@ -59,8 +60,8 @@ const CONFIG = {
 
   // 首页ABOUT区块
   STARTER_ABOUT_ENABLE: true, // ABOUT区块开关
-  STARTER_ABOUT_TITLE: '30年專注塑膠原料行業',
-  STARTER_ABOUT_TEXT: '鑫葳塑膠成立於1993年，專注於高品質塑膠原料的供應與服務。<br/><br/>憑藉多年的行業經驗和穩定的供應鏈管理，我們為電子、汽車、家電等行業提供可靠的原材料支持，成為眾多製造企業的長期合作夥伴。',
+  STARTER_ABOUT_TITLE: '鑫葳團隊服務業界30年，專注塑膠原料行業',
+  STARTER_ABOUT_TEXT: '鑫葳塑膠專注於高品質塑膠原料的供應與服務。<br/><br/>憑藉多年的行業經驗和穩定的供應鏈管理，我們為電子、汽車、家電等行業提供可靠的原材料支持，成為眾多製造企業的長期合作夥伴。',
   STARTER_ABOUT_BUTTON_TEXT: '了解更多',
   STARTER_ABOUT_BUTTON_URL: '/about',
   STARTER_ABOUT_IMAGE_1: 'images/starter/meterial/meterial.jpg',
@@ -107,7 +108,7 @@ const CONFIG = {
   STARTER_PRICING_3_BUTTON_URL: '/special-consultation',
 
   // 首页用户测评区块
-  STARTER_TESTIMONIALS_ENABLE: true, // 测评区块开关
+  STARTER_TESTIMONIALS_ENABLE: false, // 测评区块开关
   STARTER_TESTIMONIALS_TITLE: '客戶評價',
   STARTER_TESTIMONIALS_TEXT_1: '客戶對我們的評價',
   STARTER_TESTIMONIALS_TEXT_2: '來自各行業客戶的真實反饋',
@@ -164,7 +165,7 @@ const CONFIG = {
   STARTER_FAQ_4_ANSWER: '是的，我們提供樣品測試服務。客戶可以在下大訂單前申請樣品進行測試，確保材料符合生產需求。部分特殊材料可能會收取樣品費用，具體請咨詢我們的銷售團隊。',
 
   // 团队成员区块
-  STARTER_TEAM_ENABLE: true, // 团队成员区块开关
+  STARTER_TEAM_ENABLE: false, // 团队成员区块开关
   STARTER_TEAM_TITLE: '專業團隊',
   STARTER_TEAM_TEXT_1: '我們的核心團隊',
   STARTER_TEAM_TEXT_2: '專業的團隊為您提供優質的產品和服務',
@@ -215,9 +216,9 @@ const CONFIG = {
   STARTER_CONTACT_ADDRESS_TEXT: '244 新北市林口區湖北里10鄰17之20號',
 
   // 電話
-  STARTER_CONTACT_PHONE_TITLE: '聯繫電話',
-  STARTER_CONTACT_PHONE_TEXT: '(886) 0938-321-132',
-
+  STARTER_CONTACT_PHONE_TITLE: '聯繫電話與傳真',
+  STARTER_CONTACT_PHONE_TEXT: '☎ (886) 0938-321-132',
+  STARTER_CONTACT_FAX_TEXT: '📠 (02) 2602-6967',
   // 郵箱
   STARTER_CONTACT_EMAIL_TITLE: '電子郵箱',
   STARTER_CONTACT_EMAIL_TEXT: 'tw.xinwei@gmail.com',
@@ -269,10 +270,6 @@ const CONFIG = {
       LINK_GROUP: [
         { TITLE: '公司首頁', URL: '/#home' },
         { TITLE: '關於鑫葳', URL: '/about' },
-        {
-          TITLE: '公司成員',
-          URL: '/member'
-        },
         {
           TITLE: '員工招募',
           URL: 'https://www.104.com.tw/company/1a2x6blwrp?jobsource=google'
@@ -345,19 +342,19 @@ const CONFIG = {
 
   STARTER_FOOTER_BLOG_LATEST_TITLE: '最新文章',
 
-  STARTER_FOOTER_PRIVACY_POLICY_TEXT: '隐私政策',
+  STARTER_FOOTER_PRIVACY_POLICY_TEXT: '隱私政策',
   STARTER_FOOTER_PRIVACY_POLICY_URL: '/privacy-policy',
 
-  STARTER_FOOTER_PRIVACY_LEGAL_NOTICE_TEXT: '法律声明',
+  STARTER_FOOTER_PRIVACY_LEGAL_NOTICE_TEXT: '法律聲明',
   STARTER_FOOTER_PRIVACY_LEGAL_NOTICE_URL: '/legacy-notice',
 
-  STARTER_FOOTER_PRIVACY_TERMS_OF_SERVICE_TEXT: '服务协议',
+  STARTER_FOOTER_PRIVACY_TERMS_OF_SERVICE_TEXT: '服務協議',
   STARTER_FOOTER_PRIVACY_TERMS_OF_SERVICE_URL: '/terms-of-use',
 
   // 404页面的提示语
-  STARTER_404_TITLE: '我们似乎找不到您要找的页面。',
-  STARTER_404_TEXT: '抱歉！您要查找的页面不存在。可能已经移动或删除。',
-  STARTER_404_BACK: '回到主页',
+  STARTER_404_TITLE: '我們似乎找不到您要找的頁面。',
+  STARTER_404_TEXT: '抱歉！您要查找的頁面不存在。可能已經移動或刪除。',
+  STARTER_404_BACK: '回到主頁',
 
   // 页面底部的行动呼吁模块
   STARTER_CTA_ENABLE: true,
@@ -366,10 +363,10 @@ const CONFIG = {
   STARTER_CTA_DESCRIPTION: '我們的專業團隊隨時為您提供技術諮詢和產品建議',
   STARTER_CTA_BUTTON: true,
   STARTER_CTA_BUTTON_URL: '/contact',
-  STARTER_CTA_BUTTON_TEXT: '免費獲取方案',
+  STARTER_CTA_BUTTON_TEXT: '免費獲取諮詢',
 
   STARTER_POST_REDIRECT_ENABLE: true, // 默認開啟重定向
-  STARTER_POST_REDIRECT_URL: 'https://blog.tangly1024.com', // 重定向域名
-  STARTER_NEWSLETTER: process.env.NEXT_PUBLIC_THEME_STARTER_NEWSLETTER || false // 是否开启邮件订阅 请先配置mailchimp功能 https://docs.tangly1024.com/article/notion-next-mailchimp
+  STARTER_POST_REDIRECT_URL: 'https://xin-wei.com/', // 重定向域名
+  STARTER_NEWSLETTER: process.env.NEXT_PUBLIC_THEME_STARTER_NEWSLETTER || false // 是否開啟郵件訂閱 請先配置mailchimp功能 https://docs.tangly1024.com/article/notion-next-mailchimp
 }
 export default CONFIG

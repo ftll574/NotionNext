@@ -2,7 +2,8 @@ import { siteConfig } from '@/lib/config'
 import SocialButton from '@/themes/fukasawa/components/SocialButton'
 import { Logo } from './Logo'
 import { SVGFooterCircleBG } from './svg/SVGFooterCircleBG'
-import SmartLink from '@/components/SmartLink'
+import Link from 'next/link'
+import React, { useEffect, useState } from 'react'
 
 /* eslint-disable @next/next/no-img-element */
 export const Footer = props => {
@@ -11,6 +12,12 @@ export const Footer = props => {
     ? props?.latestPosts.slice(0, footerPostCount)
     : []
   const STARTER_FOOTER_LINK_GROUP = siteConfig('STARTER_FOOTER_LINK_GROUP', [])
+  const [showStats, setShowStats] = useState(false)
+  
+  useEffect(() => {
+    setShowStats(true)
+  }, [])
+
   return (
     <>
       {/* <!-- ====== Footer Section Start --> */}
@@ -49,11 +56,11 @@ export const Footer = props => {
                       {item?.LINK_GROUP?.map((l, i) => {
                         return (
                           <li key={i}>
-                            <SmartLink
+                            <Link
                               href={l.URL}
                               className='mb-3 inline-block text-base text-gray-7 hover:text-primary'>
                               {l.TITLE}
-                            </SmartLink>
+                            </Link>
                           </li>
                         )
                       })}
@@ -73,7 +80,7 @@ export const Footer = props => {
                 <div className='flex flex-col gap-8'>
                   {latestPosts?.map((item, index) => {
                     return (
-                      <SmartLink
+                      <Link
                         key={index}
                         href={item?.href}
                         className='group flex items-center gap-[22px]'>
@@ -88,7 +95,7 @@ export const Footer = props => {
                         <span className='line-clamp-2 max-w-[180px] text-base text-gray-7 group-hover:text-white'>
                           {item.title}
                         </span>
-                      </SmartLink>
+                      </Link>
                     )
                   })}
                 </div>
@@ -105,19 +112,19 @@ export const Footer = props => {
               <div className='w-full px-4 md:w-2/3 lg:w-1/2'>
                 <div className='my-1'>
                   <div className='-mx-3 flex items-center justify-center md:justify-start'>
-                    <SmartLink
+                    <Link
                       href={siteConfig('STARTER_FOOTER_PRIVACY_POLICY_URL', '')}
                       className='px-3 text-base text-gray-7 hover:text-white hover:underline'>
                       {siteConfig('STARTER_FOOTER_PRIVACY_POLICY_TEXT')}
-                    </SmartLink>
-                    <SmartLink
+                    </Link>
+                    <Link
                       href={siteConfig(
                         'STARTER_FOOTER_PRIVACY_LEGAL_NOTICE_URL', ''
                       )}
                       className='px-3 text-base text-gray-7 hover:text-white hover:underline'>
                       {siteConfig('STARTER_FOOTER_PRIVACY_LEGAL_NOTICE_TEXT')}
-                    </SmartLink>
-                    <SmartLink
+                    </Link>
+                    <Link
                       href={siteConfig(
                         'STARTER_FOOTER_PRIVACY_TERMS_OF_SERVICE_URL', ''
                       )}
@@ -125,7 +132,7 @@ export const Footer = props => {
                       {siteConfig(
                         'STARTER_FOOTER_PRIVACY_TERMS_OF_SERVICE_TEXT', ''
                       )}
-                    </SmartLink>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -160,6 +167,35 @@ export const Footer = props => {
           <span className='absolute right-0 top-0 z-[-1]'>
             <SVGFooterCircleBG />
           </span>
+        </div>
+
+        {/* 版權區塊 */}
+        <div className="bg-primary/10 py-8">
+          <div className="container">
+            <div className="items-center justify-between text-center md:flex">
+              <p className="mb-6 text-base text-body-color dark:text-white md:mb-0">
+                {siteConfig('STARTER_FOOTER_COPYRIGHT')}
+              </p>
+              
+              {/* 只在客戶端渲染統計組件 */}
+              {showStats && (
+                <div className="flex items-center justify-center space-x-5">
+                  <div className="flex items-center space-x-2 text-sm text-body-color dark:text-white">
+                    <i className="fas fa-eye"></i>
+                    <span className="busuanzi_container_site_pv">
+                      總訪問量: <span className="busuanzi_value_site_pv"></span>
+                    </span>
+                  </div>
+                  <div className="flex items-center space-x-2 text-sm text-body-color dark:text-white">
+                    <i className="fas fa-users"></i>
+                    <span className="busuanzi_container_site_uv">
+                      訪客數: <span className="busuanzi_value_site_uv"></span>
+                    </span>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
         </div>
       </footer>
       {/* <!-- ====== Footer Section End --> */}
