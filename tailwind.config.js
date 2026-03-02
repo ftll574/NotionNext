@@ -51,9 +51,9 @@ module.exports = {
           7: '#D1D5DB',
           8: '#E5E7EB'
         },
-        primary: '#3758F9',
-        'blue-dark': '#1B44C8',
-        secondary: '#13C296',
+        primary: '#00629B',
+        'blue-dark': '#004A76',
+        secondary: '#FF7E00',
         'body-color': '#637381',
         'body-secondary': '#8899A8',
         warning: '#FBBF24',
@@ -77,6 +77,22 @@ module.exports = {
         'testimonial-btn': '0px 8px 15px 0px rgba(72, 72, 138, 0.08)',
         1: '0px 1px 3px 0px rgba(166, 175, 195, 0.40)',
         2: '0px 5px 12px 0px rgba(0, 0, 0, 0.10)'
+      },
+      gradientColorStops: theme => ({
+        ...theme('colors'),
+        'primary-light': '#0096db',
+      }),
+      animation: {
+        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+      },
+      fontSize: {
+        'base': '1.05rem',
+        'lg': '1.15rem',
+        'xl': '1.25rem',
+        '2xl': '1.5rem',
+        '3xl': '1.875rem',
+        '4xl': '2.25rem',
+        '5xl': '3rem',
       }
     }
   },
