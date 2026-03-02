@@ -212,18 +212,18 @@ const CONFIG = {
 
   // 地址
   STARTER_CONTACT_ADDRESS_TITLE: '公司地址',
-  STARTER_CONTACT_ADDRESS_TEXT: '244新北市林口區湖北里10鄰17之20號',
+  STARTER_CONTACT_ADDRESS_TEXT: '244 新北市林口區湖北里10鄰17之20號',
 
   // 電話
   STARTER_CONTACT_PHONE_TITLE: '聯繫電話',
-  STARTER_CONTACT_PHONE_TEXT: '(886)0938-321-132',
+  STARTER_CONTACT_PHONE_TEXT: '(886) 0938-321-132',
 
   // 郵箱
   STARTER_CONTACT_EMAIL_TITLE: '電子郵箱',
   STARTER_CONTACT_EMAIL_TEXT: 'tw.xinwei@gmail.com',
 
   // 外部留言表單鏈接 (可選)
-  STARTER_CONTACT_MSG_EXTERNAL_URL: 'https://forms.your-form-provider.com/contact-form',
+  STARTER_CONTACT_MSG_EXTERNAL_URL: 'https://noteforms.com/forms/wtefer',
 
   // 合作伙伴的图标
   STARTER_BRANDS_ENABLE: false, // 合作伙伴开关
