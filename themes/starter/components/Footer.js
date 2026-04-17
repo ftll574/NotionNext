@@ -12,7 +12,7 @@ export const Footer = props => {
     ? props?.latestPosts.slice(0, footerPostCount)
     : []
   const STARTER_FOOTER_LINK_GROUP = siteConfig('STARTER_FOOTER_LINK_GROUP', [])
-  
+
   // 移除useEffect和useState，直接使用客戶端渲染判斷
   const isBrowser = typeof window !== 'undefined'
 
@@ -21,7 +21,8 @@ export const Footer = props => {
       {/* <!-- ====== Footer Section Start --> */}
       <footer
         className='wow fadeInUp relative z-10 bg-[#090E34] pt-20 lg:pt-[100px]'
-        data-wow-delay='.15s'>
+        data-wow-delay='.15s'
+      >
         <div className='container'>
           <div className='-mx-4 flex flex-wrap'>
             <div className='w-full px-4 sm:w-1/2 md:w-1/2 lg:w-4/12 xl:w-3/12'>
@@ -45,16 +46,18 @@ export const Footer = props => {
               return (
                 <div
                   key={index}
-                  className='w-full px-4 sm:w-1/2 md:w-1/2 lg:w-2/12 xl:w-2/12'>
+                  className='w-full px-4 sm:w-1/2 md:w-1/2 lg:w-2/12 xl:w-2/12'
+                >
                   <div className='mb-10 w-full'>
                     <h4 className='mb-9 text-lg font-semibold text-white'>
                       {item.TITLE}
                     </h4>
-                    <ul className="space-y-2">
+                    <ul className='space-y-2'>
                       {item?.LINK_GROUP?.map((l, i) => {
                         // 檢查是否為產品目錄頁面帶有錨點的連結
-                        const isProductAnchorLink = l.URL.startsWith('/products#')
-                        
+                        const isProductAnchorLink =
+                          l.URL.startsWith('/products#')
+
                         return (
                           <li key={i}>
                             {isProductAnchorLink ? (
@@ -96,7 +99,8 @@ export const Footer = props => {
                       <Link
                         key={index}
                         href={item?.href}
-                        className='group flex items-center gap-[22px]'>
+                        className='group flex items-center gap-[22px]'
+                      >
                         {item.pageCoverThumbnail && (
                           <div className='overflow-hidden rounded w-20 h-12'>
                             <img
@@ -127,23 +131,39 @@ export const Footer = props => {
                   <div className='-mx-3 flex items-center justify-center md:justify-start'>
                     {siteConfig('STARTER_FOOTER_PRIVACY_POLICY_TEXT') && (
                       <Link
-                        href={siteConfig('STARTER_FOOTER_PRIVACY_POLICY_URL', '')}
-                        className='px-3 text-base text-gray-300 hover:text-white hover:underline'>
+                        href={siteConfig(
+                          'STARTER_FOOTER_PRIVACY_POLICY_URL',
+                          ''
+                        )}
+                        className='px-3 text-base text-gray-300 hover:text-white hover:underline'
+                      >
                         {siteConfig('STARTER_FOOTER_PRIVACY_POLICY_TEXT')}
                       </Link>
                     )}
                     {siteConfig('STARTER_FOOTER_PRIVACY_LEGAL_NOTICE_TEXT') && (
                       <Link
-                        href={siteConfig('STARTER_FOOTER_PRIVACY_LEGAL_NOTICE_URL', '')}
-                        className='px-3 text-base text-gray-300 hover:text-white hover:underline'>
+                        href={siteConfig(
+                          'STARTER_FOOTER_PRIVACY_LEGAL_NOTICE_URL',
+                          ''
+                        )}
+                        className='px-3 text-base text-gray-300 hover:text-white hover:underline'
+                      >
                         {siteConfig('STARTER_FOOTER_PRIVACY_LEGAL_NOTICE_TEXT')}
                       </Link>
                     )}
-                    {siteConfig('STARTER_FOOTER_PRIVACY_TERMS_OF_SERVICE_TEXT') && (
+                    {siteConfig(
+                      'STARTER_FOOTER_PRIVACY_TERMS_OF_SERVICE_TEXT'
+                    ) && (
                       <Link
-                        href={siteConfig('STARTER_FOOTER_PRIVACY_TERMS_OF_SERVICE_URL', '')}
-                        className='px-3 text-base text-gray-300 hover:text-white hover:underline'>
-                        {siteConfig('STARTER_FOOTER_PRIVACY_TERMS_OF_SERVICE_TEXT')}
+                        href={siteConfig(
+                          'STARTER_FOOTER_PRIVACY_TERMS_OF_SERVICE_URL',
+                          ''
+                        )}
+                        className='px-3 text-base text-gray-300 hover:text-white hover:underline'
+                      >
+                        {siteConfig(
+                          'STARTER_FOOTER_PRIVACY_TERMS_OF_SERVICE_TEXT'
+                        )}
                       </Link>
                     )}
                   </div>
@@ -157,7 +177,8 @@ export const Footer = props => {
                       href='https://github.com/tangly1024/NotionNext'
                       rel='nofollow noopner noreferrer'
                       target='_blank'
-                      className='px-1 text-gray-100 hover:underline'>
+                      className='px-1 text-gray-100 hover:underline'
+                    >
                       NotionNext {siteConfig('VERSION')}
                     </a>
                   </p>
@@ -167,14 +188,22 @@ export const Footer = props => {
           </div>
         </div>
 
-        {/* Footer 背景 */}
-        <div>
+        {/* Footer 背景（純裝飾） */}
+        <div aria-hidden='true'>
           <span className='absolute left-0 top-0 z-[-1]'>
-            <img src='/images/starter/footer/shape-1.svg' alt='' />
+            <img
+              src='/images/starter/footer/shape-1.svg'
+              alt=''
+              aria-hidden='true'
+            />
           </span>
 
           <span className='absolute bottom-0 right-0 z-[-1]'>
-            <img src='/images/starter/footer/shape-3.svg' alt='' />
+            <img
+              src='/images/starter/footer/shape-3.svg'
+              alt=''
+              aria-hidden='true'
+            />
           </span>
 
           <span className='absolute right-0 top-0 z-[-1]'>
@@ -183,26 +212,26 @@ export const Footer = props => {
         </div>
 
         {/* 版權區塊 */}
-        <div className="bg-primary/10 py-8">
-          <div className="container">
-            <div className="items-center justify-between text-center md:flex">
-              <p className="mb-6 text-base text-gray-300 md:mb-0">
+        <div className='bg-primary/10 py-8'>
+          <div className='container'>
+            <div className='items-center justify-between text-center md:flex'>
+              <p className='mb-6 text-base text-gray-300 md:mb-0'>
                 {siteConfig('STARTER_FOOTER_COPYRIGHT')}
               </p>
-              
+
               {/* 只在客戶端顯示統計組件 */}
               {isBrowser && (
-                <div className="flex items-center justify-center space-x-5">
-                  <div className="flex items-center space-x-2 text-sm text-gray-300">
-                    <i className="fas fa-eye"></i>
-                    <span className="busuanzi_container_site_pv">
-                      總訪問量: <span className="busuanzi_value_site_pv"></span>
+                <div className='flex items-center justify-center space-x-5'>
+                  <div className='flex items-center space-x-2 text-sm text-gray-300'>
+                    <i className='fas fa-eye'></i>
+                    <span className='busuanzi_container_site_pv'>
+                      總訪問量: <span className='busuanzi_value_site_pv'></span>
                     </span>
                   </div>
-                  <div className="flex items-center space-x-2 text-sm text-gray-300">
-                    <i className="fas fa-users"></i>
-                    <span className="busuanzi_container_site_uv">
-                      訪客數: <span className="busuanzi_value_site_uv"></span>
+                  <div className='flex items-center space-x-2 text-sm text-gray-300'>
+                    <i className='fas fa-users'></i>
+                    <span className='busuanzi_container_site_uv'>
+                      訪客數: <span className='busuanzi_value_site_uv'></span>
                     </span>
                   </div>
                 </div>

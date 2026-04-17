@@ -2,7 +2,6 @@
 import { siteConfig } from '@/lib/config'
 import SmartLink from '@/components/SmartLink'
 
-
 /**
  * 博文列表
  * @param {*} param0
@@ -12,7 +11,10 @@ export const Blog = ({ posts }) => {
   return (
     <>
       {/* <!-- ====== Blog Section Start --> */}
-      <section id="blog-section" className='bg-white pb-10 pt-20 dark:bg-dark lg:pb-20 lg:pt-[120px]'>
+      <section
+        id='blog-section'
+        className='bg-white pb-10 pt-20 dark:bg-dark lg:pb-20 lg:pt-[120px]'
+      >
         <div className='container mx-auto'>
           {/* 区块标题文字 */}
           <div className='-mx-4 flex flex-wrap justify-center'>
@@ -28,7 +30,8 @@ export const Blog = ({ posts }) => {
                   dangerouslySetInnerHTML={{
                     __html: siteConfig('STARTER_BLOG_TEXT_2')
                   }}
-                  className='text-base text-body-color dark:text-dark-6'></p>
+                  className='text-base text-body-color dark:text-dark-6'
+                ></p>
               </div>
             </div>
           </div>
@@ -39,17 +42,39 @@ export const Blog = ({ posts }) => {
                 <div key={index} className='w-full px-4 md:w-1/2 lg:w-1/3'>
                   <div
                     className='wow fadeInUp group mb-10'
-                    data-wow-delay='.1s'>
-                    <div className='mb-8 overflow-hidden rounded-[5px]'>
-                      {item.pageCoverThumbnail && (
-                        <SmartLink href={item?.href} className='block'>
+                    data-wow-delay='.1s'
+                  >
+                    <div className='mb-8 overflow-hidden rounded-[5px] aspect-[16/10]'>
+                      <SmartLink
+                        href={item?.href}
+                        aria-label={item.title}
+                        className='block w-full h-full'
+                      >
+                        {item.pageCoverThumbnail ? (
                           <img
                             src={item.pageCoverThumbnail}
                             alt={item.title}
-                            className='w-full transition group-hover:rotate-6 group-hover:scale-125'
+                            loading='lazy'
+                            className='w-full h-full object-cover transition group-hover:rotate-6 group-hover:scale-125'
                           />
-                        </SmartLink>
-                      )}
+                        ) : (
+                          <div className='relative w-full h-full bg-gradient-to-br from-primary to-[#0096db] transition group-hover:scale-105'>
+                            <div
+                              aria-hidden='true'
+                              className='absolute inset-0 opacity-20'
+                              style={{
+                                backgroundImage:
+                                  'radial-gradient(circle at 20% 20%, rgba(255,255,255,0.35) 0, transparent 40%), radial-gradient(circle at 80% 60%, rgba(255,255,255,0.25) 0, transparent 50%)'
+                              }}
+                            />
+                            <div className='relative z-10 h-full flex items-center justify-center p-6'>
+                              <span className='text-white text-lg font-semibold line-clamp-3 text-center leading-snug'>
+                                {item.title}
+                              </span>
+                            </div>
+                          </div>
+                        )}
+                      </SmartLink>
                     </div>
                     <div>
                       <span className='mb-6 inline-block rounded-[5px] bg-primary px-4 py-0.5 text-center text-xs font-medium leading-loose text-white'>
@@ -58,7 +83,8 @@ export const Blog = ({ posts }) => {
                       <h3>
                         <SmartLink
                           href={item?.href}
-                          className='mb-4 inline-block text-xl font-semibold text-dark hover:text-primary dark:text-white dark:hover:text-primary sm:text-2xl lg:text-xl xl:text-2xl'>
+                          className='mb-4 inline-block text-xl font-semibold text-dark hover:text-primary dark:text-white dark:hover:text-primary sm:text-2xl lg:text-xl xl:text-2xl'
+                        >
                           {item.title}
                         </SmartLink>
                       </h3>
@@ -71,7 +97,6 @@ export const Blog = ({ posts }) => {
               )
             })}
           </div>
-
         </div>
       </section>
       {/* <!-- ====== Blog Section End --> */}

@@ -29,39 +29,45 @@ const CONFIG = {
   STARTER_NAV_BUTTON_1_TEXT: '',
   STARTER_NAV_BUTTON_1_URL: '',
 
-  STARTER_NAV_BUTTON_2_TEXT: '', 
+  STARTER_NAV_BUTTON_2_TEXT: '',
   STARTER_NAV_BUTTON_2_URL: '',
 
   // 特性區塊
   STARTER_FEATURE_ENABLE: true,
   STARTER_FEATURE_TITLE: '高品質塑膠原料',
   STARTER_FEATURE_TEXT_1: '多元化的產品線滿足各種需求',
-  STARTER_FEATURE_TEXT_2: '從通用塑料到特種工程塑料，我們提供全面的塑膠原料解決方案',
+  STARTER_FEATURE_TEXT_2:
+    '從通用塑料到特種工程塑料，我們提供全面的塑膠原料解決方案',
 
   STARTER_FEATURE_1_TITLE_1: '嚴選品質保證',
-  STARTER_FEATURE_1_TEXT_1: '採用SGS認證標準檢測流程，嚴控每批原料物性穩定，提供可追溯品質報告，杜絕生產隱患',
+  STARTER_FEATURE_1_TEXT_1:
+    '採用SGS認證標準檢測流程，嚴控每批原料物性穩定，提供可追溯品質報告，杜絕生產隱患',
   STARTER_FEATURE_1_BUTTON_TEXT: '品質管理系統',
   STARTER_FEATURE_1_BUTTON_URL: '/products',
 
   STARTER_FEATURE_2_TITLE_1: '全系列產品供應',
-  STARTER_FEATURE_2_TEXT_1: '涵蓋TPE、PVC塑料等通用塑料、彈性塑膠、工程塑料，可依客戶需求調配特性，提供客製化配方',
+  STARTER_FEATURE_2_TEXT_1:
+    '涵蓋TPE、PVC塑料等通用塑料、彈性塑膠、工程塑料，可依客戶需求調配特性，提供客製化配方',
   STARTER_FEATURE_2_BUTTON_TEXT: '瀏覽產品系列',
   STARTER_FEATURE_2_BUTTON_URL: '/products',
 
   STARTER_FEATURE_3_TITLE_1: '技術支援服務',
-  STARTER_FEATURE_3_TEXT_1: '專業工程師團隊提供材料選型建議、應用問題診斷，協助客戶解決加工製程難題，提供物性數據與加工建議',
+  STARTER_FEATURE_3_TEXT_1:
+    '專業工程師團隊提供材料選型建議、應用問題診斷，協助客戶解決加工製程難題，提供物性數據與加工建議',
   STARTER_FEATURE_3_BUTTON_TEXT: '技術諮詢服務',
   STARTER_FEATURE_3_BUTTON_URL: '#contact-section',
 
   STARTER_FEATURE_4_TITLE_1: '靈活庫存管理',
-  STARTER_FEATURE_4_TEXT_1: '建立完善供應鏈體系，常規料型現貨供應，特殊需求快速調度，縮短交期至7-10個工作日',
+  STARTER_FEATURE_4_TEXT_1:
+    '建立完善供應鏈體系，常規料型現貨供應，特殊需求快速調度，縮短交期至7-10個工作日',
   STARTER_FEATURE_4_BUTTON_TEXT: '了解配送服務',
   STARTER_FEATURE_4_BUTTON_URL: '#contact-section',
 
   // 首頁ABOUT區塊
   STARTER_ABOUT_ENABLE: true, // ABOUT區塊開關
   STARTER_ABOUT_TITLE: '鑫葳團隊服務業界30年，專注塑膠原料行業',
-  STARTER_ABOUT_TEXT: '鑫葳塑膠專注於高品質塑膠原料的供應與服務。<br/><br/>憑藉多年的行業經驗和穩定的供應鏈管理，我們為電子、汽車、家電等行業提供可靠的原材料支持，成為眾多製造企業的長期合作夥伴。',
+  STARTER_ABOUT_TEXT:
+    '鑫葳塑膠專注於高品質塑膠原料的供應與服務。<br/><br/>憑藉多年的行業經驗和穩定的供應鏈管理，我們為電子、汽車、家電等行業提供可靠的原材料支持，成為眾多製造企業的長期合作夥伴。',
   STARTER_ABOUT_BUTTON_TEXT: '了解更多',
   STARTER_ABOUT_BUTTON_URL: '/about',
   STARTER_ABOUT_IMAGE_1: 'images/starter/meterial/meterial.jpg',
@@ -79,11 +85,12 @@ const CONFIG = {
   // 產品系列1
   STARTER_PRICING_1_TITLE: '通用型塑膠',
   STARTER_PRICING_1_IMAGE: 'images/starter/background/home2.jpg',
-  STARTER_PRICING_1_PRICE: '量大優惠', 
+  STARTER_PRICING_1_PRICE: '量大優惠',
   STARTER_PRICING_1_PRICE_CURRENCY: '',
   STARTER_PRICING_1_PRICE_PERIOD: '',
   STARTER_PRICING_1_HEADER: '適用於一般消費品製造',
-  STARTER_PRICING_1_FEATURES: 'PP聚丙烯｜射出級/擠出級,PE聚乙烯｜高/低密度,PS聚苯乙烯｜GPPS/HIPS,ABS｜各色標準料/改性料,提供物性數據與加工建議',
+  STARTER_PRICING_1_FEATURES:
+    'PP聚丙烯｜射出級/擠出級,PE聚乙烯｜高/低密度,PS聚苯乙烯｜GPPS/HIPS,ABS｜各色標準料/改性料,提供物性數據與加工建議',
   STARTER_PRICING_1_BUTTON_TEXT: '立即詢價',
   STARTER_PRICING_1_BUTTON_URL: '#contact-section',
 
@@ -95,7 +102,8 @@ const CONFIG = {
   STARTER_PRICING_2_PRICE_PERIOD: '',
   STARTER_PRICING_2_TAG: '熱銷',
   STARTER_PRICING_2_HEADER: '適用於需要彈性與韌性的應用場景',
-  STARTER_PRICING_2_FEATURES: 'TPE熱塑性彈性體｜多種硬度選擇,TPU聚氨酯彈性體｜優異耐磨性,PVC軟質塑膠｜符合環保標準,TPV彈性材料｜耐化學良好,提供物性數據與加工建議',
+  STARTER_PRICING_2_FEATURES:
+    'TPE熱塑性彈性體｜多種硬度選擇,TPU聚氨酯彈性體｜優異耐磨性,PVC軟質塑膠｜符合環保標準,TPV彈性材料｜耐化學良好,提供物性數據與加工建議',
   STARTER_PRICING_2_BUTTON_TEXT: '了解更多',
   STARTER_PRICING_2_BUTTON_URL: '#contact-section',
 
@@ -107,9 +115,49 @@ const CONFIG = {
   STARTER_PRICING_3_PRICE_PERIOD: '',
   STARTER_PRICING_3_TAG: '高性能',
   STARTER_PRICING_3_HEADER: '適用於高要求工業應用',
-  STARTER_PRICING_3_FEATURES: 'PA尼龍系列｜PA6/PA66/改性,PC聚碳酸酯｜透明/阻燃級,POM聚甲醛｜高剛性/耐磨,PBT聚對苯二甲酸丁二醇酯,專業技術支援與物性測試',
+  STARTER_PRICING_3_FEATURES:
+    'PA尼龍系列｜PA6/PA66/改性,PC聚碳酸酯｜透明/阻燃級,POM聚甲醛｜高剛性/耐磨,PBT聚對苯二甲酸丁二醇酯,專業技術支援與物性測試',
   STARTER_PRICING_3_BUTTON_TEXT: '技術諮詢',
   STARTER_PRICING_3_BUTTON_URL: '#contact-section',
+
+  // 服務產業信任指標區塊
+  STARTER_INDUSTRIES_ENABLE: true,
+  STARTER_INDUSTRIES_TITLE: '服務產業',
+  STARTER_INDUSTRIES_TEXT_1: '跨產業的可靠原料夥伴',
+  STARTER_INDUSTRIES_TEXT_2:
+    '30 年深耕，廣獲電子、汽車、家電、醫療、包裝等產業客戶信賴',
+  STARTER_INDUSTRIES_STATS: [
+    { value: '30+', label: '年產業經驗' },
+    { value: '1000+', label: '長期合作客戶' },
+    { value: '50+', label: '原料品項' },
+    { value: '7-10', label: '工作日交期' }
+  ],
+  STARTER_INDUSTRIES_ITEMS: [
+    {
+      name: '電子',
+      icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="100%" height="100%"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 3v2m6-2v2M9 19v2m6-2v2M3 9h2m-2 6h2m16-6h-2m2 6h-2M7 7h10v10H7z"/></svg>'
+    },
+    {
+      name: '汽車',
+      icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="100%" height="100%"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 17h14l-1.5-6a2 2 0 00-1.94-1.5H8.44A2 2 0 006.5 11L5 17zm0 0v2m14-2v2M7 14h.01M17 14h.01"/></svg>'
+    },
+    {
+      name: '家電',
+      icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="100%" height="100%"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 4h14v16H5V4zm2 3h10M7 11h10M7 15h6"/></svg>'
+    },
+    {
+      name: '醫療',
+      icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="100%" height="100%"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4v16m-8-8h16"/></svg>'
+    },
+    {
+      name: '包裝',
+      icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="100%" height="100%"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 7l-8-4-8 4v10l8 4 8-4V7zM4 7l8 4m0 0l8-4m-8 4v10"/></svg>'
+    },
+    {
+      name: '工業',
+      icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="100%" height="100%"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 20h18M5 20V10l5 3V10l5 3V8l4 2v10"/></svg>'
+    }
+  ],
 
   // 首頁用戶評價區塊
   STARTER_TESTIMONIALS_ENABLE: false, // 評價區塊開關
@@ -121,7 +169,8 @@ const CONFIG = {
   // 這裡不支援CONFIG和環境變數，需要一一修改此處程式碼。
   STARTER_TESTIMONIALS_ITEMS: [
     {
-      STARTER_TESTIMONIALS_ITEM_CONTENT: '通過與這家供應商的合作，我們顯著提高了產品質量，同時降低了材料不穩定導致的生產問題。他們的技術團隊非常專業，提供了很多有價值的建議。',
+      STARTER_TESTIMONIALS_ITEM_CONTENT:
+        '通過與這家供應商的合作，我們顯著提高了產品質量，同時降低了材料不穩定導致的生產問題。他們的技術團隊非常專業，提供了很多有價值的建議。',
       STARTER_TESTIMONIALS_ITEM_AVATAR: '/images/testimonials/client1.jpg',
       STARTER_TESTIMONIALS_ITEM_NICKNAME: '李鎮宇',
       STARTER_TESTIMONIALS_ITEM_DESCRIPTION: '電子產品製造商',
@@ -129,7 +178,8 @@ const CONFIG = {
       STARTER_TESTIMONIALS_ITEM_URL: '#'
     },
     {
-      STARTER_TESTIMONIALS_ITEM_CONTENT: '作為汽車零部件生產商，我們對原材料的要求非常嚴格。這家公司不僅能提供符合我們標準的高品質材料，還能根據我們的特殊需求進行調整。',
+      STARTER_TESTIMONIALS_ITEM_CONTENT:
+        '作為汽車零部件生產商，我們對原材料的要求非常嚴格。這家公司不僅能提供符合我們標準的高品質材料，還能根據我們的特殊需求進行調整。',
       STARTER_TESTIMONIALS_ITEM_AVATAR: '/images/testimonials/client2.jpg',
       STARTER_TESTIMONIALS_ITEM_NICKNAME: '李智宇',
       STARTER_TESTIMONIALS_ITEM_DESCRIPTION: '汽車零部件製造商',
@@ -137,7 +187,8 @@ const CONFIG = {
       STARTER_TESTIMONIALS_ITEM_URL: '#'
     },
     {
-      STARTER_TESTIMONIALS_ITEM_CONTENT: '我們與該供應商合作已超過5年，他們始終保持穩定的供應和優質的服務。即使在原材料短缺的時期，他們也能確保我們的訂單優先得到滿足。',
+      STARTER_TESTIMONIALS_ITEM_CONTENT:
+        '我們與該供應商合作已超過5年，他們始終保持穩定的供應和優質的服務。即使在原材料短缺的時期，他們也能確保我們的訂單優先得到滿足。',
       STARTER_TESTIMONIALS_ITEM_AVATAR: '/images/testimonials/client3.jpg',
       STARTER_TESTIMONIALS_ITEM_NICKNAME: '李綺',
       STARTER_TESTIMONIALS_ITEM_DESCRIPTION: '家用電器製造商',
@@ -154,19 +205,23 @@ const CONFIG = {
 
   // 問題1
   STARTER_FAQ_1_QUESTION: '你們提供哪些類型的塑膠原料？',
-  STARTER_FAQ_1_ANSWER: '我們提供各種類型的塑膠原料，包括通用塑料（PP、PE、PS等）、工程塑料（PA、PC、POM等）。我們可以根據客戶的具體需求提供定制解決方案。',
+  STARTER_FAQ_1_ANSWER:
+    '我們提供各種類型的塑膠原料，包括通用塑料（PP、PE、PS等）、工程塑料（PA、PC、POM等）。我們可以根據客戶的具體需求提供定制解決方案。',
 
   // 問題2
   STARTER_FAQ_2_QUESTION: '如何確保原料的品質？',
-  STARTER_FAQ_2_ANSWER: '我們與全球知名供應商建立了長期穩定的合作關係，所有原料均經過嚴格的品質檢測流程。我們擁有專業的檢測設備和團隊，確保每批原料符合國際標準和客戶要求。',
+  STARTER_FAQ_2_ANSWER:
+    '我們與全球知名供應商建立了長期穩定的合作關係，所有原料均經過嚴格的品質檢測流程。我們擁有專業的檢測設備和團隊，確保每批原料符合國際標準和客戶要求。',
 
   // 問題3
   STARTER_FAQ_3_QUESTION: '訂單交付時間是多久？',
-  STARTER_FAQ_3_ANSWER: '常備塑料產品通常在確認訂單後1-3個工作日內交付，視訂單量和運輸方式而定。針對長期合作客戶，我們提供庫存預留服務，可以實現更快的交付時間。',
+  STARTER_FAQ_3_ANSWER:
+    '常備塑料產品通常在確認訂單後1-3個工作日內交付，視訂單量和運輸方式而定。針對長期合作客戶，我們提供庫存預留服務，可以實現更快的交付時間。',
 
   // 問題4
   STARTER_FAQ_4_QUESTION: '你們是否提供樣品測試？',
-  STARTER_FAQ_4_ANSWER: '是的，我們提供樣品測試服務。客戶可以在下大訂單前申請樣品進行測試，確保材料符合生產需求。部分特殊材料可能會收取樣品費用，具體請諮詢我們的銷售團隊。',
+  STARTER_FAQ_4_ANSWER:
+    '是的，我們提供樣品測試服務。客戶可以在下大訂單前申請樣品進行測試，確保材料符合生產需求。部分特殊材料可能會收取樣品費用，具體請諮詢我們的銷售團隊。',
 
   // 團隊成員區塊
   STARTER_TEAM_ENABLE: false, // 團隊成員區塊開關
@@ -245,6 +300,10 @@ const CONFIG = {
   STARTER_CONTACT_EMAIL_TITLE: '電子郵箱',
   STARTER_CONTACT_EMAIL_TEXT: 'tw.xinwei@gmail.com',
 
+  // 營業時間（支援多行；以 \n 分隔）
+  STARTER_CONTACT_HOURS_TITLE: '營業時間',
+  STARTER_CONTACT_HOURS: '週一至週五: 8:00 - 17:00\n週六、日: 休息',
+
   // 外部留言表單連結 (可選)
   STARTER_CONTACT_MSG_EXTERNAL_URL: 'https://noteforms.com/forms/wtefer',
 
@@ -283,7 +342,8 @@ const CONFIG = {
     }
   ],
 
-  STARTER_FOOTER_SLOGAN: '專業塑膠原料供應商，為您的生產提供優質材料與全方位服務。',
+  STARTER_FOOTER_SLOGAN:
+    '專業塑膠原料供應商，為您的生產提供優質材料與全方位服務。',
 
   // 頁尾三列選單組
   STARTER_FOOTER_LINK_GROUP: [
@@ -309,17 +369,17 @@ const CONFIG = {
           TITLE: 'PP 特性',
           URL: '/pp-feature'
         },
-        { 
-          TITLE: 'PS 特性', 
-          URL: '/ps-feature' 
+        {
+          TITLE: 'PS 特性',
+          URL: '/ps-feature'
         },
-        { 
-          TITLE: 'PVC 特性', 
-          URL: '/pvc-feature' 
+        {
+          TITLE: 'PVC 特性',
+          URL: '/pvc-feature'
         },
-        { 
-          TITLE: 'ABS 特性', 
-          URL: '/abs-feature' 
+        {
+          TITLE: 'ABS 特性',
+          URL: '/abs-feature'
         }
       ]
     },
@@ -403,6 +463,6 @@ const CONFIG = {
   STARTER_POST_REDIRECT_URL: 'https://xin-wei.com/', // 重定向域名
   STARTER_NEWSLETTER: process.env.NEXT_PUBLIC_THEME_STARTER_NEWSLETTER || false, // 是否開啟郵件訂閱 請先配置mailchimp功能 https://docs.tangly1024.com/article/notion-next-mailchimp
 
-  STARTER_MENU_ARCHIVE: true,
+  STARTER_MENU_ARCHIVE: true
 }
 export default CONFIG

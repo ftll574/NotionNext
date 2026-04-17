@@ -15,6 +15,7 @@ import { Brand } from './components/Brand'
 import { Contact } from './components/Contact'
 import { FAQ } from './components/FAQ'
 import { Features } from './components/Features'
+import { Industries } from './components/Industries'
 import { Footer } from './components/Footer'
 import { Header } from './components/Header'
 import { Hero } from './components/Hero'
@@ -58,7 +59,7 @@ const LayerContext = createContext()
  */
 const LayoutBase = props => {
   const { children } = props
-  // 极简模式，会隐藏掉页头页脚等组件，便于嵌入网页等功能 
+  // 极简模式，会隐藏掉页头页脚等组件，便于嵌入网页等功能
   const { isLiteMode } = useGlobal()
   const router = useRouter()
 
@@ -80,7 +81,8 @@ const LayoutBase = props => {
   return (
     <div
       id='theme-starter'
-      className={`${siteConfig('FONT_STYLE')} min-h-screen flex flex-col dark:bg-[#212b36] scroll-smooth`}>
+      className={`${siteConfig('FONT_STYLE')} min-h-screen flex flex-col dark:bg-[#212b36] scroll-smooth`}
+    >
       <Style />
       <SchemaOrg />
 
@@ -131,15 +133,32 @@ const LayoutIndex = props => {
     <>
       <Head>
         <title>{pageTitle}</title>
-        <meta name="description" content={pageDescription} />
-        <meta name="keywords" content={BLOG.KEYWORDS} />
-        <meta property="og:title" content={pageTitle} />
-        <meta property="og:description" content={pageDescription} />
-        <meta property="og:url" content={canonicalURL} />
-        {props?.post?.pageCoverThumbnail && (
-          <meta property="og:image" content={props.post.pageCoverThumbnail} />
-        )}
-        <link rel="canonical" href={canonicalURL} />
+        <meta name='description' content={pageDescription} />
+        <meta name='keywords' content={BLOG.KEYWORDS} />
+        <meta property='og:type' content='website' />
+        <meta property='og:site_name' content={BLOG.TITLE} />
+        <meta property='og:locale' content='zh_TW' />
+        <meta property='og:title' content={pageTitle} />
+        <meta property='og:description' content={pageDescription} />
+        <meta property='og:url' content={canonicalURL} />
+        <meta
+          property='og:image'
+          content={
+            props?.post?.pageCoverThumbnail ||
+            `${BLOG.LINK}/images/starter/background/home.png`
+          }
+        />
+        <meta name='twitter:card' content='summary_large_image' />
+        <meta name='twitter:title' content={pageTitle} />
+        <meta name='twitter:description' content={pageDescription} />
+        <meta
+          name='twitter:image'
+          content={
+            props?.post?.pageCoverThumbnail ||
+            `${BLOG.LINK}/images/starter/background/home.png`
+          }
+        />
+        <link rel='canonical' href={canonicalURL} />
       </Head>
 
       {/* 英雄区 */}
@@ -147,6 +166,9 @@ const LayoutIndex = props => {
 
       {/* 关于 */}
       {siteConfig('STARTER_ABOUT_ENABLE', true, CONFIG) && <About />}
+
+      {/* 服務產業信任指標 */}
+      {siteConfig('STARTER_INDUSTRIES_ENABLE', true, CONFIG) && <Industries />}
 
       {/* 产品特性 */}
       {siteConfig('STARTER_FEATURE_ENABLE', true, CONFIG) && <Features />}
@@ -213,7 +235,7 @@ const LayoutSlug = props => {
   const metaKeywords = post?.tags ? post.tags.join(',') : BLOG.KEYWORDS
 
   // 檢查是否需要 noindex (假設 post 物件中直接有 noIndex 布林屬性)
-  const shouldNoIndex = post?.noIndex === true;
+  const shouldNoIndex = post?.noIndex === true
 
   // 如果 是 /article/[slug] 的文章路径则視情況进行重定向到另一个域名
   if (
@@ -237,16 +259,16 @@ const LayoutSlug = props => {
     <>
       <Head>
         <title>{metaTitle}</title>
-        <meta name="description" content={metaDescription} />
-        <meta name="keywords" content={metaKeywords} />
-        {shouldNoIndex && <meta name="robots" content="noindex" />}
-        <meta property="og:title" content={metaTitle} />
-        <meta property="og:description" content={metaDescription} />
-        <meta property="og:url" content={canonicalURL} />
+        <meta name='description' content={metaDescription} />
+        <meta name='keywords' content={metaKeywords} />
+        {shouldNoIndex && <meta name='robots' content='noindex' />}
+        <meta property='og:title' content={metaTitle} />
+        <meta property='og:description' content={metaDescription} />
+        <meta property='og:url' content={canonicalURL} />
         {post?.pageCoverThumbnail && (
-          <meta property="og:image" content={post.pageCoverThumbnail} />
+          <meta property='og:image' content={post.pageCoverThumbnail} />
         )}
-        <link rel="canonical" href={canonicalURL} />
+        <link rel='canonical' href={canonicalURL} />
       </Head>
       <Banner title={post?.title} description={post?.summary} />
       <div className='container grow'>
@@ -307,8 +329,12 @@ const LayoutSearch = props => {
   const currentSearch = keyword || router?.query?.s
   const { locale } = useGlobal()
 
-  const pageTitle = currentSearch ? `「${currentSearch}」的搜尋結果 - ${BLOG.AUTHOR}` : `網站搜尋 - ${BLOG.AUTHOR}`
-  const pageDescription = currentSearch ? `查看鑫葳貿易有限公司關於「${currentSearch}」的所有搜尋結果。` : `在鑫葳貿易有限公司網站內搜尋您感興趣的內容。`
+  const pageTitle = currentSearch
+    ? `「${currentSearch}」的搜尋結果 - ${BLOG.AUTHOR}`
+    : `網站搜尋 - ${BLOG.AUTHOR}`
+  const pageDescription = currentSearch
+    ? `查看鑫葳貿易有限公司關於「${currentSearch}」的所有搜尋結果。`
+    : `在鑫葳貿易有限公司網站內搜尋您感興趣的內容。`
   const canonicalURL = BLOG.LINK + router.asPath
 
   useEffect(() => {
@@ -327,12 +353,17 @@ const LayoutSearch = props => {
     <>
       <Head>
         <title>{pageTitle}</title>
-        <meta name="description" content={pageDescription} />
-        <meta name="keywords" content={currentSearch ? `${currentSearch}, ${BLOG.KEYWORDS}` : BLOG.KEYWORDS} />
-        <meta property="og:title" content={pageTitle} />
-        <meta property="og:description" content={pageDescription} />
-        <meta property="og:url" content={canonicalURL} />
-        <link rel="canonical" href={canonicalURL} />
+        <meta name='description' content={pageDescription} />
+        <meta
+          name='keywords'
+          content={
+            currentSearch ? `${currentSearch}, ${BLOG.KEYWORDS}` : BLOG.KEYWORDS
+          }
+        />
+        <meta property='og:title' content={pageTitle} />
+        <meta property='og:description' content={pageDescription} />
+        <meta property='og:url' content={canonicalURL} />
+        <link rel='canonical' href={canonicalURL} />
       </Head>
       <section className='max-w-7xl mx-auto bg-white pb-10 pt-20 dark:bg-dark lg:pb-20 lg:pt-[120px]'>
         <SearchInput {...props} />
@@ -356,12 +387,15 @@ const LayoutArchive = props => {
   const allPosts = Object.values(archivePosts).flat()
 
   // 獲取所有可用類別
-  const categories = [...new Set(allPosts.map(post => post.category || '未分類'))];
+  const categories = [
+    ...new Set(allPosts.map(post => post.category || '未分類'))
+  ]
 
   // 根據選中的類別過濾文章
-  const filteredPosts = selectedCategory === 'all'
-    ? allPosts
-    : allPosts.filter(post => post.category === selectedCategory);
+  const filteredPosts =
+    selectedCategory === 'all'
+      ? allPosts
+      : allPosts.filter(post => post.category === selectedCategory)
 
   return (
     <section className='bg-white dark:bg-dark py-16 lg:py-20'>
@@ -386,20 +420,20 @@ const LayoutArchive = props => {
 const Layout404 = props => {
   const router = useRouter()
   const canonicalURL = BLOG.LINK + router.asPath
-  const pageTitle = `頁面未找到 (404) - ${BLOG.AUTHOR}`;
-  const pageDescription = `抱歉，您所尋找的頁面不存在。請檢查網址或返回首頁。`;
+  const pageTitle = `頁面未找到 (404) - ${BLOG.AUTHOR}`
+  const pageDescription = `抱歉，您所尋找的頁面不存在。請檢查網址或返回首頁。`
 
   return (
     <>
       <Head>
         <title>{pageTitle}</title>
-        <meta name="description" content={pageDescription} />
+        <meta name='description' content={pageDescription} />
         {/* 404 頁面通常不需要被索引，可以考慮加上 noindex，但如果希望用戶能搜到404提示則不用加 */}
         {/* <meta name="robots" content="noindex" /> */}
-        <meta property="og:title" content={pageTitle} />
-        <meta property="og:description" content={pageDescription} />
-        <meta property="og:url" content={canonicalURL} />
-        <link rel="canonical" href={canonicalURL} />
+        <meta property='og:title' content={pageTitle} />
+        <meta property='og:description' content={pageDescription} />
+        <meta property='og:url' content={canonicalURL} />
+        <link rel='canonical' href={canonicalURL} />
       </Head>
       {/* <!-- ====== 404 Section Start --> */}
       <section className='bg-white py-20 dark:bg-dark-2 lg:py-[110px]'>
@@ -427,7 +461,8 @@ const Layout404 = props => {
                 </p>
                 <SmartLink
                   href='/'
-                  className='py-3 text-base font-medium text-white transition rounded-md bg-dark px-7 hover:bg-primary'>
+                  className='py-3 text-base font-medium text-white transition rounded-md bg-dark px-7 hover:bg-primary'
+                >
                   {siteConfig('STARTER_404_BACK')}
                 </SmartLink>
               </div>
@@ -455,36 +490,36 @@ const LayoutPostList = props => {
 
   // 根據路徑設定特定的 title 和 description
   if (router.pathname === '/products') {
-    pageTitle = `所有產品 - ${BLOG.AUTHOR}`;
-    pageDescription = `探索鑫葳貿易有限公司提供的各類高品質塑膠原料，包括PP、PE、PS、ABS等，滿足您的各種工業應用需求。`;
+    pageTitle = `所有產品 - ${BLOG.AUTHOR}`
+    pageDescription = `探索鑫葳貿易有限公司提供的各類高品質塑膠原料，包括PP、PE、PS、ABS等，滿足您的各種工業應用需求。`
   } else if (router.pathname === '/about') {
-    pageTitle = `關於我們 - ${BLOG.AUTHOR}`;
-    pageDescription = `了解鑫葳貿易有限公司的歷史、使命與價值觀。我們是您值得信賴的塑膠原料合作夥伴，擁有超過30年的產業經驗。`;
+    pageTitle = `關於我們 - ${BLOG.AUTHOR}`
+    pageDescription = `了解鑫葳貿易有限公司的歷史、使命與價值觀。我們是您值得信賴的塑膠原料合作夥伴，擁有超過30年的產業經驗。`
   } else if (router.pathname === '/contact') {
-    pageTitle = `聯絡我們 - ${BLOG.AUTHOR}`;
-    pageDescription = `聯絡鑫葳貿易有限公司，獲取專業的塑膠原料解決方案、產品報價或技術支援。我們期待與您合作。`;
+    pageTitle = `聯絡我們 - ${BLOG.AUTHOR}`
+    pageDescription = `聯絡鑫葳貿易有限公司，獲取專業的塑膠原料解決方案、產品報價或技術支援。我們期待與您合作。`
   } else if (category) {
-    pageTitle = `${category} - 分類文章 - ${BLOG.AUTHOR}`;
-    pageDescription = `瀏覽鑫葳貿易在「${category}」分類下的所有文章與資訊。`;
+    pageTitle = `${category} - 分類文章 - ${BLOG.AUTHOR}`
+    pageDescription = `瀏覽鑫葳貿易在「${category}」分類下的所有文章與資訊。`
   } else if (tag) {
-    pageTitle = `${tag} - 標籤文章 - ${BLOG.AUTHOR}`;
-    pageDescription = `查找鑫葳貿易所有標記為「${tag}」的相關文章與內容。`;
+    pageTitle = `${tag} - 標籤文章 - ${BLOG.AUTHOR}`
+    pageDescription = `查找鑫葳貿易所有標記為「${tag}」的相關文章與內容。`
   } else if (router.pathname === '/archive') {
     // Archive 頁面可能有自己的 LayoutArchive 元件，但如果由 LayoutPostList 處理，則使用此設定
-    pageTitle = `文章存檔 - ${BLOG.AUTHOR}`;
-    pageDescription = `瀏覽鑫葳貿易有限公司所有文章，獲取塑膠產業最新資訊與技術分享。`;
+    pageTitle = `文章存檔 - ${BLOG.AUTHOR}`
+    pageDescription = `瀏覽鑫葳貿易有限公司所有文章，獲取塑膠產業最新資訊與技術分享。`
   }
 
   return (
     <>
       <Head>
         <title>{pageTitle}</title>
-        <meta name="description" content={pageDescription} />
-        <meta name="keywords" content={BLOG.KEYWORDS} />
-        <meta property="og:title" content={pageTitle} />
-        <meta property="og:description" content={pageDescription} />
-        <meta property="og:url" content={canonicalURL} />
-        <link rel="canonical" href={canonicalURL} />
+        <meta name='description' content={pageDescription} />
+        <meta name='keywords' content={BLOG.KEYWORDS} />
+        <meta property='og:title' content={pageTitle} />
+        <meta property='og:description' content={pageDescription} />
+        <meta property='og:url' content={canonicalURL} />
+        <link rel='canonical' href={canonicalURL} />
       </Head>
       {/* <!-- ====== Blog Section Start --> */}
       <section className='bg-white pb-10 pt-20 dark:bg-dark lg:pb-20 lg:pt-[120px]'>
@@ -511,7 +546,8 @@ const LayoutPostList = props => {
                       dangerouslySetInnerHTML={{
                         __html: siteConfig('STARTER_BLOG_TEXT_2')
                       }}
-                      className='text-base text-body-color dark:text-dark-6'></p>
+                      className='text-base text-body-color dark:text-dark-6'
+                    ></p>
                   </>
                 )}
               </div>
@@ -524,7 +560,8 @@ const LayoutPostList = props => {
                 <div key={index} className='w-full px-4 md:w-1/2 lg:w-1/3'>
                   <div
                     className='wow fadeInUp group mb-10'
-                    data-wow-delay='.1s'>
+                    data-wow-delay='.1s'
+                  >
                     <div className='mb-8 overflow-hidden rounded-[5px]'>
                       <SmartLink href={item?.href} className='block'>
                         <img
@@ -541,7 +578,8 @@ const LayoutPostList = props => {
                       <h3>
                         <SmartLink
                           href={item?.href}
-                          className='mb-4 inline-block text-xl font-semibold text-dark hover:text-primary dark:text-white dark:hover:text-primary sm:text-2xl lg:text-xl xl:text-2xl'>
+                          className='mb-4 inline-block text-xl font-semibold text-dark hover:text-primary dark:text-white dark:hover:text-primary sm:text-2xl lg:text-xl xl:text-2xl'
+                        >
                           {item.title}
                         </SmartLink>
                       </h3>
@@ -576,18 +614,21 @@ const LayoutCategoryIndex = props => {
         </span>
         <div
           id='category-list'
-          className='duration-200 flex flex-wrap justify-center items-center '>
+          className='duration-200 flex flex-wrap justify-center items-center '
+        >
           {categoryOptions?.map(category => {
             return (
               <SmartLink
                 key={category.name}
                 href={`/category/${category.name}`}
                 passHref
-                legacyBehavior>
+                legacyBehavior
+              >
                 <h2
                   className={
                     'hover:text-black text-2xl font-semibold text-dark sm:text-4xl md:text-[40px] md:leading-[1.2] dark:hover:text-white dark:text-gray-300 dark:hover:bg-gray-600 px-5 cursor-pointer py-2 hover:bg-gray-100'
-                  }>
+                  }
+                >
                   <i className='mr-4 fas fa-folder' />
                   {category.name}({category.count})
                 </h2>
@@ -616,7 +657,8 @@ const LayoutTagIndex = props => {
         </span>
         <div
           id='tags-list'
-          className='duration-200 flex flex-wrap justify-center items-center'>
+          className='duration-200 flex flex-wrap justify-center items-center'
+        >
           {tagOptions.map(tag => {
             return (
               <div key={tag.name} className='p-2'>
@@ -624,7 +666,8 @@ const LayoutTagIndex = props => {
                   key={tag}
                   href={`/tag/${encodeURIComponent(tag.name)}`}
                   passHref
-                  className={`cursor-pointer inline-block rounded hover:bg-gray-500 hover:text-white duration-200  mr-2 py-1 px-2 text-md whitespace-nowrap dark:hover:text-white text-gray-600 hover:shadow-xl dark:border-gray-400 notion-${tag.color}_background dark:bg-gray-800`}>
+                  className={`cursor-pointer inline-block rounded hover:bg-gray-500 hover:text-white duration-200  mr-2 py-1 px-2 text-md whitespace-nowrap dark:hover:text-white text-gray-600 hover:shadow-xl dark:border-gray-400 notion-${tag.color}_background dark:bg-gray-800`}
+                >
                   <div className='font-light dark:text-gray-400'>
                     <i className='mr-1 fas fa-tag' />{' '}
                     {tag.name + (tag.count ? `(${tag.count})` : '')}{' '}
