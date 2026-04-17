@@ -2,6 +2,16 @@
 import { siteConfig } from '@/lib/config'
 import SmartLink from '@/components/SmartLink'
 
+// Notion 預設 page cover（如 webb1.jpg、stock 圖）辨識度低、會讓多篇文章長得一樣，視為無封面以觸發漸層 fallback
+const isGenericNotionCover = url => {
+  if (!url || typeof url !== 'string') return true
+  return (
+    url.includes('notion.so/images/page-cover/') ||
+    url.includes('notion.so/images/page-cover%2F') ||
+    url.includes('www.notion.so/images/page-cover')
+  )
+}
+
 /**
  * 博文列表
  * @param {*} param0
@@ -50,7 +60,8 @@ export const Blog = ({ posts }) => {
                         aria-label={item.title}
                         className='block w-full h-full focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2'
                       >
-                        {item.pageCoverThumbnail ? (
+                        {item.pageCoverThumbnail &&
+                        !isGenericNotionCover(item.pageCoverThumbnail) ? (
                           <img
                             src={item.pageCoverThumbnail}
                             alt={item.title}

@@ -3,7 +3,7 @@ import SocialButton from './SocialButton'
 import { Logo } from './Logo'
 import { SVGFooterCircleBG } from './svg/SVGFooterCircleBG'
 import Link from 'next/link'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 /* eslint-disable @next/next/no-img-element */
 export const Footer = props => {
@@ -13,8 +13,11 @@ export const Footer = props => {
     : []
   const STARTER_FOOTER_LINK_GROUP = siteConfig('STARTER_FOOTER_LINK_GROUP', [])
 
-  // 移除useEffect和useState，直接使用客戶端渲染判斷
-  const isBrowser = typeof window !== 'undefined'
+  // 掛載後才把 isBrowser 設為 true，避免 SSR / 客端初始渲染不一致的 hydration 錯誤
+  const [isBrowser, setIsBrowser] = useState(false)
+  useEffect(() => {
+    setIsBrowser(true)
+  }, [])
 
   return (
     <>
@@ -27,9 +30,13 @@ export const Footer = props => {
           <div className='-mx-4 flex flex-wrap'>
             <div className='w-full px-4 sm:w-1/2 md:w-1/2 lg:w-4/12 xl:w-3/12'>
               <div className='mb-10 w-full'>
-                <a className='-mx-4 mb-6 inline-block max-w-[160px]'>
+                <Link
+                  href='/'
+                  aria-label='回首頁'
+                  className='-mx-4 mb-6 inline-block max-w-[160px] focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#090E34] rounded'
+                >
                   <Logo white={true} />
-                </a>
+                </Link>
                 <p className='mb-8 max-w-[270px] text-base text-gray-300'>
                   {siteConfig('STARTER_FOOTER_SLOGAN')}
                 </p>
@@ -95,20 +102,28 @@ export const Footer = props => {
                 {/* 展示两条最新博客文章 */}
                 <div className='flex flex-col gap-8'>
                   {latestPosts?.map((item, index) => {
+                    const cover = item.pageCoverThumbnail
+                    const isGeneric =
+                      !cover ||
+                      (typeof cover === 'string' &&
+                        cover.includes('notion.so/images/page-cover'))
                     return (
                       <Link
                         key={index}
                         href={item?.href}
                         className='group flex items-center gap-[22px]'
                       >
-                        {item.pageCoverThumbnail && (
-                          <div className='overflow-hidden rounded w-20 h-12'>
+                        <div className='overflow-hidden rounded w-20 h-12 flex-shrink-0 bg-gradient-to-br from-primary to-[#0096db]'>
+                          {!isGeneric && (
                             <img
-                              src={item.pageCoverThumbnail}
+                              src={cover}
                               alt={item.title}
+                              loading='lazy'
+                              decoding='async'
+                              className='w-full h-full object-cover'
                             />
-                          </div>
-                        )}
+                          )}
+                        </div>
                         <span className='line-clamp-2 max-w-[180px] text-base text-gray-300 group-hover:text-white'>
                           {item.title}
                         </span>
@@ -195,6 +210,8 @@ export const Footer = props => {
               src='/images/starter/footer/shape-1.svg'
               alt=''
               aria-hidden='true'
+              loading='lazy'
+              decoding='async'
             />
           </span>
 
@@ -203,6 +220,8 @@ export const Footer = props => {
               src='/images/starter/footer/shape-3.svg'
               alt=''
               aria-hidden='true'
+              loading='lazy'
+              decoding='async'
             />
           </span>
 
