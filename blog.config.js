@@ -3,9 +3,9 @@
 const BLOG = {
   // Important page_id！！！Duplicate Template from  https://www.notion.so/tanghh/02ab3b8678004aa69e9e415905ef32a5
   NOTION_PAGE_ID:
-    process.env.NOTION_PAGE_ID ||
-    '183b75929a5e802e886cd7d8291e7804',
-  TITLE: process.env.NEXT_PUBLIC_TITLE || '鑫葳貿易有限公司：專業塑膠原料供應商', // 網站標題，用於SEO和瀏覽器標籤
+    process.env.NOTION_PAGE_ID || '183b75929a5e802e886cd7d8291e7804',
+  TITLE:
+    process.env.NEXT_PUBLIC_TITLE || '鑫葳貿易有限公司：專業塑膠原料供應商', // 網站標題，用於SEO和瀏覽器標籤
   THEME: process.env.NEXT_PUBLIC_THEME || 'starter', // 当前主题，在themes文件夹下可找到所有支持的主题；主题名称就是文件夹名，例如 example,fukasawa,gitbook,heo,hexo,landing,matery,medium,next,nobelium,plog,simple
   LANG: process.env.NEXT_PUBLIC_LANG || 'zh-TW', // e.g 'zh-CN','en-US'  see /lib/lang.js for more.
   SINCE: process.env.NEXT_PUBLIC_SINCE || 2025, // e.g if leave this empty, current year will be used.
@@ -18,9 +18,13 @@ const BLOG = {
   AUTHOR: process.env.NEXT_PUBLIC_AUTHOR || '鑫葳貿易有限公司', // 您的昵称 例如 tangly1024
   BIO: process.env.NEXT_PUBLIC_BIO || '鑫葳貿易有限公司', // 作者简介
   LINK: process.env.NEXT_PUBLIC_LINK || 'https://xin-wei.com', // 网站地址
-  DESCRIPTION: process.env.NEXT_PUBLIC_DESCRIPTION || '鑫葳貿易有限公司 - 專業塑膠原料供應商，30年產業經驗，提供PP聚丙烯、PE聚乙烯、PS聚苯乙烯等全系列塑膠原料，電子、汽車、家電等行業優質供應商。', // 網站描述
-  KEYWORDS: process.env.NEXT_PUBLIC_KEYWORD || '鑫葳貿易,塑膠原料,PP聚丙烯,PE聚乙烯,PS聚苯乙烯,ABS,塑膠供應商,工程塑料,塑膠粒,台灣塑膠原料', // 网站关键词 英文逗号隔开
-  BLOG_FAVICON: process.env.NEXT_PUBLIC_FAVICON || '/favicon.ico', // blog favicon 配置, 默认使用 /public/favicon.ico，支持在线图片，如 https://img.imesong.com/favicon.png
+  DESCRIPTION:
+    process.env.NEXT_PUBLIC_DESCRIPTION ||
+    '鑫葳貿易有限公司 - 專業塑膠原料供應商，30年產業經驗，提供PP聚丙烯、PE聚乙烯、PS聚苯乙烯等全系列塑膠原料，電子、汽車、家電等行業優質供應商。', // 網站描述
+  KEYWORDS:
+    process.env.NEXT_PUBLIC_KEYWORD ||
+    '鑫葳貿易,塑膠原料,PP聚丙烯,PE聚乙烯,PS聚苯乙烯,ABS,塑膠供應商,工程塑料,塑膠粒,台灣塑膠原料', // 网站关键词 英文逗号隔开
+  BLOG_FAVICON: process.env.NEXT_PUBLIC_FAVICON || '/favicon.svg', // blog favicon 配置, 預設使用 /public/favicon.svg (鑫葳 logo)
   BEI_AN: process.env.NEXT_PUBLIC_BEI_AN || '', // 备案号 闽ICP备XXXXXX
   BEI_AN_LINK: process.env.NEXT_PUBLIC_BEI_AN_LINK || '', // 备案查询链接，如果用了萌备等备案请在这里填写
 
@@ -62,9 +66,7 @@ const BLOG = {
     process.env.NEXT_PUBLIC_LAYOUT_SIDEBAR_REVERSE || false,
 
   // 欢迎语打字效果,Hexo,Matery主题支持, 英文逗号隔开多个欢迎语。
-  GREETING_WORDS:
-    process.env.NEXT_PUBLIC_GREETING_WORDS ||
-    '鑫葳貿易有限公司',
+  GREETING_WORDS: process.env.NEXT_PUBLIC_GREETING_WORDS || '鑫葳貿易有限公司',
 
   // uuid重定向至 slug
   UUID_REDIRECT: process.env.UUID_REDIRECT || false,
@@ -79,10 +81,12 @@ const BLOG = {
   THEME_SWITCH: process.env.NEXT_PUBLIC_THEME_SWITCH || false,
 
   // 右键菜单
-  CUSTOM_RIGHT_CLICK_CONTEXT_MENU: process.env.NEXT_PUBLIC_CUSTOM_RIGHT_CLICK_CONTEXT_MENU || false,
+  CUSTOM_RIGHT_CLICK_CONTEXT_MENU:
+    process.env.NEXT_PUBLIC_CUSTOM_RIGHT_CLICK_CONTEXT_MENU || false,
 
   // SEO 相關設定
-  CANONICAL_URL_PREFIX: process.env.NEXT_PUBLIC_CANONICAL_URL_PREFIX || 'https://xin-wei.com', // 規範化URL前綴
+  CANONICAL_URL_PREFIX:
+    process.env.NEXT_PUBLIC_CANONICAL_URL_PREFIX || 'https://xin-wei.com', // 規範化URL前綴
   ENABLE_CANONICAL: process.env.NEXT_PUBLIC_ENABLE_CANONICAL || true, // 是否啟用規範化URL
   SITEMAP_EXCLUDE: process.env.NEXT_PUBLIC_SITEMAP_EXCLUDE || [
     '/search',
