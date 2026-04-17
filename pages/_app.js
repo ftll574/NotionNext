@@ -10,7 +10,7 @@ import useAdjustStyle from '@/hooks/useAdjustStyle'
 import { GlobalContextProvider } from '@/lib/global'
 import { getBaseLayoutByTheme } from '@/themes/theme'
 import { useRouter } from 'next/router'
-import { useCallback, useMemo } from 'react'
+import { useCallback, useMemo, useEffect } from 'react'
 import { getQueryParam } from '../lib/utils'
 
 // 各种扩展插件 这个要阻塞引入
@@ -19,6 +19,7 @@ import ExternalPlugins from '@/components/ExternalPlugins'
 import SEO from '@/components/SEO'
 import { zhCN } from '@clerk/localizations'
 import dynamic from 'next/dynamic'
+import Script from 'next/script'
 // import { ClerkProvider } from '@clerk/nextjs'
 const ClerkProvider = dynamic(() =>
   import('@clerk/nextjs').then(m => m.ClerkProvider)
@@ -59,8 +60,14 @@ const MyApp = ({ Component, pageProps }) => {
         <Component {...pageProps} />
       </GLayout>
       <ExternalPlugins {...pageProps} />
+      <Script 
+        src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" 
+        strategy="lazyOnload" 
+        id="busuanzi-script" 
+      />
     </GlobalContextProvider>
   )
+
   return (
     <>
       {enableClerk ? (

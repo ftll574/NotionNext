@@ -1,0 +1,26 @@
+{
+  "name": "鑫葳貿易有限公司",
+  "short_name": "鑫葳貿易",
+  "description": "專業塑膠原料供應商，提供PP聚丙烯、PE聚乙烯、PS聚苯乙烯等全系列塑膠原料。",
+  "icons": [
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "theme_color": "#ffffff",
+  "background_color": "#ffffff",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "scope": "/",
+  "lang": "zh-TW"
+} 

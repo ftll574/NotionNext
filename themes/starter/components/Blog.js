@@ -2,6 +2,7 @@
 import { siteConfig } from '@/lib/config'
 import SmartLink from '@/components/SmartLink'
 
+
 /**
  * 博文列表
  * @param {*} param0
@@ -11,7 +12,7 @@ export const Blog = ({ posts }) => {
   return (
     <>
       {/* <!-- ====== Blog Section Start --> */}
-      <section className='bg-white pb-10 pt-20 dark:bg-dark lg:pb-20 lg:pt-[120px]'>
+      <section id="blog-section" className='bg-white pb-10 pt-20 dark:bg-dark lg:pb-20 lg:pt-[120px]'>
         <div className='container mx-auto'>
           {/* 区块标题文字 */}
           <div className='-mx-4 flex flex-wrap justify-center'>
@@ -70,6 +71,7 @@ export const Blog = ({ posts }) => {
               )
             })}
           </div>
+
         </div>
       </section>
       {/* <!-- ====== Blog Section End --> */}

@@ -2,13 +2,14 @@
 import { siteConfig } from '@/lib/config'
 import { SVGAvatarBG } from './svg/SVGAvatarBG'
 
+
 export const Team = () => {
   const STARTER_TEAM_ITEMS = siteConfig('STARTER_TEAM_ITEMS', [])
   return (
     <>
       {/* <!-- ====== Team Section Start --> */}
       <section
-        id='team'
+        id='team-section'
         className='overflow-hidden bg-gray-1 pb-12 pt-20 dark:bg-dark-2 lg:pb-[90px] lg:pt-[120px]'>
         <div className='container mx-auto'>
           <div className='-mx-4 flex flex-wrap'>
@@ -35,49 +36,38 @@ export const Team = () => {
               return (
                 <div
                   key={index}
-                  className='w-full px-4 sm:w-1/2 lg:w-1/4 xl:w-1/4'>
-                  <div className='group mb-8 rounded-xl bg-white px-5 pb-10 pt-12 shadow-testimonial dark:bg-dark dark:shadow-none'>
-                    {/* 头像 */}
-                    <div className='relative z-10 mx-auto mb-5 h-[120px] w-[120px]'>
+                  className='w-full px-4 md:w-1/2 lg:w-1/4'>
+                  <div className="wow fadeInUp gradient-card img-zoom overflow-hidden text-center" data-wow-delay={`0.${index * 2 + 1}s`}>
+                    <div className="relative overflow-hidden">
                       <img
                         src={item.STARTER_TEAM_ITEM_AVATAR}
-                        alt='team image'
-                        className='h-[120px] w-[120px] rounded-full'
+                        alt={item.STARTER_TEAM_ITEM_NICKNAME}
+                        className="w-full transition-all duration-300"
                       />
-                      <span className='absolute bottom-0 left-0 -z-10 h-10 w-10 rounded-full bg-secondary opacity-0 transition-all group-hover:opacity-100'></span>
-                      <span className='absolute right-0 top-0 -z-10 opacity-0 transition-all group-hover:opacity-100'>
-                        <SVGAvatarBG />
-                      </span>
+                      <div className="absolute inset-0 bg-primary bg-opacity-70 opacity-0 transition-all duration-300 hover:opacity-100 flex items-center justify-center">
+                        <a
+                          href={item.STARTER_TEAM_ITEM_URL}
+                          className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-white text-primary mx-1 hover:bg-primary hover:text-white transition-all duration-300">
+                          <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                          </svg>
+                        </a>
+                      </div>
                     </div>
-
-                    {/* 文字介绍 */}
-                    <div className='text-center'>
-                      <h4 className='mb-1 text-lg font-semibold text-dark dark:text-white'>
+                    <div className="p-6">
+                      <h3 className="mb-1 text-xl font-bold text-dark dark:text-white">
                         {item.STARTER_TEAM_ITEM_NICKNAME}
-                      </h4>
-
-                      <p className='mb-5 text-sm text-body-color dark:text-dark-6'>
+                      </h3>
+                      <p className="text-body-color dark:text-dark-6">
                         {item.STARTER_TEAM_ITEM_DESCRIPTION}
                       </p>
-
-                      {/* 社交链接 */}
-                      {/* <div className='flex items-center justify-center gap-5'>
-                        <a className='text-dark-6 hover:text-primary'>
-                          <SVGFacebook className='fill-current' />
-                        </a>
-                        <a className='text-dark-6 hover:text-primary'>
-                          <SVGTwitter className='fill-current' />
-                        </a>
-                        <a className='text-dark-6 hover:text-primary'>
-                          <SVGInstagram className='fill-current' />
-                        </a>
-                      </div> */}
                     </div>
                   </div>
                 </div>
               )
             })}
           </div>
+
         </div>
       </section>
       {/* <!-- ====== Team Section End --> */}

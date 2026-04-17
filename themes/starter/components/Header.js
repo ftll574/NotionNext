@@ -2,12 +2,10 @@
 import DashboardButton from '@/components/ui/dashboard/DashboardButton'
 import { siteConfig } from '@/lib/config'
 import { useGlobal } from '@/lib/global'
-import { SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
 import throttle from 'lodash.throttle'
-import SmartLink from '@/components/SmartLink'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useCallback, useEffect, useState } from 'react'
-import { DarkModeButton } from './DarkModeButton'
+import { useCallback, useEffect, useState, useRef } from 'react'
 import { Logo } from './Logo'
 import { MenuList } from './MenuList'
 
@@ -17,101 +15,129 @@ import { MenuList } from './MenuList'
 export const Header = props => {
   const router = useRouter()
   const { isDarkMode } = useGlobal()
+  
+  // 設置初始狀態
   const [buttonTextColor, setColor] = useState(
     router.route === '/' ? 'text-white' : ''
   )
-
-  const enableClerk = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY
-
+  const [scrolled, setScrolled] = useState(false)
+  const [animationComplete, setAnimationComplete] = useState(false)
+  
+  // 使用useRef儲存可能變化的值
+  const isDarkModeRef = useRef(isDarkMode)
+  const routerRef = useRef(router)
+  
+  // 更新ref值
   useEffect(() => {
+    isDarkModeRef.current = isDarkMode
+    routerRef.current = router
+  })
+  
+  // 滚动监听函数
+  const throttleMs = 100
+  const navBarScollListener = useCallback(
+    throttle(() => {
+      const ud_header = document.querySelector('.ud-header')
+      const scrollY = window.scrollY
+      
+      // 更新滾動狀態
+      setScrolled(scrollY > 50)
+      
+      // 控制台输出当前滚动位置和 sticky 值
+      if (scrollY > 50) {
+        ud_header?.classList?.add('sticky')
+      } else {
+        ud_header?.classList?.remove('sticky')
+      }
+    }, throttleMs),
+    [] // 空依賴數組，確保只創建一次函數
+  )
+  
+  // 初始設置和事件監聽
+  useEffect(() => {
+    // 設置文字顏色
     if (isDarkMode || router.route === '/') {
       setColor('text-white')
     } else {
       setColor('')
     }
-    // ======= Sticky
+    
+    // 等待一小段時間後設置動畫完成標誌
+    const animationTimer = setTimeout(() => {
+      setAnimationComplete(true)
+    }, 500)
+    
+    // 添加滾動事件監聽
     window.addEventListener('scroll', navBarScollListener)
+    
+    // 初始化檢查
+    navBarScollListener()
+    
+    // 清理函數
     return () => {
+      clearTimeout(animationTimer)
       window.removeEventListener('scroll', navBarScollListener)
     }
-  }, [isDarkMode])
+  }, [isDarkMode, router.route, navBarScollListener]) // 僅在這些值變化時重新執行
 
-  // 滚动监听
-  const throttleMs = 200
-  const navBarScollListener = useCallback(
-    throttle(() => {
-      // eslint-disable-next-line camelcase
-      const ud_header = document.querySelector('.ud-header')
-      const scrollY = window.scrollY
-      // 控制台输出当前滚动位置和 sticky 值
-      if (scrollY > 0) {
-        ud_header?.classList?.add('sticky')
-      } else {
-        ud_header?.classList?.remove('sticky')
-      }
-    }, throttleMs)
-  )
+  // 導航欄背景顏色
+  const navBarBg = router.route === '/' && !scrolled 
+    ? 'bg-transparent backdrop-blur-md' 
+    : 'bg-white dark:bg-gray-900';
 
   return (
     <>
-      {/* <!-- ====== Navbar Section Start --> */}
-      <div className='ud-header absolute left-0 top-0 z-40 flex w-full items-center bg-transparent'>
-        <div className='container'>
-          <div className='relative -mx-4 flex items-center justify-between'>
+      {/* <!-- ====== 改進的導航欄部分 Start --> */}
+      <div className={`ud-header absolute left-0 top-0 z-50 w-full ${navBarBg} transition-all duration-300 ease-in-out ${animationComplete ? 'translate-y-0 opacity-100' : '-translate-y-3 opacity-0'}`}>
+        <div className={`container mx-auto ${scrolled ? 'py-2' : 'py-4'} transition-all duration-300`}>
+          <div className="relative flex items-center justify-between">
             {/* Logo */}
-            <Logo {...props} />
+            <div className="flex-shrink-0 w-auto">
+              <Logo {...props} className="transition-all duration-300" />
+            </div>
 
-            <div className='flex w-full items-center justify-between px-4'>
-              {/* 中间菜单 */}
+            {/* 手機版：只顯示選單按鈕 */}
+            <div className="flex items-center space-x-2">
+              {/* 僅顯示選單按鈕，移除深色模式按鈕 */}
               <MenuList {...props} />
+            </div>
 
-              {/* 右侧功能 */}
-              <div className='flex items-center gap-4 justify-end pr-16 lg:pr-0'>
-                {/* 深色模式切换 */}
-                <DarkModeButton />
-                {/* 注册登录功能 */}
-                {enableClerk && (
-                  <>
-                    <SignedOut>
-                      <div className='hidden sm:flex gap-4'>
-                        <SmartLink
-                          href={siteConfig('STARTER_NAV_BUTTON_1_URL', '')}
-                          className={`loginBtn ${buttonTextColor} p-2 text-base font-medium hover:opacity-70`}>
-                          {siteConfig('STARTER_NAV_BUTTON_1_TEXT')}
-                        </SmartLink>
-                        <SmartLink
-                          href={siteConfig('STARTER_NAV_BUTTON_2_URL', '')}
-                          className={`signUpBtn ${buttonTextColor} p-2 rounded-md bg-white bg-opacity-20 py-2 text-base font-medium duration-300 ease-in-out hover:bg-opacity-100 hover:text-dark`}>
-                          {siteConfig('STARTER_NAV_BUTTON_2_TEXT')}
-                        </SmartLink>
-                      </div>
-                    </SignedOut>
-                    <SignedIn>
-                      <UserButton />
-                      <DashboardButton className={'hidden md:block'} />
-                    </SignedIn>
-                  </>
+            {/* 僅在桌面版顯示的導航按鈕 */}
+            {siteConfig('STARTER_NAV_BUTTON_ENABLE') && (
+              <div className="hidden lg:flex items-center space-x-4">
+                {/* 第一個導航按鈕 */}
+                {siteConfig('STARTER_NAV_BUTTON_1_TEXT') && (
+                  <Link
+                    href={siteConfig('STARTER_NAV_BUTTON_1_URL')}
+                    className={`py-2 px-4 rounded-md border border-gray-300 ${
+                      router.route === '/' && !scrolled 
+                        ? 'text-white hover:bg-white/20' 
+                        : 'text-gray-700 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800'
+                    } transition-all duration-300`}
+                  >
+                    {siteConfig('STARTER_NAV_BUTTON_1_TEXT')}
+                  </Link>
                 )}
-                {!enableClerk && (
-                  <div className='hidden sm:flex gap-4'>
-                    <SmartLink
-                      href={siteConfig('STARTER_NAV_BUTTON_1_URL', '')}
-                      className={`loginBtn ${buttonTextColor} p-2 text-base font-medium hover:opacity-70`}>
-                      {siteConfig('STARTER_NAV_BUTTON_1_TEXT')}
-                    </SmartLink>
-                    <SmartLink
-                      href={siteConfig('STARTER_NAV_BUTTON_2_URL', '')}
-                      className={`signUpBtn ${buttonTextColor} p-2 rounded-md bg-white bg-opacity-20 py-2 text-base font-medium duration-300 ease-in-out hover:bg-opacity-100 hover:text-dark`}>
-                      {siteConfig('STARTER_NAV_BUTTON_2_TEXT')}
-                    </SmartLink>
-                  </div>
+                
+                {/* 第二個導航按鈕 */}
+                {siteConfig('STARTER_NAV_BUTTON_2_TEXT') && (
+                  <Link
+                    href={siteConfig('STARTER_NAV_BUTTON_2_URL')}
+                    className={`py-2 px-4 rounded-md ${
+                      router.route === '/' && !scrolled
+                        ? 'bg-white text-primary hover:bg-gray-100' 
+                        : 'bg-primary text-white hover:bg-primary-700'
+                    } transition-all duration-300 shadow-sm hover:shadow-md transform hover:-translate-y-0.5`}
+                  >
+                    {siteConfig('STARTER_NAV_BUTTON_2_TEXT')}
+                  </Link>
                 )}
               </div>
-            </div>
+            )}
           </div>
         </div>
       </div>
-      {/* <!-- ====== Navbar Section End --> */}
+      {/* <!-- ====== 導航欄部分 End --> */}
     </>
   )
 }

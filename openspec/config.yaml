@@ -1,0 +1,58 @@
+schema: spec-driven
+
+context: |
+  # 鑫葳貿易有限公司 - NotionNext 企業網站
+  
+  ## 專案概述
+  Fork 自 tangly1024/NotionNext (v4.8.3) 的企業官網，
+  使用 Notion 作為 CMS，部署在 Vercel 上。
+  公司為專業塑膠原料供應商（PP、PE、PS、ABS 等），30年產業經驗。
+  網站域名：xin-wei.com
+  
+  ## Tech Stack
+  - Framework: Next.js 14.2.4 (Pages Router)
+  - React 18
+  - Styling: Tailwind CSS 3.x
+  - CMS: Notion API (notion-client 6.15.6 + react-notion-x 6.16.0)
+  - Auth: Clerk (@clerk/nextjs) — 目前已停用
+  - Deployment: Vercel
+  - Language: JavaScript 為主，TypeScript 共存（漸進式遷移）
+  - Linting: ESLint + Prettier
+  - Testing: Jest (基本設定存在，但測試覆蓋率低)
+  
+  ## 架構
+  - `/pages/` — Next.js pages router 頁面
+  - `/themes/` — 多主題系統（21 個主題），目前使用 `starter` 主題
+  - `/components/` — 共用元件
+  - `/lib/` — 工具函式、Notion API 邏輯
+  - `/conf/` — 模組化設定（評論、聯絡方式、文章、分析、圖片、字體等）
+  - `/blog.config.js` — 主設定檔，透過 env vars 可覆寫
+  - `/public/` — 靜態資源
+  
+  ## 慣例
+  - Prettier: 單引號、無分號、trailingComma none、arrowParens avoid、printWidth 80
+  - 繁體中文（zh-TW）為主語言
+  - SEO 優化：canonical URL、sitemap、Google Search Console 驗證
+  - CSP headers 配置完成
+  - 靜態資源長期快取 (max-age=31536000, immutable)
+  - Webpack alias: `@` → 根目錄, `@theme-components` → 當前主題
+  
+  ## 分支策略
+  - `main` — 乾淨的上游同步
+  - `zhenyu/feature/xinwei_design` — 鑫葳客製化分支
+  
+  ## 注意事項
+  - 上游 NotionNext 會持續更新，合併時要注意衝突
+  - 主題系統是動態載入的，透過 blog.config.js 的 THEME 設定切換
+  - 圖片來源白名單在 next.config.js 中管理
+
+rules:
+  proposal:
+    - 用繁體中文撰寫
+    - 需評估對上游 NotionNext 合併的影響
+    - 若涉及主題修改，需指定影響的主題（目前主要用 starter）
+    - 包含對 SEO 的影響評估
+  tasks:
+    - 單一任務不超過 2 小時
+    - 需列出受影響的檔案
+    - 需包含測試/驗證步驟

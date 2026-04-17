@@ -7,6 +7,7 @@ import { useEffect } from 'react'
 import { SVGLeftArrow } from './svg/SVGLeftArrow'
 import { SVGRightArrow } from './svg/SVGRightArrow'
 
+
 /**
  * 一些外部js
  */
@@ -64,7 +65,7 @@ export const Testimonials = () => {
     <>
       {/* <!-- ====== Testimonial Section Start --> */}
       <section
-        id='testimonials'
+        id='testimonials-section'
         className='overflow-hidden bg-gray-1 py-20 dark:bg-dark-2 md:py-[120px]'>
         <div className='container mx-auto'>
           <div className='-mx-4 flex flex-wrap justify-center'>
@@ -142,6 +143,7 @@ export const Testimonials = () => {
               </div>
             </div>
           </div>
+
         </div>
       </section>
       {/* <!-- ====== Testimonial Section End --> */}
