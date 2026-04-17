@@ -82,13 +82,13 @@ export const MenuList = props => {
   }, [])
 
   // 處理菜單項被打開的回調
-  const handleMenuOpen = (index) => {
+  const handleMenuOpen = index => {
     setActiveMenuIndex(index)
   }
 
   // 監聽點擊事件，關閉菜單
   useEffect(() => {
-    const handleClickOutside = (event) => {
+    const handleClickOutside = event => {
       if (navRef.current && !navRef.current.contains(event.target)) {
         setLockScreen(false)
         setActiveMenuIndex(null)
@@ -139,64 +139,85 @@ export const MenuList = props => {
   }, [isHomePage])
 
   return (
-    <div ref={navRef} className="menu-container">
+    <div ref={navRef} className='menu-container'>
       {/* 移動端選單按鈕 */}
       <div className='lg:hidden'>
         <button
           onClick={() => setLockScreen(!lockScreen)}
-          className='rounded-lg px-3 py-[6px] ring-primary focus:ring-2'>
+          aria-label={lockScreen ? '關閉選單' : '開啟選單'}
+          aria-expanded={lockScreen}
+          aria-controls='xinwei-mobile-nav'
+          className='rounded-lg px-3 py-[6px] cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2'
+        >
           <span
-            className={`relative my-1.5 block h-0.5 w-[30px] ${isHomePage && !navBar ? 'bg-white' : 'bg-black dark:bg-white'} transition-all duration-300 ${lockScreen ? ' top-[7px] rotate-45' : ' '
-              }`}
+            className={`relative my-1.5 block h-0.5 w-[30px] ${isHomePage && !navBar ? 'bg-white' : 'bg-black dark:bg-white'} transition-all duration-300 ${
+              lockScreen ? ' top-[7px] rotate-45' : ' '
+            }`}
           />
           <span
-            className={`relative my-1.5 block h-0.5 w-[30px] ${isHomePage && !navBar ? 'bg-white' : 'bg-black dark:bg-white'} transition-all duration-300 ${lockScreen ? 'opacity-0 ' : ' '
-              }`}
+            className={`relative my-1.5 block h-0.5 w-[30px] ${isHomePage && !navBar ? 'bg-white' : 'bg-black dark:bg-white'} transition-all duration-300 ${
+              lockScreen ? 'opacity-0 ' : ' '
+            }`}
           />
           <span
-            className={`relative my-1.5 block h-0.5 w-[30px] ${isHomePage && !navBar ? 'bg-white' : 'bg-black dark:bg-white'} transition-all duration-300 ${lockScreen ? ' top-[-8px] -rotate-45' : ' '
-              }`}
+            className={`relative my-1.5 block h-0.5 w-[30px] ${isHomePage && !navBar ? 'bg-white' : 'bg-black dark:bg-white'} transition-all duration-300 ${
+              lockScreen ? ' top-[-8px] -rotate-45' : ' '
+            }`}
           />
         </button>
       </div>
 
       {/* 手機版選單 - 優化樣式 */}
       {isMobile && lockScreen && (
-        <nav className="fixed left-0 top-[70px] z-[99] h-[calc(100vh-70px)] w-full bg-dark py-4 overflow-y-auto">
-          <ul className="block px-4 py-2">
-            {links && links?.map((link, index) => {
-              return <MenuItem
-                key={`mobile-${index}`}
-                link={link}
-                index={index}
-                isOpen={true}
-                onMenuOpen={() => handleMenuOpen(index)}
-                isAnyMenuOpen={activeMenuIndex !== null && activeMenuIndex !== index}
-                navBar={true}
-                isMobile={true}
-                totalLinks={links.length}
-              />
-            })}
+        <nav
+          id='xinwei-mobile-nav'
+          aria-label='主選單'
+          className='fixed left-0 top-[70px] z-[99] h-[calc(100vh-70px)] w-full bg-dark py-4 overflow-y-auto overscroll-contain'
+        >
+          <ul className='block px-4 py-2 pb-24'>
+            {links &&
+              links?.map((link, index) => {
+                return (
+                  <MenuItem
+                    key={`mobile-${index}`}
+                    link={link}
+                    index={index}
+                    isOpen={true}
+                    onMenuOpen={() => handleMenuOpen(index)}
+                    isAnyMenuOpen={
+                      activeMenuIndex !== null && activeMenuIndex !== index
+                    }
+                    navBar={true}
+                    isMobile={true}
+                    totalLinks={links.length}
+                  />
+                )
+              })}
           </ul>
         </nav>
       )}
 
       {/* 電腦版選單 - 永遠可見 */}
-      <nav className="hidden lg:block lg:w-full lg:max-w-full desktop-menu">
-        <ul className="flex">
-          {links && links?.map((link, index) => {
-            return <MenuItem
-              key={`desktop-${index}`}
-              link={link}
-              index={index}
-              isOpen={isOpen}
-              onMenuOpen={() => handleMenuOpen(index)}
-              isAnyMenuOpen={activeMenuIndex !== null && activeMenuIndex !== index}
-              navBar={navBar}
-              isMobile={false}
-              totalLinks={links.length}
-            />
-          })}
+      <nav className='hidden lg:block lg:w-full lg:max-w-full desktop-menu'>
+        <ul className='flex'>
+          {links &&
+            links?.map((link, index) => {
+              return (
+                <MenuItem
+                  key={`desktop-${index}`}
+                  link={link}
+                  index={index}
+                  isOpen={isOpen}
+                  onMenuOpen={() => handleMenuOpen(index)}
+                  isAnyMenuOpen={
+                    activeMenuIndex !== null && activeMenuIndex !== index
+                  }
+                  navBar={navBar}
+                  isMobile={false}
+                  totalLinks={links.length}
+                />
+              )
+            })}
         </ul>
       </nav>
 
@@ -206,7 +227,7 @@ export const MenuList = props => {
         .menu-container nav {
           transition: all 0.3s ease;
         }
-        
+
         /* 基本選單項樣式 */
         .desktop-menu .group ul li a,
         .desktop-menu .group ul li button {
@@ -222,13 +243,13 @@ export const MenuList = props => {
           text-align: left;
           white-space: nowrap !important;
         }
-        
+
         /* 深色模式 */
         .dark .desktop-menu .group ul li a,
         .dark .desktop-menu .group ul li button {
           color: #fff;
         }
-        
+
         /* 懸停和活動狀態 */
         .desktop-menu .group ul li a:hover,
         .desktop-menu .group ul li button:hover,
@@ -236,36 +257,38 @@ export const MenuList = props => {
           background-color: rgba(59, 130, 246, 0.1);
           color: #3b82f6;
         }
-        
+
         /* 子菜單容器 */
         .desktop-menu .group > div > div,
         .desktop-menu .group ul li div > div {
           background-color: white;
           border-radius: 8px;
-          box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+          box-shadow:
+            0 4px 6px -1px rgba(0, 0, 0, 0.1),
+            0 2px 4px -1px rgba(0, 0, 0, 0.06);
         }
-        
+
         /* 深色模式下子菜單容器 */
         .dark .desktop-menu .group > div > div,
         .dark .desktop-menu .group ul li div > div {
           background-color: #1f2937;
         }
-        
+
         /* 移動端菜單樣式 */
         @media (max-width: 1023px) {
           nav ul li div > div {
             background-color: transparent !important;
             box-shadow: none !important;
           }
-          
-          nav ul li a, 
+
+          nav ul li a,
           nav ul li button {
             color: white !important;
             padding: 12px 0 !important;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
           }
-          
-          nav ul li a:hover, 
+
+          nav ul li a:hover,
           nav ul li button:hover {
             background-color: rgba(255, 255, 255, 0.1) !important;
           }

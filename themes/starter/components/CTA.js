@@ -13,7 +13,10 @@ export const CTA = () => {
   return (
     <>
       {/* <!-- ====== CTA Section Start --> */}
-      <section id="cta-section" className='relative z-10 overflow-hidden bg-primary py-20 lg:py-[115px]'>
+      <section
+        id='cta-section'
+        className='relative z-10 overflow-hidden bg-primary py-20 lg:py-[115px]'
+      >
         <div className='container mx-auto'>
           <div className='relative overflow-hidden'>
             <div className='-mx-4 flex flex-wrap items-stretch'>
@@ -29,27 +32,28 @@ export const CTA = () => {
                     {siteConfig('STARTER_CTA_DESCRIPTION')}
                   </p>
                   {siteConfig('STARTER_CTA_BUTTON') && (
-                    <>
-                      <SmartLink
-                        href={siteConfig('STARTER_CTA_BUTTON_URL', '')}
-                        className='inline-block rounded-md border border-transparent bg-secondary px-7 py-3 text-base font-medium text-white transition hover:bg-[#0BB489]'>
-                        {siteConfig('STARTER_CTA_BUTTON_TEXT')}
-                      </SmartLink>
-                    </>
+                    <SmartLink
+                      href={siteConfig('STARTER_CTA_BUTTON_URL', '')}
+                      aria-label={siteConfig('STARTER_CTA_BUTTON_TEXT')}
+                      className='inline-block rounded-md border border-transparent bg-secondary px-7 py-3 text-base font-medium text-white transition hover:bg-[#0BB489] cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-primary'
+                    >
+                      {siteConfig('STARTER_CTA_BUTTON_TEXT')}
+                    </SmartLink>
                   )}
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div>
+        <div aria-hidden='true'>
           <span className='absolute left-0 top-0'>
             <svg
               width='495'
               height='470'
               viewBox='0 0 495 470'
               fill='none'
-              xmlns='http://www.w3.org/2000/svg'>
+              xmlns='http://www.w3.org/2000/svg'
+            >
               <circle
                 cx='55'
                 cy='442'
@@ -79,7 +83,8 @@ export const CTA = () => {
               height='470'
               viewBox='0 0 493 470'
               fill='none'
-              xmlns='http://www.w3.org/2000/svg'>
+              xmlns='http://www.w3.org/2000/svg'
+            >
               <circle
                 cx='462'
                 cy='5'

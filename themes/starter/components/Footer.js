@@ -1,5 +1,5 @@
 import { siteConfig } from '@/lib/config'
-import SocialButton from '@/themes/fukasawa/components/SocialButton'
+import SocialButton from './SocialButton'
 import { Logo } from './Logo'
 import { SVGFooterCircleBG } from './svg/SVGFooterCircleBG'
 import Link from 'next/link'

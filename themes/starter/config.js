@@ -133,30 +133,12 @@ const CONFIG = {
     { value: '7-10', label: '工作日交期' }
   ],
   STARTER_INDUSTRIES_ITEMS: [
-    {
-      name: '電子',
-      icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="100%" height="100%"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 3v2m6-2v2M9 19v2m6-2v2M3 9h2m-2 6h2m16-6h-2m2 6h-2M7 7h10v10H7z"/></svg>'
-    },
-    {
-      name: '汽車',
-      icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="100%" height="100%"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 17h14l-1.5-6a2 2 0 00-1.94-1.5H8.44A2 2 0 006.5 11L5 17zm0 0v2m14-2v2M7 14h.01M17 14h.01"/></svg>'
-    },
-    {
-      name: '家電',
-      icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="100%" height="100%"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 4h14v16H5V4zm2 3h10M7 11h10M7 15h6"/></svg>'
-    },
-    {
-      name: '醫療',
-      icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="100%" height="100%"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4v16m-8-8h16"/></svg>'
-    },
-    {
-      name: '包裝',
-      icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="100%" height="100%"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 7l-8-4-8 4v10l8 4 8-4V7zM4 7l8 4m0 0l8-4m-8 4v10"/></svg>'
-    },
-    {
-      name: '工業',
-      icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="100%" height="100%"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 20h18M5 20V10l5 3V10l5 3V8l4 2v10"/></svg>'
-    }
+    { name: '電子', icon: 'electronics' },
+    { name: '汽車', icon: 'automotive' },
+    { name: '家電', icon: 'appliance' },
+    { name: '醫療', icon: 'medical' },
+    { name: '包裝', icon: 'packaging' },
+    { name: '工業', icon: 'industrial' }
   ],
 
   // 首頁用戶評價區塊
@@ -337,7 +319,7 @@ const CONFIG = {
     {
       IMAGE: '/images/starter/brands/tailgrids.svg',
       IMAGE_WHITE: '/images/starter/brands/tailgrids-white.svg',
-      URL: '"https://tailgrids.com/',
+      URL: 'https://tailgrids.com/',
       TITLE: 'tailgrids'
     }
   ],
@@ -456,7 +438,7 @@ const CONFIG = {
   STARTER_CTA_TITLE_2: '立即聯繫我們',
   STARTER_CTA_DESCRIPTION: '我們的專業團隊隨時為您提供技術諮詢和產品建議',
   STARTER_CTA_BUTTON: true,
-  STARTER_CTA_BUTTON_URL: '#contact',
+  STARTER_CTA_BUTTON_URL: '#contact-section',
   STARTER_CTA_BUTTON_TEXT: '免費獲取諮詢',
 
   STARTER_POST_REDIRECT_ENABLE: true, // 預設開啟重定向

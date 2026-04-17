@@ -44,17 +44,21 @@ export const Blog = ({ posts }) => {
                     className='wow fadeInUp group mb-10'
                     data-wow-delay='.1s'
                   >
-                    <div className='mb-8 overflow-hidden rounded-[5px] aspect-[16/10]'>
+                    <div className='mb-8 overflow-hidden rounded-[5px] aspect-[16/10] bg-gradient-to-br from-slate-100 to-slate-200 dark:from-dark-2 dark:to-dark-3'>
                       <SmartLink
                         href={item?.href}
                         aria-label={item.title}
-                        className='block w-full h-full'
+                        className='block w-full h-full focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2'
                       >
                         {item.pageCoverThumbnail ? (
                           <img
                             src={item.pageCoverThumbnail}
                             alt={item.title}
                             loading='lazy'
+                            decoding='async'
+                            onError={e => {
+                              e.currentTarget.style.display = 'none'
+                            }}
                             className='w-full h-full object-cover transition group-hover:rotate-6 group-hover:scale-125'
                           />
                         ) : (

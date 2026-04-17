@@ -119,6 +119,8 @@ export const Hero = props => {
                 title={siteConfig('TITLE', null, config)}
                 className='w-full h-full object-cover'
                 loading={index === 0 ? 'eager' : 'lazy'}
+                fetchpriority={index === 0 ? 'high' : 'low'}
+                decoding={index === 0 ? 'sync' : 'async'}
                 style={{
                   objectFit: 'cover',
                   objectPosition: 'center',
