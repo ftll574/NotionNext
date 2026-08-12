@@ -13,7 +13,7 @@ import { useRouter } from 'next/router'
 import PropTypes from 'prop-types'
 import { useEffect, useState } from 'react'
 import { isExport } from '@/lib/utils/buildMode'
-import { getPriorityPages, prefetchAllBlockMaps } from '@/lib/build/prefetch'
+import { getRoutablePages, prefetchAllBlockMaps } from '@/lib/build/prefetch'
 
 /**
  * 根据notion的slug访问页面
@@ -114,34 +114,22 @@ Slug.propTypes = {
 export async function getStaticPaths() {
   const from = 'slug-paths'
   const { allPages } = await fetchGlobalAllData({ from })
-
-  // Export 模式：全量预生成
-  if (isExport()) {
-    await prefetchAllBlockMaps(allPages)
-    return {
-      paths: allPages
-        ?.filter(row => checkSlugHasNoSlash(row))
-        .map(row => ({ params: { prefix: row.slug } })),
-      fallback: false
-    }
-  }
-
-  // ISR 模式：预生成最新10篇，其余按需渲染
-  const tops = getPriorityPages(allPages)
-  await prefetchAllBlockMaps(tops)
+  const pages = getRoutablePages(allPages).filter(row =>
+    checkSlugHasNoSlash(row)
+  )
+  await prefetchAllBlockMaps(pages)
 
   return {
-    paths: tops
-      .filter(row => checkSlugHasNoSlash(row))
-      .map(row => ({ params: { prefix: row.slug } })),
-    fallback: 'blocking'
+    paths: pages.map(row => ({ params: { prefix: row.slug } })),
+    // 公司官网内容量小，全部预生成可避免扫描器用随机路径触发昂贵的 Notion 查询。
+    fallback: false
   }
 }
 
 export async function getStaticProps({ params: { prefix }, locale }) {
   const props = await resolvePostProps({
     prefix,
-    locale,
+    locale
   })
 
   return {
@@ -149,10 +137,10 @@ export async function getStaticProps({ params: { prefix }, locale }) {
     revalidate: isExport()
       ? undefined
       : siteConfig(
-        'NEXT_REVALIDATE_SECOND',
-        BLOG.NEXT_REVALIDATE_SECOND,
-        props.NOTION_CONFIG
-      ),
+          'NEXT_REVALIDATE_SECOND',
+          BLOG.NEXT_REVALIDATE_SECOND,
+          props.NOTION_CONFIG
+        ),
     notFound: !props.post
   }
 }

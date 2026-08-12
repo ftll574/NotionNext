@@ -4,7 +4,7 @@ import { fetchGlobalAllData, resolvePostProps } from '@/lib/db/SiteDataApi'
 import Slug from '..'
 import { checkSlugHasOneSlash } from '@/lib/utils/post'
 import { isExport } from '@/lib/utils/buildMode'
-import { getPriorityPages, prefetchAllBlockMaps } from '@/lib/build/prefetch'
+import { getRoutablePages, prefetchAllBlockMaps } from '@/lib/build/prefetch'
 
 /**
  * 根据notion的slug访问页面
@@ -19,38 +19,20 @@ const PrefixSlug = props => {
 export async function getStaticPaths() {
   const from = 'slug-paths'
   const { allPages } = await fetchGlobalAllData({ from })
-
-  // Export 模式：全量预生成
-  if (isExport()) {
-    await prefetchAllBlockMaps(allPages)
-    return {
-      paths: allPages
-        ?.filter(row => checkSlugHasOneSlash(row))
-        .map(row => ({
-          params: {
-            prefix: row.slug.split('/')[0],
-            slug: row.slug.split('/')[1]
-          }
-        })),
-      fallback: false
-    }
-  }
-
-  // ISR 模式：预生成最新10篇（仅两段路径格式）
-  const tops = getPriorityPages(allPages)
-
-  await prefetchAllBlockMaps(tops)
+  const pages = getRoutablePages(allPages).filter(row =>
+    checkSlugHasOneSlash(row)
+  )
+  await prefetchAllBlockMaps(pages)
 
   return {
-    paths: tops
-      .filter(p => checkSlugHasOneSlash(p))
-      .map(row => ({
-        params: {
-          prefix: row.slug.split('/')[0],
-          slug: row.slug.split('/')[1]
-        }
-      })),
-    fallback: 'blocking'
+    paths: pages.map(row => ({
+      params: {
+        prefix: row.slug.split('/')[0],
+        slug: row.slug.split('/')[1]
+      }
+    })),
+    // 未知路徑直接使用靜態 404，避免每個掃描請求都啟動 Function。
+    fallback: false
   }
 }
 
@@ -58,7 +40,7 @@ export async function getStaticProps({ params: { prefix, slug }, locale }) {
   const props = await resolvePostProps({
     prefix,
     slug,
-    locale,
+    locale
   })
 
   return {
@@ -66,10 +48,10 @@ export async function getStaticProps({ params: { prefix, slug }, locale }) {
     revalidate: isExport()
       ? undefined
       : siteConfig(
-        'NEXT_REVALIDATE_SECOND',
-        BLOG.NEXT_REVALIDATE_SECOND,
-        props.NOTION_CONFIG
-      ),
+          'NEXT_REVALIDATE_SECOND',
+          BLOG.NEXT_REVALIDATE_SECOND,
+          props.NOTION_CONFIG
+        ),
     notFound: !props.post
   }
 }
