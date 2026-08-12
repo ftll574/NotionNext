@@ -4,7 +4,7 @@ import { fetchGlobalAllData, resolvePostProps } from '@/lib/db/SiteDataApi'
 import { checkSlugHasMorThanTwoSlash } from '@/lib/utils/post'
 import Slug from '..'
 import { isExport } from '@/lib/utils/buildMode'
-import { getPublishedPages, prefetchAllBlockMaps } from '@/lib/build/prefetch'
+import { getRoutablePages, prefetchAllBlockMaps } from '@/lib/build/prefetch'
 
 /**
  * 根据notion的slug访问页面
@@ -19,7 +19,7 @@ const PrefixSlug = props => {
 export async function getStaticPaths() {
   const from = 'slug-paths'
   const { allPages } = await fetchGlobalAllData({ from })
-  const pages = getPublishedPages(allPages).filter(row =>
+  const pages = getRoutablePages(allPages).filter(row =>
     checkSlugHasMorThanTwoSlash(row)
   )
   await prefetchAllBlockMaps(pages)

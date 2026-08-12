@@ -13,7 +13,7 @@ import { useRouter } from 'next/router'
 import PropTypes from 'prop-types'
 import { useEffect, useState } from 'react'
 import { isExport } from '@/lib/utils/buildMode'
-import { getPublishedPages, prefetchAllBlockMaps } from '@/lib/build/prefetch'
+import { getRoutablePages, prefetchAllBlockMaps } from '@/lib/build/prefetch'
 
 /**
  * 根据notion的slug访问页面
@@ -114,7 +114,7 @@ Slug.propTypes = {
 export async function getStaticPaths() {
   const from = 'slug-paths'
   const { allPages } = await fetchGlobalAllData({ from })
-  const pages = getPublishedPages(allPages).filter(row =>
+  const pages = getRoutablePages(allPages).filter(row =>
     checkSlugHasNoSlash(row)
   )
   await prefetchAllBlockMaps(pages)
