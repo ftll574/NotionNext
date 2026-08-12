@@ -335,7 +335,9 @@ const nextConfig = {
     return config
   },
   experimental: {
-    // cpus: 1,
+    // Notion's private page API rate-limits the duplicate requests emitted by
+    // parallel static-generation workers. Keep builds serialized and reliable.
+    cpus: 1,
     scrollRestoration: true,
     // 性能优化实验性功能
     optimizePackageImports: ['@heroicons/react', 'lodash']
